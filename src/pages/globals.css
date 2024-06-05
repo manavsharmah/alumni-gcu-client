@@ -1,0 +1,126 @@
+.topbar-container {
+    width: 100%;
+    background-color: #27357f;
+    border-bottom: 1px solid #27357f;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    height: 130px; /* Adjust height as needed */
+  }
+  
+  /* .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+  } */
+  
+    .logo-container {
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
+    }
+    
+    .logo {
+      height: 100px;
+    }
+    
+    .auth-links {
+      display: flex;
+      align-items: center;
+    }
+    
+    .auth-link {
+      color: #ffffff;
+      font-weight: bold;
+      text-decoration: none;
+      margin-left: 10px;
+    }
+  
+  
+    .auth-link:hover {
+      color: #007bff !important;
+    }
+    
+    .nav-links {
+      background-color: #27357f;
+      padding-top: 15px; /* Ensure this matches the padding to align properly */
+      padding-bottom: 15px; /* Ensure this matches the padding to align properly */
+      margin-top: 40px; /* Adjust margin to align below the topbar */
+    }
+    
+    .nav-list {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .nav-item {
+      margin: 0 15px;
+    }
+    
+    .nav-link {
+      color: white !important;
+      font-weight: bold;
+    }
+    
+    
+    .nav-link:hover {
+      color: #007bff !important;
+    }
+  
+  .kingster-navigation .kingster-navigation-slide-bar {
+      border-color: #fbcf0a;
+  }
+  .kingster-navigation .kingster-navigation-slide-bar {
+    border-bottom-width: 7px;
+    border-bottom-style: solid;
+    position: absolute;
+    display: none;
+    margin-top: -7px;
+    overflow: hidden;
+  }
+  .kingster-body * {
+    border-color: #e6e6e6;
+  }
+  
+  /* Media query for mobile responsiveness */
+  @media only screen and (max-width: 600px) {
+    .topbar {
+      padding: 10px; /* Adjust padding for smaller screens */
+      flex-direction: column; /* Stack items vertically on small screens */
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .logo {
+      height: 40px; /* Adjust logo size for smaller screens */
+      margin-bottom: 10px; /* Add spacing between logo and other elements */
+    }
+  
+   .auth-links {
+      display: flex; /* Show auth links on small screens */
+      margin-top: 10px; /* Add spacing between auth links and other elements */
+   }
+  
+   .nav-links {
+      display: block; /* Show navigation links on small screens */
+      background-color: #27357f;
+      padding: 10px;
+   }
+  
+   .nav-list {
+      flex-direction: column; /* Stack nav items vertically on small screens */
+   }
+  
+   .nav-item {
+      margin: 5px 0; /* Adjust margin for smaller screens */
+   }
+  
+   .nav-link:hover {
+      color: white; /* Change hover color back to white on small screens */
+   }
+  }

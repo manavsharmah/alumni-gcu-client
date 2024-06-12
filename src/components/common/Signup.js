@@ -15,7 +15,7 @@ const Signup = () => {
     });
 
     const handleChange = (e) => {
-        setInputs(prev => ({ 
+        setInputs((prev) => ({ 
             ...prev, 
             [e.target.name]: e.target.value
         }));
@@ -26,14 +26,16 @@ const Signup = () => {
             name: inputs.name,
             email: inputs.email,
             password: inputs.password
-        }).catch(err => console.log(err));
+        }) 
+        .catch((err) => console.log(err));
         const data = await res.data;
+        //console.log(data)
         return data;
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        sendRequest().then(() => history('/login')); //Later we need to route the user to home page
+        sendRequest().then(() => history("/login")); //Later we need to route the user to home page
     };
 
     return (

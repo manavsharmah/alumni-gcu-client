@@ -14,24 +14,26 @@ const Login = () => {
     });
 
     const handleChange = (e) => {
-        setInputs(prev => ({ 
+        setInputs((prev) => ({ 
             ...prev, 
             [e.target.name]: e.target.value
         }));
     };
     
     const sendRequest = async () => {
-        const res = await axios.post('http://localhost:5000/api/login', {
+        const res = await axios.post("http://localhost:5000/api/login", {
             email: inputs.email,
             password: inputs.password
-        }).catch(err => console.log(err));
+        })
+        .catch((err) => console.log(err));
         const data = await res.data;
+        // console.log(data)
         return data;
-    }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        sendRequest().then(() => history('/home'));
+        sendRequest().then(() => history("/welcome"));
     };
 
     return (
@@ -55,7 +57,7 @@ const Login = () => {
             <div className="forgot-password">Lost Password? <span>Click Here!</span></div>
             
             <div className="submit-container">
-                <Button type='submit'>Signup</Button>
+                <Button type='submit'>Login</Button>
             </div>
         </div>
         </form>

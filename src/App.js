@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import Welcome from './pages/specific/Welcome';
 import Header  from "./components/common/Header";
 import Footer from "./components/common/Footer";
-import Login from './components/common/login.js';
+import Login from './components/common/Login.js';
 import Signup from './components/common/Signup';
 
 

@@ -1,12 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import "./styles/App.css";
+import Header from './components/common/Header';
+import Footer from './components/common/Footer'
 import Home from './pages/Home';
-import Welcome from './pages/specific/Welcome';
-import Header  from "./components/common/Header";
-import Footer from "./components/common/Footer";
-import Login from './components/common/Login.js';
-import Signup from './components/common/Signup';
+import  Login  from "./components/common/Login";
+import Register from './components/common/Register';
+import ResetPassword from './components/common/ResetPassword';
+
 
 
 function App() {
@@ -18,9 +19,9 @@ function App() {
       <main>
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/register" element={<Register />} />
           <Route path='/home' element={<Home />} />
-          <Route path='/welcome' element={<Welcome />} />
+          <Route path='/reset-password' element={<ResetPassword />} />
         </Routes>
       </main>
       <footer>

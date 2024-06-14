@@ -35,7 +35,7 @@ const Header = () => {
       </nav>
 
       <div className="auth-links ml-auto d-flex align-items-center">
-          <a href="/signup" className="auth-link text-white font-weight-bold ml-3">Sign Up</a>&nbsp;
+          <a href="/register" className="auth-link text-white font-weight-bold ml-3">Register</a>&nbsp;
           <span>  |  </span>
           <a href="/login" className="auth-link text-white font-weight-bold ml-3">Login</a>
         </div>

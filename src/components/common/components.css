@@ -38,9 +38,9 @@
       height: 50px;
     }
 
-    .logo-text {
+    /* .logo-text {
       text-decoration: none;
-    }
+    } */
 
     .navbar {
       background-color: #27357f;
@@ -117,7 +117,6 @@
 .logo {
   margin-right: 20px;
   margin-top: -200px;
-  /* justify-content: center; */
 }
 
 .logo img {

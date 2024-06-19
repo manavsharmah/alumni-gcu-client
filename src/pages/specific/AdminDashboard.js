@@ -1,8 +1,34 @@
-import React from 'react';
-import "./pages.css";
+import React, { useState, useEffect } from 'react';
+import "../pages.css";
+import axios from 'axios';
 
 
 const Admindashboard = () => {
+
+    const [users, setUsers] = useState([]);
+
+    useEffect(() => {
+      const fetchPendingUsers = async () => {
+        try {
+          const res = await axios.get('http://localhost:5000/api/auth/pending-users');
+          setUsers(res.data);
+        } catch (err) {
+          console.error(err); // Handle the error appropriately
+        }
+      };
+  
+      fetchPendingUsers();
+    }, []);
+  
+    const approveUser = async (email) => {
+      try {
+        await axios.post('http://localhost:5000/api/auth/approve', { email });
+        setUsers(users.filter(user => user.email !== email));
+      } catch (err) {
+        console.error(err); // Handle the error appropriately
+      }
+    };
+
   return (
         <div className="container mt-5 admin-dashboard">
             <input 
@@ -15,7 +41,7 @@ const Admindashboard = () => {
             <div className='admin-header'>
                 <h1 className='admin-heading'>ADMIN DASHBOARD</h1>
             </div>
-            <h2>Pending Approvals</h2>
+            <h2>Pending User Approvals</h2>
             {/* {users.length > 0 ? ( */}
                 <table className="table table-striped">
                     <thead>
@@ -26,16 +52,16 @@ const Admindashboard = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* {users.map(user => ( */}
-                            <tr>
-                                <td>username</td>
-                                <td>user email</td>
+                        {users.map(user => (
+                            <tr key={user._id}>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
                                 <td>
-                                    <button className="btn btn-success mr-2">Approve</button>
+                                    <button onClick={() => approveUser(user.email)} className="btn btn-success mr-2">Approve</button>
                                     <button className="btn btn-danger">Reject</button>
                                 </td>
                             </tr>
-                        {/* ))} */}
+                         ))}
                     </tbody>
                 </table>
             {/* ) : ( */}

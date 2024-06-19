@@ -9,7 +9,7 @@ const Home = () => {
           <div className="left-box">
             <h2>Welcome to the GCU Alumni Association</h2>
             <p>A registered body of the Alumni members of the Girijananda Choudhury University where you can connect with fellow members and alumnis</p>
-            <br />
+            <br/>
             <a href="/register">
               <button className="button">REGISTER</button>
             </a>
@@ -28,11 +28,10 @@ const Home = () => {
             <img src="./assets/vc-gcu.jpg" alt="GCU Vice Chancellor" className='vc-img'/>
           </div>
           
-        </section> */}
+            </section> */}
+    </div>
+  )
+}        
 
 
-    <div>
-      
-
-
-export default Home
+export default Home;

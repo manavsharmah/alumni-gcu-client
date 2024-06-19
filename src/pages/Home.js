@@ -1,44 +1,31 @@
 import React from 'react';
-import './globals.css';
+import './pages.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Home = () => {
   return (
-    <div className="topbar-container d-flex justify-content-between align-items-center p-3">
-      
-        <div className="logo-container-fluid  d-flex align-items-center">
-          <a href="https://www.gcualumni.com/home.js">
-            <img src="" alt="GCU Alumni Association" className="logo" />
-          </a>
-        </div>
-       
-      
-      <nav className="nav-links container-fluid">
-        <ul className="nav justify-content-center">
-        <li className="nav-item">
-            <a className="nav-link text-white font-weight-bold" href="https://www.gcucalumni.com/about.js">About Us</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link text-white font-weight-bold" href="https://www.gcucalumni.com/alumniassociation.js">Alumni Achievers</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link text-white font-weight-bold" href="https://www.gcucalumni.com/studentservice.js">Student Services</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link text-white font-weight-bold" href="https://www.gcucalumni.com/newsroom.js">Newsroom</a>
-          </li>
-          <li className="nav-item"><a className="nav-link text-white font-weight-bold" href="https://www.gcucalumni.com/events.js" >Activities</a></li>
-          <li className="nav-item"><a className="nav-link text-white font-weight-bold" href="https://www.gcualumni.com/events.js" >More</a></li>
-          <li className="nav-item"><a className="nav-link text-white font-weight-bold" href="https://www.gcualumni.com/page/FAQs.js" >FAQ's</a></li>
-        </ul>
-        {/* <div className="kingster-navigation-slide-bar" style="width: 47.4688px; left: 395.594px; display: block; overflow: hidden;"></div> */}
-      </nav>
-
-      <div className="auth-links ml-auto d-flex align-items-center">
-          <a href="https://www.gcualumni.com/user/signup.js" className="auth-link text-white font-weight-bold ml-3">Register</a>&nbsp;
-          <span>  |  </span>
-          <a href="https://www.gcualumni.com/user/login.js" className="auth-link text-white font-weight-bold ml-3">Login</a>
-        </div>
+    <div className='main'>
+        <section className="hero">
+          <div className="left-box">
+            <h2>Welcome to the GCU Alumni Association</h2>
+            <p>A registered body of the Alumni members of the Girijananda Choudhury University where you can connect with fellow members and alumnis</p>
+            <br />
+            <button className="button">REGISTER</button>
+          </div>
+          <div className="right-box">
+            <img src="./assets/gcu-building.jpg" alt="GCU Campus" />
+          </div>
+        </section>
+        {/* <section className='hero2'>
+          <div className='vc-text'>
+            <h2>Message from the Vice Chancellor</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sint animi placeat dolorum dolores iure molestiae? Asperiores, ea.</p>
+          </div>
+          <div className='vc-image'>
+            <img src="./assets/vc-gcu.jpg" alt="Vice Chancellor" className='vc-img'/>
+          </div>
+          
+        </section> */}
     </div>
   )
 }

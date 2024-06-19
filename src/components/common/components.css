@@ -1,0 +1,382 @@
+/* .topbar-container {
+    width: 100%;
+    /* background-color: #27357f;
+    border-bottom: 1px solid #27357f; */
+    /* position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    height: 100px; /* Adjust height as needed 
+  } */
+  
+  /* .topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+  } */
+
+  /* .topbar-box {
+    width: 100%;
+    background-color: #ffffff;
+    border-bottom: black 1px solid;
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    height: 90px;
+  } 
+  
+    .logo-container {
+      display: flex;
+      align-items: center;
+      padding-left: 20px;
+      text-decoration: none;
+    } */
+    
+    .logo {
+      height: 50px;
+    }
+
+    .logo-text {
+      text-decoration: none;
+    }
+
+    .navbar {
+      background-color: #27357f;
+      height: 50px;
+    }
+    
+    .auth-links {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      
+    }
+    
+    .auth-link {
+      justify-content: end;
+      color: #030303;
+      font-weight: bold;
+      text-decoration: none;
+      margin-left: 10px;
+      align-items: end;
+    }
+  
+  
+    .auth-link:hover {
+      color: #007bff !important;
+    }
+    
+    /* .nav-links {
+      background-color: #27357f;
+      padding-top: 15px; Ensure this matches the padding to align properly */
+      /* padding-bottom: 15px; /* Ensure this matches the padding to align properly */
+      /* margin-top: 40px; /* Adjust margin to align below the topbar */
+      /* display: inline-block;
+	    position: relative;
+    } 
+     
+    /* .nav-list {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .nav-item {
+      margin: 0 15px;
+    }
+    
+    .nav-link {
+      color: white !important;
+      font-weight: bold;
+    }
+    
+    
+    .nav-link:hover {
+      color: #007bff !important;
+    }  */
+
+/* =====Topbar===== */
+
+.header-container {
+  text-align: left;
+}
+
+.App-header {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: rgb(0, 0, 0);
+}
+
+.logo {
+  margin-right: 20px;
+  margin-top: -200px;
+  /* justify-content: center; */
+}
+
+.logo img {
+  width: 220px;
+}
+
+.title {
+  margin: 0;
+  text-align: left;
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.nav-buttons button {
+  background-color: white;
+  color: #282c34;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.navbar {
+  background-color: #27357f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.navbar li a {
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.navbar li a:hover {
+  color: #007bff !important;
+  text-decoration: underline;
+  text-decoration-color: #fbcf0a;
+  text-decoration-thickness: 7px;
+  text-underline-offset: 14px;
+}
+
+.App-main {
+  padding: 20px;
+}
+
+
+  /* Media query for mobile responsiveness */
+  @media only screen and (max-width: 600px) {
+    .topbar {
+      padding: 10px; /* Adjust padding for smaller screens */
+      flex-direction: column; /* Stack items vertically on small screens */
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .logo {
+      height: 40px; /* Adjust logo size for smaller screens */
+      margin-bottom: 10px; /* Add spacing between logo and other elements */
+    }
+  
+   .auth-links {
+      display: flex; /* Show auth links on small screens */
+      margin-top: 10px; /* Add spacing between auth links and other elements */
+   }
+  
+   .nav-links {
+      display: block; /* Show navigation links on small screens */
+      background-color: #27357f;
+      padding: 10px;
+   }
+  
+   .nav-list {
+      flex-direction: column; /* Stack nav items vertically on small screens */
+   }
+  
+   .nav-item {
+      margin: 5px 0; /* Adjust margin for smaller screens */
+   }
+  
+   .nav-link:hover {
+      color: white; /* Change hover color back to white on small screens */
+   }
+  }
+
+  /* Signup styling */
+
+/* .container{
+  display: flex;
+  flex-direction:column;
+  margin:auto;
+  margin-top: 200px;
+  width:600px;
+  background:#ffffff;
+  padding-bottom: 30px;
+} */
+
+.header{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap: 9px;
+  width:100%;
+  margin-top:30px;
+}
+
+.text{
+  color: #f5f905;
+  font-size: 48px;
+  font-weight:700;
+}
+
+.underline{
+  width:61px;
+  height:6px;
+  background: blue;
+  border-radius:9px;
+}
+
+.inputs{
+  margin-top: 55px;
+  display: flex;
+  flex-direction: column;
+  gap:25px;
+}
+
+.input{
+  display:flex;
+  align-items:center;
+  margin:auto;
+  width:480px;
+  height:80px;
+  background:#eaeaea;
+  border-radius:6px;
+}
+
+.input img{
+  margin: 0px 30px;
+}
+
+.input input{
+  height:40px;
+  width:400px;
+  background: transparent;
+  border:none;
+  outline:none;
+  color:#797979;
+  font-size: 20px;
+}
+
+.forgot-password{
+  padding-left:75px;
+  margin-left: 75px;
+  margin-top:27px;
+  color: #797979;
+  font-size:18px;
+}
+
+.forgot-password span{
+  color: blue;
+  cursor:pointer;
+}
+
+.submit-container{
+  display:flex;
+  gap:30px;
+  margin: 60px auto;
+}
+
+.submit{
+  display:flex;
+  justify-content: center;
+  align-items:center;
+  width:220px;
+  height:59px;
+  color:white;
+  background:blue;
+  border-radius:50px;
+  font-size:19px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+
+
+/* =====Signup/Login===== */
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 90px;
+
+}
+
+.card {
+  margin-left: -250px;
+  border-radius: 7px;
+  width: 800px;
+  display: flex;
+  box-shadow: 5px 5px 30px rgb(197, 196, 196);
+}
+
+
+.card-body {
+  border-radius: 7px;
+  background-color: #ffffff;
+  padding: 15px;
+}
+
+.card-title {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.input {
+  height: 60px;
+  padding: 20px;
+}
+
+
+.btn-primary {
+  background-color: #27357f;
+  width: 300px;
+  height: 60px;
+  justify-content: center;
+  margin-left: 230px;
+  font-size: 20px;
+}
+
+.btn-primary:hover {
+  background-color: #1b265f;
+}
+
+.already-registered {
+  padding-left:75px;
+  margin-left: 75px;
+  margin-top:27px;
+  color: #797979;
+  font-size:18px;
+}
+
+.already-registered span {
+    color: blue;
+    cursor:pointer;
+}
+
+.container2 {
+  display: flex;
+  height: 400px;
+  margin-top: 200px;
+}

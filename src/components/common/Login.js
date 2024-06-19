@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
+ second
+import "./components.css";
 import "../components.css";
+ main
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,6 +30,37 @@ const Login = () => {
     };
 
     return (
+ second
+        <div className="container" >
+            <div className='row justify-content-center'>
+            <div className='col-md-6'>
+                <div class="card">
+                    <div className='card-body'>
+                    <h2 className='card-title text-center'>Login</h2>
+                    <hr />
+                        <form onSubmit={onSubmit}>                           
+                                <div className="input">
+                                    <img src='' alt=''/>
+                                    <input type='email' placeholder='Email id' value={email} onChange={onChange} name='email' required/>
+                                </div>
+                            <br></br>            
+                            <div className="input">
+                                <img src='' alt=''/>
+                                <input type='password' placeholder='Password' value={password} onChange={onChange} name='password' required/>
+                            </div>
+                            <div className="forgot-password">Forgot Password? <span>Click Here!</span></div>
+                            {/* <br /> */}
+                            
+                            <div className="submit-container">
+                                <button type='submit' className='btn btn-primary'>Login</button>
+                            </div>
+                        </form>
+                </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
         <form onSubmit={onSubmit}>
         <div className='container'>
             <div className='header'>
@@ -51,6 +85,7 @@ const Login = () => {
             </div>
         </div>
         </form>
+            main
         
     );
 };

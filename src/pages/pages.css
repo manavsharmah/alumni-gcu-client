@@ -1,0 +1,104 @@
+  .admin-dashboard {
+    padding-top: 5px; /* Adjust this value based on the height of your top bar */
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-header {
+  padding-bottom: 20px;
+  font-weight: bold;
+}
+
+.admin-heading {
+  font-weight: bold;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-decoration: dashed;
+  text-align: center;
+}
+
+.card {
+  border-color: #27357f;
+  background-color: #e2e4eb;
+}
+
+.card-body {
+  /* margin-bottom: 20px;
+  margin-right: 20px; */
+  background-color: #eceef3;
+}
+
+.btn {
+  margin-right: 20px;
+}
+
+
+.main {
+  background-color: #fff;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.left-box {
+  /* width: 50%; */
+  /* display: contents; */
+  /* justify-content: left; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.left-box h2 {
+  justify-content: center;
+  width: 35%;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.left-box p {
+  width: 35%;
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.button {
+  background-color: #27357f;
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.hero-image {
+  width: 50%;
+}
+
+.hero-image img {
+  width: auto;
+  height: auto;
+}
+
+
+.hero2 {
+  background-color: #27357f;
+  display: flex;
+  justify-content: space-between;
+}
+
+.vc-text{
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.vc-img {
+  height: 45px;
+  width: 35px;
+}

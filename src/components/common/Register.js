@@ -43,7 +43,7 @@ const Register = () => {
                         <form onSubmit={onSubmit}>                           
                                 <div className="input">
                                     <img src='' alt=''/>
-                                    <input type='text'  placeholder='Name'value={name} onChange={onChange} name='name' required/>
+                                    <input type='text'  placeholder='Name' value={name} onChange={onChange} name='name' required/>
                                 </div>
                             <br></br>            
                             <div className="input">
@@ -55,7 +55,7 @@ const Register = () => {
                                 <img src='' alt=''/>
                                 <input type='text'  placeholder='Phone' value={phone} onChange={onChange} name='phone' required/>
                             </div>
-                            <div className="already-registered">Already Registered? <span>Login!</span></div>
+                            <div className="already-registered">Already Registered? <span><a href="/login">LOGIN!</a></span></div>
                             {/* <br /> */}
                             
                             <div className="submit-container">

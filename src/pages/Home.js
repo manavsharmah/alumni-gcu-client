@@ -25,7 +25,7 @@ const Home = () => {
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sint animi placeat dolorum dolores iure molestiae? Asperiores, ea.</p>
           </div>
           <div className='vc-image'>
-            <img src="./assets/vc-gcu.jpg" alt="Vice Chancellor" className='vc-img'/>
+            <img src="./assets/vc-gcu.jpg" alt="GCU Vice Chancellor" className='vc-img'/>
           </div>
           
         </section> */}

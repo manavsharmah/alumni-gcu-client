@@ -39,7 +39,7 @@ const Admindashboard = () => {
                     </tbody>
                 </table>
             {/* ) : ( */}
-                <p>No pending approvals.</p>
+                <p>No pending approvals right now.</p>
             {/* )} */}
         </div>
   )

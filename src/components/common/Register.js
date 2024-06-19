@@ -50,7 +50,7 @@ const Register = () => {
                                 <img src='' alt=''/>
                                 <input type='text'  placeholder='Phone' value={phone} onChange={onChange} name='phone' required/>
                             </div>
-                            <div className="already-registered">Already Registered? <span><a href="/login">Login!</a></span></div>
+                            <div className="already-registered">Already Registered? <span><a href="/login">LOGIN!</a></span></div>
                             {/* <br /> */}
                             
                             <div className="submit-container">

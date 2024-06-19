@@ -44,7 +44,7 @@ const Login = () => {
                                 <img src='' alt=''/>
                                 <input type='password' placeholder='Password' value={password} onChange={onChange} name='password' required/>
                             </div>
-                            <div className="forgot-password">Forgot Password? <span>Click Here!</span></div>
+                            <div className="forgot-password">Forgot Password? <span>Click Here!!</span></div>
                             
                             <div className="submit-container">
                                 <button type='submit' className='btn btn-primary'>Login</button>

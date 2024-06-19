@@ -10,7 +10,10 @@ const Home = () => {
             <h2>Welcome to the GCU Alumni Association</h2>
             <p>A registered body of the Alumni members of the Girijananda Choudhury University where you can connect with fellow members and alumnis</p>
             <br />
-            <button className="button">REGISTER</button>
+            <a href="/register">
+              <button className="button">REGISTER</button>
+            </a>
+            
           </div>
           <div className="right-box">
             <img src="./assets/gcu-building.jpg" alt="GCU Campus" />

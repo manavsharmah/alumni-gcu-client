@@ -1,5 +1,5 @@
   .admin-dashboard {
-    padding-top: 5px; /* Adjust this value based on the height of your top bar */
+    padding-top: 4px; /* Adjust this value based on the height of your top bar */
     display: flex;
     flex-direction: column;
 }

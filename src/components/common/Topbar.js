@@ -25,7 +25,7 @@ const Topbar = () => {
         <li><a href="https://www.gcucalumni.com/studentservice.js">Student Services</a></li>
         <li><a href="https://www.gcucalumni.com/newsroom.js">Newsroom</a></li>
         <li><a href="https://www.gcucalumni.com/events.js">Activities</a></li>
-        <li><a href="https://www.gcucalumni.com/events.js">More</a></li>
+        <li><a href="https://www.gcucalumni.com/more.js">More</a></li>
         <li><a href="https://www.gcualumni.com/page/FAQs.js">FAQ's</a></li>
       </ul>
     </nav>

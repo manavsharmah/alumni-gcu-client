@@ -213,7 +213,7 @@
    }
   }
 
-  /* Signup styling */
+  /* =====>Signup styling<======= */
 
 /* .container{
   display: flex;
@@ -367,6 +367,9 @@
   margin-top:27px;
   color: #797979;
   font-size:18px;
+}
+.already-registered a {
+  text-decoration: none;
 }
 
 .already-registered span {

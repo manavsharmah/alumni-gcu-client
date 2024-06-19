@@ -46,30 +46,3 @@ const Admindashboard = () => {
 }
 
 export default Admindashboard;
-
-
-
-    // <div className="container mt-5 admin-dashboard">
-    //     <div className='admin-header'>
-    //         <h1 className='admin-heading'>ADMIN DASHBOARD</h1>
-    //     </div>
-    //         <h2>Pending Approvals</h2>
-    //         {/* {users.length > 0 ? ( */}
-    //             <div className="row">
-    //                 {/* {users.map(user => ( */}
-    //                     <div className="col-md-4">
-    //                         <div className="card mb-4">
-    //                             <div className="card-body">
-    //                                 <h5 className="card-title">User name</h5>
-    //                                 <p className="card-text">Email</p>
-    //                                 <button className="btn btn-success mr-2">Approve</button>
-    //                                 <button className="btn btn-danger" >Reject</button>
-    //                             </div>
-    //                         </div>
-    //                     </div>
-    //                 {/* ))} */}
-    //             </div>
-    //         {/* ) : ( */}
-    //             <p>No pending approvals.</p>
-    //         {/* )} */}
-    //     </div>

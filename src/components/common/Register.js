@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
+ second
 import "./components.css";
+
+import "../components.css";
+ main
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -28,6 +32,7 @@ const Register = () => {
   };
 
     return (
+ second
         <div className="container" >
             <div className='row justify-content-center'>
             <div className='col-md-6'>
@@ -67,3 +72,40 @@ const Register = () => {
 };
 
 export default Register;
+
+        <form onSubmit={onSubmit}>
+            <div className='container'>
+            <div className='header'>
+                <div className='text'>Register</div>
+                <div className='underline'></div>
+            </div>
+
+            <div className='inputs'>
+                <div className="input">
+                    <img src='' alt=''/>
+                    <input type='text' placeholder='Name'value={name} onChange={onChange} name='name' required/>
+                </div>
+            </div>
+            <br></br>            
+            <div className="input">
+                <img src='' alt=''/>
+                <input type='email' placeholder='Email id' value={email} onChange={onChange} name='email' required/>
+            </div>
+            <br></br>
+            <div className="input">
+                <img src='' alt=''/>
+                <input type='text' placeholder='Phone' value={phone} onChange={onChange} name='phone' required/>
+            </div>
+            
+            <div className="submit-container">
+                <button type='submit'>Signup</button>
+            </div>
+        </div>
+        </form>
+        
+    );
+};
+
+export default Register;
+
+ main

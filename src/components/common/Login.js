@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
+ second
 import "./components.css";
+import "../components.css";
+ main
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -27,6 +30,7 @@ const Login = () => {
     };
 
     return (
+ second
         <div className="container" >
             <div className='row justify-content-center'>
             <div className='col-md-6'>
@@ -56,6 +60,32 @@ const Login = () => {
             </div>
         </div>
         </div>
+
+        <form onSubmit={onSubmit}>
+        <div className='container'>
+            <div className='header'>
+                <div className='text'>Login</div>
+                <div className='underline'></div>
+            </div>
+            <br></br>
+            
+            <div className="input">
+                <img src='' alt=''/>
+                <input type='email' placeholder='Email id' value={email} onChange={onChange} name='email' required/>
+            </div>
+            <br></br>
+            <div className="input">
+                <img src='' alt=''/>
+                <input type='password' placeholder='Password' value={password} onChange={onChange} name='password' required/>
+            </div>
+            <div className="forgot-password">Lost Password? <span>Click Here!</span></div>
+            
+            <div className="submit-container">
+                <button type="submit">Login</button>
+            </div>
+        </div>
+        </form>
+            main
         
     );
 };

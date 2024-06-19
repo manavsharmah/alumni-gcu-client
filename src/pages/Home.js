@@ -1,4 +1,3 @@
- second
 import React from 'react';
 import './pages.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -31,15 +30,9 @@ const Home = () => {
           
         </section> */}
 
-import React from 'react'
 
-const Home = () => {
-  return (
     <div>
       
-main
-    </div>
-  )
-}
+
 
 export default Home

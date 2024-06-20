@@ -8,7 +8,7 @@ const Home = () => {
         <section className="hero">
           <div className="left-box">
             <h2>Welcome to the GCU Alumni Association</h2>
-            <p>A registered body of the Alumni members of the Girijananda Choudhury University where you can connect with fellow members and alumnis</p>
+            <p>A registered body of the Alumni members of the Girijananda Chowdhury University where you can connect with fellow members and alumnus</p>
             <br/>
             <a href="/register">
               <button className="button">REGISTER</button>

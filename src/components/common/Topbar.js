@@ -9,7 +9,7 @@ const Topbar = () => {
         <img src="./assets/LOGO 1.jpg" alt="Girijananda Choudhury University logo" />
       </div>
       <div className="title">
-        <h2>Girijananda Choudhury University</h2>
+        <h2>Girijananda Chowdhury University</h2>
         <h2>Alumni Association</h2>
       </div>
       <div className="auth-links ml-auto d-flex align-items-center">

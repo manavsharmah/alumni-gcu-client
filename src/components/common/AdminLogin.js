@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../services/api';
 
-const Login = () => {
+const AdminLogin = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         email: '',
@@ -17,7 +17,7 @@ const Login = () => {
         e.preventDefault();
         try {
              await axiosInstance.post('http://localhost:5000/api/auth/login', formData);
-            navigate('/welcome'); // Navigate to reset password page after successful login
+            navigate('/admin-dashboard'); // Navigate to reset password page after successful login
         } catch (err) {
             console.error(err.response.data);
             setError(err.response.data.message || 'Something went wrong');
@@ -30,7 +30,7 @@ const Login = () => {
                 <div className='col-md-6'>
                     <div className="card">
                         <div className='card-body'>
-                            <h2 className='card-title text-center'>Login</h2>
+                            <h2 className='card-title text-center'>Admin Login</h2>
                             <hr />
                             {error && <div className="alert alert-danger">{error}</div>}
                             <form onSubmit={onSubmit}>
@@ -55,4 +55,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default AdminLogin;

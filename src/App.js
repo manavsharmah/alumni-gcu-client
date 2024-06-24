@@ -7,24 +7,29 @@ import Login from './components/common/Login';
 import Welcome from './pages/specific/Welcome';
 import Register from './components/common/Register';
 import ResetPassword from './components/common/ResetPassword';
+import ProtectedRoute from './components/ProtectedRoute';
+import AdminLogin from "./components/common/AdminLogin";
 
 
 function App() {
   return (
     <React.Fragment>
-        <div>
-          <Routes>
-            <Route element={<RootLayout />}>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/" element={<Home />} />
-              <Route path="/admin-dashboard" element={<AdminDashboard />} />
-              <Route path='/reset-password' element={<ResetPassword />} />
-              <Route path='/welcome' element={<Welcome />} />
-            </Route>
-          </Routes>
-        </div>
-      </React.Fragment>
+      <Routes>
+        <Route element={<RootLayout />}>
+          <Route path="/admin-login" element={<AdminLogin />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/welcome" element={<Welcome />} />
+          {/* <Route path="/admin-dashboard" element={<AdminDashboard />} /> */}
+          <Route
+            path="/admin-dashboard"
+            element={<ProtectedRoute element={<AdminDashboard />} requiredRole="admin" />}
+          />        
+        </Route>
+      </Routes>
+    </React.Fragment>
   );
 }
 

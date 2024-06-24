@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "../pages.css";
-import axios from 'axios';
+import axiosInstance from '../../services/api';
 
 
 const Admindashboard = () => {
@@ -10,7 +10,7 @@ const Admindashboard = () => {
     useEffect(() => {
       const fetchPendingUsers = async () => {
         try {
-          const res = await axios.get('http://localhost:5000/api/auth/pending-users');
+          const res = await axiosInstance.get('http://localhost:5000/api/auth/pending-users');
           setUsers(res.data);
         } catch (err) {
           console.error(err); // Handle the error appropriately
@@ -22,7 +22,7 @@ const Admindashboard = () => {
   
     const approveUser = async (email) => {
       try {
-        await axios.post('http://localhost:5000/api/auth/approve', { email });
+        await axiosInstance.post('http://localhost:5000/api/auth/approve', { email });
         setUsers(users.filter(user => user.email !== email));
       } catch (err) {
         console.error(err); // Handle the error appropriately

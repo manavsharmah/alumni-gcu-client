@@ -26,43 +26,43 @@ const Register = () => {
     }
   };
 
-    return (
-        <div className="container" >
-            <div className='row justify-content-center'>
-            <div className='col-md-6'>
-                <div class="card">
-                    <div className='card-body'>
-                    <h2 className='card-title text-center'>Registration</h2>
-                    <hr />
-                        <form onSubmit={onSubmit}>                           
-                                <div className="input">
-                                    <img src='' alt=''/>
-                                    <input type='text'  placeholder='Name' value={name} onChange={onChange} name='name' required/>
-                                </div>
-                            <br></br>            
+  return (
+    <div className="container" >
+        <div className='row justify-content-center'>
+        <div className='col-md-6 col-10'>
+            <div class="card">
+                <div className='card-body'>
+                <h2 className='card-title text-center'>Registration</h2>
+                <hr />
+                    <form onSubmit={onSubmit}>                           
                             <div className="input">
                                 <img src='' alt=''/>
-                                <input type='email'  placeholder='Email id' value={email} onChange={onChange} name='email' required/>
+                                <input type='text'  placeholder='Name' value={name} onChange={onChange} name='name' required/>
                             </div>
-                            <br></br>
-                            <div className="input">
-                                <img src='' alt=''/>
-                                <input type='text'  placeholder='Phone' value={phone} onChange={onChange} name='phone' required/>
-                            </div>
-                            <div className="already-registered">Already Registered? <span><a href="/login">LOGIN!</a></span></div>
-                            {/* <br /> */}
-                            
-                            <div className="submit-container">
-                                <button type='submit' className='btn btn-primary'>Register</button>
-                            </div>
-                        </form>
-                </div>
-                </div>
+                        <br></br>            
+                        <div className="input">
+                            <img src='' alt=''/>
+                            <input type='email'  placeholder='Email id' value={email} onChange={onChange} name='email' required/>
+                        </div>
+                        <br></br>
+                        <div className="input">
+                            <img src='' alt=''/>
+                            <input type='text'  placeholder='Phone' value={phone} onChange={onChange} name='phone' required/>
+                        </div>
+                        <div className="already-registered">Already Registered? <span><a href="/login">LOGIN!</a></span></div>
+                        {/* <br /> */}
+                        
+                        <div className="submit-container">
+                            <button type='submit' className='btn btn-primary'>Register</button>
+                        </div>
+                    </form>
+            </div>
             </div>
         </div>
-        </div>
-        
-    );
+    </div>
+    </div>
+    
+  );
 };
 
 export default Register;

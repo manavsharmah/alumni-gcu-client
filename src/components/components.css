@@ -72,20 +72,17 @@
       color: #007bff !important;
     }
   
-  .kingster-navigation .kingster-navigation-slide-bar {
-      border-color: #fbcf0a;
-  }
-  .kingster-navigation .kingster-navigation-slide-bar {
-    border-bottom-width: 7px;
-    border-bottom-style: solid;
-    position: absolute;
-    display: none;
-    margin-top: -7px;
-    overflow: hidden;
-  }
-  .kingster-body * {
-    border-color: #e6e6e6;
-  }
+
+    .profile-photo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    
+    .username {
+      font-weight: bold;
+    }
   
   /* Media query for mobile responsiveness */
   @media only screen and (max-width: 600px) {

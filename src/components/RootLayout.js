@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import Topbar from './common/Topbar';
+import Bottombar from './common/Bottombar';
 
 const RootLayout = () => {
   return (
@@ -11,7 +12,7 @@ const RootLayout = () => {
         <Outlet />
       </section>
 
-      {/* <Bottombar /> */}
+      <Bottombar />
     </div>
   )
 }

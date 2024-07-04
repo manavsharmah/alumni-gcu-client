@@ -37,6 +37,13 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/welcome" element={<Welcome />} />
+          <Route path='/overview' element={<Overview />} />
+          <Route path='/vision' element={<Vision />} />
+          <Route path='/objectives' element={<Objectives />} />
+          <Route path='/council' element={<Council />} />
+          <Route path='/presidents' element={<Presidents />} />
+          <Route path='/chapters' element={<Chapters />} />
+          <Route path='/alumnus' element={<Alumnus />} />
           {/* <Route path="/admin-dashboard" element={<AdminDashboard />} /> */}
           <Route
             path="/admin-dashboard"

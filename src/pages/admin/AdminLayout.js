@@ -8,8 +8,8 @@ const AdminLayout = () => {
       <nav className="admin-sidebar">
         <ul>
           <li><a href="/admin-dashboard">Dashboard</a></li>
-          <li><a href="/news-form">News Form</a></li>
-          <li><a href="/admin-settings">Settings</a></li>
+          <li><a href="/news-form">Create New News</a></li>
+          <li><a href="/events-form">Create New Event</a></li>
           <li><a href="/">Back to Website</a></li>
         </ul>
       </nav>

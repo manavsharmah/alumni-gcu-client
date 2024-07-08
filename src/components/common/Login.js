@@ -17,7 +17,7 @@ const Login = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-             await axiosInstance.post('http://localhost:5000/api/auth/login', formData);
+            await axiosInstance.post('http://localhost:5000/api/auth/login', formData);
             navigate('/welcome'); // Navigate to reset password page after successful login
         } catch (err) {
             console.error(err.response.data);

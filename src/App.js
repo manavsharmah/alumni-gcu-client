@@ -16,8 +16,9 @@ import Home from './pages/Home';
 import Welcome from './pages/specific/Welcome';
 
 // Admin Pages
-import AdminNewsForm from './pages/admin/AdminNewsForm.js';
+import AdminNewsForm from './pages/admin/AdminNewsForm';
 import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminEventsForm from './pages/admin/AdminEventsForm';
 
 // Detail Pages
 import TopAlumni from './pages/detail/TopAlumni';
@@ -35,6 +36,7 @@ import Objectives from './pages/detail/Objectives';
 import Vision from './pages/detail/Vision';
 import Overview from './pages/detail/Overview';
 import Gallery from './pages/detail/Gallery';
+import Events from './pages/detail/Events';
 
 
 
@@ -72,8 +74,9 @@ function App() {
           <Route path='/contact' element={<Contact />} />
           <Route path='/scholarship' element={<Scholarship />} />
           <Route path='/activities' element={<Activities />} />
+          <Route path='/events' element={<Events />} />
 
-          {/* Adimn + User Routes */}
+          {/* Adimin + User Routes */}
 
           <Route
             path="/welcome"
@@ -92,6 +95,7 @@ function App() {
 
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path='/news-form' element={<AdminNewsForm />} />
+          <Route path='/events-form' element={<AdminEventsForm />} />
 
         </Route>
           

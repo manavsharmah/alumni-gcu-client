@@ -18,7 +18,7 @@
 
 .container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .card {
   border-color: #27357f;

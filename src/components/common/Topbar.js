@@ -69,13 +69,6 @@ const Topbar = () => {
         </button>
       </header>
       <nav className={`navbar ${isNavOpen ? 'open' : ''}`}>
-        {user ? (
-          <>
-            <h1 className='username'>{user.name}</h1>
-          </>
-        ) : (
-          <p>Loading....</p>
-        )}
         <ul>
           <li><a href="https://www.gcucalumni.com/about.js">About</a>
             <ul className='sub-menus'>
@@ -89,7 +82,7 @@ const Topbar = () => {
           </li>
           <li><a href="https://www.gcucalumni.com/alumniassociation.js">Get Involved</a>
           <ul className='sub-menus'>
-              <li><a href='alumnus/'>Alumnus - Stake Holder Forum</a></li>
+              <li><a href='/alumnus'>Alumnus - Stake Holder Forum</a></li>
             </ul>
           </li>
           <li><a href="https://www.gcucalumni.com/alumniassociation.js">Alumni Achievers</a>
@@ -113,6 +106,13 @@ const Topbar = () => {
           </li>
           <li><a href="/faq">FAQ's</a></li>
         </ul>
+          {user ? (
+            <>
+              <a href="/profile"><h1 className='username'>{user.name}</h1></a>
+            </>
+          ) : (
+            <p>Loading....</p>
+          )}
       </nav>
     </div>
   );

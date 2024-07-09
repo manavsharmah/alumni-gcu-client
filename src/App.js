@@ -14,6 +14,8 @@ import AdminLayout from './pages/admin/AdminLayout';
 // Pages
 import Home from './pages/Home';
 import Welcome from './pages/specific/Welcome';
+import Profile from './pages/specific/Profile';
+import UpdateProfile from './pages/specific/UpdateProfile'
 
 // Admin Pages
 import AdminNewsForm from './pages/admin/AdminNewsForm';
@@ -85,6 +87,14 @@ function App() {
           <Route
             path="/reset-password"
             element={<ProtectedRoute element={<ResetPassword />} requiredRole={["admin", "user"]} />}
+          />
+          <Route
+            path="/profile"
+            element={<ProtectedRoute element={<Profile />} requiredRole="user" />}
+          />
+          <Route
+            path="/update-profile"
+            element={<ProtectedRoute element={<UpdateProfile />} requiredRole="user" />}
           />
                  
         </Route>

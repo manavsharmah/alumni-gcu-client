@@ -222,3 +222,31 @@
     background:#EAEAEA;
     color:#676767;
 }
+
+
+/* Verified User List */
+
+
+.users-section {
+  flex: 1;
+  border-left: 1px solid #d80e0e;
+  padding-left: 20px;
+}
+
+.verified-users-list {
+  margin-top: 20px;
+}
+
+.user-item {
+  padding: 10px 0;
+}
+
+.user-item p {
+  margin: 0;
+}
+
+hr {
+  margin: 10px 0;
+  border: 0;
+  border-top: 1px solid #808080;
+}

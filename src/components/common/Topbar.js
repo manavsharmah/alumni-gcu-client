@@ -47,7 +47,9 @@ const Topbar = () => {
     <div className="App">
       <header className="App-header">
         <div className="logo">
+          <a href='/'>
           <img src="./assets/LOGO 1.jpg" alt="Girijananda Choudhury University logo" />
+          </a>
         </div>
         <div className="title">
           <h2>Girijananda Chowdhury University</h2>

@@ -14,6 +14,7 @@ const Login = () => {
     const { email, password } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+
     const onSubmit = async e => {
         e.preventDefault();
         try {
@@ -23,6 +24,10 @@ const Login = () => {
             console.error(err.response.data);
             setError(err.response.data.message || 'Something went wrong');
         }
+    };
+
+    const handleForgotPasswordClick = () => {
+        navigate('/forgot-password');
     };
 
     return (
@@ -42,8 +47,9 @@ const Login = () => {
                                 <div className="input">
                                     <input type='password' placeholder='Password' value={password} onChange={onChange} name='password' required />
                                 </div>
-                                <div className="forgot-password">Forgot Password? <span>Click Here!!</span></div>
-
+                                <div className="forgot-password">
+                                    Forgot Password? <span onClick={handleForgotPasswordClick} style={{ cursor: 'pointer', color: 'blue' }}>Click Here!!</span>
+                                </div>
                                 <div className="submit-container">
                                     <button type='submit' className='btn btn-primary'>Login</button>
                                 </div>

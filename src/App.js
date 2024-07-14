@@ -5,6 +5,7 @@ import Login from './components/common/Login';
 import Register from './components/common/Register';
 import ResetPassword from './components/common/ResetPassword';
 import AdminLogin from './components/common/AdminLogin';
+import ForgotPassword from './components/common/ForgotPassword';
 
 // Layout Components
 import RootLayout from './components/RootLayout';
@@ -108,6 +109,10 @@ function App() {
           <Route path='/events-form' element={<AdminEventsForm />} />
 
         </Route>
+
+          {/* forgot password route */}
+
+        <Route path='/forgot-password' element={<ForgotPassword />} />
           
       </Routes>
     </React.Fragment>

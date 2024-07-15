@@ -1,14 +1,30 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import RootLayout from './components/RootLayout';
-import AdminDashboard from './pages/specific/AdminDashboard';
+
+// Common Components
 import Login from './components/common/Login';
-import Welcome from './pages/specific/Welcome';
 import Register from './components/common/Register';
 import ResetPassword from './components/common/ResetPassword';
+import AdminLogin from './components/common/AdminLogin';
+import Topbar from './components/common/Topbar';
+import Bottombar from './components/common/Bottombar';
+
+// Layout Components
 import ProtectedRoute from './components/ProtectedRoute';
-import AdminLogin from "./components/common/AdminLogin";
+import AdminLayout from './pages/admin/AdminLayout';
+
+// Pages
+import Home from './pages/Home';
+import Welcome from './pages/specific/Welcome';
+import Profile from './pages/specific/Profile';
+import UpdateProfile from './pages/specific/UpdateProfile';
+
+// Admin Pages
+import AdminNewsForm from './pages/admin/AdminNewsForm';
+import AdminDashboard from './pages/admin/AdminDashboard';
+import AdminEventsForm from './pages/admin/AdminEventsForm';
+
+// Detail Pages
 import TopAlumni from './pages/detail/TopAlumni';
 import NotableAlumni from './pages/detail/NotableAlumni';
 import NewsArchive from './pages/detail/NewsArchive';
@@ -24,39 +40,28 @@ import Objectives from './pages/detail/Objectives';
 import Vision from './pages/detail/Vision';
 import Overview from './pages/detail/Overview';
 import Gallery from './pages/detail/Gallery';
-
+import Events from './pages/detail/Events';
 
 function App() {
   return (
     <React.Fragment>
-      <Routes>
-        <Route element={<RootLayout />}>
-          <Route path="/admin-login" element={<AdminLogin />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/welcome" element={<Welcome />} />
-          <Route path='/overview' element={<Overview />} />
-          <Route path='/vision' element={<Vision />} />
-          <Route path='/objectives' element={<Objectives />} />
-          <Route path='/council' element={<Council />} />
-          <Route path='/presidents' element={<Presidents />} />
-          <Route path='/chapters' element={<Chapters />} />
-          <Route path='/alumnus' element={<Alumnus />} />
-          {/* <Route path="/admin-dashboard" element={<AdminDashboard />} /> */}
-          <Route
-            path="/admin-dashboard"
-            element={<ProtectedRoute element={<AdminDashboard />} requiredRole="admin" />}
-            />        
-            <Route path='/top-alumni' element={<TopAlumni />} />
-            <Route path='/alumnus' element={<Alumnus />} />
+      <Topbar />
+      <div className="w-full md:flex">
+        <section className="flex flex-1 h-full">
+          <Routes>
+            {/* Open Routes */}
+            <Route path="/admin-login" element={<AdminLogin />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<Home />} />
             <Route path='/overview' element={<Overview />} />
             <Route path='/vision' element={<Vision />} />
             <Route path='/objectives' element={<Objectives />} />
             <Route path='/council' element={<Council />} />
             <Route path='/presidents' element={<Presidents />} />
             <Route path='/chapters' element={<Chapters />} />
+            <Route path='/alumnus' element={<Alumnus />} />
+            <Route path='/top-alumni' element={<TopAlumni />} />
             <Route path='/notable-alumni' element={<NotableAlumni />} />
             <Route path='/news-archive' element={<NewsArchive />} />
             <Route path='/gallery' element={<Gallery />} />
@@ -64,10 +69,39 @@ function App() {
             <Route path='/contact' element={<Contact />} />
             <Route path='/scholarship' element={<Scholarship />} />
             <Route path='/activities' element={<Activities />} />
-        </Route>
-      </Routes>
+            <Route path='/events' element={<Events />} />
+
+            {/* Admin + User Routes */}
+            <Route
+              path="/welcome"
+              element={<ProtectedRoute element={<Welcome />} requiredRole={["admin", "user"]} />}
+            />
+            <Route
+              path="/reset-password"
+              element={<ProtectedRoute element={<ResetPassword />} requiredRole={["admin", "user"]} />}
+            />
+            <Route
+              path="/profile"
+              element={<ProtectedRoute element={<Profile />} requiredRole="user" />}
+            />
+            <Route
+              path="/update-profile"
+              element={<ProtectedRoute element={<UpdateProfile />} requiredRole="user" />}
+            />
+
+            {/* Admin Routes */}
+            <Route element={<ProtectedRoute element={<AdminLayout />} requiredRole="admin" />}>
+              <Route path="/admin-dashboard" element={<AdminDashboard />} />
+              <Route path='/news-form' element={<AdminNewsForm />} />
+              <Route path='/events-form' element={<AdminEventsForm />} />
+            </Route>
+          </Routes>
+        </section>
+      </div>
+      <Bottombar />
     </React.Fragment>
   );
 }
 
 export default App;
+

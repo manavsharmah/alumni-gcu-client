@@ -9,10 +9,12 @@ const Register = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: ''
+    phone: '',
+    batch: '',
+    branch: ''
   });
 
-  const { name, email, phone } = formData;
+  const { name, email, phone, batch, branch } = formData;
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -48,6 +50,20 @@ const Register = () => {
                         <div className="input">
                             <img src='' alt=''/>
                             <input type='text'  placeholder='Phone' value={phone} onChange={onChange} name='phone' required/>
+                        </div>
+                        <br />
+                        <div className="input">
+                            <img src='' alt=''/>
+                            <input type='text'  placeholder='Batch' value={batch} onChange={onChange} name='batch' required/>
+                        </div>
+                        <br></br >
+                        <div className="input">
+                          <img src='' alt=''/>
+                          <select name='branch' value={branch} onChange={onChange} required>
+                            <option value='Computer Science and Engineering'>Computer Science and Engineering</option>
+                            <option value='Mechanical Engineering'>Mechanical Engineering</option>
+                            <option value='Civil Engineering'>Civil Engineering</option>
+                          </select>
                         </div>
                         <div className="already-registered">Already Registered? <span><a href="/login">LOGIN!</a></span></div>
                         {/* <br /> */}

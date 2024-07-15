@@ -1,4 +1,4 @@
-.topbar-container {
+/* .topbar-container {
     width: 100%;
     background-color: #27357f;
     border-bottom: 1px solid #27357f;
@@ -6,15 +6,8 @@
     right: 0;
     left: 0;
     top: 0;
-    height: 130px; /* Adjust height as needed */
+    height: 130px; 
   }
-  
-  /* .topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 30px;
-  } */
   
     .logo-container {
       display: flex;
@@ -45,9 +38,9 @@
     
     .nav-links {
       background-color: #27357f;
-      padding-top: 15px; /* Ensure this matches the padding to align properly */
-      padding-bottom: 15px; /* Ensure this matches the padding to align properly */
-      margin-top: 40px; /* Adjust margin to align below the topbar */
+      padding-top: 15px; 
+      padding-bottom: 15px; 
+      margin-top: 40px; 
     }
     
     .nav-list {
@@ -84,45 +77,45 @@
       font-weight: bold;
     }
   
-  /* Media query for mobile responsiveness */
+
   @media only screen and (max-width: 600px) {
     .topbar {
-      padding: 10px; /* Adjust padding for smaller screens */
-      flex-direction: column; /* Stack items vertically on small screens */
+      padding: 10px;
+      flex-direction: column; 
       justify-content: center;
       align-items: center;
     }
   
     .logo {
-      height: 40px; /* Adjust logo size for smaller screens */
-      margin-bottom: 10px; /* Add spacing between logo and other elements */
+      height: 40px; 
+      margin-bottom: 10px;
     }
   
    .auth-links {
-      display: flex; /* Show auth links on small screens */
-      margin-top: 10px; /* Add spacing between auth links and other elements */
+      display: flex; 
+      margin-top: 10px; 
    }
   
    .nav-links {
-      display: block; /* Show navigation links on small screens */
+      display: block; 
       background-color: #27357f;
       padding: 10px;
    }
   
    .nav-list {
-      flex-direction: column; /* Stack nav items vertically on small screens */
+      flex-direction: column;
    }
   
    .nav-item {
-      margin: 5px 0; /* Adjust margin for smaller screens */
+      margin: 5px 0;
    }
   
    .nav-link:hover {
-      color: white; /* Change hover color back to white on small screens */
+      color: white; 
    }
   }
 
-/* Signup styling */
+
 
 .container{
     display: flex;
@@ -221,4 +214,4 @@
 .gray{
     background:#EAEAEA;
     color:#676767;
-}
+} */

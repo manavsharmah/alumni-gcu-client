@@ -11,6 +11,8 @@
       display: flex;
       align-items: center;
       justify-content: end;
+      margin-bottom: 15px;
+      margin-right: 10px;
       
     }
     
@@ -107,15 +109,17 @@
 .navbar {
   background-color: #27357f;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 10px;
+
 }
 
 .navbar ul {
   list-style: none;
   display: flex;
   gap: 20px;
+  align-items: center;
   /* padding: 0;
   margin: 0; */
 }
@@ -142,6 +146,7 @@
 
 .navbar ul.sub-menus {
   margin-top: 13px;
+  padding-bottom: 11px;
   padding: 0;
   height: auto;
   overflow: hidden;
@@ -188,6 +193,12 @@
   justify-content: center;
 }
 
+.rounded-full {
+  height: 30px;
+  margin-right: 7px;
+  justify-content: center;
+}
+
 .App-main {
   padding: 20px;
 }
@@ -196,6 +207,67 @@
   display: none;
 }
 
+
+.dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-bottom: 15px;
+  margin-right: 10px;
+}
+
+.dropdown-toggle {
+  color: white;
+  font-size: 17px;
+  text-decoration: none;
+  margin-top: 4px;
+}
+.dropdown-toggle:hover {
+  color: #007bff;
+}
+
+.dropdown-button {
+  color: #030303;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 10px;
+  align-items: end;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.dropdown-button:hover {
+  color: #007bff !important;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  display: none;
+}
+
+.dropdown-menu a {
+  color: #030303;
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+}
+
+.dropdown-menu a:hover {
+  color: #007bff !important;
+  background-color: #f0f0f0;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
 
   /* Media query for mobile responsiveness */
   /* @media only screen and (max-width: 600px) {
@@ -407,6 +479,7 @@
   display: flex;
   justify-content: center;
   margin-top: 90px;
+  padding-bottom: 50px;
 
 }
 
@@ -508,6 +581,15 @@
     margin-top: -14px;
   }
 
+  .input select {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
   .already-registered {
     font-size: 12px;
   }
@@ -538,7 +620,7 @@
   background-color: #f8f9fa;
   padding: 10px;
   border-top: 1px solid #ddd;
-  position: fixed;
+  /* position: fixed; */
   bottom: 0;
   width: 100%;
   height: 100px;

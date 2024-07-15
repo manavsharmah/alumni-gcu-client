@@ -1,13 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 // Common Components
 import Login from './components/common/Login';
 import Register from './components/common/Register';
 import ResetPassword from './components/common/ResetPassword';
 import AdminLogin from './components/common/AdminLogin';
-import ForgotPassword from './components/common/ForgotPassword';
+import Topbar from './components/common/Topbar';
+import Bottombar from './components/common/Bottombar';
 
 // Layout Components
+import ForgotPassword from './components/common/ForgotPassword';
 import RootLayout from './components/RootLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminLayout from './pages/admin/AdminLayout';
@@ -16,6 +19,7 @@ import AdminLayout from './pages/admin/AdminLayout';
 import Home from './pages/Home';
 import Welcome from './pages/specific/Welcome';
 import Profile from './pages/specific/Profile';
+import UpdateProfile from './pages/specific/UpdateProfile';
 import UpdateProfile from './pages/specific/UpdateProfile'
 
 // Admin Pages
@@ -42,81 +46,71 @@ import Gallery from './pages/detail/Gallery';
 import Events from './pages/detail/Events';
 
 
-
 function App() {
   return (
     <React.Fragment>
-      <Routes>
-        <Route element={<RootLayout />}>
+      <Topbar />
+      <div className="w-full md:flex">
+        <section className="flex flex-1 h-full">
+          <Routes>
+            {/* Open Routes */}
+            <Route path="/admin-login" element={<AdminLogin />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/" element={<Home />} />
+            <Route path='/overview' element={<Overview />} />
+            <Route path='/vision' element={<Vision />} />
+            <Route path='/objectives' element={<Objectives />} />
+            <Route path='/council' element={<Council />} />
+            <Route path='/presidents' element={<Presidents />} />
+            <Route path='/chapters' element={<Chapters />} />
+            <Route path='/alumnus' element={<Alumnus />} />
+            <Route path='/top-alumni' element={<TopAlumni />} />
+            <Route path='/notable-alumni' element={<NotableAlumni />} />
+            <Route path='/news-archive' element={<NewsArchive />} />
+            <Route path='/gallery' element={<Gallery />} />
+            <Route path='/faq' element={<FAQ />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path='/scholarship' element={<Scholarship />} />
+            <Route path='/activities' element={<Activities />} />
+            <Route path='/events' element={<Events />} />
 
-          {/* Open Routes */}
+            {/* Admin + User Routes */}
+            <Route
+              path="/welcome"
+              element={<ProtectedRoute element={<Welcome />} requiredRole={["admin", "user"]} />}
+            />
+            <Route
+              path="/reset-password"
+              element={<ProtectedRoute element={<ResetPassword />} requiredRole={["admin", "user"]} />}
+            />
+            <Route
+              path="/profile"
+              element={<ProtectedRoute element={<Profile />} requiredRole="user" />}
+            />
+            <Route
+              path="/update-profile"
+              element={<ProtectedRoute element={<UpdateProfile />} requiredRole="user" />}
+            />
 
-          <Route path="/admin-login" element={<AdminLogin />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/" element={<Home />} />
-          <Route path='/overview' element={<Overview />} />
-          <Route path='/vision' element={<Vision />} />
-          <Route path='/objectives' element={<Objectives />} />
-          <Route path='/council' element={<Council />} />
-          <Route path='/presidents' element={<Presidents />} />
-          <Route path='/chapters' element={<Chapters />} />
-          <Route path='/alumnus' element={<Alumnus />} />
-          <Route path='/top-alumni' element={<TopAlumni />} />
-          <Route path='/alumnus' element={<Alumnus />} />
-          <Route path='/overview' element={<Overview />} />
-          <Route path='/vision' element={<Vision />} />
-          <Route path='/objectives' element={<Objectives />} />
-          <Route path='/council' element={<Council />} />
-          <Route path='/presidents' element={<Presidents />} />
-          <Route path='/chapters' element={<Chapters />} />
-          <Route path='/notable-alumni' element={<NotableAlumni />} />
-          <Route path='/news-archive' element={<NewsArchive />} />
-          <Route path='/gallery' element={<Gallery />} />
-          <Route path='/faq' element={<FAQ />} />
-          <Route path='/contact' element={<Contact />} />
-          <Route path='/scholarship' element={<Scholarship />} />
-          <Route path='/activities' element={<Activities />} />
-          <Route path='/events' element={<Events />} />
+            {/* Admin Routes */}
+            <Route element={<ProtectedRoute element={<AdminLayout />} requiredRole="admin" />}>
+              <Route path="/admin-dashboard" element={<AdminDashboard />} />
+              <Route path='/news-form' element={<AdminNewsForm />} />
+              <Route path='/events-form' element={<AdminEventsForm />} />
+            </Route>
 
-          {/* Adimin + User Routes */}
+            {/* forgot password route */}
 
-          <Route
-            path="/welcome"
-            element={<ProtectedRoute element={<Welcome />} requiredRole={["admin", "user"]} />}
-          />
-          <Route
-            path="/reset-password"
-            element={<ProtectedRoute element={<ResetPassword />} requiredRole={["admin", "user"]} />}
-          />
-          <Route
-            path="/profile"
-            element={<ProtectedRoute element={<Profile />} requiredRole="user" />}
-          />
-          <Route
-            path="/update-profile"
-            element={<ProtectedRoute element={<UpdateProfile />} requiredRole="user" />}
-          />
-                 
-        </Route>
-
-        {/* admin Routes */}
-
-        <Route element={<ProtectedRoute element={<AdminLayout />} requiredRole="admin" />}>
-
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
-          <Route path='/news-form' element={<AdminNewsForm />} />
-          <Route path='/events-form' element={<AdminEventsForm />} />
-
-        </Route>
-
-          {/* forgot password route */}
-
-        <Route path='/forgot-password' element={<ForgotPassword />} />
-          
-      </Routes>
+           <Route path='/forgot-password' element={<ForgotPassword />} />
+             
+          </Routes>
+        </section>
+      </div>
+      <Bottombar />
     </React.Fragment>
   );
 }
 
 export default App;
+

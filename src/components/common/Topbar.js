@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import "./components.css";
-import axios from 'axios';
 import axiosInstance from '../../services/api';
 
 const Topbar = () => {
@@ -47,32 +46,25 @@ const Topbar = () => {
     <div className="App">
       <header className="App-header">
         <div className="logo">
-          <a href='/'>
-          <img src="./assets/LOGO 1.jpg" alt="Girijananda Choudhury University logo" />
+          <a href="/">
+            <img src="./assets/LOGO 1.jpg" alt="Girijananda Chowdhury University Alumni Association Logo" />
           </a>
         </div>
         <div className="title">
           <h2>Girijananda Chowdhury University</h2>
           <h2>Alumni Association</h2>
         </div>
-        <div className="auth-links ml-auto d-flex align-items-center">
-          {!user ? (
-            <>
-              <a href="/register" className="auth-link text-dark font-weight-bold ml-3">Register</a>&nbsp;
-              <span>  |  </span>
-              <a href="/login" className="auth-link text-dark font-weight-bold ml-3">Login</a>
-            </>
-          ) : (
-            <a href='/' onClick={handleLogout} className="auth-link text-dark font-weight-bold ml-3">Logout</a>
-          )}
+        <div className='logo-gcu'>
+          <img src="./assets/gcu-logo.png" alt="Girijananda Chowdhury University Logo" />
         </div>
+        
         <button className="menu-toggle" onClick={toggleNav}>
           &#9776;
         </button>
       </header>
       <nav className={`navbar ${isNavOpen ? 'open' : ''}`}>
         <ul>
-          <li><a href="https://www.gcucalumni.com/about.js">About</a>
+          <li><a href="#">About</a>
             <ul className='sub-menus'>
               <li><a href='/overview'>Overview</a></li>
               <li><a href='/vision'>Vision and Mission</a></li>
@@ -108,13 +100,30 @@ const Topbar = () => {
           </li>
           <li><a href="/faq">FAQ's</a></li>
         </ul>
-          {user ? (
+        <div className="auth-links ml-auto d-flex align-items-center">
+          {!user ? (
             <>
-              <a href="/profile"><h1 className='username'>{user.name}</h1></a>
+              <a href="/register" className="auth-link text-light font-weight-bold ml-3">Register</a>&nbsp;
+              <span>  |  </span>
+              <a href="/login" className="auth-link text-light font-weight-bold ml-3">Login</a>
             </>
           ) : (
-            <p>Loading....</p>
+            <div className="dropdown">
+              <a href="/profile" className="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img 
+                    src="./assets/profile-placeholder.svg" 
+                    alt="profile" 
+                    className='rounded-full'
+                />
+                {user.name}
+              </a>
+              <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a className="dropdown-item" href="/update-profile">Edit Profile</a>
+                <a className="dropdown-item" href="/" onClick={handleLogout}>Logout</a>
+              </div>
+            </div>
           )}
+        </div>
       </nav>
     </div>
   );

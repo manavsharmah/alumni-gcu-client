@@ -10,6 +10,8 @@ import Topbar from './components/common/Topbar';
 import Bottombar from './components/common/Bottombar';
 
 // Layout Components
+import ForgotPassword from './components/common/ForgotPassword';
+import RootLayout from './components/RootLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminLayout from './pages/admin/AdminLayout';
 
@@ -18,6 +20,7 @@ import Home from './pages/Home';
 import Welcome from './pages/specific/Welcome';
 import Profile from './pages/specific/Profile';
 import UpdateProfile from './pages/specific/UpdateProfile';
+import UpdateProfile from './pages/specific/UpdateProfile'
 
 // Admin Pages
 import AdminNewsForm from './pages/admin/AdminNewsForm';
@@ -41,6 +44,7 @@ import Vision from './pages/detail/Vision';
 import Overview from './pages/detail/Overview';
 import Gallery from './pages/detail/Gallery';
 import Events from './pages/detail/Events';
+
 
 function App() {
   return (
@@ -95,6 +99,11 @@ function App() {
               <Route path='/news-form' element={<AdminNewsForm />} />
               <Route path='/events-form' element={<AdminEventsForm />} />
             </Route>
+
+            {/* forgot password route */}
+
+           <Route path='/forgot-password' element={<ForgotPassword />} />
+             
           </Routes>
         </section>
       </div>

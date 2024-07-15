@@ -10,11 +10,11 @@ const Register = () => {
     name: '',
     email: '',
     phone: '',
+    branch: '', 
     batch: '',
-    branch: ''
   });
 
-  const { name, email, phone, batch, branch } = formData;
+  const { name, email, phone, branch, batch } = formData;
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 

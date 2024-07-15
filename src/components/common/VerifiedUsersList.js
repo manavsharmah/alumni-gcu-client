@@ -39,4 +39,6 @@ const VerifiedUsersList = () => {
   );
 };
 
+
 export default VerifiedUsersList;
+

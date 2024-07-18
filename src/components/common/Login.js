@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./components.css";
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../../services/api';
+import api from '../../services/api';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -18,8 +18,9 @@ const Login = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            await axiosInstance.post('http://localhost:5000/api/auth/login', formData);
-            navigate('/welcome'); // Navigate to reset password page after successful login
+            const response = await api.post('/auth/login', formData);
+            localStorage.setItem('accessToken', response.data.accessToken);
+            navigate('/welcome'); // Navigate to welcome page after successful login
         } catch (err) {
             console.error(err.response.data);
             setError(err.response.data.message || 'Something went wrong');

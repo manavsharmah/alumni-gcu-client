@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "../pages.css";
-import axios from 'axios';
+import api from "../../services/api"
 // import { FaSearch } from 'react-icons/fa';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -14,7 +14,7 @@ const Admindashboard = () => {
   useEffect(() => {
     const fetchPendingUsers = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/auth/pending-users');
+        const res = await api.get('/user/pending-users');
         setUsers(res.data);
         setFilteredUsers(res.data); // Set initial filtered users
       } catch (err) {
@@ -27,7 +27,7 @@ const Admindashboard = () => {
 
   const approveUser = async (email) => {
     try {
-      await axios.post('http://localhost:5000/api/auth/approve', { email });
+      await api.post('/user/approve', { email });
       setUsers(users.filter(user => user.email !== email));
       setFilteredUsers(filteredUsers.filter(user => user.email !== email)); // Update filtered users as well
     } catch (err) {
@@ -61,7 +61,7 @@ const Admindashboard = () => {
     formData.append('image', selectedFile);
 
     try {
-      await axios.post('http://localhost:5000/api/auth/upload', formData, {
+      await api.post('/user/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

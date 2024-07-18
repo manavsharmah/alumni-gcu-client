@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "./components.css";
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../../services/api';
+import api from '../../services/api';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState('');
@@ -12,7 +12,7 @@ const ForgotPassword = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const response = await axiosInstance.post('/api/auth/forgot-password', { email });
+            const response = await api.post('/auth/forgot-password', { email });
             setMessage(response.data.message);
             setError('');
         } catch (err) {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../services/api';
+import api from '../../services/api';
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
@@ -7,7 +7,7 @@ const EventList = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axiosInstance.get('http://localhost:5000/api/events/get-events');
+        const response = await api.get('/events/get-events');
         setEvents(response.data);
       } catch (error) {
         console.error('Error fetching Events:', error);

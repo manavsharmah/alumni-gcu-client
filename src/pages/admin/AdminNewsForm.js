@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "../../components/components.css";
-import axiosInstance from '../../services/api';
+import api from '../../services/api';
 
 const AdminNewsForm = () => {
   const [message, setMessage] = useState('');
@@ -17,7 +17,7 @@ const AdminNewsForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axiosInstance.post('http://localhost:5000/api/news/upload', formData);
+      await api.post('/news/upload', formData);
       setMessage('Event Uploaded!');
     } catch (err) {
       console.error(err.response.data);

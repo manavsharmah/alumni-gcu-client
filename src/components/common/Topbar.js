@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./components.css";
-import axiosInstance from '../../services/api';
+import api from '../../services/api';
 
 const Topbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -12,7 +12,7 @@ const Topbar = () => {
 
   const sendRequest = async () => {
     try {
-        const res = await axiosInstance.get('http://localhost:5000/api/auth/user');
+        const res = await api.get('http://localhost:5000/api/user/user');
         if (res && res.data) {
             return res.data;
         } else {
@@ -27,7 +27,7 @@ const Topbar = () => {
 
   const handleLogout = async () => {
     try {
-        await axiosInstance.post('http://localhost:5000/api/auth/logout');
+        await api.post('/auth/logout');
         setUser(null);
     } catch (err) {
         console.error('Error during logout:', err);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../../services/api';
+import api from '../../services/api';
 import "./components.css";
 
 const VerifiedUsersList = () => {
@@ -9,7 +9,7 @@ const VerifiedUsersList = () => {
   useEffect(() => {
     const fetchVerifiedUsers = async () => {
       try {
-        const response = await axiosInstance.get('http://localhost:5000/api/auth/verified-users');
+        const response = await api.get('/user/verified-users');
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching verified users:', error);

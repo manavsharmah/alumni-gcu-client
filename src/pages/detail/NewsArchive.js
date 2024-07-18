@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axiosInstance from '../../services/api';
+import api from '../../services/api';
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
@@ -7,7 +7,7 @@ const NewsList = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axiosInstance.get('http://localhost:5000/api/news/get-news');
+        const response = await api.get('/news/get-news');
         setNews(response.data);
       } catch (error) {
         console.error('Error fetching news:', error);

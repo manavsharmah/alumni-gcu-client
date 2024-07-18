@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../../services/api';
+import api from '../../services/api';
 
 const UpdateProfile = () => {
   const [message, setMessage] = useState('');
@@ -22,7 +22,7 @@ const UpdateProfile = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axiosInstance.get('http://localhost:5000/api/auth/user');
+        const response = await api.get('/user/user');
         const user = response.data;
         setUserData({
           name: user.name,
@@ -49,7 +49,7 @@ const UpdateProfile = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axiosInstance.put('http://localhost:5000/api/auth/update-profile', {
+      await api.put('/user/update-profile', {
         biography,
         currentWorkingPlace,
         socialLinks: { linkedin, facebook }

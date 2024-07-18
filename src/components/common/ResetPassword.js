@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../../services/api';
-//import { api } from '../../services/api'; // Import the Axios instance
+import api from '../../services/api';
+
 
 function ResetPassword() {
   const navigate = useNavigate(); // Initialize navigate hook
@@ -18,7 +18,7 @@ function ResetPassword() {
   const onSubmit = async e => {
     e.preventDefault();
     try {
-      await axiosInstance.post('http://localhost:5000/api/auth/reset-password', formData); // Use the api instance
+      await api.post('/user/reset-password', formData); // Use the api instance
       
       navigate('/home'); // Navigate to home page after successful password reset
     } catch (err) {

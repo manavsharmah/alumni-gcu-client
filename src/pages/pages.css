@@ -3,6 +3,12 @@
     display: flex;
     flex-direction: column;
 }
+/* 
+.admin-container {
+  display: flex;
+  flex-direction: column;
+} */
+
 
 .admin-header {
   padding-bottom: 20px;
@@ -20,6 +26,9 @@
   display: flex;
   flex-direction: column;
 }
+
+
+
 .card {
   border-color: #27357f;
   background-color: #e2e4eb;
@@ -29,6 +38,7 @@
   /* margin-bottom: 20px;
   margin-right: 20px; */
   background-color: #eceef3;
+  height: 450px;
 }
 
 .btn {
@@ -43,6 +53,7 @@
 
 .main {
   background-color: #fff;
+
 }
 
 .hero {
@@ -97,19 +108,32 @@
 .hero2 {
   background-color: #27357f;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
+  height: 430px;
 }
 
 .vc-text{
   color: #fff;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.vc-heading {
+  font-size: 30px;
+}
+
+.vc-image {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
 .vc-img {
-  height: 45px;
-  width: 35px;
+  height: 195px;
+  width: 190px;
+  border-radius: 100px;
 }
 
 .image-body {
@@ -122,6 +146,122 @@
   height: 230px;
   width: 320px;
   padding: 7px;
+}
+
+.hero3 {
+  background-color: #eceef3;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* .news-events {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+} */
+
+.newsroom, .events {
+  width: 45%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.newsroom h2, .events h2 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* .newsroom {
+  padding: 20px;
+} */
+
+
+.news-cards {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 20px;
+  /* justify-content: center; */
+  background-color: #fff;
+  width: 400px;
+  height: 400px;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+  overflow: hidden;
+
+}
+
+/* .news-card {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease;
+} */
+
+.news-card ul {
+  padding: 0;
+}
+
+.news-cards li {
+  height: 50px;
+  gap: 10px;
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.news-cards li:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #f4f4f7;
+}
+
+.news-card h3 {
+  margin-top: 0;
+}
+
+.news-title {
+  flex-grow: 1;
+  margin-left: -20px;
+}
+
+.news-date {
+  flex-shrink: 0;
+  margin-right: 10px;
+  color: #9e9d9d;
+}
+
+.news-details {
+  font-size: 0.95em;
+}
+
+.events-cards {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  background-color: #fff;
+  height: 400px;
+  width: 350px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
  /* =========Gallery========= */
@@ -157,16 +297,20 @@
   }
 }
 
-/* user profile styling */
+<<
+/* =======User Profile Styling========== */
 
-.container {
+
+
+/*.container {
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
   background-color: #fff;
-}
+} */
+
 
 .form {
   display: flex;

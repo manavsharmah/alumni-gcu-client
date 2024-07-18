@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import "../pages.css";
 import axios from 'axios';
-import { FaSearch } from 'react-icons/fa';
+// import { FaSearch } from 'react-icons/fa';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 const Admindashboard = () => {
   const [users, setUsers] = useState([]);
@@ -73,7 +75,7 @@ const Admindashboard = () => {
 
 
   return (
-    <div className="container mt-5 admin-dashboard">
+    <div className="admin-container mt-5 admin-dashboard">
       <div className="row justify-content-center mb-3">
         <div className="col-md-6 col-lg-4">
           <div className="input-group">
@@ -86,7 +88,7 @@ const Admindashboard = () => {
             />
             <div className="input-group-append">
               <button className="btn btn-outline-secondary" onClick={handleSearchClick}>
-                <FaSearch />
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
               </button>
             </div>
           </div>

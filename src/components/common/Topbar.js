@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "../components.css";
-import axiosInstance from '../../services/api';
+import api from '../../services/api';
 
 const Topbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);

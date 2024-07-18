@@ -1,10 +1,11 @@
 import React from 'react';
+import AboutNav from './quicknavs/AboutNav';
 
 const Vision = () => {
     return (
         <div className='container main-header'>
-            <div className="row justify-content-center mt-5">
-                <div className="col-md-8">
+            <div className="content-wrapper">
+                <div className="content">
                     <h2 className='text-center'>Vision</h2>
                     <div className="card">
                         <div className="card-body">
@@ -14,6 +15,9 @@ const Vision = () => {
                             </p>
                         </div>
                     </div>
+                </div>
+                <div className="sidebar">
+                    <AboutNav />
                 </div>
             </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import "./components.css";
+import "../components.css";
 import axiosInstance from '../../services/api';
 
 const Topbar = () => {

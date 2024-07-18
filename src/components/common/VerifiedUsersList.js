@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../services/api';
-import "./components.css";
+import "../components.css";
 
 const VerifiedUsersList = () => {
   const [users, setUsers] = useState([]);

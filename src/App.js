@@ -20,7 +20,6 @@ import Home from './pages/Home';
 import Welcome from './pages/specific/Welcome';
 import Profile from './pages/specific/Profile';
 import UpdateProfile from './pages/specific/UpdateProfile';
-import UpdateProfile from './pages/specific/UpdateProfile'
 
 // Admin Pages
 import AdminNewsForm from './pages/admin/AdminNewsForm';

@@ -62,6 +62,7 @@
     }  */
 
 /* =====Topbar===== */
+/* Existing styles... */
 
 .header-container {
   text-align: left;
@@ -78,7 +79,7 @@
 
 .logo {
   margin-right: 20px;
-  margin-top: -200px;
+  margin-top: -140px;
   margin-bottom: 10px;
 }
 
@@ -109,19 +110,15 @@
 .navbar {
   background-color: #27357f;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 10px;
-
 }
 
 .navbar ul {
   list-style: none;
   display: flex;
   gap: 20px;
-  align-items: center;
-  /* padding: 0;
-  margin: 0; */
 }
 
 .navbar li {
@@ -132,7 +129,6 @@
   color: white;
   text-decoration: none;
   font-size: 17px;
-  /* padding: 10px; */
   display: block;
 }
 
@@ -146,7 +142,6 @@
 
 .navbar ul.sub-menus {
   margin-top: 13px;
-  padding-bottom: 11px;
   padding: 0;
   height: auto;
   overflow: hidden;
@@ -164,7 +159,7 @@
 }
 
 .navbar ul.sub-menus li {
-  display: block; /* Display each submenu item as a block */
+  display: block;
   padding: 0;
   text-align: left;
   width: 100%;
@@ -193,185 +188,111 @@
   justify-content: center;
 }
 
-.rounded-full {
-  height: 30px;
-  margin-right: 7px;
-  justify-content: center;
-}
-
 .App-main {
   padding: 20px;
+  flex-grow: 1;
+  background-color: #f8f9fa;
+  margin-top: 80px; /* Adjusted to provide space below header */
 }
 
 .menu-toggle {
   display: none;
 }
 
-
-.dropdown {
-  display: flex;
-  align-items: center;
-  justify-content: end;
-  margin-bottom: 15px;
-  margin-right: 10px;
-}
-
-.dropdown-toggle {
-  color: white;
-  font-size: 17px;
-  text-decoration: none;
-  margin-top: 4px;
-}
-.dropdown-toggle:hover {
-  color: #007bff;
-}
-
-.dropdown-button {
-  color: #030303;
-  font-weight: bold;
-  text-decoration: none;
-  margin-left: 10px;
-  align-items: end;
-  background-color: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-.dropdown-button:hover {
-  color: #007bff !important;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 10px;
-  display: none;
-}
-
-.dropdown-menu a {
-  color: #030303;
-  font-weight: bold;
-  text-decoration: none;
-  display: block;
-  padding: 10px;
-}
-
-.dropdown-menu a:hover {
-  color: #007bff !important;
-  background-color: #f0f0f0;
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
-
-  /* Media query for mobile responsiveness */
-  /* @media only screen and (max-width: 600px) {
-    .topbar {
-      padding: 10px; /* Adjust padding for smaller screens */
-      /* flex-direction: column; /* Stack items vertically on small screens */
-      /* justify-content: center;
-      align-items: center;
-    }  */
-  
-    /* .logo {
-      height: 40px; /* Adjust logo size for smaller screens */
-      /* margin-bottom: 10px; /* Add spacing between logo and other elements */
-    /* }  */
-   
-   /* .auth-links {
-      display: flex; /* Show auth links on small screens */
-      /* margin-top: 10px; /* Add spacing between auth links and other elements */
-   /* }  */
-  
-   /* .nav-links {
-      display: block; /* Show navigation links on small screens */
-      /* background-color: #27357f;
-      padding: 10px;
-   }  */
-  
-   /* .nav-list {
-      flex-direction: column; /* Stack nav items vertically on small screens */
-   /* }  */
-/*   
-   .nav-item {
-      margin: 5px 0; /* Adjust margin for smaller screens */
-   /* } */
-   
-   /* .nav-link:hover {
-      color: white; /* Change hover color back to white on small screens */
-   /* }
-  }   */
-
-
-
-    /* Media query for mobile responsiveness */
-    @media screen and (max-width: 750px) {
-      .App-header {
-        /* flex-direction: column; */
-        justify-content: space-around;
-        align-items: center;
-      }
-    
-      .logo {
-        /* height: 60px; Resize logo for smaller screens */
-        margin-top: -50px;
-      }
-    
-      .logo img {
-        height: 100px; /* Resize logo image for smaller screens */
-        width: 100px;
-      }
-    
-      .menu-toggle {
-        display: block; /* Show the menu toggle button on small screens */
-        color: white;
-        font-size: 30px;
-        cursor: pointer;
-        padding: 10px;
-        background-color: #27357f;
-        border: none;
-        align-self: flex-end;
-      }
-  
-      .title {
-        display: none;
-      }
-    
-      .navbar {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-      }
-    
-      .navbar.open {
-        display: flex;
-      }
-    
-      /* .navbar ul {
-        flex-direction: column;
-        width: 100%;
-      } */
-  
-      .navbar ul {
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
-        text-align: center;
-        padding: 0;
-        margin: 5px 0;
-      }
-  
-      .navbar li a {
-        padding: 10px;
-        width: 100%;
-      }
-    
+@media screen and (max-width: 750px) {
+  .App-header {
+    height: 100px;
+    justify-content: space-around;
+    align-items: center;
   }
+
+  .logo {
+    margin-top: 0; /* Adjusted margin-top to remove blank space */
+  }
+
+  .logo img {
+    height: 100px;
+    width: 100px;
+  }
+
+  .menu-toggle {
+    display: block;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: #27357f;
+    border: none;
+    align-self: flex-end;
+  }
+
+  .title {
+    display: none;
+  }
+
+  .navbar {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #27357f;
+    padding-top: 60px;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%);
+    z-index: 999;
+  }
+
+  .navbar.open {
+    transform: translateX(0);
+  }
+
+  .navbar ul {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    margin: 5px 0;
+  }
+
+  .navbar li a {
+    padding: 10px;
+    width: 100%;
+  }
+
+  .navbar ul.sub-menus {
+    left: 100%;
+    top: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+  }
+
+  .navbar li:hover ul.sub-menus {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .navbar ul.sub-menus a {
+    padding-left: 20px;
+  }
+
+  .auth-links {
+    display: none;
+  }
+
+  .App-main {
+    padding: 20px;
+    flex-grow: 1;
+    margin-top: 0; /* Adjusted to remove blank space */
+    margin-left: 0;
+  }
+}
+
 
   /* =====>Signup styling<======= */
 

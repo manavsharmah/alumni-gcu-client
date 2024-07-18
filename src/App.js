@@ -43,7 +43,6 @@ import Vision from './pages/detail/Vision';
 import Overview from './pages/detail/Overview';
 import Gallery from './pages/detail/Gallery';
 import Events from './pages/detail/Events';
-import AboutNav from './pages/detail/quicknavs/AboutNav';
 import NewsList from './pages/detail/NewsArchive';
 
 

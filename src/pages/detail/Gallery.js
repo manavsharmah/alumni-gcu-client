@@ -55,6 +55,6 @@ const Gallery = () => {
   );
 }
 
-export default NotableAlumni;
+export default Gallery;
 
 

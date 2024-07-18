@@ -9,7 +9,7 @@ const VerifiedUsersList = () => {
   useEffect(() => {
     const fetchVerifiedUsers = async () => {
       try {
-        const response = await axiosInstance.get('http://localhost:5000/api/auth/verified-users');
+        const response = await api.get('/user/verified-users');
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching verified users:', error);
@@ -39,4 +39,6 @@ const VerifiedUsersList = () => {
   );
 };
 
+
 export default VerifiedUsersList;
+

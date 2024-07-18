@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import "../components.css";
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../../services/api';
+import api from '../../services/api';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -14,15 +14,21 @@ const Login = () => {
     const { email, password } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+
     const onSubmit = async e => {
         e.preventDefault();
         try {
-             await axiosInstance.post('http://localhost:5000/api/auth/login', formData);
-            navigate('/welcome'); // Navigate to reset password page after successful login
+            const response = await api.post('/auth/login', formData);
+            localStorage.setItem('accessToken', response.data.accessToken);
+            navigate('/welcome'); // Navigate to welcome page after successful login
         } catch (err) {
             console.error(err.response.data);
             setError(err.response.data.message || 'Something went wrong');
         }
+    };
+
+    const handleForgotPasswordClick = () => {
+        navigate('/forgot-password');
     };
 
     return (
@@ -42,8 +48,9 @@ const Login = () => {
                                 <div className="input">
                                     <input type='password' placeholder='Password' value={password} onChange={onChange} name='password' required />
                                 </div>
-                                <div className="forgot-password">Forgot Password? <span>Click Here!!</span></div>
-
+                                <div className="forgot-password">
+                                    Forgot Password? <span onClick={handleForgotPasswordClick} style={{ cursor: 'pointer', color: 'blue' }}>Click Here!!</span>
+                                </div>
                                 <div className="submit-container">
                                     <button type='submit' className='btn btn-primary'>Login</button>
                                 </div>

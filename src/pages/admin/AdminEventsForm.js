@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import "../../components/components.css";
-import axiosInstance from '../../services/api';
+import api from '../../services/api';
 
 const AdminEventsForm = () => {
   const [message, setMessage] = useState('');
@@ -19,7 +19,7 @@ const AdminEventsForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axiosInstance.post('http://localhost:5000/api/events/upload', formData);
+      await api.post('/events/upload', formData);
       setMessage('Event Uploaded!');
     } catch (err) {
       console.error(err.response.data);
@@ -64,4 +64,6 @@ const AdminEventsForm = () => {
   );
 };
 
+
 export default AdminEventsForm;
+

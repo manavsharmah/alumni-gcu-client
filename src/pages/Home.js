@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './pages.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../services/api';
+import api from '../services/api';
 
 const Home = () => {
     const [news, setNews] = useState([]);
@@ -11,7 +11,7 @@ const Home = () => {
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await axiosInstance.get('http://localhost:5000/api/news/get-news');
+                const response = await api.get('/news/get-news');
                 const sortedNews = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
                 setNews(sortedNews.slice(0, 6)); // Keep only the latest 6 news items
             } catch (error) {

@@ -10,18 +10,18 @@ const Register = () => {
     name: '',
     email: '',
     phone: '',
+    branch: '', 
     batch: '',
-    branch: ''
   });
 
-  const { name, email, phone, batch, branch } = formData;
+  const { name, email, phone, branch, batch } = formData;
 
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async e => {
     e.preventDefault();
     try {
-      await axiosInstance.post('http://localhost:5000/api/auth/register', formData);
+      await api.post('/user/register', formData);
       navigate('/login');
     } catch (err) {
       console.error(err.response.data);

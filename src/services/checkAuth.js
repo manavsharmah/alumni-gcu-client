@@ -1,8 +1,8 @@
-import axiosInstance from "./api";
+import api from "./api";
 
 const checkAuth = async () => {
   try {
-    const response = await axiosInstance.get('http://localhost:5000/api/auth/check-auth');
+    const response = await api.get('/user/check-auth');
     return response.data;
   } catch (error) {
     console.error('Not authenticated', error);

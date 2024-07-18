@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axiosInstance from '../../services/api';
+import api from '../../services/api';
 
 const AdminLogin = () => {
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ const AdminLogin = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-             await axiosInstance.post('http://localhost:5000/api/auth/login', formData);
+             await api.post('/auth/login', formData);
             navigate('/admin-dashboard'); // Navigate to reset password page after successful login
         } catch (err) {
             console.error(err.response.data);

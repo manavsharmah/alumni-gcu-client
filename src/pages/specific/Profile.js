@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import axiosInstance from "../../services/api";
+import api from "../../services/api";
 
 const Profile = () => {
     const [user, setUser] = useState(null); // Initialize user to null
     
     const sendRequest = async () => {
         try {
-            const res = await axiosInstance.get('http://localhost:5000/api/auth/user');
+            const res = await api.get('/user/user');
             if (res && res.data) {
                 return res.data;
             } else {
@@ -41,4 +41,6 @@ const Profile = () => {
     );
 };
 
+
 export default Profile;
+

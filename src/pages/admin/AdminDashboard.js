@@ -7,6 +7,7 @@ const Admindashboard = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
 
   useEffect(() => {
     const fetchPendingUsers = async () => {
@@ -43,6 +44,33 @@ const Admindashboard = () => {
     );
     setFilteredUsers(filtered);
   };
+
+  const handleFileChange = (e) => {
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const uploadImage = async () => {
+    if (!selectedFile) {
+      alert('Please select a file first.');
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append('image', selectedFile);
+
+    try {
+      await axios.post('http://localhost:5000/api/auth/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
+      alert('Image uploaded successfully.');
+    } catch (err) {
+      console.error('Error uploading image:', err);
+      alert('Failed to upload image.');
+    }
+  };
+
 
   return (
     <div className="container mt-5 admin-dashboard">
@@ -93,6 +121,11 @@ const Admindashboard = () => {
       ) : (
         <p>No pending approvals right now.</p>
       )}
+      <div className="mt-5">
+        <h2>Upload Image</h2>
+        <input type="file" onChange={handleFileChange} />
+        <button onClick={uploadImage} className="btn btn-primary mt-2">Upload</button>
+      </div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../pages.css';
+import MoreNav from './quicknavs/MoreNav';
 
 const Gallery = () => {
   const [photos, setPhotos] = useState([]);
@@ -46,9 +47,14 @@ const Gallery = () => {
             <p>Loading photos...</p> 
           )}
         </div>
+        <div className="sidebar">
+          <MoreNav />
+        </div>
       </div>
     </div>
   );
-};
+}
 
-export default Gallery;
+export default NotableAlumni;
+
+

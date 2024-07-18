@@ -29,7 +29,7 @@ import AdminEventsForm from './pages/admin/AdminEventsForm';
 // Detail Pages
 import TopAlumni from './pages/detail/TopAlumni';
 import NotableAlumni from './pages/detail/NotableAlumni';
-import NewsArchive from './pages/detail/NewsArchive';
+// import NewsArchive from './pages/detail/NewsArchive';
 import FAQ from './pages/detail/FAQ';
 import Contact from './pages/detail/Contact';
 import Scholarship from './pages/detail/Scholarship';
@@ -43,6 +43,8 @@ import Vision from './pages/detail/Vision';
 import Overview from './pages/detail/Overview';
 import Gallery from './pages/detail/Gallery';
 import Events from './pages/detail/Events';
+import AboutNav from './pages/detail/quicknavs/AboutNav';
+import NewsList from './pages/detail/NewsArchive';
 
 
 function App() {
@@ -66,13 +68,15 @@ function App() {
             <Route path='/alumnus' element={<Alumnus />} />
             <Route path='/top-alumni' element={<TopAlumni />} />
             <Route path='/notable-alumni' element={<NotableAlumni />} />
-            <Route path='/news-archive' element={<NewsArchive />} />
+            {/* <Route path='/news-archive' element={<NewsArchive />} /> */}
+            <Route path='/news-archive' element={<NewsList />} />
             <Route path='/gallery' element={<Gallery />} />
-            <Route path='/faq' element={<FAQ />} />
             <Route path='/contact' element={<Contact />} />
+            <Route path='/faq' element={<FAQ />} />
             <Route path='/scholarship' element={<Scholarship />} />
             <Route path='/activities' element={<Activities />} />
             <Route path='/events' element={<Events />} />
+            <Route path='/aboutnav' element={<AboutNav />} />
 
             {/* Admin + User Routes */}
             <Route

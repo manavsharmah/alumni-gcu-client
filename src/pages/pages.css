@@ -24,12 +24,27 @@
 
 .container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
 }
 
+.content-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  width: 100%;
+  max-width: 1000px; /* Adjust as needed */
+}
 
+.content {
+  flex: 1;
+  margin-right: 4px; /* Space between content and sidebar */
+}
 
 .card {
+  display: flex;
   border-color: #27357f;
   background-color: #e2e4eb;
 }
@@ -39,6 +54,68 @@
   margin-right: 20px; */
   background-color: #eceef3;
   height: 450px;
+}
+
+/* .news-card {
+  display: flex;
+  border-color: #27357f;
+  background-color: #e2e4eb;
+  height: 800px;
+} */
+
+
+.news-container {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+}
+
+.card-body ul {
+  list-style: none;
+  padding: 0;
+}
+
+.card-body li {
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
+}
+
+.card-body h3 {
+  margin: 0 0 10px;
+}
+
+.card-body p {
+  margin: 0 0 5px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  cursor: pointer;
+  color: #007bff;
+  text-decoration: none;
+}
+
+.page-item.active .page-link {
+  font-weight: bold;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 50%;
+  padding: 5px 10px;
+}
+
+
+.sidebar {
+  width: 300px; /* Fixed width for the sidebar */
 }
 
 .btn {
@@ -224,6 +301,7 @@
   justify-content: space-between;
   border-bottom: 1px solid #ccc;
   cursor: pointer;
+  font-size: 20px;
 }
 
 .news-cards li:hover {

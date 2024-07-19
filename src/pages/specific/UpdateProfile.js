@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../services/api';
 import { FaFacebook, FaLinkedin } from 'react-icons/fa';
-import { Container, Form, Button, Row, Col, Alert, Spinner } from 'react-bootstrap';
+import { Container, Form, Button, Row, Col, Alert, Spinner, Card } from 'react-bootstrap';
 
 const UpdateProfile = () => {
   const [message, setMessage] = useState('');
@@ -56,13 +56,11 @@ const UpdateProfile = () => {
     try {
       setLoading(true);
       const response = await axiosInstance.get(`http://localhost:5000/api/auth/${platform}-oauth`);
-      // Handle redirect or further actions for OAuth
       console.log(`Connecting ${platform} account`, response.data);
       setLoading(false);
     } catch (error) {
       console.error(`Error connecting ${platform} account:`, error);
       setLoading(false);
-      // Optionally show an error message to the user
       setMessage(`Error connecting ${platform} account.`);
     }
   };
@@ -86,67 +84,81 @@ const UpdateProfile = () => {
   };
 
   return (
-    <Container className="mt-5">
-      <h2>Update Profile</h2>
-      {loading ? (
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      ) : (
-        <>
-          <Row className="mb-4">
-            <Col>
-              <strong>Name:</strong> {userData.name}
-            </Col>
-            <Col>
-              <strong>Email:</strong> {userData.email}
-            </Col>
-            <Col>
-              <strong>Phone:</strong> {userData.phone}
-            </Col>
-            <Col>
-              <strong>Batch:</strong> {userData.batch}
-            </Col>
-            <Col>
-              <strong>Branch:</strong> {userData.branch}
-            </Col>
-          </Row>
-          <Form onSubmit={onSubmit}>
-            <Form.Group controlId="formBiography" className="mb-3">
-              <Form.Label>Biography:</Form.Label>
-              <Form.Control as="textarea" name="biography" value={biography} onChange={onChange} />
-            </Form.Group>
-            <Form.Group controlId="formCurrentWorkingPlace" className="mb-3">
-              <Form.Label>Current Working Place:</Form.Label>
-              <Form.Control type="text" name="currentWorkingPlace" value={currentWorkingPlace} onChange={onChange} />
-            </Form.Group>
-            <Form.Group controlId="formLinkedin" className="mb-3">
-              <Form.Label>
-                <FaLinkedin size={24} className="mr-2" /> LinkedIn:
-              </Form.Label>
-              <Button variant="primary" onClick={() => handleOAuth('linkedin')}>
-                Connect LinkedIn
-              </Button>
-            </Form.Group>
-            <Form.Group controlId="formFacebook" className="mb-3">
-              <Form.Label>
-                <FaFacebook size={24} className="mr-2" /> Facebook:
-              </Form.Label>
-              <Button variant="primary" onClick={() => handleOAuth('facebook')}>
-                Connect Facebook
-              </Button>
-            </Form.Group>
-            <Button variant="success" type="submit">
-              Update Profile
-            </Button>
-          </Form>
-          {message && (
-            <Alert className="mt-3" variant={message.includes('Error') ? 'danger' : 'success'}>
-              {message}
-            </Alert>
+    <Container className="mt-5 d-flex justify-content-center"> 
+      <Card style={{ width: '80%' }}>
+        <Card.Header as="h2" className="text-center">
+          Update Profile
+        </Card.Header>
+
+        <Card.Body>
+          {loading ? (
+            <div className="d-flex justify-content-center">
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            </div>
+          ) : (
+            <>
+              {/* User Data Section */}
+              <Row className="mb-4">
+                <Col xs={12} md={6}>
+                  <p><strong>Name:</strong> {userData.name}</p>
+                  <p><strong>Email:</strong> {userData.email}</p>
+                </Col>
+                <Col xs={12} md={6}>
+                  <p><strong>Phone:</strong> {userData.phone}</p>
+                  <p><strong>Batch:</strong> {userData.batch}</p>
+                  <p><strong>Branch:</strong> {userData.branch}</p>
+                </Col>
+              </Row>
+
+              {/* Update Form */}
+              <Form onSubmit={onSubmit}>
+                <Form.Group controlId="formBiography" className="mb-3">
+                  <Form.Label>Biography:</Form.Label>
+                  <Form.Control as="textarea" name="biography" value={biography} onChange={onChange} />
+                </Form.Group>
+
+                <Form.Group controlId="formCurrentWorkingPlace" className="mb-3">
+                  <Form.Label>Current Working Place:</Form.Label>
+                  <Form.Control type="text" name="currentWorkingPlace" value={currentWorkingPlace} onChange={onChange} />
+                </Form.Group>
+
+                <Form.Group controlId="formLinkedin" className="mb-3">
+                  <Form.Label>
+                    <FaLinkedin size={24} className="mr-2" /> LinkedIn:
+                  </Form.Label>
+                  <Button variant="primary" onClick={() => handleOAuth('linkedin')}>
+                    Connect LinkedIn
+                  </Button>
+                </Form.Group>
+
+                <Form.Group controlId="formFacebook" className="mb-3">
+                  <Form.Label>
+                    <FaFacebook size={24} className="mr-2" /> Facebook:
+                  </Form.Label>
+                  <Button variant="primary" onClick={() => handleOAuth('facebook')}>
+                    Connect Facebook
+                  </Button>
+                </Form.Group>
+                
+                <div className="d-grid"> {/* Center the button */}
+                  <Button variant="success" type="submit">
+                    Update Profile
+                  </Button>
+                </div>
+              </Form>
+
+              {/* Message Alert */}
+              {message && (
+                <Alert className="mt-3" variant={message.includes('Error') ? 'danger' : 'success'}>
+                  {message}
+                </Alert>
+              )}
+            </>
           )}
-        </>
-      )}
+        </Card.Body>
+      </Card>
     </Container>
   );
 };

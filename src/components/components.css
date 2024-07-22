@@ -687,3 +687,47 @@ margin: 10px 0;
 border: 0;
 border-top: 1px solid #808080;
 }
+
+.verified-users-container {
+  width: 30%; /* Adjust the width as needed */
+  position: left; /* Position on the left */
+  padding: 20px;
+  border-right: 1px solid #ddd; /* Add a subtle separator line */
+}
+
+.users-list {
+  list-style: none; /* Remove default list styling */
+  padding: 0;
+}
+
+.user-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+}
+
+.user-item img {
+  margin-right: 15px;
+  border-radius: 50%;
+}
+
+.user-info h3 {
+  margin: 0 0 5px;
+}
+
+.user-info p {
+  margin: 0;
+  font-size: 14px;
+}
+
+/* Add responsiveness */
+@media (max-width: 768px) {
+  .verified-users-container {
+    width: 100%; 
+    float: none; 
+    border-right: none;
+  }
+}

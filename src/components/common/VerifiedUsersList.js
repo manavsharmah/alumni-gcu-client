@@ -21,17 +21,19 @@ const VerifiedUsersList = () => {
   }, []);
 
   return (
-    <div className="verified-users-list">
-      <h2>Other Alumnis</h2>
+    <div className="verified-users-container"> 
+      <h2>Recent Verified Users</h2>
       {error && <p className="error">{error}</p>}
-      <div className="users-container">
+      <div className="users-list"> 
         {users.map(user => (
           <div key={user._id} className="user-item">
-            <p><strong>Name:</strong> {user.name}</p>
-            <p><strong>Biography:</strong> {user.biography}</p>
-            <p><strong>Batch:</strong> {user.batch}</p>
-            <p><strong>Branch:</strong> {user.branch}</p>
-            <hr />
+            <img src="https://via.placeholder.com/50" alt="Profile" />
+            <div className="user-info">
+              <h3>{user.name}</h3>
+              <p><strong>Biography:</strong> {user.biography}</p>
+              <p><strong>Batch:</strong> {user.batch}</p>
+              <p><strong>Branch:</strong> {user.branch}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -39,6 +41,4 @@ const VerifiedUsersList = () => {
   );
 };
 
-
 export default VerifiedUsersList;
-

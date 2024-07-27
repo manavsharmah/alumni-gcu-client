@@ -2,15 +2,15 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 // Common Components
-import Login from './components/common/Login';
-import Register from './components/common/Register';
-import ResetPassword from './components/common/ResetPassword';
+import Login from './components/forms/LoginForm';
+import Register from './components/forms/RegisterForm';
+import ResetPassword from './components/forms/ResetPassword';
 import AdminLogin from './components/common/AdminLogin';
 import Topbar from './components/common/Topbar';
 import Bottombar from './components/common/Bottombar';
 
 // Layout Components
-import ForgotPassword from './components/common/ForgotPassword';
+import ForgotPassword from './components/forms/ForgotPassword';
 import RootLayout from './components/RootLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminLayout from './pages/admin/AdminLayout';
@@ -27,23 +27,17 @@ import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminEventsForm from './pages/admin/AdminEventsForm';
 
 // Detail Pages
-import TopAlumni from './pages/detail/TopAlumni';
-import NotableAlumni from './pages/detail/NotableAlumni';
-// import NewsArchive from './pages/detail/NewsArchive';
+import { TopAlumni, NotableAlumni } from './pages/detail/Alumni';
 import FAQ from './pages/detail/FAQ';
 import Contact from './pages/detail/Contact';
 import Scholarship from './pages/detail/Scholarship';
 import Activities from './pages/detail/Activities';
-import Alumnus from './pages/detail/Alumnus';
-import Chapters from './pages/detail/Chapters';
-import Presidents from './pages/detail/Presidents';
-import Council from './pages/detail/Council';
-import Objectives from './pages/detail/Objectives';
-import Vision from './pages/detail/Vision';
-import Overview from './pages/detail/Overview';
+import { Alumnus } from './pages/detail/GetInvolved';
 import Gallery from './pages/detail/Gallery';
 import Events from './pages/detail/Events';
 import NewsList from './pages/detail/NewsArchive';
+import NewsRoom from './pages/detail/NewsRoom';
+import {Overview, VisionAndMission, Objectives, GoverningCouncil, PastPresidents, AlumniChapters } from './pages/detail/About';
 
 
 function App() {
@@ -59,23 +53,23 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/" element={<Home />} />
             <Route path='/overview' element={<Overview />} />
-            <Route path='/vision' element={<Vision />} />
+            <Route path='/vision' element={<VisionAndMission />} />
             <Route path='/objectives' element={<Objectives />} />
-            <Route path='/council' element={<Council />} />
-            <Route path='/presidents' element={<Presidents />} />
-            <Route path='/chapters' element={<Chapters />} />
+            <Route path='/council' element={<GoverningCouncil />} />
+            <Route path='/presidents' element={<PastPresidents />} />
+            <Route path='/chapters' element={<AlumniChapters />} />
             <Route path='/alumnus' element={<Alumnus />} />
             <Route path='/top-alumni' element={<TopAlumni />} />
             <Route path='/notable-alumni' element={<NotableAlumni />} />
             {/* <Route path='/news-archive' element={<NewsArchive />} /> */}
-            <Route path='/news-archive' element={<NewsList />} />
+            <Route path='/newsarchive' element={<NewsList />} />
             <Route path='/gallery' element={<Gallery />} />
             <Route path='/contact' element={<Contact />} />
             <Route path='/faq' element={<FAQ />} />
             <Route path='/scholarship' element={<Scholarship />} />
             <Route path='/activities' element={<Activities />} />
             <Route path='/events' element={<Events />} />
-            <Route path='/aboutnav' element={<AboutNav />} />
+            <Route path="/news-archive" element={<NewsRoom />} />
 
             {/* Admin + User Routes */}
             <Route

@@ -4,7 +4,7 @@ axios.defaults.withCredentials = true;
 
 const Welcome = () => {   
     return (
-        <div className="container">
+        <div className="users-container">
             <VerifiedUsersList />
         </div>
     )

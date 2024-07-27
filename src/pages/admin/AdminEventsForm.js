@@ -21,6 +21,7 @@ const AdminEventsForm = () => {
     try {
       await api.post('/events/upload', formData);
       setMessage('Event Uploaded!');
+      
     } catch (err) {
       console.error(err.response.data);
       setMessage('Error Creating News')

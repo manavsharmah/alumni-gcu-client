@@ -233,113 +233,25 @@
   padding: 20px;
 }
 
-/* .news-events {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 20px;
-} */
-
-.newsroom, .events {
-  width: 45%;
+.news-events-container{
+  width: 70%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 24px 0px;
 }
 
-.newsroom h2, .events h2 {
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-/* .newsroom {
-  padding: 20px;
-} */
-
-
-.news-cards {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  gap: 20px;
-  /* justify-content: center; */
-  background-color: #fff;
-  width: 400px;
-  height: 400px;
-  padding: 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-  overflow: hidden;
-
-}
-
-/* .news-card {
-  width: 300px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #fff;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease;
-} */
-
-.news-card ul {
-  padding: 0;
-}
-
-.news-cards li {
-  height: 50px;
-  gap: 10px;
-  list-style-type: none;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #ccc;
-  cursor: pointer;
-  font-size: 20px;
-}
-
-.news-cards li:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: #f4f4f7;
-}
-
-.news-card h3 {
-  margin-top: 0;
-}
-
-.news-title {
-  flex-grow: 1;
-  margin-left: -20px;
-}
-
-.news-date {
-  flex-shrink: 0;
-  margin-right: 10px;
-  color: #9e9d9d;
-}
-
-.news-details {
-  font-size: 0.95em;
-}
-
-.events-cards {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  gap: 20px;
-  align-items: center;
-  background-color: #fff;
-  height: 400px;
-  width: 350px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border: 1px solid #ccc;
-  border-radius: 8px;
+@media (max-width: 768px){
+  .news-events-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 8px;
+  }
+  
 }
 
  /* =========Gallery========= */
@@ -422,5 +334,22 @@ button {
 
 button:hover {
   background-color: #0056b3;
+}
+
+
+.page-container {
+  display: flex;
+  justify-content: center;
+  /* height: calc(100vh - 60px); Adjust based on navbar height */
+  padding: 60px 0px ; /* Adjust based on navbar height */
+  background-color: #f5f5f5; /* Optional: background color for the page */
+  align-items: flex-start;
+}
+
+.users-container {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 10px;
+  position: ;
 }
 

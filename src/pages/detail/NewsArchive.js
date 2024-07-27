@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axiosInstance from '../../services/api';
 import '../pages.css';
+import Article from '../../components/common/Article-container';
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
@@ -34,12 +35,9 @@ const NewsList = () => {
   };
 
   return (
-    <div className="news-container">
-      <div className='row justify-content-center'>
-        <div className='col-md-6 col-10'>
-          <h2 className='title'>News</h2>
-          <div className="card">
-            <div className='card-body'>
+    <div className="page-container">
+      <Article title="News">
+
               <ul>
                 {currentNews.map((newsItem) => (
                   <li key={newsItem._id}>
@@ -55,10 +53,7 @@ const NewsList = () => {
                 paginate={paginate}
                 currentPage={currentPage}
               />
-            </div>
-          </div>
-        </div>
-      </div>
+    </Article>
     </div>
   );
 };

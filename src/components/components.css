@@ -851,7 +851,7 @@ margin: 5px 0;
 }
 
 .news-cards li {
-  height: 50px;
+  height: 60px;
   gap: 10px;
   display: flex;
   justify-content: space-between;

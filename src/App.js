@@ -36,7 +36,6 @@ import { Alumnus } from './pages/detail/GetInvolved';
 import Gallery from './pages/detail/Gallery';
 import Events from './pages/detail/Events';
 import NewsList from './pages/detail/NewsArchive';
-import NewsRoom from './pages/detail/NewsRoom';
 import {Overview, VisionAndMission, Objectives, GoverningCouncil, PastPresidents, AlumniChapters } from './pages/detail/About';
 
 
@@ -62,14 +61,13 @@ function App() {
             <Route path='/top-alumni' element={<TopAlumni />} />
             <Route path='/notable-alumni' element={<NotableAlumni />} />
             {/* <Route path='/news-archive' element={<NewsArchive />} /> */}
-            <Route path='/newsarchive' element={<NewsList />} />
+            <Route path='/news-archive' element={<NewsList />} />
             <Route path='/gallery' element={<Gallery />} />
             <Route path='/contact' element={<Contact />} />
             <Route path='/faq' element={<FAQ />} />
             <Route path='/scholarship' element={<Scholarship />} />
             <Route path='/activities' element={<Activities />} />
             <Route path='/events' element={<Events />} />
-            <Route path="/news-archive" element={<NewsRoom />} />
 
             {/* Admin + User Routes */}
             <Route

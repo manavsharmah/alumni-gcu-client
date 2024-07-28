@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+import "../components.css";
 
 const EventCard = () => {
   const [events, setEvents] = useState([]);

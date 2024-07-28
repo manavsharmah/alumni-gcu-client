@@ -28,12 +28,12 @@ const Topbar = () => {
   const handleLogout = async () => {
     try {
         await api.post('/auth/logout');
+        localStorage.removeItem('accessToken');
         setUser(null);
     } catch (err) {
         console.error('Error during logout:', err);
     }
-  };
-
+};
   useEffect(() => {
       sendRequest().then((data) => {
           if (data) {
@@ -74,25 +74,25 @@ const Topbar = () => {
               <li><a href='/chapters'>Alumni Chapters</a></li>
             </ul>
           </li>
-          <li><a href="https://www.gcucalumni.com/alumniassociation.js">Get Involved</a>
+          <li><a href="#">Get Involved</a>
           <ul className='sub-menus'>
               <li><a href='/alumnus'>Alumnus - Stake Holder Forum</a></li>
             </ul>
           </li>
-          <li><a href="https://www.gcucalumni.com/alumniassociation.js">Alumni Achievers</a>
+          <li><a href="#">Alumni Achievers</a>
           <ul className='sub-menus'>
               <li><a href='/top-alumni'>Top Alumni in Lime Light</a></li>
               <li><a href='/notable-alumni'>Notable Alumni</a></li>
             </ul>
           </li>
           <li><a href="/scholarship">Scholarships</a></li>
-          <li><a href="https://www.gcucalumni.com/newsroom.js">Newsroom</a>
+          <li><a href="#">Newsroom</a>
             <ul className='sub-menus'>
               <li><a href='/news-archive'>News Archive</a></li>
             </ul>
           </li>
           <li><a href="/activities">Activities</a></li>
-          <li><a href="https://www.gcucalumni.com/events.js">More</a>
+          <li><a href="#">More</a>
             <ul className='sub-menus'>
               <li><a href='/gallery'>Gallery</a></li>
               <li><a href='/contact'>Contact</a></li>

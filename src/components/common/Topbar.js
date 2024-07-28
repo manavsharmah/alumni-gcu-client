@@ -1,54 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import "../components.css";
 import api from '../../services/api';
+import { useUser } from '../../services/UserContext';
+import { Link } from 'react-router-dom';
 
 const Topbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
-  const [user, setUser] = useState(null);
+  const { user, logout, loading } = useUser(); // Use the custom hook to get the user data
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
-  }
-
-  const sendRequest = async () => {
-    try {
-        const res = await api.get('http://localhost:5000/api/user/user');
-        if (res && res.data) {
-            return res.data;
-        } else {
-            console.error('No data found in response');
-            return null;
-        }
-    } catch (err) {
-        console.error('Error during HTTP request:', err);
-        return null;
-    }
   };
 
   const handleLogout = async () => {
     try {
-        await api.post('/auth/logout');
-        setUser(null);
-    } catch (err) {
-        console.error('Error during logout:', err);
-    }
+      await logout();
+  } catch (err) {
+      console.error('Error during logout:', err);
+  }
   };
 
-  useEffect(() => {
-      sendRequest().then((data) => {
-          if (data) {
-              setUser(data);
-          }
-      });
-  }, []);
+  if (loading) {
+    return <div>Loading...</div>; // Show a loading indicator while the user data is being fetched
+  }
 
   return (
     <div className="App">
       <header className="App-header">
         <div className="logo">
-          <a href="/">
+          <Link to="/">
             <img src="./assets/LOGO 1.jpg" alt="Girijananda Chowdhury University Alumni Association Logo" />
-          </a>
+          </Link>
         </div>
         <div className="title">
           <h2>Girijananda Chowdhury University</h2>
@@ -64,62 +46,67 @@ const Topbar = () => {
       </header>
       <nav className={`navbar ${isNavOpen ? 'open' : ''}`}>
         <ul>
-          <li><a href="#">About</a>
+          <li>
+            <Link to="#">About</Link>
             <ul className='sub-menus'>
-              <li><a href='/overview'>Overview</a></li>
-              <li><a href='/vision'>Vision and Mission</a></li>
-              <li><a href='/objectives'>Objectives and Activities</a></li>
-              <li><a href='/council'>Governing Council</a></li>
-              <li><a href='/presidents'>Past Presidents</a></li>
-              <li><a href='/chapters'>Alumni Chapters</a></li>
+              <li><Link to='/overview'>Overview</Link></li>
+              <li><Link to='/vision'>Vision and Mission</Link></li>
+              <li><Link to='/objectives'>Objectives and Activities</Link></li>
+              <li><Link to='/council'>Governing Council</Link></li>
+              <li><Link to='/presidents'>Past Presidents</Link></li>
+              <li><Link to='/chapters'>Alumni Chapters</Link></li>
             </ul>
           </li>
-          <li><a href="https://www.gcucalumni.com/alumniassociation.js">Get Involved</a>
-          <ul className='sub-menus'>
-              <li><a href='/alumnus'>Alumnus - Stake Holder Forum</a></li>
-            </ul>
-          </li>
-          <li><a href="https://www.gcucalumni.com/alumniassociation.js">Alumni Achievers</a>
-          <ul className='sub-menus'>
-              <li><a href='/top-alumni'>Top Alumni in Lime Light</a></li>
-              <li><a href='/notable-alumni'>Notable Alumni</a></li>
-            </ul>
-          </li>
-          <li><a href="/scholarship">Scholarships</a></li>
-          <li><a href="https://www.gcucalumni.com/newsroom.js">Newsroom</a>
+          <li>
+            <Link to="https://www.gcucalumni.com/alumniassociation.js">Get Involved</Link>
             <ul className='sub-menus'>
-              <li><a href='/news-archive'>News Archive</a></li>
+              <li><Link to='/alumnus'>Alumnus - Stake Holder Forum</Link></li>
             </ul>
           </li>
-          <li><a href="/activities">Activities</a></li>
-          <li><a href="https://www.gcucalumni.com/events.js">More</a>
+          <li>
+            <Link to="https://www.gcucalumni.com/alumniassociation.js">Alumni Achievers</Link>
             <ul className='sub-menus'>
-              <li><a href='/gallery'>Gallery</a></li>
-              <li><a href='/contact'>Contact</a></li>
+              <li><Link to='/top-alumni'>Top Alumni in Lime Light</Link></li>
+              <li><Link to='/notable-alumni'>Notable Alumni</Link></li>
             </ul>
           </li>
-          <li><a href="/faq">FAQ's</a></li>
+          <li><Link to="/scholarship">Scholarships</Link></li>
+          <li>
+            <Link to="https://www.gcucalumni.com/newsroom.js">Newsroom</Link>
+            <ul className='sub-menus'>
+              <li><Link to='/news-archive'>News Archive</Link></li>
+            </ul>
+          </li>
+          <li><Link to="/activities">Activities</Link></li>
+          <li>
+            <Link to="https://www.gcucalumni.com/events.js">More</Link>
+            <ul className='sub-menus'>
+              <li><Link to='/gallery'>Gallery</Link></li>
+              <li><Link to='/contact'>Contact</Link></li>
+            </ul>
+          </li>
+          <li><Link to="/faq">FAQ's</Link></li>
         </ul>
         <div className="auth-links ml-auto d-flex align-items-center">
           {!user ? (
             <>
-              <a href="/register" className="auth-link text-light font-weight-bold ml-3">Register</a>&nbsp;
+              <Link to="/register" className="auth-link text-light font-weight-bold ml-3">Register</Link>&nbsp;
               <span>  |  </span>
-              <a href="/login" className="auth-link text-light font-weight-bold ml-3">Login</a>
+              <Link to="/login" className="auth-link text-light font-weight-bold ml-3">Login</Link>
             </>
           ) : (
             <div className="dropdown">
-              <a href="/profile" className="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <img 
-                    src="./assets/profile-placeholder.svg" 
-                    alt="profile" 
-                    className='rounded-full'
+              <Link to="/profile" className="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img 
+                  src="./assets/profile-placeholder.svg" 
+                  alt="profile" 
+                  className='rounded-full'
                 />
                 {user.name}
-              </a>
+              </Link>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a className="dropdown-item" href="/update-profile">Edit Profile</a>
-                <a className="dropdown-item" href="/" onClick={handleLogout}>Logout</a>
+                <Link className="dropdown-item" to="/update-profile">Edit Profile</Link>
+                <Link className="dropdown-item" to="/" onClick={handleLogout}>Logout</Link>
               </div>
             </div>
           )}
@@ -127,6 +114,6 @@ const Topbar = () => {
       </nav>
     </div>
   );
-}
+};
 
 export default Topbar;

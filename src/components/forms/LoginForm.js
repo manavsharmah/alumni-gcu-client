@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../../services/api';
+// import api from '../../services/api';
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useUser } from '../../services/UserContext';
 import './form.css';
 
 const Login = () => {
@@ -15,14 +16,16 @@ const Login = () => {
 
     const { email, password } = formData;
 
+    const { login } = useUser(); //usercontext
+
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const response = await api.post('/auth/login', formData);
-            localStorage.setItem('accessToken', response.data.accessToken);
-            navigate('/welcome'); // Navigate to welcome page after successful login
+            await login(formData); //using login from usercontext
+            navigate('/welcome'); 
+            window.location.reload();//not a final fix/jugaad
         } catch (err) {
             console.error(err.response.data);
             setError(err.response.data.message || 'Something went wrong');

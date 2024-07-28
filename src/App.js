@@ -6,8 +6,6 @@ import Login from './components/forms/LoginForm';
 import Register from './components/forms/RegisterForm';
 import ResetPassword from './components/forms/ResetPassword';
 import AdminLogin from './components/common/AdminLogin';
-import Topbar from './components/common/Topbar';
-import Bottombar from './components/common/Bottombar';
 
 // Layout Components
 import ForgotPassword from './components/forms/ForgotPassword';
@@ -25,6 +23,7 @@ import UpdateProfile from './pages/specific/UpdateProfile';
 import AdminNewsForm from './pages/admin/AdminNewsForm';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminEventsForm from './pages/admin/AdminEventsForm';
+import PhotoUpload from './pages/admin/PhotoUpload';
 
 // Detail Pages
 import { TopAlumni, NotableAlumni } from './pages/detail/Alumni';
@@ -36,17 +35,16 @@ import { Alumnus } from './pages/detail/GetInvolved';
 import Gallery from './pages/detail/Gallery';
 import Events from './pages/detail/Events';
 import NewsList from './pages/detail/NewsArchive';
-import NewsRoom from './pages/detail/NewsRoom';
 import {Overview, VisionAndMission, Objectives, GoverningCouncil, PastPresidents, AlumniChapters } from './pages/detail/About';
 
 
 function App() {
   return (
     <React.Fragment>
-      <Topbar />
       <div className="w-full md:flex">
         <section className="flex flex-1 h-full">
           <Routes>
+            <Route element={<RootLayout />}>
             {/* Open Routes */}
             <Route path="/admin-login" element={<AdminLogin />} />
             <Route path="/login" element={<Login />} />
@@ -62,14 +60,13 @@ function App() {
             <Route path='/top-alumni' element={<TopAlumni />} />
             <Route path='/notable-alumni' element={<NotableAlumni />} />
             {/* <Route path='/news-archive' element={<NewsArchive />} /> */}
-            <Route path='/newsarchive' element={<NewsList />} />
+            <Route path='/news-archive' element={<NewsList />} />
             <Route path='/gallery' element={<Gallery />} />
             <Route path='/contact' element={<Contact />} />
             <Route path='/faq' element={<FAQ />} />
             <Route path='/scholarship' element={<Scholarship />} />
             <Route path='/activities' element={<Activities />} />
             <Route path='/events' element={<Events />} />
-            <Route path="/news-archive" element={<NewsRoom />} />
 
             {/* Admin + User Routes */}
             <Route
@@ -88,12 +85,14 @@ function App() {
               path="/update-profile"
               element={<ProtectedRoute element={<UpdateProfile />} requiredRole="user" />}
             />
+            </Route>
 
             {/* Admin Routes */}
             <Route element={<ProtectedRoute element={<AdminLayout />} requiredRole="admin" />}>
               <Route path="/admin-dashboard" element={<AdminDashboard />} />
               <Route path='/news-form' element={<AdminNewsForm />} />
               <Route path='/events-form' element={<AdminEventsForm />} />
+              <Route path='/photo-upload-form' element={<PhotoUpload />} />
             </Route>
 
             {/* forgot password route */}
@@ -103,7 +102,6 @@ function App() {
           </Routes>
         </section>
       </div>
-      <Bottombar />
     </React.Fragment>
   );
 }

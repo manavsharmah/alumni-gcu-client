@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import "../pages.css";
-import api from "../../services/api"
-// import { FaSearch } from 'react-icons/fa';
+import "./admin.css";
+import api from "../../services/api";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 
-const Admindashboard = () => {
+const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
 
   useEffect(() => {
     const fetchPendingUsers = async () => {
       try {
         const res = await api.get('/user/pending-users');
         setUsers(res.data);
-        setFilteredUsers(res.data); // Set initial filtered users
+        setFilteredUsers(res.data);
       } catch (err) {
-        console.error(err); // Handle the error appropriately
+        console.error(err);
       }
     };
 
@@ -29,81 +28,81 @@ const Admindashboard = () => {
     try {
       await api.post('/user/approve', { email });
       setUsers(users.filter(user => user.email !== email));
-      setFilteredUsers(filteredUsers.filter(user => user.email !== email)); // Update filtered users as well
+      setFilteredUsers(filteredUsers.filter(user => user.email !== email));
     } catch (err) {
-      console.error(err); // Handle the error appropriately
+      console.error(err);
     }
   };
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
-  };
-
-  const handleSearchClick = () => {
     const filtered = users.filter(user =>
-      user.name.toLowerCase().includes(search.toLowerCase()) ||
-      user.email.toLowerCase().includes(search.toLowerCase())
+      user.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
+      user.email.toLowerCase().includes(e.target.value.toLowerCase()) ||
+      user.batch.toLowerCase().includes(e.target.value.toLowerCase()) ||
+      user.branch.toLowerCase().includes(e.target.value.toLowerCase())
     );
     setFilteredUsers(filtered);
   };
 
-  const handleFileChange = (e) => {
-    setSelectedFile(e.target.files[0]);
+  const handleSort = (key) => {
+    let direction = 'ascending';
+    if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+      direction = 'descending';
+    }
+    setSortConfig({ key, direction });
+    sortArray(filteredUsers, key, direction);
   };
 
-  const uploadImage = async () => {
-    if (!selectedFile) {
-      alert('Please select a file first.');
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('image', selectedFile);
-
-    try {
-      await api.post('/user/upload', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      alert('Image uploaded successfully.');
-    } catch (err) {
-      console.error('Error uploading image:', err);
-      alert('Failed to upload image.');
-    }
+  const sortArray = (array, key, direction) => {
+    const sortedArray = [...array].sort((a, b) => {
+      if (a[key] < b[key]) {
+        return direction === 'ascending' ? -1 : 1;
+      }
+      if (a[key] > b[key]) {
+        return direction === 'ascending' ? 1 : -1;
+      }
+      return 0;
+    });
+    setFilteredUsers(sortedArray);
   };
 
+  const getSortIndicator = (key) => {
+    if (sortConfig.key === key) {
+      if (sortConfig.direction === 'ascending') {
+        return <FontAwesomeIcon icon={faSortUp} />;
+      }
+      return <FontAwesomeIcon icon={faSortDown} />;
+    }
+    return null;
+  };
 
   return (
-    <div className="admin-container mt-5 admin-dashboard">
-      <div className="row justify-content-center mb-3">
-        <div className="col-md-6 col-lg-4">
-          <div className="input-group">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search by name or email"
-              value={search}
-              onChange={handleSearchChange}
-            />
-            <div className="input-group-append">
-              <button className="btn btn-outline-secondary" onClick={handleSearchClick}>
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </button>
-            </div>
-          </div>
-        </div>
+    <div className="dashboard-container">
+      <div className='dashboard-header'>
+        <h1 className='dashboard-title'>ADMIN DASHBOARD</h1>
       </div>
-      <div className='admin-header'>
-        <h1 className='admin-heading'>ADMIN DASHBOARD</h1>
+      <div className="search-group">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Search by name, email, batch, or branch"
+          value={search}
+          onChange={handleSearchChange}
+        />
+        <button className="search-button">
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </button>
       </div>
       <h2>Pending User Approvals</h2>
       {filteredUsers.length > 0 ? (
-        <table className="table table-striped">
+        <table className="approval-table table-striped">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Email</th>
+              <th onClick={() => handleSort('name')}>Name {getSortIndicator('name')}</th>
+              <th onClick={() => handleSort('email')}>Email {getSortIndicator('email')}</th>
+              <th onClick={() => handleSort('batch')}>Batch {getSortIndicator('batch')}</th>
+              <th onClick={() => handleSort('branch')}>Branch {getSortIndicator('branch')}</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -112,9 +111,11 @@ const Admindashboard = () => {
               <tr key={user._id}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
+                <td>{user.batch}</td>
+                <td>{user.branch}</td>
                 <td>
-                  <button onClick={() => approveUser(user.email)} className="btn btn-success mr-2">Approve</button>
-                  <button className="btn btn-danger">Reject</button>
+                  <button onClick={() => approveUser(user.email)} className="btn-approve">Approve</button>
+                  <button className="btn-reject">Reject</button>
                 </td>
               </tr>
             ))}
@@ -123,13 +124,8 @@ const Admindashboard = () => {
       ) : (
         <p>No pending approvals right now.</p>
       )}
-      <div className="mt-5">
-        <h2>Upload Image</h2>
-        <input type="file" onChange={handleFileChange} />
-        <button onClick={uploadImage} className="btn btn-primary mt-2">Upload</button>
-      </div>
     </div>
   );
 };
 
-export default Admindashboard;
+export default AdminDashboard;

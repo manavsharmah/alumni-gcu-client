@@ -10,7 +10,7 @@ const AdminEventsForm = () => {
     organizer: '',
     event_date: '',
     event_time: '',
-  })
+  });
 
   const { title, content, organizer, event_date, event_time } = formData;
 
@@ -21,50 +21,88 @@ const AdminEventsForm = () => {
     try {
       await api.post('/events/upload', formData);
       setMessage('Event Uploaded!');
-      
     } catch (err) {
       console.error(err.response.data);
-      setMessage('Error Creating News')
+      setMessage('Error Creating Event');
     }
   };
 
   return (
-    <div>
-      <h2 align='center'>Create News</h2>
-      <br/>
-      <br/>
-      <form onSubmit={onSubmit}>                           
-                            <div className="input">
-                                <img src='' alt=''/>
-                                <input type='text'  placeholder='Title' value={title} onChange={onChange} name='title' required/>
-                            </div>
-                        <br></br>            
-                        <div align='center'>
-                            <img src='' alt=''/>
-                            <textarea  placeholder='Content' value={content} onChange={onChange} name='content' required/>
-                        </div>
-                        <br></br>
-                        <div className="input">
-                            <img src='' alt=''/>
-                            <input type='text'  placeholder='Organizer' value={organizer} onChange={onChange} name='organizer'/>
-                        </div>
-                        <br></br>
-                        <div className="input">
-                            <img src='' alt=''/>
-                            <input type='text'  placeholder='Event Date' value={event_date} onChange={onChange} name='event_date' required/>
-                        </div>
-                        <br></br>
-                        <div className="input">
-                            <img src='' alt=''/>
-                            <input type='text'  placeholder='Event Time' value={event_time} onChange={onChange} name='event_time'/>
-                        </div>
-                        <button type="submit" className='btn btn-primary'>Create News</button>
-                    </form>
-      {message && <p>{message}</p>}
+    <div className="admin-form-container">
+      <h2  className="admin-form-header">Create Event</h2>
+      <form onSubmit={onSubmit}>
+        <div className="admin-input-group">
+          <label htmlFor="title">Title</label>
+          <input
+            type='text'
+            className="admin-form-input"
+            id="title"
+            placeholder='Title'
+            value={title}
+            onChange={onChange}
+            name='title'
+            required
+          />
+        </div>
+        <br />
+        <div className="admin-input-group">
+          <label htmlFor="content">Content</label>
+          <textarea
+            id="content"
+            className="admin-form-input"
+            placeholder='Content'
+            value={content}
+            onChange={onChange}
+            name='content'
+            required
+          />
+        </div>
+        <br />
+        <div className="admin-input-group">
+          <label htmlFor="organizer">Organizer</label>
+          <input
+            type='text'
+            className="admin-form-input"
+            id="organizer"
+            placeholder='Organizer'
+            value={organizer}
+            onChange={onChange}
+            name='organizer'
+          />
+        </div>
+        <br />
+        <div className="admin-input-group">
+          <label htmlFor="event_date">Event Date</label>
+          <input
+            type='date'
+            className="admin-form-input"
+            id="event_date"
+            placeholder='Event Date'
+            value={event_date}
+            onChange={onChange}
+            name='event_date'
+            required
+          />
+        </div>
+        <br />
+        <div className="admin-input-group">
+          <label htmlFor="event_time">Event Time</label>
+          <input
+            type='time'
+            className="admin-form-input"
+            id="event_time"
+            placeholder='Event Time'
+            value={event_time}
+            onChange={onChange}
+            name='event_time'
+          />
+        </div>
+        <br />
+        <button type="submit" className='admin-form-button'>Create Event</button>
+      </form>
+      {message && <p className="message">{message}</p>}
     </div>
   );
 };
 
-
 export default AdminEventsForm;
-

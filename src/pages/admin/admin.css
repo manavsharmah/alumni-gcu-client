@@ -1,33 +1,253 @@
+/* Admin layout Styling */
+
 .admin-layout {
     display: flex;
     min-height: 100vh;
   }
   
-  .admin-sidebar {
-    width: 250px;
-    background-color: #343a40;
-    padding: 20px;
-    color: #fff;
-  }
-  
-  .admin-sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .admin-sidebar ul li {
-    margin: 20px 0;
-  }
-  
-  .admin-sidebar ul li a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
   .admin-content {
     flex: 1;
-    padding: 20px;
+    padding: 50px;
     background-color: #f8f9fa;
 
   }
+
+.admin-sidebar {
+  width: 200px;
+  background-color: #2a3b59;
+  border-right: 1px solid #ddd;
+  height: 100%;
+  padding-top: 20px;
+  color: #fff;
+}
+
+/* .logo-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.admin-logo {
+  max-width: 80%;
+  height: auto;
+} */
+
+.admin-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.admin-sidebar ul li {
+  margin: 20px 0;
+}
+
+.admin-sidebar ul li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  padding: 10px 0;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.admin-sidebar ul li a:hover {
+  background-color: #1d2a44;
+  color: #fff;
+}
+
+.admin-sidebar ul li a svg {
+  margin-bottom: 5px;
+  font-size: 2em; /* Increase icon size */
+}
+
+.admin-sidebar ul li a span {
+  font-size: 1em; /* Increase label size */
+}
+
+
+/* admin dashboard  */
+
+.dashboard-container {
+  padding: 20px;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.dashboard-title {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.search-group {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 300px;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+.search-button {
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+.approval-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.approval-table th,
+.approval-table td {
+  border: 1px solid #767676;
+  padding: 10px;
+  text-align: left;
+}
+
+.btn-approve {
+  margin: 0px 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.btn-reject {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.btn-approve:hover {
+  background-color: #218838;
+}
+
+.btn-reject:hover {
+  background-color: #c82333;
+}
+
+
+/* PhotoUpload component styles */
+
+.photo-upload-container {
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 600px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.photo-upload-header {
+  font-size: 2em;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.photo-upload-input {
+  display: block;
+  margin: 0 auto 20px;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 20px;
+  outline: none;
+}
+
+.photo-upload-button {
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.photo-upload-button:hover {
+  background-color: #0056b3;
+}
+
+
+/* Admin Event and News Form */
+
+
+.admin-form-container {
+  margin: 0 auto;
+  padding: 20px;
+  max-width: 600px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.admin-form-header {
+  text-align: center;
+  font-size: 2em;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.admin-form-group {
+  margin-bottom: 20px;
+}
+
+.admin-form-input,
+.admin-form-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 20px;
+  outline: none;
+  margin-bottom: 10px;
+}
+
+.admin-form-textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+.admin-form-button {
+  background-color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  color: #fff;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+}
+
+.admin-form-button:hover {
+  background-color: #0056b3;
+}
+
+.admin-form-message {
+  text-align: center;
+  font-size: 1em;
+  color: green;
+  margin-top: 20px;
+}
+
+
   

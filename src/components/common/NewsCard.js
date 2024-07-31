@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import api from "../../services/api";
+import axios from "axios";
 import "../components.css";
 
 const NewsCard = () => {
@@ -11,7 +11,7 @@ const NewsCard = () => {
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await api.get('/news/get-news');
+                const response = await axios.get('http://localhost:5000/api/news/get-news');
                 const sortedNews = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
                 setNews(sortedNews);
             } catch (error) {

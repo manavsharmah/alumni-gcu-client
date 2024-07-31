@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../services/api';
 import { FaFacebook, FaLinkedin } from 'react-icons/fa';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Card } from 'react-bootstrap';
+import api from "../../services/api"
 
 const UpdateProfile = () => {
   const [message, setMessage] = useState('');
@@ -26,7 +27,7 @@ const UpdateProfile = () => {
     const fetchUser = async () => {
       try {
         setLoading(true);
-        const response = await axiosInstance.get('http://localhost:5000/api/auth/user');
+        const response = await api.get('http://localhost:5000/api/user/user');
         const user = response.data;
         setUserData({
           name: user.name,

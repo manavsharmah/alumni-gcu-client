@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 // Create an Axios instance
 const api = axios.create({
@@ -10,7 +10,9 @@ const api = axios.create({
 // Function to refresh the access token
 const refreshAccessToken = async () => {
   try {
-    const response = await api.get('/refresh-token');
+    const response = await axios.post('http://localhost:5000/api/auth/refresh-token', {}, {
+      withCredentials: true,
+    });
     localStorage.setItem('accessToken', response.data.accessToken);
     return response.data.accessToken;
   } catch (error) {
@@ -24,42 +26,24 @@ api.interceptors.request.use(async (config) => {
   let accessToken = localStorage.getItem('accessToken');
 
   if (accessToken) {
-    const { exp } = jwtDecode(accessToken);
+    const decodeToken = jwtDecode(accessToken);
+    const currentTime = Date.now() / 1000;
 
-    // Check if the token is expired or about to expire
-    if (Date.now() >= exp * 1000) {
-      accessToken = await refreshAccessToken();
+    if(decodeToken.exp - currentTime < 10) {
+      try {
+        const newAccessToken = await refreshAccessToken();
+        config.headers.Authorization = `Bearer ${newAccessToken}`;
+      } catch (error) {
+        console.error('Error refreshing access token:', error);
+        // Handle token refresh error (e.g., logout user)
+      }
+    } else {
+      config.headers.Authorization = `Bearer ${accessToken}`;
     }
-
-    config.headers['Authorization'] = `Bearer ${accessToken}`;
   }
-
   return config;
-}, (error) => {
-  return Promise.reject(error);
-});
-
-// Add a response interceptor to handle token expiry
-api.interceptors.response.use((response) => {
-  return response;
-}, async (error) => {
-  const originalRequest = error.config;
-
-  if (error.response.status === 401 && !originalRequest._retry) {
-    originalRequest._retry = true;
-
-    try {
-      const newAccessToken = await refreshAccessToken();
-      originalRequest.headers['Authorization'] = `Bearer ${newAccessToken}`;
-      return api(originalRequest);
-    } catch (error) {
-      console.error('Error refreshing access token:', error);
-      // Handle refresh token expiration or invalid refresh token
-      // e.g., redirect to login page
-    }
-  }
-
-  return Promise.reject(error);
-});
+}, 
+(error) => Promise.reject(error)
+);
 
 export default api;

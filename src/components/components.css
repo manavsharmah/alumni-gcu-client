@@ -10,7 +10,7 @@
 .auth-links {
   display: flex;
   align-items: center;
-  justify-content: end;
+  /* justify-content: end; */
   margin-bottom: 15px;
   margin-right: 10px;
   
@@ -288,34 +288,55 @@ display: block;
     width: 100px;
   }
 
+  .logo-gcu {
+    display: none;
+  }
+
+  .nav-content {
+    display: none;
+  }
+  
+  .nav-content.open {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    left: -25%;
+  }
+
   .menu-toggle {
-    display: block; /* Show the menu toggle button on small screens */
+    display: block; 
     color: white;
     font-size: 30px;
     cursor: pointer;
     padding: 10px;
     background-color: #27357f;
     border: none;
-    align-self: flex-end;
+    /* align-self: flex-end; */
   }
 
-  .title {
+  /* .title {
     display: none;
+  } */
+
+  .title h2 {
+    font-size: 18px;
   }
 
   .navbar {
     display: flex;
-    flex-direction: column;
-    width: 250px;
+    flex-direction: row;
+    width: 100%;
     height: 100%;
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     background-color: #27357f;
     padding-top: 60px;
-    transition: transform 0.3s ease-in-out;
-    transform: translateX(-100%);
-    z-index: 999;
+    overflow:hidden;
+    /* transition: transform 0.3s ease-in-out;
+    transform: translateX(-100%); */
+    /* z-index: 999; */
   }
 
   .navbar.open {
@@ -331,21 +352,43 @@ display: block;
     margin: 5px 0;
   }
 
+  .navbar li {
+    display: block;
+    position: relative;
+    width: 100%;
+  }
+
   .navbar li a {
     padding: 10px;
     width: 100%;
+    z-index: 1;
+  }
+
+  /* Show all sub-menus when the navbar is open */
+  .navbar.open ul.sub-menus {
+    opacity: 1;
+    visibility: visible;
+    display: contents;
+  }
+
+  .navbar.open .navbar ul.sub-menus {
+    position: relative;
+    left: -100%;
+    top: 0;
   }
 
   .navbar ul.sub-menus {
-    left: 100%;
+    /* display: none; */
+    left: 0;
     top: 0;
     width: 100%;
     opacity: 0;
-    visibility: hidden;
+    visibility: visible;
     transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   }
 
-  .navbar li:hover ul.sub-menus {
+  .navbar li ul.sub-menus {
+    display: block;
     opacity: 1;
     visibility: visible;
   }
@@ -354,8 +397,13 @@ display: block;
     padding-left: 20px;
   }
 
-  .auth-links {
+  /* .auth-links {
     display: none;
+  } */
+
+  .auth-nav {
+    justify-content: right;
+    box-sizing: border-box;
   }
 
   .App-main {
@@ -366,6 +414,10 @@ display: block;
   }
 
 }
+
+
+
+
 
 /* =====>Signup styling<======= */
 

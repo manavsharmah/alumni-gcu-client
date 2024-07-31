@@ -11,7 +11,7 @@ import Bottombar from './components/common/Bottombar';
 
 // Layout Components
 import ForgotPassword from './components/common/ForgotPassword';
-import RootLayout from './components/RootLayout';
+// import RootLayout from './components/RootLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminLayout from './pages/admin/AdminLayout';
 
@@ -75,7 +75,6 @@ function App() {
             <Route path='/scholarship' element={<Scholarship />} />
             <Route path='/activities' element={<Activities />} />
             <Route path='/events' element={<Events />} />
-            <Route path='/aboutnav' element={<AboutNav />} />
 
             {/* Admin + User Routes */}
             <Route

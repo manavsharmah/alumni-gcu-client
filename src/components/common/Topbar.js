@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import "../components.css";
-import api from '../../services/api';
 import { useUser } from '../../services/UserContext';
 import { Link } from 'react-router-dom';
 

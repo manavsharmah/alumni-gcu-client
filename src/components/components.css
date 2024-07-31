@@ -51,6 +51,11 @@
   margin: 0 15px;
 }
 
+.nav-link {
+  color: white !important;
+  font-weight: bold;
+}
+
 
 .nav-link:hover {
   color: #007bff !important;
@@ -353,7 +358,7 @@ display: block;
     width: 100%;
   }
 
-  .navbar li a {
+  .navbar li Link {
     padding: 10px;
     width: 100%;
     z-index: 1;
@@ -388,7 +393,7 @@ display: block;
     visibility: visible;
   }
 
-  .navbar ul.sub-menus a {
+  .navbar ul.sub-menus Link {
     padding-left: 20px;
   }
 

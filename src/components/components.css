@@ -271,7 +271,7 @@ display: block;
 
 
 /* Media query for mobile responsiveness */
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 768px) {
   .App-header {
     height: 100px;
     justify-content: space-around;
@@ -484,7 +484,7 @@ color:#797979;
 font-size: 20px;
 }
 
-.forgot-password{
+/* .forgot-password{
 padding-left:75px;
 margin-left: 75px;
 margin-top:27px;
@@ -495,7 +495,7 @@ font-size:18px;
 .forgot-password span{
 color: blue;
 cursor:pointer;
-}
+} */
 
 .submit-container{
 display:flex;
@@ -521,7 +521,7 @@ cursor:pointer;
 
 /* =====Signup/Login===== */
 
-.container {
+/* .container {
 display: flex;
 justify-content: center;
 margin-top: 90px;
@@ -590,25 +590,23 @@ cursor:pointer;
 display: flex;
 height: 400px;
 margin-top: 200px;
-}
+} */
 
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
 .col-md-6 {
 width: 100%;
 }
 }
 
-/* Small Screen Styles */
 @media (max-width: 480px) {
 
 .container {
 padding: 10px;
 }
 .card {
-width: 60%; /* Reduce the card width on smaller screens */
+width: 60%; 
 margin: 20px auto;
-/* margin-left: auto; */
 }
 
 .card-title {
@@ -653,7 +651,7 @@ align-items: center;
 .btn {
 justify-content: center;
 }
-}
+} */
 
 
 /* =======Bottom Bar======== */
@@ -663,23 +661,29 @@ display: flex;
 flex-wrap: wrap;
 justify-content: space-between;
 align-items: center;
-background-color: #f8f9fa;
+background-color: #27357f;
 padding: 10px;
 border-top: 1px solid #ddd;
 /* position: fixed; */
 bottom: 0;
 width: 100%;
-height: 100px;
+height: auto;
 box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
 bottom: 0;
 left: 0;
 }
 
-.social-links,
-.footer-links,
-.app-links {
+.social-links {
 display: flex;
 flex-direction:row;
+padding: 9px;
+align-items: center;
+margin: 10px 0;
+}
+
+.footer-links {
+display: flex;
+flex-direction: row;
 padding: 9px;
 align-items: center;
 margin: 10px 0;
@@ -689,91 +693,100 @@ margin: 10px 0;
 .footer-links a {
 text-decoration: none;
 padding: 7px;
-color: #000;
+color: #ffffff;
 margin: 5px 0;
 }
 
-.footer-links a {
-color: #555;
+/* Tablet styles */
+@media (max-width: 768px) {
+  .bottombar {
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+    padding: 10px 5px;
+  }
+
+  .social-links {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .footer-links{
+    flex-direction: column ;
+    align-items: center;
+  }
+
+  .social-links a,
+  .footer-links a {
+    margin: 5px 0px;
+    padding: 5px 3px;
+  }
 }
 
-.feedback {
-margin-top: 10px;
-}
 
-.feedback-button {
-background-color: #28a745;
-color: white;
-border: none;
-padding: 10px 20px;
-border-radius: 5px;
-cursor: pointer;
-}
-
-.feedback-button:hover {
-background-color: #218838;
-}
 
 /* Verified User List */
 
-.users-section {
-flex: 1;
-border-left: 1px solid #d80e0e;
-padding-left: 20px;
-}
-
-.verified-users-list {
-margin-top: 20px;
-}
-
-.user-item {
-padding: 10px 0;
-}
-
-.user-item p {
-margin: 0;
-}
-
-hr {
-margin: 10px 0;
-border: 0;
-border-top: 1px solid #808080;
-}
+/* components.css */
 
 .verified-users-container {
-  width: 30%; /* Adjust the width as needed */
-  position: left; /* Position on the left */
   padding: 20px;
-  border-right: 1px solid #ddd; /* Add a subtle separator line */
+  width: 300px;
+  margin: auto;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
 
 .users-list {
-  list-style: none; /* Remove default list styling */
-  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .user-item {
   display: flex;
   align-items: center;
-  margin-bottom: 15px;
-  padding: 10px;
-  border: 1px solid #eee;
-  border-radius: 5px;
+  gap: 10px;
 }
 
 .user-item img {
-  margin-right: 15px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
 }
 
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
 .user-info h3 {
-  margin: 0 0 5px;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .user-info p {
   margin: 0;
-  font-size: 14px;
+  font-size: 0.875rem;
+  color: #666;
 }
+
+.error {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
 
 /* Add responsiveness */
 @media (max-width: 768px) {
@@ -783,3 +796,237 @@ border-top: 1px solid #808080;
     border-right: none;
   }
 }
+
+
+/* Article-container */
+
+.article-container {
+  border: 1px solid #c4c4c4;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 60%;
+  box-sizing: border-box;
+}
+
+.container-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.container-content {
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+/* Quick Nav  */
+
+.quick-nav {
+  background-color: #eee;
+  padding: 16px;
+  margin-left: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  max-width: 300px;
+  height: auto;
+}
+
+
+.quick-nav-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.navs {
+  list-style-type: none;
+  padding: 0;
+}
+
+.navs li {
+  margin: 8px 0;
+}
+
+.navs a {
+  text-decoration: none;
+  color: #333;
+}
+
+.navs a.active {
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .article-container {
+    max-width: 97%;
+  }
+
+  .quick-nav {
+    display: none;
+  }
+}
+
+
+/* News Card */
+
+.news-cards {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  width: 850px;
+  height: 400px; /* Fixed height for the container */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.news-cards h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 2px solid #f0c14b;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.news-cards ul {
+  padding: 0;
+  list-style-type: none;
+  overflow-y: auto; /* Enable vertical scrolling */
+  height: calc(100% - 50px); /* Adjust height to fit within the container */
+}
+
+.news-cards li {
+  height: 60px;
+  gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-cards li:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #27357f;
+}
+
+.news-cards li:hover .news-title,
+.news-cards li:hover .news-date {
+  color: white;
+}
+
+.news-title {
+  padding-left: 8px;
+  flex: 1;
+  color: #000000;
+}
+
+.news-date {
+  padding-right: 8px;
+  color: #888;
+  font-size: 14px;
+  margin-left: 20px;
+}
+
+
+
+/* Event Card */
+
+.event-cards {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  width: 500px;
+  height: 400px; /* Fixed height for the container */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.event-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 2px solid #f0c14b;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.event-cards ul {
+  padding: 0;
+  list-style-type: none;
+  overflow-y: auto; /* Enable vertical scrolling */
+  height: calc(100% - 50px); /* Adjust height to fit within the container */
+}
+
+.event-cards li {
+  margin-bottom: 0px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.event-cards li:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background-color: #27357f;
+}
+
+.event-cards li:hover .event-title-text,
+.event-cards li:hover .event-info h6,
+.event-cards li:hover .event-info h7,
+.event-cards li:hover .event-posted-date {
+  color: white;
+}
+
+.event-title-text {
+  margin: 0;
+  color: #000;
+}
+
+.event-content {
+  margin: 10px 0;
+  color: #444;
+}
+
+.event-info h6 {
+  margin: 5px 0;
+  color: #666;
+}
+
+.event-info h7 {
+  margin: 5px 50px 5px 0px;
+  color: #666;
+}
+
+
+.event-posted-date {
+  color: #888;
+}
+
+
+@media (max-width: 768px) {
+  .news-cards,
+  .event-cards {
+    width: 100%;
+    margin: 8px 0px;
+
+  }
+
+}
+
+

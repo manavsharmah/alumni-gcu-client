@@ -1,18 +1,50 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
+import { FaTachometerAlt, FaNewspaper, FaCalendarAlt, FaArrowLeft, FaImages } from 'react-icons/fa';
 import "./admin.css";
 
 const AdminLayout = () => {
   return (
     <div className="admin-layout">
+      <div className="admin-nav-bar">
       <nav className="admin-sidebar">
-        <ul>
-          <li><a href="/admin-dashboard">Dashboard</a></li>
-          <li><a href="/news-form">Create New News</a></li>
-          <li><a href="/events-form">Create New Event</a></li>
-          <li><a href="/">Back to Website</a></li>
-        </ul>
-      </nav>
+      {/* <div className="logo-container">
+        <img src="./assets/LOGO 1.jpg"  alt="Logo" className="admin-logo" />
+      </div> */}
+      <ul>
+        <li>
+          <a href="/admin-dashboard">
+            <FaTachometerAlt />
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="/news-form">
+            <FaNewspaper />
+            <span>Create New News</span>
+          </a>
+        </li>
+        <li>
+          <a href="/events-form">
+            <FaCalendarAlt />
+            <span>Create New Event</span>
+          </a>
+        </li>
+        <li>
+          <a href="/photo-upload-form">
+            <FaImages />
+            <span>Upload Images</span>
+          </a>
+        </li>
+        <li>
+          <a href="/">
+            <FaArrowLeft />
+            <span>Back to Website</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    </div>
       <div className="admin-content">
         <Outlet />
       </div>

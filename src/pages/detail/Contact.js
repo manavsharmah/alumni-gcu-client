@@ -1,5 +1,5 @@
 import React from 'react';
-import MoreNav from './quicknavs/MoreNav';
+
 
 const Chapters = () => {
     return (
@@ -14,9 +14,6 @@ const Chapters = () => {
                             </p>
                         </div>
                     </div>
-                </div>
-                <div className="sidebar">
-                    <MoreNav />
                 </div>
             </div>
         </div>

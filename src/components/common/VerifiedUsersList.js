@@ -5,6 +5,7 @@ import "../components.css";
 const VerifiedUsersList = () => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState('');
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     const fetchVerifiedUsers = async () => {
@@ -20,19 +21,33 @@ const VerifiedUsersList = () => {
     fetchVerifiedUsers();
   }, []);
 
+  const handleSearch = (event) => {
+    setSearch(event.target.value);
+  };
+
+  const filteredUsers = users.filter(user => 
+    user.name?.toLowerCase().includes(search.toLowerCase()) ||
+    user.batch?.toLowerCase().includes(search.toLowerCase()) ||
+    user.branch?.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
-    <div className="verified-users-container"> 
-      <h2>Recent Verified Users</h2>
+    <div className="verified-users-container">
+      <input 
+        type="text" 
+        placeholder="Search by name, batch, or branch" 
+        value={search}
+        onChange={handleSearch}
+        className="search-bar"
+      />
       {error && <p className="error">{error}</p>}
-      <div className="users-list"> 
-        {users.map(user => (
+      <div className="users-list">
+        {filteredUsers.map(user => (
           <div key={user._id} className="user-item">
             <img src="https://via.placeholder.com/50" alt="Profile" />
             <div className="user-info">
               <h3>{user.name}</h3>
-              <p><strong>Biography:</strong> {user.biography}</p>
-              <p><strong>Batch:</strong> {user.batch}</p>
-              <p><strong>Branch:</strong> {user.branch}</p>
+              <p>{user.branch}</p> ,<p>{user.batch}</p>
             </div>
           </div>
         ))}

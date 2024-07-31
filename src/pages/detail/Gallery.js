@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../pages.css';
-import MoreNav from './quicknavs/MoreNav';
+import Article from '../../components/common/Article-container';
+
 
 const Gallery = () => {
   const [photos, setPhotos] = useState([]);
@@ -29,29 +30,20 @@ const Gallery = () => {
   }, []);
 
   return (
-    <div className="container">
-      <div className="row justify-content-center">
-        <div className="col-md-6 col-10">
-          <h2 className="title">Gallery</h2>
+      <div className="page-container">
+        <Article title="Gallery">
           {photos.length > 0 ? (
-            <div className="card">
-              <div className="card-body">
+
                 <div>
                   {photos.map((photo, index) => (
                     <img key={index} src={photo} alt={`photo_${index}`} className="image" />
                   ))}
                 </div>
-              </div>
-            </div>
           ) : (
             <p>Loading photos...</p> 
           )}
-        </div>
-        <div className="sidebar">
-          <MoreNav />
-        </div>
-      </div>
-    </div>
+          </Article>
+        </div>  
   );
 }
 

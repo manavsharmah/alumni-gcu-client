@@ -9,6 +9,7 @@ const Topbar = () => {
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
+    document.querySelector('.navbar').classList.toggle('open');
   };
 
   const handleLogout = async () => {
@@ -22,7 +23,7 @@ const Topbar = () => {
   if (loading) {
     return <div>Loading...</div>; // Show a loading indicator while the user data is being fetched
   }
-
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -38,61 +39,62 @@ const Topbar = () => {
         <div className='logo-gcu'>
           <img src="./assets/gcu-logo.png" alt="Girijananda Chowdhury University Logo" />
         </div>
-        
+      </header>
+      <nav className="navbar">
         <button className="menu-toggle" onClick={toggleNav}>
           &#9776;
         </button>
-      </header>
-      <nav className={`navbar ${isNavOpen ? 'open' : ''}`}>
-        <ul>
-          <li>
-            <Link to="#">About</Link>
-            <ul className='sub-menus'>
-              <li><Link to='/overview'>Overview</Link></li>
-              <li><Link to='/vision'>Vision and Mission</Link></li>
-              <li><Link to='/objectives'>Objectives and Activities</Link></li>
-              <li><Link to='/council'>Governing Council</Link></li>
-              <li><Link to='/presidents'>Past Presidents</Link></li>
-              <li><Link to='/chapters'>Alumni Chapters</Link></li>
-            </ul>
-          </li>
-          <li>
-            <Link to="https://www.gcucalumni.com/alumniassociation.js">Get Involved</Link>
-            <ul className='sub-menus'>
-              <li><Link to='/alumnus'>Alumnus - Stake Holder Forum</Link></li>
-            </ul>
-          </li>
-          <li>
-            <Link to="https://www.gcucalumni.com/alumniassociation.js">Alumni Achievers</Link>
-            <ul className='sub-menus'>
-              <li><Link to='/top-alumni'>Top Alumni in Lime Light</Link></li>
-              <li><Link to='/notable-alumni'>Notable Alumni</Link></li>
-            </ul>
-          </li>
-          <li><Link to="/scholarship">Scholarships</Link></li>
-          <li>
-            <Link to="https://www.gcucalumni.com/newsroom.js">Newsroom</Link>
-            <ul className='sub-menus'>
-              <li><Link to='/news-archive'>News Archive</Link></li>
-            </ul>
-          </li>
-          <li><Link to="/activities">Activities</Link></li>
-          <li>
-            <Link to="https://www.gcucalumni.com/events.js">More</Link>
-            <ul className='sub-menus'>
-              <li><Link to='/gallery'>Gallery</Link></li>
-              <li><Link to='/contact'>Contact</Link></li>
-            </ul>
-          </li>
-          <li><Link to="/faq">FAQ's</Link></li>
-        </ul>
+        <div className={`nav-content ${isNavOpen ? 'open' : ''}`}>
+          <ul>
+            <li>
+              <Link to="#">About</Link>
+              <ul className='sub-menus'>
+                <li><Link to='/overview'>Overview</Link></li>
+                <li><Link to='/vision'>Vision and Mission</Link></li>
+                <li><Link to='/objectives'>Objectives and Activities</Link></li>
+                <li><Link to='/council'>Governing Council</Link></li>
+                <li><Link to='/presidents'>Past Presidents</Link></li>
+                <li><Link to='/chapters'>Alumni Chapters</Link></li>
+              </ul>
+            </li>
+            <li>
+              <Link to="https://www.gcucalumni.com/alumniassociation.js">Get Involved</Link>
+              <ul className='sub-menus'>
+                <li><Link to='/alumnus'>Alumnus - Stake Holder Forum</Link></li>
+              </ul>
+            </li>
+            <li>
+              <Link to="https://www.gcucalumni.com/alumniassociation.js">Alumni Achievers</Link>
+              <ul className='sub-menus'>
+                <li><Link to='/top-alumni'>Top Alumni in Lime Light</Link></li>
+                <li><Link to='/notable-alumni'>Notable Alumni</Link></li>
+              </ul>
+            </li>
+            <li><Link to="/scholarship">Scholarships</Link></li>
+            <li>
+              <Link to="https://www.gcucalumni.com/newsroom.js">Newsroom</Link>
+              <ul className='sub-menus'>
+                <li><Link to='/news-archive'>News Archive</Link></li>
+              </ul>
+            </li>
+            <li><Link to="/activities">Activities</Link></li>
+            <li>
+              <Link to="https://www.gcucalumni.com/events.js">More</Link>
+              <ul className='sub-menus'>
+                <li><Link to='/gallery'>Gallery</Link></li>
+                <li><Link to='/contact'>Contact</Link></li>
+              </ul>
+            </li>
+            <li><Link to="/faq">FAQ's</Link></li>
+          </ul>
+        </div>
         <div className="auth-links ml-auto d-flex align-items-center">
           {!user ? (
-            <>
+            <div className='auth-nav'>
               <Link to="/register" className="auth-link text-light font-weight-bold ml-3">Register</Link>&nbsp;
               <span>  |  </span>
               <Link to="/login" className="auth-link text-light font-weight-bold ml-3">Login</Link>
-            </>
+            </div>
           ) : (
             <div className="dropdown">
               <Link to="/profile" className="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -113,6 +115,6 @@ const Topbar = () => {
       </nav>
     </div>
   );
-};
+}
 
 export default Topbar;

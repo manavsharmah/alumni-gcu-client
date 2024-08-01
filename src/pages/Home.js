@@ -3,6 +3,7 @@ import './pages.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NewsCard from '../components/common/NewsCard';
 import EventCard from '../components/common/EventsCard';
+import GalleryPreview from "../components/common/GalleryPreview"
 
 const Home = () => {
 
@@ -37,6 +38,9 @@ const Home = () => {
                     <NewsCard />
                     <EventCard />
                 </div>
+            </section>
+            <section className='hero4'> {/* New section for gallery preview */}
+                <GalleryPreview />
             </section>
         </div>
     );

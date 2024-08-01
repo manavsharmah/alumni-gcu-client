@@ -28,6 +28,7 @@ import PhotoUpload from "./pages/admin/PhotoUpload";
 
 // Detail Pages
 import { TopAlumni, NotableAlumni } from "./pages/detail/Alumni";
+import { Copyright, Disclaimer, TermsOfUse, PrivacyPolicy, AlumniDirectory } from "./pages/detail/Others";
 import FAQ from "./pages/detail/FAQ";
 import Contact from "./pages/detail/Contact";
 import Scholarship from "./pages/detail/Scholarship";
@@ -75,6 +76,11 @@ function App() {
 								<Route path="/scholarship" element={<Scholarship />} />
 								<Route path="/activities" element={<Activities />} />
 								<Route path="/events" element={<Events />} />
+								<Route path="/copyright" element={<Copyright />} />
+								<Route path="/disclaimer" element={<Disclaimer />} />
+								<Route path="/termsofuse" element={<TermsOfUse />} />
+								<Route path="/privacypolicy" element={<PrivacyPolicy />} />
+								<Route path="/alumnidirectory" element={<AlumniDirectory />} />
 
 								{/* Admin + User Routes */}
 								<Route

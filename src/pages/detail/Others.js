@@ -1,15 +1,7 @@
 import React from 'react';
 import Article from '../../components/common/Article-container';
-import QuickNav from '../../components/common/QuickNav';
 import "../pages.css";
 
-const othersLinks = [
-    { to: "/copyright", label: "Copyright" },
-    { to: "/disclaimer", label: "Disclaimer" },
-    { to: "/termsofuse", label: "TermsOfUse" },
-    { to: "/privacypolicy", label: "PrivacyPolicy" },
-    { to: "/alumnidirectory", label: "AlumniDirectory" }
-];
 
 const Copyright = () => {
     return (

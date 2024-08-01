@@ -2,18 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../services/api';
 import { FaFacebook, FaLinkedin } from 'react-icons/fa';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Card } from 'react-bootstrap';
-import api from "../../services/api"
+import { useUser } from "../../services/UserContext";
 
 const UpdateProfile = () => {
+  const { user } = useUser();
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
-  const [userData, setUserData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    batch: '',
-    branch: '',
-  });
   const [formData, setFormData] = useState({
     biography: '',
     currentWorkingPlace: '',
@@ -24,32 +18,15 @@ const UpdateProfile = () => {
   const { biography, currentWorkingPlace, linkedin, facebook } = formData;
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        setLoading(true);
-        const response = await api.get('http://localhost:5000/api/user/user');
-        const user = response.data;
-        setUserData({
-          name: user.name,
-          email: user.email,
-          phone: user.phone,
-          batch: user.batch,
-          branch: user.branch,
-        });
-        setFormData({
-          biography: user.biography || '',
-          currentWorkingPlace: user.currentWorkingPlace || '',
-          linkedin: user.socialLinks?.linkedin || '',
-          facebook: user.socialLinks?.facebook || '',
-        });
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching user:', error);
-        setLoading(false);
-      }
-    };
-    fetchUser();
-  }, []);
+    if (user) {
+      setFormData({
+        biography: user.biography || '',
+        currentWorkingPlace: user.currentWorkingPlace || '',
+        linkedin: user.socialLinks?.linkedin || '',
+        facebook: user.socialLinks?.facebook || '',
+      });
+    }
+  }, [user]);
 
   const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -85,7 +62,7 @@ const UpdateProfile = () => {
   };
 
   return (
-    <Container className="mt-5 d-flex justify-content-center"> 
+    <Container className="mt-5 d-flex justify-content-center">
       <Card style={{ width: '80%' }}>
         <Card.Header as="h2" className="text-center">
           Update Profile
@@ -103,13 +80,13 @@ const UpdateProfile = () => {
               {/* User Data Section */}
               <Row className="mb-4">
                 <Col xs={12} md={6}>
-                  <p><strong>Name:</strong> {userData.name}</p>
-                  <p><strong>Email:</strong> {userData.email}</p>
+                  <p><strong>Name:</strong> {user?.name}</p>
+                  <p><strong>Email:</strong> {user?.email}</p>
                 </Col>
                 <Col xs={12} md={6}>
-                  <p><strong>Phone:</strong> {userData.phone}</p>
-                  <p><strong>Batch:</strong> {userData.batch}</p>
-                  <p><strong>Branch:</strong> {userData.branch}</p>
+                  <p><strong>Phone:</strong> {user?.phone}</p>
+                  <p><strong>Batch:</strong> {user?.batch}</p>
+                  <p><strong>Branch:</strong> {user?.branch}</p>
                 </Col>
               </Row>
 
@@ -143,7 +120,7 @@ const UpdateProfile = () => {
                   </Button>
                 </Form.Group>
                 
-                <div className="d-grid"> {/* Center the button */}
+                <div className="d-grid">
                   <Button variant="success" type="submit">
                     Update Profile
                   </Button>

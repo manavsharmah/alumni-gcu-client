@@ -106,6 +106,14 @@ const Topbar = () => {
               </ul>
             </li>
             <li><Link to="/faq">FAQ's</Link></li>
+            {user && (
+              <>
+                <li><Link to="/welcome">Feed</Link></li>
+                {user.role === 'admin' && (
+                  <li><Link to="/admin-dashboard">Admin Dashboard</Link></li>
+                )}
+              </>
+            )}
           </ul>
         </div>
         <div className="auth-links ml-auto d-flex align-items-center">

@@ -271,7 +271,7 @@ display: block;
 
 
 /* Media query for mobile responsiveness */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 750px) {
   .App-header {
     height: 100px;
     justify-content: space-around;
@@ -279,12 +279,11 @@ display: block;
   }
 
   .logo {
-    /* height: 60px; Resize logo for smaller screens */
     margin-top: -50px;
   }
 
   .logo img {
-    height: 100px; /* Resize logo image for smaller screens */
+    height: 100px;
     width: 100px;
   }
 
@@ -299,25 +298,26 @@ display: block;
   .nav-content.open {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    position: relative;
-    left: -25%;
+    width: 100%;
+    position: absolute;
+    top: 60px; /* Position the nav content below the navbar */
+    left: 0;
+    background-color: #27357f;
+    z-index: 999; /* Ensure it appears above other content */
+    border-top: 1px solid #000;
   }
 
   .menu-toggle {
     display: block; 
     color: white;
-    font-size: 30px;
+    font-size: 20px;
     cursor: pointer;
     padding: 10px;
     background-color: #27357f;
     border: none;
-    /* align-self: flex-end; */
+    position: relative;
+    z-index: 1000; /* Ensure the menu toggle stays above the nav content */
   }
-
-  /* .title {
-    display: none;
-  } */
 
   .title h2 {
     font-size: 18px;
@@ -325,22 +325,13 @@ display: block;
 
   .navbar {
     display: flex;
-    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    height: 100%;
+    height: 60px;
     position: relative;
-    top: 0;
-    left: 0;
     background-color: #27357f;
-    padding-top: 60px;
-    overflow:hidden;
-    /* transition: transform 0.3s ease-in-out;
-    transform: translateX(-100%); */
-    /* z-index: 999; */
-  }
-
-  .navbar.open {
-    transform: translateX(0);
+    padding: 0 10px;
   }
 
   .navbar ul {
@@ -364,7 +355,6 @@ display: block;
     z-index: 1;
   }
 
-  /* Show all sub-menus when the navbar is open */
   .navbar.open ul.sub-menus {
     opacity: 1;
     visibility: visible;
@@ -373,12 +363,11 @@ display: block;
 
   .navbar.open .navbar ul.sub-menus {
     position: relative;
-    left: -100%;
+    left: 0;
     top: 0;
   }
 
   .navbar ul.sub-menus {
-    /* display: none; */
     left: 0;
     top: 0;
     width: 100%;
@@ -397,22 +386,23 @@ display: block;
     padding-left: 20px;
   }
 
-  /* .auth-links {
-    display: none;
-  } */
+  .auth-links {
+    position: relative;
+    z-index: 1000; /* Ensure it stays above the nav content */
+  }
 
   .auth-nav {
-    justify-content: right;
-    box-sizing: border-box;
+    display: flex;
+    gap: 10px;
+    align-items: center;
   }
 
   .App-main {
     padding: 20px;
     flex-grow: 1;
-    margin-top: 0; /* Adjusted to remove blank space */
+    margin-top: 0;
     margin-left: 0;
   }
-
 }
 
 

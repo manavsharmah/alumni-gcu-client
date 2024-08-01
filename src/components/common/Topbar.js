@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "../components.css";
 import { useUser } from '../../services/UserContext';
 import { Link } from 'react-router-dom';
@@ -12,13 +12,33 @@ const Topbar = () => {
     document.querySelector('.navbar').classList.toggle('open');
   };
 
+  const closeNav = () => {
+    setIsNavOpen(false);
+    document.querySelector('.navbar').classList.remove('open');
+  };
+
   const handleLogout = async () => {
     try {
       await logout();
-  } catch (err) {
+    } catch (err) {
       console.error('Error during logout:', err);
-  }
+    }
   };
+
+  useEffect(() => {
+    // Add event listener to close navbar when clicking on nav items
+    const navItems = document.querySelectorAll('.nav-content li a');
+    navItems.forEach(item => {
+      item.addEventListener('click', closeNav);
+    });
+
+    // Cleanup event listeners on unmount
+    return () => {
+      navItems.forEach(item => {
+        item.removeEventListener('click', closeNav);
+      });
+    };
+  }, []);
 
   if (loading) {
     return <div>Loading...</div>; // Show a loading indicator while the user data is being fetched

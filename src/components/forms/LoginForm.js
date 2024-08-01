@@ -41,6 +41,7 @@ const Login = () => {
         <div className="login-container">
             <form className="login-form" onSubmit={onSubmit}>
                 <h2>Login For Access</h2>
+                <hr />
                 {error && <p className="error">{error}</p>}
                 <div className="input-group">
                     <label htmlFor="email">

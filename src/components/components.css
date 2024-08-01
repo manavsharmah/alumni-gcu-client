@@ -302,6 +302,7 @@ display: block;
     background-color: #27357f;
     z-index: 999; /* Ensure it appears above other content */
     border-top: 1px solid #000;
+    padding-left: 10px;
   }
 
   .menu-toggle {

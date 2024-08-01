@@ -1,14 +1,16 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import api from '../services/api';
+import axios from 'axios';
 
-const UserContext = createContext();
+export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchUser = async () => {
+            const accessToken = localStorage.getItem('accessToken');
+            if (accessToken) {
             try {
                 const res = await api.get('/user/user');
                 if (res && res.data) {
@@ -16,17 +18,15 @@ export const UserProvider = ({ children }) => {
                 }
             } catch (err) {
                 console.error('Error during HTTP request:', err);
-            } finally {
-                setLoading(false);
-            }
+            } 
+        }
         };
-
         fetchUser();
     }, []);
 
     const login = async (credentials) => {
         try {
-            const res = await api.post('/auth/login', credentials); 
+            const res = await axios.post('http://localhost:5000/api/auth/login', credentials); 
             if (res && res.data) {
                 setUser(res.data.user); 
                 localStorage.setItem('accessToken', res.data.accessToken); //storing in localstorage
@@ -49,7 +49,7 @@ export const UserProvider = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ user, setUser, loading, login, logout }}>
+        <UserContext.Provider value={{ user, setUser, login, logout }}>
             {children}
         </UserContext.Provider>
     );

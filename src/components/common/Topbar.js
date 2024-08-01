@@ -58,13 +58,13 @@ const Topbar = () => {
               </ul>
             </li>
             <li>
-              <Link to="https://www.gcucalumni.com/alumniassociation.js">Get Involved</Link>
+              <Link to="#">Get Involved</Link>
               <ul className='sub-menus'>
                 <li><Link to='/alumnus'>Alumnus - Stake Holder Forum</Link></li>
               </ul>
             </li>
             <li>
-              <Link to="https://www.gcucalumni.com/alumniassociation.js">Alumni Achievers</Link>
+              <Link to="#">Alumni Achievers</Link>
               <ul className='sub-menus'>
                 <li><Link to='/top-alumni'>Top Alumni in Lime Light</Link></li>
                 <li><Link to='/notable-alumni'>Notable Alumni</Link></li>
@@ -72,14 +72,14 @@ const Topbar = () => {
             </li>
             <li><Link to="/scholarship">Scholarships</Link></li>
             <li>
-              <Link to="https://www.gcucalumni.com/newsroom.js">Newsroom</Link>
+              <Link to="#">Newsroom</Link>
               <ul className='sub-menus'>
                 <li><Link to='/news-archive'>News Archive</Link></li>
               </ul>
             </li>
             <li><Link to="/activities">Activities</Link></li>
             <li>
-              <Link to="https://www.gcucalumni.com/events.js">More</Link>
+              <Link to="#">More</Link>
               <ul className='sub-menus'>
                 <li><Link to='/gallery'>Gallery</Link></li>
                 <li><Link to='/contact'>Contact</Link></li>

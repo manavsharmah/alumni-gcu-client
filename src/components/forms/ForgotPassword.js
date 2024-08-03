@@ -13,7 +13,7 @@ const ForgotPassword = () => {
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            const response = await api.post('/auth/forgot-password', { email });
+            const response = await api.post('/user/forgot-password', { email });
             setMessage(response.data.message);
             setError('');
         } catch (err) {

@@ -453,3 +453,202 @@ button:hover {
   background-color: #0056b3;
   color: white;
 }
+
+/* update profile */
+
+/* UpdateProfile.css */
+.profile-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  height: 100%;
+}
+
+.profile-card {
+  width: 80%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  height: 100%;
+}
+
+.card-header {
+  background: #f8f9fa;
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.card-body {
+  padding: 20px;
+  height: 100%;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.col {
+  flex: 1;
+  padding: 10px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
+
+
+.alert {
+  margin-top: 20px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.alert-success {
+  background: #d4edda;
+  color: #155724;
+}
+
+.alert-danger {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+@media (max-width: 768px) {
+  .profile-container{
+    padding: 10PX;
+  }
+  .profile-card {
+    width: 100%;
+  }
+  
+  .col {
+    flex: 1 1 100%;
+    padding: 10px 0;
+  }
+  
+  .form-group {
+    margin-bottom: 10px;
+  }
+}
+
+
+/* Profile.css */
+/* Profile.css */
+.prof-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f7fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.prof-header {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.profile-info,
+.additional-info {
+  margin: 20px 0;
+}
+
+.profile-info p,
+.additional-info p {
+  margin: 5px 0;
+}
+
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .prof-container {
+    padding: 15px;
+  }
+  
+  .card {
+    padding: 15px;
+  }
+
+  .card h2 {
+    font-size: 1.25rem;
+  }
+
+  .profile-info,
+  .additional-info {
+    margin: 15px 0;
+  }
+
+  .profile-info p,
+  .additional-info p {
+    margin: 3px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .prof-container {
+    padding: 10px;
+  }
+  
+  .card {
+    padding: 10px;
+  }
+
+  .card h2 {
+    font-size: 1rem;
+  }
+
+  .profile-info,
+  .additional-info {
+    margin: 10px 0;
+  }
+
+  .profile-info p,
+  .additional-info p {
+    margin: 2px 0;
+  }
+}
+
+
+
+
+
+

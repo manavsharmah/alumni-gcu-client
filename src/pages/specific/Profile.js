@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
+import '../pages.css'; // Import the new CSS file
 
 const Profile = () => {
     const [user, setUser] = useState(null); // Initialize user to null
-    
+
     const sendRequest = async () => {
         try {
             const res = await api.get('/user/user');
@@ -18,29 +19,32 @@ const Profile = () => {
             return null;
         }
     };
-    
+
     useEffect(() => {
         sendRequest().then((data) => {
             if (data) {
                 setUser(data);
             }
         });
-    }, []);    
+    }, []);
 
     return (
-        <div> 
-            <h1>Profile</h1>
-            <p>{user && user.name}</p>
-            <p>{user && user.email}</p>
-            <p>{user && user.biography}</p>
-            <p>{user && user.currentWorkingPlace}</p>
-            <p>{user && user.batch}</p>
-            <a href="/update-profile"><button className="button">Update Profile</button></a>
-
+        <div className="prof-container">
+            <div className="prof-header">
+                <h1>Profile</h1>
+                <p>{user && user.name}</p>
+                <p>{user && user.email}</p>
+            </div>
+            <div className="profile-info card">
+                <h2>About</h2>
+                <p><strong>Biography:</strong> {user && user.biography}</p>
+                <p><strong>Current Working Place:</strong> {user && user.currentWorkingPlace}</p>
+                <p><strong>Batch:</strong> {user && user.batch}</p>
+                <p><strong>Branch:</strong> {user && user.branch}</p>
+                <a href="/update-profile"><button className="button">Update Profile</button></a>
+            </div>
         </div>
     );
 };
 
-
 export default Profile;
-

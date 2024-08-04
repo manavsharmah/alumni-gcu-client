@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../services/api';
 import { FaFacebook, FaLinkedin } from 'react-icons/fa';
-import { Container, Form, Button, Row, Col, Alert, Spinner, Card } from 'react-bootstrap';
-import api from "../../services/api"
+import api from "../../services/api";
+import '../pages.css';
 
 const UpdateProfile = () => {
   const [message, setMessage] = useState('');
@@ -85,82 +85,81 @@ const UpdateProfile = () => {
   };
 
   return (
-    <Container className="mt-5 d-flex justify-content-center"> 
-      <Card style={{ width: '80%' }}>
-        <Card.Header as="h2" className="text-center">
+    <div className="profile-container">
+      <div className="profile-card">
+        <div className="card-header">
           Update Profile
-        </Card.Header>
-
-        <Card.Body>
+        </div>
+        <div className="card-body">
           {loading ? (
-            <div className="d-flex justify-content-center">
-              <Spinner animation="border" role="status">
+            <div className="spinner">
+              <div className="spinner-border" role="status">
                 <span className="visually-hidden">Loading...</span>
-              </Spinner>
+              </div>
             </div>
           ) : (
             <>
               {/* User Data Section */}
-              <Row className="mb-4">
-                <Col xs={12} md={6}>
+              <div className="row">
+                <div className="col">
                   <p><strong>Name:</strong> {userData.name}</p>
                   <p><strong>Email:</strong> {userData.email}</p>
-                </Col>
-                <Col xs={12} md={6}>
+                </div>
+                <div className="col">
                   <p><strong>Phone:</strong> {userData.phone}</p>
                   <p><strong>Batch:</strong> {userData.batch}</p>
                   <p><strong>Branch:</strong> {userData.branch}</p>
-                </Col>
-              </Row>
+                </div>
+              </div>
 
               {/* Update Form */}
-              <Form onSubmit={onSubmit}>
-                <Form.Group controlId="formBiography" className="mb-3">
-                  <Form.Label>Biography:</Form.Label>
-                  <Form.Control as="textarea" name="biography" value={biography} onChange={onChange} />
-                </Form.Group>
-
-                <Form.Group controlId="formCurrentWorkingPlace" className="mb-3">
-                  <Form.Label>Current Working Place:</Form.Label>
-                  <Form.Control type="text" name="currentWorkingPlace" value={currentWorkingPlace} onChange={onChange} />
-                </Form.Group>
-
-                <Form.Group controlId="formLinkedin" className="mb-3">
-                  <Form.Label>
-                    <FaLinkedin size={24} className="mr-2" /> LinkedIn:
-                  </Form.Label>
-                  <Button variant="primary" onClick={() => handleOAuth('linkedin')}>
-                    Connect LinkedIn
-                  </Button>
-                </Form.Group>
-
-                <Form.Group controlId="formFacebook" className="mb-3">
-                  <Form.Label>
-                    <FaFacebook size={24} className="mr-2" /> Facebook:
-                  </Form.Label>
-                  <Button variant="primary" onClick={() => handleOAuth('facebook')}>
-                    Connect Facebook
-                  </Button>
-                </Form.Group>
-                
-                <div className="d-grid"> {/* Center the button */}
-                  <Button variant="success" type="submit">
-                    Update Profile
-                  </Button>
+              <form onSubmit={onSubmit}>
+                <div className="form-group">
+                  <label className="form-label" htmlFor="formBiography">Biography:</label>
+                  <textarea className="form-control" id="formBiography" name="biography" value={biography} onChange={onChange} />
                 </div>
-              </Form>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="formCurrentWorkingPlace">Current Working Place:</label>
+                  <input className="form-control" type="text" id="formCurrentWorkingPlace" name="currentWorkingPlace" value={currentWorkingPlace} onChange={onChange} />
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="formLinkedin">
+                    <FaLinkedin size={24} className="mr-2" /> LinkedIn:
+                  </label>
+                  <button type="button" className="button" onClick={() => handleOAuth('linkedin')}>
+                    Connect LinkedIn
+                  </button>
+                </div>
+
+                <div className="form-group">
+                  <label className="form-label" htmlFor="formFacebook">
+                    <FaFacebook size={24} className="mr-2" /> Facebook:
+                  </label>
+                  <button type="button" className="button" onClick={() => handleOAuth('facebook')}>
+                    Connect Facebook
+                  </button>
+                </div>
+                
+                <div className="d-grid">
+                  <button type="submit" className="button">
+                    Update Profile
+                  </button>
+                </div>
+              </form>
 
               {/* Message Alert */}
               {message && (
-                <Alert className="mt-3" variant={message.includes('Error') ? 'danger' : 'success'}>
+                <div className={`alert ${message.includes('Error') ? 'alert-danger' : 'alert-success'}`}>
                   {message}
-                </Alert>
+                </div>
               )}
             </>
           )}
-        </Card.Body>
-      </Card>
-    </Container>
+        </div>
+      </div>
+    </div>
   );
 };
 

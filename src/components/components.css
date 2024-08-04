@@ -64,209 +64,217 @@
 /* =====Topbar===== */
 
 .header-container {
-text-align: left;
+  text-align: left;
 }
 
 .App-header {
-background-color: #ffffff;
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 20px;
-color: rgb(0, 0, 0);
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  color: rgb(0, 0, 0);
 }
 
 .logo {
-margin-right: 20px;
-margin-top: -200px;
-margin-bottom: 10px;
+  margin-right: 20px;
+  margin-top: -200px;
+  margin-bottom: 10px;
 }
 
 .logo img {
-width: 220px;
-max-width: 100%;
+  width: 220px;
+  max-width: 100%;
 }
 
 .title {
-margin: 0;
-text-align: center;
+  margin: 0;
+  text-align: center;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: bolder;
 }
 
 .nav-buttons {
-display: flex;
-gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .nav-buttons button {
-background-color: white;
-color: #282c34;
-border: none;
-padding: 8px 16px;
-border-radius: 5px;
-cursor: pointer;
+  background-color: white;
+  color: #282c34;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .navbar {
-background-color: #27357f;
-display: flex;
-justify-content: space-between;
-align-items: center;
-padding: 10px;
+  background-color: #27357f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
 
+.nav-content {
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  font-family: "Rubik", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
 }
 
 .navbar ul {
-list-style: none;
-display: flex;
-gap: 20px;
-align-items: center;
-/* padding: 0;
-margin: 0; */
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: -15px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .navbar li {
-position: relative;
+  position: relative;
 }
 
 .navbar li a {
-color: white;
-text-decoration: none;
-font-size: 17px;
-/* padding: 10px; */
-display: block;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
 }
 
 .navbar li a:hover {
-color: #007bff !important;
-text-decoration: underline;
-text-decoration-color: #fbcf0a;
-text-decoration-thickness: 7px;
-text-underline-offset: 14px;
+  color: #007bff !important;
+  text-decoration: underline;
+  text-decoration-color: #fbcf0a;
+  text-decoration-thickness: 7px;
+  text-underline-offset: 14px;
 }
 
 .navbar ul.sub-menus {
-margin-top: 13px;
-padding-bottom: 11px;
-padding: 0;
-height: auto;
-overflow: hidden;
-width: 270px;
-background: #27357f;
-position: absolute;
-z-index: 99;
-opacity: 0;
-visibility: hidden;
-transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
-left: 0;
-top: 100%;
-flex-direction: column;
-text-decoration: none;
+  margin-top: 13px;
+  padding-bottom: 11px;
+  padding: 0;
+  height: auto;
+  overflow: hidden;
+  width: 270px;
+  background: #27357f;
+  position: absolute;
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+  left: 0;
+  top: 100%;
+  flex-direction: column;
+  text-decoration: none;
 }
 
 .navbar ul.sub-menus li {
-display: block; /* Display each submenu item as a block */
-padding: 0;
-text-align: left;
-width: 100%;
+  display: block; /* Display each submenu item as a block */
+  padding: 0;
+  text-align: left;
+  width: 100%;
 }
 
 .navbar ul.sub-menus a {
-color: #ffffff;
-font-size: 16px;
-padding: 8px;
-display: block;
+  color: #ffffff;
+  font-size: 16px;
+  padding: 8px;
+  display: block;
 }
 
 .navbar li:hover ul.sub-menus {
-opacity: 1;
-visibility: visible;
+  opacity: 1;
+  visibility: visible;
 }
 
 .navbar ul.sub-menus a:hover {
-background: #f2f2f2;
-color: #444444;
+  background: #f2f2f2;
+  color: #444444;
 }
 
 .username {
-color: white;
-font-size: 20px;
-justify-content: center;
+  color: white;
+  font-size: 20px;
+  justify-content: center;
 }
 
 .rounded-full {
-height: 30px;
-margin-right: 7px;
-justify-content: center;
+  height: 30px;
+  margin-right: 7px;
+  justify-content: center;
 }
 
 .App-main {
-padding: 20px;
+  padding: 20px;
 }
 
 .menu-toggle {
-display: none;
+  display: none;
 }
 
-
 .dropdown {
-display: flex;
-align-items: center;
-justify-content: end;
-margin-bottom: 15px;
-margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-bottom: 15px;
+  margin-right: 10px;
 }
 
 .dropdown-toggle {
-color: white;
-font-size: 17px;
-text-decoration: none;
-margin-top: 4px;
+  color: white;
+  font-size: 17px;
+  text-decoration: none;
+  margin-top: 4px;
 }
+
 .dropdown-toggle:hover {
-color: #007bff;
+  color: #007bff;
 }
 
 .dropdown-button {
-color: #030303;
-font-weight: bold;
-text-decoration: none;
-margin-left: 10px;
-align-items: end;
-background-color: transparent;
-border: none;
-padding: 0;
-cursor: pointer;
+  color: #030303;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 10px;
+  align-items: end;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .dropdown-button:hover {
-color: #007bff !important;
+  color: #007bff !important;
 }
 
 .dropdown-menu {
-position: absolute;
-top: 100%;
-right: 0;
-background-color: #fff;
-border: 1px solid #ddd;
-padding: 10px;
-display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  display: none;
 }
 
 .dropdown-menu a {
-color: #030303;
-font-weight: bold;
-text-decoration: none;
-display: block;
-padding: 10px;
+  color: #030303;
+  font-weight: bold;
+  text-decoration: none;
+  display: block;
+  padding: 10px;
 }
 
 .dropdown-menu a:hover {
-color: #007bff !important;
-background-color: #f0f0f0;
+  color: #007bff !important;
+  background-color: #f0f0f0;
 }
 
 .dropdown:hover .dropdown-menu {
-display: block;
+  display: block;
 }
 
 
@@ -279,12 +287,14 @@ display: block;
   }
 
   .logo {
-    margin-top: -50px;
+    margin-top: -60px;
   }
 
   .logo img {
-    height: 100px;
-    width: 100px;
+    height: 120px;
+    width: 190px;
+    margin-top: -10px;
+    margin-left: -15px;
   }
 
   .logo-gcu {
@@ -298,25 +308,28 @@ display: block;
   .nav-content.open {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 60%;
     position: absolute;
     top: 60px; /* Position the nav content below the navbar */
     left: 0;
     background-color: #27357f;
     z-index: 999; /* Ensure it appears above other content */
     border-top: 1px solid #000;
+    padding-left: 10px;
   }
 
   .menu-toggle {
     display: block; 
     color: white;
-    font-size: 20px;
+    font-size: 18px;
     cursor: pointer;
-    padding: 10px;
+    margin-top: -20px;
     background-color: #27357f;
     border: none;
     position: relative;
     z-index: 1000; /* Ensure the menu toggle stays above the nav content */
+    align-items: center;
+    top: 0;
   }
 
   .title h2 {
@@ -359,6 +372,7 @@ display: block;
     opacity: 1;
     visibility: visible;
     display: contents;
+    margin-left: 10px;
   }
 
   .navbar.open .navbar ul.sub-menus {

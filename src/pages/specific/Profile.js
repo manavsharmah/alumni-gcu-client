@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
-import '../pages.css'; // Import the new CSS file
+import '../pages.css'; 
 
 const Profile = () => {
     const [user, setUser] = useState(null); // Initialize user to null

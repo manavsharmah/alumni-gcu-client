@@ -210,6 +210,13 @@
   gap: 30px;
 }
 
+.hero4 {
+  background-color: #eceef3;
+  justify-content: center;
+  padding: 20px;
+  gap: 30px;
+}
+
 .news-events-container{
   width: 70%;
   display: flex;

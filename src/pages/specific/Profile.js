@@ -1,28 +1,50 @@
-import React from 'react';
-import { useUser } from "../../services/UserContext";
+import React, { useEffect, useState } from "react";
+import api from "../../services/api";
+import '../pages.css'; 
 
 const Profile = () => {
-  const { user } = useUser();
+    const [user, setUser] = useState(null); // Initialize user to null
 
-  return (
-    <div>
-      <h1>Profile</h1>
-      {user ? (
-        <>
-          <p><strong>Name:</strong> {user.name}</p>
-          <p><strong>Email:</strong> {user.email}</p>
-          <p><strong>Biography:</strong> {user.biography}</p>
-          <p><strong>Current Working Place:</strong> {user.currentWorkingPlace}</p>
-          <p><strong>Batch:</strong> {user.batch}</p>
-          <a href="/update-profile">
-            <button className="button">Update Profile</button>
-          </a>
-        </>
-      ) : (
-        <p>Loading...</p>
-      )}
-    </div>
-  );
+    const sendRequest = async () => {
+        try {
+            const res = await api.get('/user/user');
+            if (res && res.data) {
+                return res.data;
+            } else {
+                console.error('No data found in response');
+                return null;
+            }
+        } catch (err) {
+            console.error('Error during HTTP request:', err);
+            return null;
+        }
+    };
+
+    useEffect(() => {
+        sendRequest().then((data) => {
+            if (data) {
+                setUser(data);
+            }
+        });
+    }, []);
+
+    return (
+        <div className="prof-container">
+            <div className="prof-header">
+                <h1>Profile</h1>
+                <p>{user && user.name}</p>
+                <p>{user && user.email}</p>
+            </div>
+            <div className="profile-info card">
+                <h2>About</h2>
+                <p><strong>Biography:</strong> {user && user.biography}</p>
+                <p><strong>Current Working Place:</strong> {user && user.currentWorkingPlace}</p>
+                <p><strong>Batch:</strong> {user && user.batch}</p>
+                <p><strong>Branch:</strong> {user && user.branch}</p>
+                <a href="/update-profile"><button className="button">Update Profile</button></a>
+            </div>
+        </div>
+    );
 };
 
 export default Profile;

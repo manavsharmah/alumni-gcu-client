@@ -81,6 +81,7 @@ function App() {
 								<Route path="/termsofuse" element={<TermsOfUse />} />
 								<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 								<Route path="/alumnidirectory" element={<AlumniDirectory />} />
+								<Route path="/forgot-password" element={<ForgotPassword />} />
 
 								{/* Admin + User Routes */}
 								<Route
@@ -135,7 +136,6 @@ function App() {
 
 							{/* forgot password route */}
 
-							<Route path="/forgot-password" element={<ForgotPassword />} />
 						</Routes>
 					</section>
 				</div>

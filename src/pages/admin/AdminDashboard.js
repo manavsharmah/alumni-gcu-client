@@ -13,7 +13,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchPendingUsers = async () => {
       try {
-        const res = await api.get('/user/pending-users');
+        const res = await api.get('/admin/pending-users');
         setUsers(res.data);
         setFilteredUsers(res.data);
       } catch (err) {
@@ -26,7 +26,17 @@ const AdminDashboard = () => {
 
   const approveUser = async (email) => {
     try {
-      await api.post('/user/approve', { email });
+      await api.post('/admin/approve', { email });
+      setUsers(users.filter(user => user.email !== email));
+      setFilteredUsers(filteredUsers.filter(user => user.email !== email));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const rejectUser = async (email) => {
+    try {
+      await api.post('/admin/reject-user', { email });
       setUsers(users.filter(user => user.email !== email));
       setFilteredUsers(filteredUsers.filter(user => user.email !== email));
     } catch (err) {
@@ -115,7 +125,7 @@ const AdminDashboard = () => {
                 <td>{user.branch}</td>
                 <td>
                   <button onClick={() => approveUser(user.email)} className="btn-approve">Approve</button>
-                  <button className="btn-reject">Reject</button>
+                  <button onClick={() => rejectUser(user.email)} className="btn-reject">Reject</button>
                 </td>
               </tr>
             ))}

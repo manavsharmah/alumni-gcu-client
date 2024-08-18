@@ -25,6 +25,8 @@ import AdminNewsForm from "./pages/admin/AdminNewsForm";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminEventsForm from "./pages/admin/AdminEventsForm";
 import PhotoUpload from "./pages/admin/PhotoUpload";
+import AlumniArchive from "../src/pages/admin/AlumniArchive";
+
 
 // Detail Pages
 import { TopAlumni, NotableAlumni } from "./pages/detail/Alumni";
@@ -129,6 +131,7 @@ function App() {
 								}
 							>
 								<Route path="/admin-dashboard" element={<AdminDashboard />} />
+								<Route path="/alumni-archive" element={<AlumniArchive />} />
 								<Route path="/news-form" element={<AdminNewsForm />} />
 								<Route path="/events-form" element={<AdminEventsForm />} />
 								<Route path="/photo-upload-form" element={<PhotoUpload />} />

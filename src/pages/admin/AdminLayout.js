@@ -19,6 +19,12 @@ const AdminLayout = () => {
           </a>
         </li>
         <li>
+          <a href="/alumni-archive">
+            <FaTachometerAlt />
+            <span>Alumni-Archive</span>
+          </a>
+        </li>
+        <li>
           <a href="/news-form">
             <FaNewspaper />
             <span>Create New News</span>

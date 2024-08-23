@@ -94,7 +94,7 @@ const Topbar = () => {
             <li>
               <Link to="#">Newsroom</Link>
               <ul className='sub-menus'>
-                <li><Link to='/news-archive'>News Archive</Link></li>
+                <li><Link to='/news'>News Archive</Link></li>
               </ul>
             </li>
             <li><Link to="/activities">Activities</Link></li>

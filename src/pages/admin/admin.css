@@ -3,13 +3,23 @@
 .admin-layout {
     display: flex;
     min-height: 100vh;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .admin-nav-bar {
+    position: fixed;
+    z-index: 1;
+    top: 0; 
+    left: 0;
+    height: 100%;
   }
   
   .admin-content {
     flex: 1;
     padding: 50px;
     background-color: #f8f9fa;
-
+    align-items: center;
   }
 
 .admin-sidebar {

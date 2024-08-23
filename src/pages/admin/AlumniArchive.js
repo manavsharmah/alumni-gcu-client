@@ -13,7 +13,7 @@ const AlumniArchive = () => {
   useEffect(() => {
     const fetchVerifiedUsers = async () => {
       try {
-        const res = await api.get('/admin/verified-users'); // Ensure this API route is created
+        const res = await api.get('/admin/pending-users'); // Ensure this API route is created
         setUsers(res.data);
         setFilteredUsers(res.data);
       } catch (err) {

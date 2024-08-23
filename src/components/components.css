@@ -852,71 +852,62 @@ margin: 5px 0;
 
 /* News Card */
 
-.news-cards {
+.news-card {
   display: flex;
   flex-direction: column;
-  background-color: #fff;
-  width: 850px;
-  height: 400px; /* Fixed height for the container */
-  padding: 20px;
-  margin-right: 20px;
-  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 400px;
+  background: #fff;
   border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-}
-
-.news-cards h2 {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  border-bottom: 2px solid #f0c14b;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.news-cards ul {
-  padding: 0;
-  list-style-type: none;
-  overflow-y: auto; /* Enable vertical scrolling */
-  height: calc(100% - 50px); /* Adjust height to fit within the container */
-}
-
-.news-cards li {
-  min-height: 60px;
-  gap: 10px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #ccc;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease;
+  margin: 20px;
 }
 
-.news-cards li:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: #27357f;
+.news-card:hover {
+  transform: translateY(-5px);
 }
 
-.news-cards li:hover .news-title,
-.news-cards li:hover .news-date {
-  color: white;
+.news-card-thumbnail {
+  width: 100%;
+  height: auto;
 }
 
-.news-title {
-  padding-left: 8px;
-  flex: 1;
-  color: #000000;
+.news-card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
-.news-date {
-  padding-right: 8px;
-  color: #888;
+.news-card-label {
   font-size: 14px;
-  margin-left: 20px;
+  font-weight: bold;
+  color: white;
+  background-color: #dc3545;
+  padding: 5px 10px;
+  border-radius: 5px;
+  align-self: flex-start;
+  margin-bottom: 10px;
+}
+
+.news-card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0 10px;
+}
+
+.news-card-date {
+  font-size: 14px;
+  color: #777;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .news-card {
+      max-width: 100%;
+  }
 }
 
 

@@ -5,8 +5,10 @@ import "../components.css";
 
 const NewsCard = () => {
     const [news, setNews] = useState([]);
+    const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
     const navigate = useNavigate();
-    const newsPerPage = 7; // Make sure this matches the value in NewsList
+    const newsPerPage = 7; // Keep this for your pagination logic
+    const rotationInterval = 15000; // Rotation interval in milliseconds (5 seconds)
 
     useEffect(() => {
         const fetchNews = async () => {
@@ -22,34 +24,39 @@ const NewsCard = () => {
         fetchNews();
     }, []);
 
-    const handleNewsClick = (newsItem) => {
-        // Calculate the page number where the newsItem is located
-        const index = news.findIndex(item => item._id === newsItem._id);
-        const pageNumber = Math.floor(index / newsPerPage) + 1;
-        navigate('/news-archive', { state: { selectedNews: newsItem._id, page: pageNumber } });
-    };
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setCurrentNewsIndex((prevIndex) => (prevIndex + 1) % news.length);
+        }, rotationInterval);
 
-    const truncateTitle = (title, wordLimit) => {
-        const words = title.split(' ');
-        if (words.length > wordLimit) {
-            return words.slice(0, wordLimit).join(' ') + '...';
-        }
-        return title;
+        return () => clearInterval(interval);
+    }, [news]);
+
+    const handleNewsClick = (newsItem) => {
+        navigate(`/news/${newsItem._id}`);
     };
+    
+
+    if (news.length === 0) return null;
+
+    const currentNews = news[currentNewsIndex];
 
     return (
-        <div className="news-cards">
-            <h2>NEWSROOM</h2>
-            <ul>
-                {news.map(newsItem => (
-                    <li key={newsItem._id} onClick={() => handleNewsClick(newsItem)}>
-                        <span className="news-title"><strong>{truncateTitle(newsItem.title, 20)}</strong></span>
-                        <span className="news-date">{new Date(newsItem.date).toLocaleDateString()}</span>
-                    </li>
-                ))}
-            </ul>
+        <div>
+            <div className="news-card" onClick={() => handleNewsClick(currentNews)}>
+                <img src={currentNews.thumbnail || "./assets/gcu-building.jpg"} alt="News Thumbnail" className="news-card-thumbnail" />
+                <div className="news-card-content">
+                    <span className="news-card-label">News</span>
+                    <h3 className="news-card-title">{currentNews.title}</h3>
+                    <p className="news-card-date">{new Date(currentNews.date).toLocaleDateString()}</p>
+                </div>
+            </div>
+            <button className="read-more-news-btn" onClick={() => navigate('/news')}>
+                Read more news
+            </button>
         </div>
     );
+    
 };
 
 export default NewsCard;

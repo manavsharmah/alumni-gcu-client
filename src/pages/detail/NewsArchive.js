@@ -1,103 +1,64 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import axios from 'axios';
-import '../pages.css';
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import '../pages.css';  // Import the CSS file for styling
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
-  const [selectedNewsId, setSelectedNewsId] = useState(null);
-  const newsPerPage = 7;
-  const location = useLocation();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [newsPerPage] = useState(10); // Number of news items per page
   const navigate = useNavigate();
-
-  const query = new URLSearchParams(location.search);
-  const currentPageFromQuery = parseInt(query.get('page')) || 1;
-  const [currentPage, setCurrentPage] = useState(currentPageFromQuery);
 
   useEffect(() => {
     const fetchNews = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/news/get-news');
-        const sortedNews = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
-        setNews(sortedNews);
-
-        // Check if there's selected news passed in the state
-        if (location.state && location.state.selectedNews) {
-          setSelectedNewsId(location.state.selectedNews);
-          if (location.state.page) {
-            setCurrentPage(location.state.page);
-          }
-        }
+        setNews(response.data);
       } catch (error) {
         console.error('Error fetching news:', error);
       }
     };
 
     fetchNews();
-  }, [location.state]);
+  }, []);
 
+  // Logic for displaying current news items
   const indexOfLastNews = currentPage * newsPerPage;
   const indexOfFirstNews = indexOfLastNews - newsPerPage;
   const currentNews = news.slice(indexOfFirstNews, indexOfLastNews);
 
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-    navigate(`?page=${pageNumber}`);
-  };
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  const handleTitleClick = (newsItem) => {
-    setSelectedNewsId(selectedNewsId === newsItem._id ? null : newsItem._id);
-  };
-
-  const Pagination = ({ newsPerPage, totalNews, paginate, currentPage }) => {
-    const pageNumbers = [];
-  
-    for (let i = 1; i <= Math.ceil(totalNews / newsPerPage); i++) {
-      pageNumbers.push(i);
-    }
-  
-    return (
-      <nav>
-        <ul className='pagination'>
-          {pageNumbers.map(number => (
-            <li key={number} className={`page-item ${currentPage === number ? 'active' : ''}`}>
-              <a onClick={() => paginate(number)} href="#!" className='page-link'>
-                {number}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    );
+  const handleNewsClick = (newsItem) => {
+    navigate(`/news/${newsItem._id}`);
   };
 
   return (
-    <div className="page-container">
-      <div className="news-list-container">
+    <div className="news-container">
+      <h2 className="news-title">News Category</h2>
       <div className="news-list">
-        <div className="news-header">
-          <h2>News Archive</h2>
-        </div>
         {currentNews.map((newsItem) => (
-          <div key={newsItem._id} className="news-item">
-            <h3 onClick={() => handleTitleClick(newsItem)} className="news-title">
-              {newsItem.title}
-            </h3>
-            {selectedNewsId === newsItem._id && (
-              <div className="news-content">
-                <p>{newsItem.content}</p>
-                <small>{new Date(newsItem.date).toLocaleString()}</small>
-              </div>
-            )}
+          <div key={newsItem._id} className="news-item" onClick={() => handleNewsClick(newsItem)}>
+            <div className="news-thumbnail">
+              <img src={newsItem.thumbnail || "./assets/gcu-building.jpg"} alt="News Thumbnail" />  {/* Placeholder for Thumbnail */}
+            </div>
+            <div className="news-content">
+              <h3 className="news-headline">{newsItem.title}</h3>
+              <p className="news-date">{new Date(newsItem.date).toLocaleDateString()}</p>
+              <p className="news-summary">{newsItem.content.substring(0, 100)}...</p> {/* Display a summary */}
+              <button className="read-more-btn">Read More</button>
+            </div>
           </div>
         ))}
-      <Pagination
-        newsPerPage={newsPerPage}
-        totalNews={news.length}
-        paginate={paginate}
-        currentPage={currentPage}
-      />
       </div>
+      {/* Pagination */}
+      <div className="pagination">
+        {[...Array(Math.ceil(news.length / newsPerPage)).keys()].map((number) => (
+          <button key={number} onClick={() => paginate(number + 1)} className={`page-number ${currentPage === number + 1 ? 'active' : ''}`}>
+            {number + 1}
+          </button>
+        ))}
       </div>
     </div>
   );

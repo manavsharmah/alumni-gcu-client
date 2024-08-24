@@ -16,7 +16,7 @@
 
 .content {
   flex: 1;
-  margin-right: 4px; /* Space between content and sidebar */
+  margin-right: 4px; 
 }
 
 .card {

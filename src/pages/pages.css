@@ -124,13 +124,17 @@
   width: 35%;
   font-size: 36px;
   margin-bottom: 20px;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
 }
+
 
 .left-box p {
   width: 35%;
   font-size: 18px;
   line-height: 1.5;
   margin-bottom: 20px;
+  font-family: "Poppins", sans-serif;
 }
 
 .button {
@@ -167,8 +171,19 @@
   align-items: center;
 }
 
+.vc-text p {
+  font-family: "Poppins", sans-serif;
+}
+
 .vc-heading {
   font-size: 30px;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+}
+
+.vc-name {
+  font-weight: bold;
+  font-size: 15px;
 }
 
 .vc-image {

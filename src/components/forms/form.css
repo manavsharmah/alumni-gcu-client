@@ -6,8 +6,16 @@
     padding: 60px 0px;
 }
 
+.login-container {
+    margin-bottom: 80px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 500px;
+} 
 
-.login-container, .register-container, .forgot-password-container, .reset-password-container {
+.register-container, .forgot-password-container, .reset-password-container {
     background-color: white;
     padding: 20px;
     border-radius: 10px;

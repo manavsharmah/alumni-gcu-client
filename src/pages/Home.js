@@ -24,9 +24,14 @@ const Home = () => {
             </section>
 
             <section className='hero2'>
-                <div className='vc-text'>
+            <div className='vc-text'>
                     <h2 className='vc-heading'>Message from the Vice Chancellor</h2>
+                    <br />
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sint animi placeat dolorum dolores iure molestiae? Asperiores, ea.</p>
+                    <p className='vc-name'>Prof. Kandarpa Das
+                        <br />
+                        Vice Chancellor of Girijananda Chowdhury University
+                    </p>
                 </div>
                 <div className='vc-image'>
                     <img src="./assets/vc-gcu.jpg" alt="GCU Vice Chancellor" className='vc-img'/>

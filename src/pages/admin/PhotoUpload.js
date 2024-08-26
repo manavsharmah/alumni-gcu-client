@@ -19,7 +19,7 @@ const PhotoUpload = () => {
     formData.append('image', selectedFile);
 
     try {
-      await api.post('/admin/upload', formData, {
+      await api.post('/images/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

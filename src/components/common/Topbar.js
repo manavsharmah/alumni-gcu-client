@@ -125,7 +125,7 @@ const Topbar = () => {
             </div>
           ) : (
             <div className="dropdown">
-              <Link to="/profile" className="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <Link to="/#" className="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img 
                   src="./assets/profile-placeholder.svg" 
                   alt="profile" 
@@ -134,7 +134,7 @@ const Topbar = () => {
                 {user.name}
               </Link>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <Link className="dropdown-item" to="/update-profile">Edit Profile</Link>
+                <Link className="dropdown-item" to="/profile">Profile</Link>
                 <Link className="dropdown-item" to="/" onClick={handleLogout}>Logout</Link>
               </div>
             </div>

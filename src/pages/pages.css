@@ -16,7 +16,7 @@
 
 .content {
   flex: 1;
-  margin-right: 4px; /* Space between content and sidebar */
+  margin-right: 4px; 
 }
 
 .card {
@@ -124,13 +124,17 @@
   width: 35%;
   font-size: 36px;
   margin-bottom: 20px;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
 }
+
 
 .left-box p {
   width: 35%;
   font-size: 18px;
   line-height: 1.5;
   margin-bottom: 20px;
+  font-family: "Poppins", sans-serif;
 }
 
 .button {
@@ -167,8 +171,19 @@
   align-items: center;
 }
 
+.vc-text p {
+  font-family: "Poppins", sans-serif;
+}
+
 .vc-heading {
   font-size: 30px;
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+}
+
+.vc-name {
+  font-weight: bold;
+  font-size: 15px;
 }
 
 .vc-image {
@@ -735,7 +750,80 @@ button:hover {
   }
 }
 
+/*Welcome styling*/
 
+.page-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 30px 10px;
+}
+
+.content-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px; /* Adjust this value as needed */
+}
+
+.post-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.post-form {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 20px auto;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.profile-picture-small {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  margin-right: 10px;
+}
+
+.post-input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  background-color: white;
+  color: #333;
+  outline: none;
+}
+
+.post-input::placeholder {
+  color: #999;
+}
+
+.post-button {
+  padding: 8px 16px;
+  margin-left: 10px;
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.post-button:hover {
+  background-color: #1a91da;
+}
+
+.users-container {
+  width: 300px;
+  padding-left: 20%;
+}
 
 
 

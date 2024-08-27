@@ -301,12 +301,6 @@
   cursor: pointer;
 }
 
-h2 {
-  text-align: center;
-  color: #444;
-  margin-bottom: 20px;
-}
-
 .user-table {
   width: 100%;
   border-collapse: collapse;

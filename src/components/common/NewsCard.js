@@ -8,7 +8,7 @@ const NewsCard = () => {
     const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
     const navigate = useNavigate();
     const newsPerPage = 7; // Keep this for your pagination logic
-    const rotationInterval = 15000; // Rotation interval in milliseconds (5 seconds)
+    const rotationInterval = 25000; // Rotation interval in milliseconds (5 seconds)
 
     useEffect(() => {
         const fetchNews = async () => {
@@ -42,18 +42,19 @@ const NewsCard = () => {
     const currentNews = news[currentNewsIndex];
 
     return (
-        <div>
+        <div className="news-card-container">
+            <h2 className='event-title'>NEWS</h2>
             <div className="news-card" onClick={() => handleNewsClick(currentNews)}>
-                <img src={currentNews.thumbnail || "./assets/gcu-building.jpg"} alt="News Thumbnail" className="news-card-thumbnail" />
+                <img src={currentNews.imageUrl || "./assets/gcu-building.jpg"} alt="News Thumbnail" className="news-card-thumbnail" />
                 <div className="news-card-content">
                     <span className="news-card-label">News</span>
                     <h3 className="news-card-title">{currentNews.title}</h3>
                     <p className="news-card-date">{new Date(currentNews.date).toLocaleDateString()}</p>
                 </div>
             </div>
-            <button className="read-more-news-btn" onClick={() => navigate('/news')}>
-                Read more news
-            </button>
+            <span className="read-more-span" onClick={() => navigate('/news')}>
+                Read more news &#8594;
+            </span>
         </div>
     );
     

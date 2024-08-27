@@ -104,7 +104,7 @@ const AdminDashboard = () => {
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
       </div>
-      <h2>Pending User Approvals</h2>
+      <h2 className='admin-form-header'>Pending User Approvals</h2>
       {filteredUsers.length > 0 ? (
         <table className="approval-table table-striped">
           <thead>

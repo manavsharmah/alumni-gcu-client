@@ -13,7 +13,8 @@ const NewsList = () => {
     const fetchNews = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/news/get-news');
-        setNews(response.data);
+        const sortedNews = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
+        setNews(sortedNews);
         // console.log('Fetched news:', response.data);
       } catch (error) {
         console.error('Error fetching news:', error);

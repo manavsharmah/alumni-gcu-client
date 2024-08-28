@@ -10,7 +10,7 @@ const GalleryPreview = () => {
     useEffect(() => {
       const fetchPhotos = async () => {
         try {
-          const response = await fetch('http://localhost:5000/api/images/photos');
+          const response = await fetch('http://localhost:5000/api/images/get-photos');
           if (!response.ok) {
             throw new Error('Failed to fetch photos');
           }
@@ -47,7 +47,7 @@ const GalleryPreview = () => {
             {photos.slice(currentIndex, currentIndex + 7).map((photo, index) => (
             <img
               key={index}
-              src={photo}
+              src={photo.url}
               alt={`photo_${index}`}
               className="preview-image"
               onClick={handleImageClick} // Add click handler

@@ -19,7 +19,7 @@
   flex: 1;
   padding: 50px;
   background-color: #f8f9fa;
-  height:100vh;
+  min-height:100vh;
   align-items: center;
   margin-left: 200px; /* Adjusted to prevent overlap with sidebar */
 }
@@ -80,7 +80,7 @@
 
 .dashboard-container {
   padding: 20px;
-  max-width: 1200px; /* Ensure max-width to center content */
+  max-width: auto; /* Ensure max-width to center content */
   margin: 0 auto; /* Center content horizontally */
   font-family: Arial, sans-serif; /* Ensuring consistent font */
 }

@@ -12,9 +12,10 @@ const Register = () => {
         phone: '',
         branch: '', 
         batch: '',
+        roll_no: '',
     });
 
-    const { name, email, phone, branch, batch } = formData;
+    const { name, email, phone, branch, batch, roll_no } = formData;
 
     const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -51,6 +52,12 @@ const Register = () => {
                         <FaPhone />
                     </label>
                     <input type='text' id="phone" name='phone' placeholder='Phone' value={phone} onChange={onChange} required />
+                </div>
+                <div className="input-group">
+                    <label htmlFor="Roll Number">
+                        <FaUniversity />
+                    </label>
+                    <input type='text' id="roll_no" name='roll_no' placeholder='Roll Number' value={roll_no} onChange={onChange} required />
                 </div>
                 <div className="input-group">
                     <label htmlFor="batch">

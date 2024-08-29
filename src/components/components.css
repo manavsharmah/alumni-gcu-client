@@ -85,12 +85,13 @@
   font-family: "Rubik", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
+  gap: 10px;
 }
 
 .navbar ul {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 15px;
   align-items: center;
   /* margin-top: -15px; */
   /* margin-bottom:15px; */
@@ -270,7 +271,7 @@
 
 
 /* Media query for mobile responsiveness */
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 768px) {
   .App-header {
     height: 100px;
     justify-content: space-around;

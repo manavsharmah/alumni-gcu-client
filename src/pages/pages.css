@@ -848,6 +848,7 @@ button:hover {
   display: flex;
   justify-content: center;
   width: 100%;
+  min-height: calc(100vh - (186px + 89px));
   padding: 30px 10px;
 }
 

@@ -49,6 +49,7 @@ const AdminDashboard = () => {
     const filtered = users.filter(user =>
       user.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
       user.email.toLowerCase().includes(e.target.value.toLowerCase()) ||
+      user.roll_no.toLowerCase().includes(e.target.value.toLowerCase()) ||
       user.batch.toLowerCase().includes(e.target.value.toLowerCase()) ||
       user.branch.toLowerCase().includes(e.target.value.toLowerCase())
     );
@@ -111,6 +112,7 @@ const AdminDashboard = () => {
             <tr>
               <th onClick={() => handleSort('name')}>Name {getSortIndicator('name')}</th>
               <th onClick={() => handleSort('email')}>Email {getSortIndicator('email')}</th>
+              <th onClick={() => handleSort('roll_no')}>Roll Number {getSortIndicator('branch')}</th>
               <th onClick={() => handleSort('batch')}>Batch {getSortIndicator('batch')}</th>
               <th onClick={() => handleSort('branch')}>Branch {getSortIndicator('branch')}</th>
               <th>Actions</th>
@@ -121,6 +123,7 @@ const AdminDashboard = () => {
               <tr key={user._id}>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
+                <td>{user.roll_no}</td>
                 <td>{user.batch}</td>
                 <td>{user.branch}</td>
                 <td>

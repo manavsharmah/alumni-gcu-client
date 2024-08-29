@@ -10,18 +10,43 @@ const AdminEventsForm = () => {
     organizer: '',
     event_date: '',
     event_time: '',
+    image: null,
   });
 
-  const { title, content, organizer, event_date, event_time } = formData;
+  const { title, content, organizer, event_date, event_time, image } = formData;
 
-  const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const onChange = e => {
+    if (e.target.name !== 'image') {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    } else {
+      setFormData({ ...formData, image: e.target.files[0] });
+    }
+  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    const data = new FormData();
+    data.append('title', title);
+    data.append('content', content);
+    data.append('organizer', organizer);
+    data.append('event_date', event_date);
+    data.append('event_time', event_time);
+    if (image) {
+      data.append('image', image);
+      console.log('Image appended:', image.name);
+    }
+
     try {
-      await api.post('/events/upload', formData);
+      const response = await api.post('/events/upload', data, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      });
       setMessage('Event Uploaded!');
-    } catch (err) {
+      console.log('Response:', response.data);
+      setFormData({ title: '', content: '', organizer: '', event_date: '', event_time: '', image: null }); 
+    }
+      catch (err) {
       console.error(err.response.data);
       setMessage('Error Creating Event');
     }
@@ -95,6 +120,16 @@ const AdminEventsForm = () => {
             value={event_time}
             onChange={onChange}
             name='event_time'
+          />
+        </div>
+        <br />
+        <div className="admin-form-group">
+          <input
+            type="file"
+            className="admin-form-input"
+            name="image"
+            accept="image/*"
+            onChange={onChange}
           />
         </div>
         <br />

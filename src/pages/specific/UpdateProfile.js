@@ -3,7 +3,6 @@ import axiosInstance from '../../services/api';
 import { FaFacebook, FaLinkedin } from 'react-icons/fa';
 import { Container, Form, Button, Row, Col, Alert, Spinner, Card } from 'react-bootstrap';
 import { useUser } from "../../services/UserContext";
-import api from "../../services/api";
 import '../pages.css';
 
 const UpdateProfile = () => {
@@ -31,19 +30,6 @@ const UpdateProfile = () => {
   }, [user]);
 
   const onChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const handleOAuth = async (platform) => {
-    try {
-      setLoading(true);
-      const response = await axiosInstance.get(`http://localhost:5000/api/auth/${platform}-oauth`);
-      console.log(`Connecting ${platform} account`, response.data);
-      setLoading(false);
-    } catch (error) {
-      console.error(`Error connecting ${platform} account:`, error);
-      setLoading(false);
-      setMessage(`Error connecting ${platform} account.`);
-    }
-  };
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -95,7 +81,7 @@ const UpdateProfile = () => {
               <form onSubmit={onSubmit}>
                 <div className="form-group">
                   <label className="form-label" htmlFor="formBiography">Biography:</label>
-                  <textarea className="form-control" id="formBiography" name="biography" value={biography} onChange={onChange} />
+                  <input className="form-control" type="text" id="formBiography" name="biography" value={biography} onChange={onChange} />
                 </div>
 
                 <div className="form-group">
@@ -107,22 +93,18 @@ const UpdateProfile = () => {
                   <label className="form-label" htmlFor="formLinkedin">
                     <FaLinkedin size={24} className="mr-2" /> LinkedIn:
                   </label>
-                  <button type="button" className="button" onClick={() => handleOAuth('linkedin')}>
-                    Connect LinkedIn
-                  </button>
+                  <input className="form-control" type="text" id="formLinkedin" name="linkedin" value={linkedin} onChange={onChange} />
                 </div>
 
                 <div className="form-group">
                   <label className="form-label" htmlFor="formFacebook">
                     <FaFacebook size={24} className="mr-2" /> Facebook:
                   </label>
-                  <button type="button" className="button" onClick={() => handleOAuth('facebook')}>
-                    Connect Facebook
-                  </button>
+                  <input className="form-control" type="text" id="formFacebook" name="facebook" value={facebook} onChange={onChange} />
                 </div>
                 
-                <div className="d-grid">
-                  <button type="submit" className="button">
+                <div className="d-flex justify-content-center mt-3">
+                  <button type="submit" className="button btn-sm">
                     Update Profile
                   </button>
                 </div>
@@ -130,7 +112,7 @@ const UpdateProfile = () => {
 
               {/* Message Alert */}
               {message && (
-                <div className={`alert ${message.includes('Error') ? 'alert-danger' : 'alert-success'}`}>
+                <div className={`alert ${message.includes('Error') ? 'alert-danger' : 'alert-success'} mt-3`}>
                   {message}
                 </div>
               )}

@@ -29,9 +29,15 @@ const SingleNews = () => {
 
   return (
     <div className="single-news-container">
-      <h2 className="single-news-title">{newsItem.title}</h2>
-      <img src={newsItem.thumbnail || "./assets/gcu-building.jpg"} alt="News Thumbnail" />
-      <p className="single-news-date">{new Date(newsItem.date).toLocaleDateString()}</p>
+      <h2 className="single-news-title">
+        <p className="single-news-date">{new Date(newsItem.date).toLocaleDateString()}</p>
+        {newsItem.title}
+      </h2>
+      <img 
+        src={newsItem.imageUrl || "./assets/gcu-building.jpg"} 
+        alt="News Thumbnail" 
+        className="single-news-thumbnail"
+      />
       <p className="single-news-content">{newsItem.content}</p>
     </div>
   );

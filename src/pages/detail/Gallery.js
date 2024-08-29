@@ -9,7 +9,7 @@ const Gallery = () => {
   useEffect(() => {
     const fetchPhotos = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/images/photos');
+        const response = await fetch('http://localhost:5000/api/images/get-photos');
         if (!response.ok) {
           throw new Error('Failed to fetch photos');
         }
@@ -36,7 +36,7 @@ const Gallery = () => {
 
                 <div>
                   {photos.map((photo, index) => (
-                    <img key={index} src={photo} alt={`photo_${index}`} className="image" />
+                    <img key={index} src={photo.url} alt={`photo_${index}`} className="image" />
                   ))}
                 </div>
           ) : (

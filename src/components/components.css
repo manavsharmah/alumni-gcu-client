@@ -104,12 +104,13 @@
   font-family: "Rubik", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
+  gap: 10px;
 }
 
 .navbar ul {
   list-style: none;
   display: flex;
-  gap: 20px;
+  gap: 15px;
   align-items: center;
   /* margin-top: -15px; */
   /* margin-bottom:15px; */
@@ -289,7 +290,7 @@
 
 
 /* Media query for mobile responsiveness */
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 768px) {
   .App-header {
     height: 100px;
     justify-content: space-around;
@@ -869,34 +870,53 @@ justify-content: center;
 }
 
 
-/* News Card */
+/* News and event Card */
 
-.news-card {
+.news-card-container,
+.event-card-container {
+  align-items: center;
+}
+
+.news-event-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 2px solid #f0c14b;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.news-card,
+.event-card {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  max-width: 400px;
+  width: 400px;
+  height: 500px;
   background: #fff;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 10px 4px 8px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: transform 0.3s ease;
   margin: 20px;
   height: 400px;
 }
 
-.news-card:hover {
-  transform: translateY(-5px);
+.news-card:hover,
+.event-card:hover {
+  transform: translateY(-7px);
 }
 
-.news-card-thumbnail {
-  width: 100%;
-  height: auto;
+.news-card-thumbnail,
+.event-card-thumbnail {
+  width: 400px;
+  height: 300px;
 }
 
-.news-card-content {
-  padding: 20px;
+.news-card-content,
+.event-card-content {
+  padding: 15px;
   display: flex;
   flex-direction: column;
 }
@@ -913,116 +933,58 @@ justify-content: center;
   font-family: ibm plex sans, sans-serif;
 }
 
-.news-card-title {
-  font-size: 18px;
+.event-card-label {
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
+  background-color: #28a745; /* Green color for events */
+  padding: 5px 10px;
+  border-radius: 5px;
+  align-self: flex-start;
+  margin-bottom: 10px;
+}
+
+.news-card-title,
+.event-card-title {
+  font-size: 20px;
   font-weight: bold;
   margin: 0 0 10px;
 }
 
-.news-card-date {
+.news-card-date,
+.event-card-organizer {
   font-size: 14px;
   color: #777;
 }
 
+.event-card-date {
+  font-size: 14px;
+  color: #777;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 40px;  
+}
+
+.read-more-span {
+  padding-left: 25px;
+  font-weight: bold;
+}
+
+.read-more-span:hover {
+  cursor: pointer;
+  color: #007bff;
+
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
-  .news-card {
+  .news-card,
+  .event-card {
       max-width: 100%;
+      margin: 8px 0px;
   }
 }
-
-
-
-/* Event Card */
-
-.event-cards {
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  width: 500px;
-  height: 400px; /* Fixed height for the container */
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.event-title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  border-bottom: 2px solid #f0c14b;
-  padding-bottom: 10px;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-.event-cards ul {
-  padding: 0;
-  list-style-type: none;
-  overflow-y: auto; /* Enable vertical scrolling */
-  height: calc(100% - 50px); /* Adjust height to fit within the container */
-}
-
-.event-cards li {
-  margin-bottom: 0px;
-  padding: 10px;
-  border-bottom: 1px solid #ccc;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.event-cards li:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: #27357f;
-}
-
-.event-cards li:hover .event-title-text,
-.event-cards li:hover .event-info h6,
-.event-cards li:hover .event-info h7,
-.event-cards li:hover .event-posted-date {
-  color: white;
-}
-
-.event-title-text {
-  margin: 0;
-  color: #000;
-}
-
-.event-content {
-  margin: 10px 0;
-  color: #444;
-}
-
-.event-info h6 {
-  margin: 5px 0;
-  color: #666;
-}
-
-.event-info h7 {
-  margin: 5px 50px 5px 0px;
-  color: #666;
-}
-
-
-.event-posted-date {
-  color: #888;
-}
-
-
-@media (max-width: 768px) {
-  .news-cards,
-  .event-cards {
-    width: 100%;
-    margin: 8px 0px;
-
-  }
-
-}
-
 
 /* Gallery Preview */
 

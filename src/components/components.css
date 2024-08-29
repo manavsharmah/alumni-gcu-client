@@ -76,6 +76,25 @@
   height: 50px;
 }
 
+/* .navbar.sticky {
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  transition: top 0.3s ease;
+  width: 100%;
+} */
+
+
+.navbar.sticky {
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: top 0.3s ease;
+}
+
+
 .nav-content {
   display: flex;
   justify-content: center;
@@ -278,14 +297,12 @@
   }
 
   .logo {
-    margin-top: -60px;
+    margin-top: -50px;
   }
 
   .logo img {
-    height: 120px;
-    width: 190px;
-    margin-top: -10px;
-    margin-left: -15px;
+    height: 100px;
+    width: 100px;
   }
 
   .logo-gcu {
@@ -297,16 +314,16 @@
   }
   
   .nav-content.open {
-    display: flex;
+    display: block;
     flex-direction: column;
-    width: 60%;
+    width: 100%;
     position: absolute;
     top: 60px; /* Position the nav content below the navbar */
     left: 0;
     background-color: #27357f;
+    height: auto;
     z-index: 999; /* Ensure it appears above other content */
     border-top: 1px solid #000;
-    padding-left: 10px;
   }
 
   .menu-toggle {
@@ -314,13 +331,11 @@
     color: white;
     font-size: 18px;
     cursor: pointer;
-    margin-top: -10px;
+    padding: 10px;
     background-color: #27357f;
     border: none;
     position: relative;
     z-index: 1000; /* Ensure the menu toggle stays above the nav content */
-    align-items: center;
-    top: 0;
   }
 
   .title h2 {
@@ -353,7 +368,7 @@
     width: 100%;
   }
 
-  .navbar li Link {
+  .navbar li a {
     padding: 10px;
     width: 100%;
     z-index: 1;
@@ -363,7 +378,6 @@
     opacity: 1;
     visibility: visible;
     display: contents;
-    margin-left: 10px;
   }
 
   .navbar.open .navbar ul.sub-menus {
@@ -387,17 +401,13 @@
     visibility: visible;
   }
 
-  .navbar ul.sub-menus Link {
+  .navbar ul.sub-menus a {
     padding-left: 20px;
   }
 
   .auth-links {
     position: relative;
     z-index: 1000; /* Ensure it stays above the nav content */
-  }
-
-  .dropdown {
-    position: relative;
   }
 
   .auth-nav {
@@ -413,6 +423,7 @@
     margin-left: 0;
   }
 }
+
 
 
 
@@ -872,6 +883,7 @@ justify-content: center;
   cursor: pointer;
   transition: transform 0.3s ease;
   margin: 20px;
+  height: 400px;
 }
 
 .news-card:hover {
@@ -898,6 +910,7 @@ justify-content: center;
   border-radius: 5px;
   align-self: flex-start;
   margin-bottom: 10px;
+  font-family: ibm plex sans, sans-serif;
 }
 
 .news-card-title {

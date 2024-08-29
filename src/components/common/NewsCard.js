@@ -7,7 +7,6 @@ const NewsCard = () => {
     const [news, setNews] = useState([]);
     const [currentNewsIndex, setCurrentNewsIndex] = useState(0);
     const navigate = useNavigate();
-    const newsPerPage = 7; // Keep this for your pagination logic
     const rotationInterval = 25000; // Rotation interval in milliseconds (5 seconds)
 
     useEffect(() => {
@@ -43,7 +42,7 @@ const NewsCard = () => {
 
     return (
         <div className="news-card-container">
-            <h2 className='event-title'>NEWS</h2>
+            <h2 className='news-event-title'>NEWS</h2>
             <div className="news-card" onClick={() => handleNewsClick(currentNews)}>
                 <img src={currentNews.imageUrl || "./assets/gcu-building.jpg"} alt="News Thumbnail" className="news-card-thumbnail" />
                 <div className="news-card-content">
@@ -56,8 +55,7 @@ const NewsCard = () => {
                 Read more news &#8594;
             </span>
         </div>
-    );
-    
+    );    
 };
 
 export default NewsCard;

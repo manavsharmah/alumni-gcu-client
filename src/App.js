@@ -39,7 +39,8 @@ import { Alumnus } from "./pages/detail/GetInvolved";
 import Gallery from "./pages/detail/Gallery";
 import Events from "./pages/detail/Events";
 import NewsList from "./pages/detail/NewsArchive";
-import SingleNews from "./pages/detail/SingleNews"
+import SingleNews from "./pages/detail/SingleNews";
+import SingleEvent from "./pages/detail/SingleEvent";
 import {
 	Overview,
 	VisionAndMission,
@@ -71,21 +72,21 @@ function App() {
 								<Route path="/alumnus" element={<Alumnus />} />
 								<Route path="/top-alumni" element={<TopAlumni />} />
 								<Route path="/notable-alumni" element={<NotableAlumni />} />
-								{/* <Route path='/news-archive' element={<NewsArchive />} /> */}
 								<Route path="/news" element={<NewsList />} />
+								<Route path="/news/:id" element={<SingleNews />} />
 								<Route path="/gallery" element={<Gallery />} />
 								<Route path="/contact" element={<Contact />} />
 								<Route path="/faq" element={<FAQ />} />
 								<Route path="/scholarship" element={<Scholarship />} />
 								<Route path="/activities" element={<Activities />} />
 								<Route path="/events" element={<Events />} />
+								<Route path="/events/:id" element={<SingleEvent />} />
 								<Route path="/copyright" element={<Copyright />} />
 								<Route path="/disclaimer" element={<Disclaimer />} />
 								<Route path="/termsofuse" element={<TermsOfUse />} />
 								<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 								<Route path="/alumnidirectory" element={<AlumniDirectory />} />
 								<Route path="/forgot-password" element={<ForgotPassword />} />
-								<Route path="/news/:id" element={<SingleNews />} />
 
 								{/* Admin + User Routes */}
 								<Route

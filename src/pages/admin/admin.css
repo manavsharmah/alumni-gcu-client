@@ -1,26 +1,28 @@
 /* Admin layout Styling */
 
 .admin-layout {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: row;
-    align-items: center;
-  }
+  display: flex;
+  min-height: 100vh;
+  flex-direction: row;
+  align-items: center;
+}
 
-  .admin-nav-bar {
-    position: fixed;
-    z-index: 1;
-    top: 0; 
-    left: 0;
-    height: 100%;
-  }
-  
-  .admin-content {
-    flex: 1;
-    padding: 50px;
-    background-color: #f8f9fa;
-    align-items: center;
-  }
+.admin-nav-bar {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  height: 100%;
+}
+
+.admin-content {
+  flex: 1;
+  padding: 50px;
+  background-color: #f8f9fa;
+  height:100vh;
+  align-items: center;
+  margin-left: 200px; /* Adjusted to prevent overlap with sidebar */
+}
 
 .admin-sidebar {
   width: 200px;
@@ -74,21 +76,24 @@
   font-size: 1em; /* Increase label size */
 }
 
-
 /* admin dashboard  */
 
 .dashboard-container {
   padding: 20px;
+  max-width: 1200px; /* Ensure max-width to center content */
+  margin: 0 auto; /* Center content horizontally */
+  font-family: Arial, sans-serif; /* Ensuring consistent font */
 }
 
 .dashboard-header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 30px; /* Increased bottom margin for spacing */
 }
 
 .dashboard-title {
-  font-size: 2em;
-  font-weight: bold;
+  font-size: 2.5em; /* Adjusted title size */
+  color: #333;
+  font-weight: bold; /* Added bold font */
 }
 
 .search-group {
@@ -98,40 +103,71 @@
 }
 
 .search-input {
-  width: 300px;
+  width: 60%;
   padding: 10px;
   border: 1px solid #ced4da;
-  border-radius: 5px;
+  border-radius: 4px 0 0 4px;
+  font-size: 16px; /* Adjust font size for input */
 }
 
 .search-button {
   background-color: #007bff;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 15px;
   color: white;
   cursor: pointer;
   margin-left: 10px;
+  border-radius: 0 4px 4px 0; /* Rounded corners */
 }
 
 .search-button:hover {
   background-color: #0056b3;
 }
 
-.approval-table {
+.approval-table,
+.user-table {
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  background-color: white; /* Background for table */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Shadow for visual depth */
 }
 
 .approval-table th,
-.approval-table td {
-  border: 1px solid #767676;
-  padding: 10px;
+.approval-table td,
+.user-table th,
+.user-table td {
+  padding: 12px 15px; /* Adjusted padding for cells */
   text-align: left;
+  border: 1px solid #ddd; /* Consistent border color */
+}
+
+.user-table th {
+  background-color: #f8f9fa; /* Light background for header */
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.user-table th:hover {
+  background-color: #e9ecef; /* Hover effect for header */
+}
+
+.user-table tbody tr:nth-child(even) {
+  background-color: #f8f9fa; /* Alternate row colors */
+}
+
+.user-table tbody tr:hover {
+  background-color: #f1f3f5; /* Hover effect for rows */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 .btn-approve {
-  margin: 0px 10px;
+  margin: 0 10px;
   background-color: #28a745;
   color: white;
   border: none;
@@ -154,7 +190,6 @@
 .btn-reject:hover {
   background-color: #c82333;
 }
-
 
 /* PhotoUpload component styles */
 
@@ -197,9 +232,7 @@
   background-color: #0056b3;
 }
 
-
 /* Admin Event and News Form */
-
 
 .admin-form-container {
   margin: 0 auto;
@@ -259,100 +292,17 @@
   margin-top: 20px;
 }
 
-/* styling for alumni archive */
-
-.dashboard-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-}
-
-.dashboard-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.dashboard-title {
-  color: #333;
-  font-size: 2.5em;
-}
-
-.search-group {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.search-input {
-  width: 60%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ddd;
-  border-radius: 4px 0 0 4px;
-}
-
-.search-button {
-  padding: 10px 15px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 0 4px 4px 0;
-  cursor: pointer;
-}
-
-.user-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-  background-color: white;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-.user-table th,
-.user-table td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.user-table th {
-  background-color: #f8f9fa;
-  font-weight: bold;
-  color: #333;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.user-table th:hover {
-  background-color: #e9ecef;
-}
-
-.user-table tbody tr:nth-child(even) {
-  background-color: #f8f9fa;
-}
-
-.user-table tbody tr:hover {
-  background-color: #f1f3f5;
-}
-
-.table-striped tbody tr:nth-of-type(odd) {
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
 @media (max-width: 768px) {
   .search-input {
     width: 100%;
   }
-  
+
   .user-table {
     font-size: 14px;
   }
-  
+
   .user-table th,
   .user-table td {
     padding: 8px 10px;
   }
 }
-
-  

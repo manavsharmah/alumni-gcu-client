@@ -32,6 +32,12 @@ const Profile = () => {
         <div className="prof-container">
             <div className="prof-header">
                 <h1>Profile</h1>
+                {/* Add dummy profile picture */}
+                <div className="profile-picture-container">
+                    <img src="https://via.placeholder.com/100" alt="Profile" className="profile-picture" />
+                    {/* Add button to change profile picture */}
+                    <button className="change-pic-button">Change Profile Picture</button>
+                </div>
                 <p>{user && user.name}</p>
                 <p>{user && user.email}</p>
             </div>

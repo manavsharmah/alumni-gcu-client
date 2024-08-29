@@ -25,6 +25,8 @@ const Topbar = () => {
     }
   };
 
+
+
   useEffect(() => {
     // Add event listener to close navbar when clicking on nav items
     const navItems = document.querySelectorAll('.nav-content li a');
@@ -37,6 +39,28 @@ const Topbar = () => {
       navItems.forEach(item => {
         item.removeEventListener('click', closeNav);
       });
+    };
+  }, []);
+
+
+  useEffect(() => {
+    const navbar = document.querySelector('.navbar');
+  
+    if (navbar) { // Check if navbar is not null
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 200) {
+          navbar.classList.add('sticky');
+        } else {
+          navbar.classList.remove('sticky');
+        }
+      });
+    }
+  
+    return () => {
+      // Remove event listener on cleanup (if navbar exists)
+      if (navbar) {
+        window.removeEventListener('scroll', () => {});
+      }
     };
   }, []);
 

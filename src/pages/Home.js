@@ -7,7 +7,7 @@ import GalleryPreview from "../components/common/GalleryPreview";
 import { useUser } from '../services/UserContext';
 
 const Home = () => {
-    const { user } = useUser(); 
+    const { user } = useUser();
 
     return (
         <div className='main'>
@@ -27,8 +27,28 @@ const Home = () => {
                 </div>
             </section>
 
+
+            <section className='hero5'>
+                <div className='ch-text'>
+                    <h2 className='ch-heading'>Message from the Chancellor</h2>
+                    <br />
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sint animi placeat dolorum dolores iure molestiae? Asperiores, ea.</p>
+                    <p className='ch-name'>Prof. Jayanta Deka
+                        <br />
+                        Chancellor of Girijananda Chowdhury University
+                    </p>
+                </div>
+                <div className='ch-image'>
+                    <img src="./assets/jayanta-sir.jpg" alt="GCU Chancellor" className='vc-img'/>
+                </div>
+            </section>
+
+
             <section className='hero2'>
-            <div className='vc-text'>
+                <div className='vc-image'>
+                    <img src="./assets/vc-gcu.jpg" alt="GCU Vice Chancellor" className='vc-img'/>
+                </div>
+                <div className='vc-text'>
                     <h2 className='vc-heading'>Message from the Vice Chancellor</h2>
                     <br />
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sint animi placeat dolorum dolores iure molestiae? Asperiores, ea.</p>
@@ -37,8 +57,21 @@ const Home = () => {
                         Vice Chancellor of Girijananda Chowdhury University
                     </p>
                 </div>
+            </section>
+
+
+            <section className='hero6'>
+                <div className='reg-text'>
+                    <h2 className='vc-heading'>Message from the Registrar</h2>
+                    <br />
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sint animi placeat dolorum dolores iure molestiae? Asperiores, ea.</p>
+                    <p className='vc-name'>Dr. Dipankar Saha
+                        <br />
+                        Registrar of Girijananda Chowdhury University
+                    </p>
+                </div>
                 <div className='vc-image'>
-                    <img src="./assets/vc-gcu.jpg" alt="GCU Vice Chancellor" className='vc-img'/>
+                    <img src="./assets/gcuregistrar.jpg" alt="GCU Registrar" className='vc-img'/>
                 </div>
             </section>
 

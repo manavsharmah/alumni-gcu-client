@@ -41,6 +41,7 @@ import Events from "./pages/detail/Events";
 import NewsList from "./pages/detail/NewsArchive";
 import SingleNews from "./pages/detail/SingleNews";
 import SingleEvent from "./pages/detail/SingleEvent";
+import Donations from "./pages/detail/Donations";
 import {
 	Overview,
 	VisionAndMission,
@@ -87,6 +88,7 @@ function App() {
 								<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 								<Route path="/alumnidirectory" element={<AlumniDirectory />} />
 								<Route path="/forgot-password" element={<ForgotPassword />} />
+								<Route path="/donations" element={<Donations />} />
 
 								{/* Admin + User Routes */}
 								<Route
@@ -139,8 +141,6 @@ function App() {
 								<Route path="/events-form" element={<AdminEventsForm />} />
 								<Route path="/photo-upload-form" element={<PhotoUpload />} />
 							</Route>
-
-							{/* forgot password route */}
 
 						</Routes>
 					</section>

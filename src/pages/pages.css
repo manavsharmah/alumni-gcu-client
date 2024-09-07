@@ -1059,6 +1059,26 @@ button:hover {
   padding-left: 20%;
 }
 
+/*Donation Styling*/
 
+.razorpay-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.razorpay-button {
+  background-color: #3399cc;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.razorpay-button:hover {
+  background-color: #2980b9;
+}
 
 

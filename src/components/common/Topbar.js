@@ -127,6 +127,7 @@ const Topbar = () => {
               <ul className='sub-menus'>
                 <li><Link to='/gallery'>Gallery</Link></li>
                 <li><Link to='/contact'>Contact</Link></li>
+                <li><Link to='/donations'>Donations</Link></li>
               </ul>
             </li>
             <li><Link to="/faq">FAQ's</Link></li>

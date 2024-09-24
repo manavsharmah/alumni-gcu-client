@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../../services/api';
 import { FaFacebook, FaLinkedin } from 'react-icons/fa';
-import { Container, Form, Button, Row, Col, Alert, Spinner, Card } from 'react-bootstrap';
+// import { Container, Form, Button, Row, Col, Alert, Spinner, Card } from 'react-bootstrap';
 import { useUser } from "../../services/UserContext";
 import '../pages.css';
 

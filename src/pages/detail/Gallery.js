@@ -36,7 +36,7 @@ const Gallery = () => {
 
                 <div>
                   {photos.map((photo, index) => (
-                    <img key={index} src={photo.url} alt={`photo_${index}`} className="image" />
+                    <img key={index} src={`http://localhost:5000${photo}`} alt={`photo_${index}`} className="image" />
                   ))}
                 </div>
           ) : (
@@ -48,5 +48,3 @@ const Gallery = () => {
 }
 
 export default Gallery;
-
-

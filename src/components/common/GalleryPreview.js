@@ -47,7 +47,7 @@ const GalleryPreview = () => {
             {photos.slice(currentIndex, currentIndex + 7).map((photo, index) => (
             <img
               key={index}
-              src={photo.url}
+              src={`http://localhost:5000${photo}`}
               alt={`photo_${index}`}
               className="preview-image"
               onClick={handleImageClick} // Add click handler

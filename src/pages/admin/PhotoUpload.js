@@ -36,6 +36,9 @@ const PhotoUpload = ({ onUploadSuccess }) => {
       formData.append('images', file); // Use 'images' as the field name
     });
 
+    //explicitly append the category field as gallery
+    formData.append('category', 'gallery');
+
     try {
       const response = await api.post('/images/upload', formData, {
         headers: {

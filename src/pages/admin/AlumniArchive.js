@@ -1,28 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import "./admin.css"; // Create this CSS file similar to your other styles
+import React, { useState } from 'react';
+import "./admin.css";
 import api from "../../services/api";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
+import * as XLSX from 'xlsx';  // For Excel download
+import Papa from 'papaparse';
 
 const AlumniArchive = () => {
   const [users, setUsers] = useState([]);
+  const [searchParams, setSearchParams] = useState({
+    batch: '',
+    branch: ''
+  });
   const [search, setSearch] = useState('');
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
+  const [searchPerformed, setSearchPerformed] = useState(false);
 
-  useEffect(() => {
-    const fetchVerifiedUsers = async () => {
-      try {
-        const res = await api.get('/admin/pending-users'); // Ensure this API route is created
-        setUsers(res.data);
-        setFilteredUsers(res.data);
-      } catch (err) {
-        console.error(err);
-      }
-    };
+  const branches = [
+    'Computer Science and Engineering',
+    'Mechanical Engineering',
+    'Civil Engineering',
+    'Electrical Engineering',
+    'Electronics and Communication Engineering',
+    'Information Technology',
+    'Chemical Engineering',
+  ];
 
-    fetchVerifiedUsers();
-  }, []);
+  const fetchFilteredUsers = async () => {
+    try {
+      const query = new URLSearchParams(searchParams).toString();
+      const res = await api.get(`/admin/approved-users?${query}`);
+      setUsers(res.data);
+      setFilteredUsers(res.data);
+      setSearchPerformed(true);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    fetchFilteredUsers();
+  };
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
@@ -30,10 +50,15 @@ const AlumniArchive = () => {
     const filtered = users.filter(user =>
       (user.name?.toLowerCase() || '').includes(searchValue) ||
       (user.email?.toLowerCase() || '').includes(searchValue) ||
-      (user.batch?.toLowerCase() || '').includes(searchValue) ||
+      (user.batch?.toString().toLowerCase() || '').includes(searchValue) ||
       (user.branch?.toLowerCase() || '').includes(searchValue)
     );
     setFilteredUsers(filtered);
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setSearchParams({ ...searchParams, [name]: value });
   };
 
   const handleSort = (key) => {
@@ -68,47 +93,126 @@ const AlumniArchive = () => {
     return null;
   };
 
+  // Function to download the CSV file
+  const downloadCSV = () => {
+    const csv = Papa.unparse(filteredUsers);  // Convert JSON to CSV
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.setAttribute('hidden', '');
+    a.setAttribute('href', url);
+    a.setAttribute('download', 'alumni_data.csv');
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  };
+
+  // Function to download the Excel file
+  const downloadExcel = () => {
+    const ws = XLSX.utils.json_to_sheet(filteredUsers);  // Convert JSON to Excel sheet
+    const wb = XLSX.utils.book_new();  // Create a new workbook
+    XLSX.utils.book_append_sheet(wb, ws, "Alumni Data");
+    XLSX.writeFile(wb, 'alumni_data.xlsx');  // Download the file as 'alumni_data.xlsx'
+  };
+
+  const handleClearSearch = () => {
+    setSearchParams({ batch: '', branch: '' });
+    setFilteredUsers([]);
+    setUsers([]);
+    setSearchPerformed(false);
+    setSearch('');
+  };
+
   return (
     <div className="dashboard-container">
       <div className='dashboard-header'>
-        <h1 className='dashboard-title'>Alumni Archive</h1>
+        <h1 className='admin-form-header'>Alumni Archive - Advanced Search</h1>
       </div>
+
       <div className="search-group">
-        <input
-          type="text"
-          className="search-input"
-          placeholder="Search by name, email, batch, or branch"
-          value={search}
-          onChange={handleSearchChange}
-        />
-        <button className="search-button">
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
-        </button>
+        <form onSubmit={handleSearchSubmit}>
+          <div className="admin-form-group">
+            <label htmlFor="batch">Batch (Year)</label>
+            <input
+              type="number"
+              className="admin-form-input"
+              name="batch"
+              id="batch"
+              value={searchParams.batch}
+              onChange={handleInputChange}
+              placeholder="Enter Batch Year"
+              min="1900"
+              max={new Date().getFullYear() + 4}
+            />
+          </div>
+
+          <div className="admin-form-group">
+            <label htmlFor="branch">Branch</label>
+            <select
+              name="branch"
+              className="admin-form-input"
+              id="branch"
+              value={searchParams.branch}
+              onChange={handleInputChange}
+            >
+              <option value="" disabled>Select Branch</option>
+              {branches.map((branch, index) => (
+                <option key={index} value={branch}>{branch}</option>
+              ))}
+            </select>
+          </div>
+
+          <button type="submit" className="admin-form-button">Search</button>
+          <button type="button" className="admin-form-button" onClick={handleClearSearch}>Clear Search</button>
+        </form>
       </div>
-      <h2>Verified Alumni List</h2>
-      {filteredUsers.length > 0 ? (
-        <table className="user-table table-striped">
-          <thead>
-            <tr>
-              <th onClick={() => handleSort('name')}>Name {getSortIndicator('name')}</th>
-              <th onClick={() => handleSort('email')}>Email {getSortIndicator('email')}</th>
-              <th onClick={() => handleSort('batch')}>Batch {getSortIndicator('batch')}</th>
-              <th onClick={() => handleSort('branch')}>Branch {getSortIndicator('branch')}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredUsers.map(user => (
-              <tr key={user._id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.batch}</td>
-                <td>{user.branch}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <p>No verified alumni found.</p>
+
+      {searchPerformed && (
+        <>
+          <h2>Alumni List</h2>
+          <div className="search-group">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="Search by name, email, batch, or branch"
+              value={search}
+              onChange={handleSearchChange}
+            />
+            <button className="search-button">
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </button>
+          </div>
+
+          <div className="download-buttons">
+            <button onClick={downloadCSV} className="admin-form-button">Download CSV</button>
+            <button onClick={downloadExcel} className="admin-form-button">Download Excel</button>
+          </div>
+
+          {filteredUsers.length > 0 ? (
+            <table className="user-table table-striped">
+              <thead>
+                <tr>
+                  <th onClick={() => handleSort('name')}>Name {getSortIndicator('name')}</th>
+                  <th onClick={() => handleSort('email')}>Email {getSortIndicator('email')}</th>
+                  <th onClick={() => handleSort('batch')}>Batch {getSortIndicator('batch')}</th>
+                  <th onClick={() => handleSort('branch')}>Branch {getSortIndicator('branch')}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredUsers.map(user => (
+                  <tr key={user._id}>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                    <td>{user.batch}</td>
+                    <td>{user.branch}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p>No users found based on your search criteria.</p>
+          )}
+        </>
       )}
     </div>
   );

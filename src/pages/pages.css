@@ -1081,4 +1081,77 @@ button:hover {
   background-color: #2980b9;
 }
 
+/* Feedback Form */
+.feedback-form-container {
+  max-width: 40%;
+  margin: 40px auto; /* Center the form on the screen for both mobile and desktop */
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #e74c3c;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+textarea {
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+button {
+  background-color: #21099b;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #020090;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .feedback-form-container {
+    margin: 20px auto;
+    padding: 15px;
+    max-width: 70%; /* Make form take full width on small screens */
+  }
+
+  h2 {
+    font-size: 1.5rem; /* Adjust font size */
+  }
+
+  input,
+  textarea {
+    padding: 10px;
+    font-size: 14px; /* Slightly reduce font size for mobile */
+  }
+
+  button {
+    padding: 8px;
+    font-size: 14px;
+  }
+}
 

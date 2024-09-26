@@ -22,6 +22,8 @@ const Bottombar = () => {
         </a>
       </div>
       <div className="footer-links">
+        <Link to="/contactus">Contact Us</Link>
+        <Link to="/feedback">Feedback Form</Link>
         <Link to="/copyright">© Copyright 2024</Link>
         <Link to="/disclaimer">Disclaimer</Link>
         <Link to="/termsofuse">Terms of Use</Link>

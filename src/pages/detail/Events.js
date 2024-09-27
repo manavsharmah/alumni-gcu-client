@@ -51,11 +51,15 @@ const EventList = () => {
             onClick={() => handleEventClick(eventItem)}
           >
             <div className="news-thumbnail">
-              <img
-                src={eventItem.imageUrl || "./assets/default-event.jpg"} // Add a default image for events
-                alt="Event Thumbnail"
-              />
-            </div>
+							{eventItem.images && eventItem.images.length > 0 ? (
+								<img
+									src={`http://localhost:5000${eventItem.images[0]}`}
+									alt="Events Thumbnail"
+								/>
+							) : (
+								<img src="./assets/gcu-building.jpg" alt="Default Thumbnail" />
+							)}
+						</div>
             <div className="news-content">
               <h3 className="news-headline">{eventItem.title}</h3>
               <p className="news-date">

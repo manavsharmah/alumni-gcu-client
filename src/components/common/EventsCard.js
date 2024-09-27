@@ -43,7 +43,15 @@ const EventCard = () => {
     <div className="event-card-container">
       <h2 className="news-event-title">EVENTS</h2>
       <div className="event-card" onClick={() => handleEventClick(currentEvent)}>
-        <img src={currentEvent.imageUrl || "./assets/event-placeholder.jpg"} alt="Event Thumbnail" className="event-card-thumbnail" />
+      {currentEvent.images && currentEvent.images.length > 0 ? (
+								<img
+									src={`http://localhost:5000${currentEvent.images[0]}`}
+									alt="Events Thumbnail"
+                  className="event-card-thumbnail"
+								/>
+							) : (
+								<img src="./assets/gcu-building.jpg" alt="Default Thumbnail" className="event-card-thumbnail" />
+							)}
         <div className="event-card-content">
           <span className="event-card-label">Event</span>
           <h3 className="event-card-title">{currentEvent.title}</h3>

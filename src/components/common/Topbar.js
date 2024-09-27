@@ -48,7 +48,7 @@ const Topbar = () => {
   
     if (navbar) { // Check if navbar is not null
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 200) {
+        if (window.scrollY > 137) {
           navbar.classList.add('sticky');
         } else {
           navbar.classList.remove('sticky');

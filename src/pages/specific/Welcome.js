@@ -1,18 +1,38 @@
+import React, { useState } from "react";
 import axios from "axios";
 import VerifiedUsersList from "../../components/common/VerifiedUsersList";
-import { useState } from "react";
+
 axios.defaults.withCredentials = true;
 
 const Welcome = () => {   
     const [postContent, setPostContent] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const handlePostChange = (e) => {
         setPostContent(e.target.value);
     };
 
-    const handlePostSubmit = () => {
-        console.log("Posting:", postContent);
-        setPostContent("");
+    const handlePostSubmit = async () => {
+        if (!postContent.trim()) {
+            setError("Post content cannot be empty");
+            return;
+        }
+
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            const response = await axios.post('/api/posts', { content: postContent });
+            console.log("Post submitted successfully:", response.data);
+            setPostContent("");
+            // You might want to update the UI here, e.g., show the new post or a success message
+        } catch (err) {
+            console.error("Error submitting post:", err);
+            setError("Failed to submit post. Please try again.");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     return (
@@ -27,16 +47,24 @@ const Welcome = () => {
                             placeholder="What's on your mind?"
                             value={postContent}
                             onChange={handlePostChange}
+                            disabled={isLoading}
                         />
-                        <button className="post-button" onClick={handlePostSubmit}>Post</button>
+                        <button 
+                            className="post-button" 
+                            onClick={handlePostSubmit}
+                            disabled={isLoading}
+                        >
+                            {isLoading ? "Posting..." : "Post"}
+                        </button>
                     </div>
+                    {error && <div className="error-message">{error}</div>}
                 </div>
                 <div className="users-container">
                     <VerifiedUsersList />
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default Welcome;

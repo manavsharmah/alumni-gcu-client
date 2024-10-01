@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import api from "../../services/api"
 import VerifiedUsersList from "../../components/common/VerifiedUsersList";
 
 axios.defaults.withCredentials = true;
@@ -23,7 +24,7 @@ const Welcome = () => {
         setError(null);
 
         try {
-            const response = await axios.post('/api/posts', { content: postContent });
+            const response = await api.post('/posts/create', { content: postContent });
             console.log("Post submitted successfully:", response.data);
             setPostContent("");
             // You might want to update the UI here, e.g., show the new post or a success message
@@ -59,9 +60,9 @@ const Welcome = () => {
                     </div>
                     {error && <div className="error-message">{error}</div>}
                 </div>
-                <div className="users-container">
+                {/* <div className="users-container">
                     <VerifiedUsersList />
-                </div>
+                </div> */}
             </div>
         </div>
     );

@@ -743,6 +743,7 @@ justify-content: center;
   display: flex;
   align-items: center;
   gap: 10px;
+  text-decoration: none;
 }
 
 .user-item img {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './pages.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import NewsCard from '../components/common/NewsCard';
@@ -8,6 +8,38 @@ import { useUser } from '../services/UserContext';
 
 const Home = () => {
     const { user } = useUser();
+    // const [currentSlide, setCurrentSlide] = useState(0);
+
+    // const officeBearers = [
+    //     {
+    //         name: "Office Bearer 1",
+    //         position: "President",
+    //         image: "./assets/gcuregistrar.jpg"
+    //     },
+    //     {
+    //         name: "Office Bearer 2",
+    //         position: "Secretary",
+    //         image: "./assets/gcuregistrar.jpg"
+    //     },
+    //     {
+    //         name: "Office Bearer 3",
+    //         position: "Treasurer",
+    //         image: "./assets/gcuregistrar.jpg"
+    //     }
+    // ];
+
+    // const nextSlide = () => {
+    //     setCurrentSlide((prevSlide) =>
+    //         prevSlide === officeBearers.length - 1 ? 0 : prevSlide + 1
+    //     );
+    // };
+
+    // const prevSlide = () => {
+    //     setCurrentSlide((prevSlide) =>
+    //         prevSlide === 0 ? officeBearers.length - 1 : prevSlide - 1
+    //     );
+    // };
+
 
     return (
         <div className='main'>
@@ -81,6 +113,40 @@ const Home = () => {
                     <EventCard />
                 </div>
             </section>
+
+            {/* <section className="office-bearers-carousel">
+                <h2 className="text-center mb-4">Meet the Office Bearers</h2>
+
+                <div className="carousel-container">
+                    <button className="carousel-control prev" onClick={prevSlide}>
+                        &#10094;
+                    </button>
+
+                    <div className="carousel-slide">
+                        {officeBearers.map((bearer, index) => (
+                            <div
+                                className={`carousel-item hero6 ${
+                                    index === currentSlide ? "active" : ""
+                                }`}
+                                key={index}
+                                style={{ display: index === currentSlide ? "flex" : "none" }}
+                            >
+                                <div className="office-bearer-image">
+                                    <img src={bearer.image} alt={bearer.name} className="vc-img" />
+                                </div>
+                                <div className="office-bearer-text">
+                                    <h3>{bearer.name}</h3>
+                                    <p>{bearer.position}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    <button className="carousel-control next" onClick={nextSlide}>
+                        &#10095;
+                    </button>
+                </div>
+            </section> */}
             <section className='hero4'> {/* New section for gallery preview */}
                 <GalleryPreview />
             </section>

@@ -1059,6 +1059,141 @@ button:hover {
   padding-left: 20%;
 }
 
+.page-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  min-height: calc(100vh - 60px);
+}
+
+.content-wrapper {
+  width: 100%;
+  max-width: 600px;
+}
+
+.post-section {
+  width: 100%;
+}
+
+.post-form {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.profile-picture-small {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  margin-right: 10px;
+}
+
+.post-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.post-button {
+  padding: 8px 16px;
+  background-color: #1a91da;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.post-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: #dc3545;
+  margin-bottom: 10px;
+}
+
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.post-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.post-card-header {
+  display: flex;
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.post-author-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  margin-right: 10px;
+}
+
+.post-author-info {
+  flex-grow: 1;
+}
+
+.post-author-name {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.post-timestamp {
+  font-size: 12px;
+  color: #666;
+}
+
+.post-content {
+  padding: 15px;
+  line-height: 1.5;
+}
+
+.posts-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.posts-page-number {
+  padding: 10px;
+  margin: 0 5px;
+  background-color: #f9c503;
+  color: #1a2b58;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.posts-page-number-active,
+.posts-page-number:hover {
+  background-color: #1a2b58;
+  color: #f9c503;
+}
+
 /*Donation Styling*/
 
 .razorpay-button-container {

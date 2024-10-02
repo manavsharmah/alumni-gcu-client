@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import api from "../../services/api";
+import axios from "axios";
 
+axios.defaults.withCredentials = true;
 const PostCard = ({ post }) => {
   return (
     <div className="post-card">

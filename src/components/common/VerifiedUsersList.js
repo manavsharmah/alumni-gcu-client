@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from React Router
 import api from '../../services/api';
 import "../components.css";
 
@@ -43,13 +44,13 @@ const VerifiedUsersList = () => {
       {error && <p className="error">{error}</p>}
       <div className="users-list">
         {filteredUsers.map(user => (
-          <div key={user._id} className="user-item">
+          <Link to={`/profile/${user._id}`} key={user._id} className="user-item"> {/* Wrap user item with Link */}
             <img src="https://via.placeholder.com/50" alt="Profile" />
             <div className="user-info">
               <h3>{user.name}</h3>
               <p>{user.branch}</p> ,<p>{user.batch}</p>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>

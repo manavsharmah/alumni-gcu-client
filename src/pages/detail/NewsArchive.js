@@ -46,8 +46,15 @@ const NewsList = () => {
         {currentNews.map((newsItem) => (
           <div key={newsItem._id} className="news-item" onClick={() => handleNewsClick(newsItem)}>
             <div className="news-thumbnail">
-              <img src={newsItem.imageUrl || "./assets/gcu-building.jpg"} alt="News Thumbnail" />
-            </div>
+							{newsItem.images && newsItem.images.length > 0 ? (
+								<img
+									src={`http://localhost:5000${newsItem.images[0]}`}
+									alt="News Thumbnail"
+								/>
+							) : (
+								<img src="./assets/gcu-building.jpg" alt="Default Thumbnail" />
+							)}
+						</div>
             <div className="news-content">
               <h3 className="news-headline">{newsItem.title}</h3>
               <p className="news-date">{new Date(newsItem.date).toLocaleDateString()}</p>

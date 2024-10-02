@@ -1,41 +1,88 @@
 import React, { useState } from 'react';
-import "./admin.css"; // Import the CSS file
-import api from "../../services/api"
+import "./admin.css";
+import api from "../../services/api";
 
-const PhotoUpload = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+const PhotoUpload = ({ onUploadSuccess }) => {
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [uploading, setUploading] = useState(false);
+  const [previewUrls, setPreviewUrls] = useState([]);
 
   const handleFileChange = (e) => {
-    setSelectedFile(e.target.files[0]);
+    const files = Array.from(e.target.files);
+    setSelectedFiles(files);
+
+    // Create preview URLs for the selected images
+    const newPreviewUrls = files.map(file => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrls((prevUrls) => [...prevUrls, reader.result]);
+      };
+      reader.readAsDataURL(file);
+      return reader.result;
+    });
+
+    setPreviewUrls(newPreviewUrls);
   };
 
-  const uploadImage = async () => {
-    if (!selectedFile) {
-      alert('Please select a file first.');
+  const uploadImages = async () => {
+    if (selectedFiles.length === 0) {
+      alert('Please select at least one file.');
       return;
     }
 
+    setUploading(true);
     const formData = new FormData();
-    formData.append('image', selectedFile);
+    selectedFiles.forEach(file => {
+      formData.append('images', file); // Use 'images' as the field name
+    });
+
+    //explicitly append the category field as gallery
+    formData.append('category', 'gallery');
 
     try {
-      await api.post('/images/upload', formData, {
+      const response = await api.post('/images/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
       });
-      alert('Image uploaded successfully.');
+      alert('Images uploaded successfully.');
+      setSelectedFiles([]);
+      setPreviewUrls([]);
+      if (onUploadSuccess) {
+        onUploadSuccess(response.data);
+      }
     } catch (err) {
-      console.error('Error uploading image:', err);
-      alert('Failed to upload image.');
+      console.error('Error uploading images:', err);
+      alert('Failed to upload images.');
+    } finally {
+      setUploading(false);
     }
   };
 
   return (
     <div className="photo-upload-container">
-      <h2 className="photo-upload-header">Upload Image</h2>
-      <input type="file" onChange={handleFileChange} className="photo-upload-input" />
-      <button onClick={uploadImage} className="photo-upload-button">Upload</button>
+      <h2 className="photo-upload-header">Upload Images</h2>
+      <input 
+        type="file" 
+        onChange={handleFileChange} 
+        className="photo-upload-input" 
+        accept="image/*"
+        multiple // Allow multiple files
+      />
+      {previewUrls.length > 0 && (
+        <div className="photo-preview">
+          {previewUrls.map((url, index) => (
+            <img key={index} src={url} alt={`Preview ${index + 1}`} className="preview-image" />
+          ))}
+        </div>
+      )}
+      <button 
+        onClick={uploadImages} 
+        className="photo-upload-button"
+        disabled={uploading}
+      >
+        {uploading ? 'Uploading...' : 'Upload'}
+      </button>
     </div>
   );
 };

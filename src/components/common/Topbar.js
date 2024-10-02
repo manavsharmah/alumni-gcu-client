@@ -48,7 +48,7 @@ const Topbar = () => {
   
     if (navbar) { // Check if navbar is not null
       window.addEventListener('scroll', () => {
-        if (window.scrollY > 200) {
+        if (window.scrollY > 137) {
           navbar.classList.add('sticky');
         } else {
           navbar.classList.remove('sticky');
@@ -73,7 +73,7 @@ const Topbar = () => {
       <header className="App-header">
         <div className="logo">
           <Link to="/">
-            <img src="./assets/LOGO 1.jpg" alt="Girijananda Chowdhury University Alumni Association Logo" />
+            <img src="/assets/LOGO 1.jpg" alt="Girijananda Chowdhury University Alumni Association Logo" />
           </Link>
         </div>
         <div className="title">
@@ -81,7 +81,7 @@ const Topbar = () => {
           <h2>Alumni Association</h2>
         </div>
         <div className='logo-gcu'>
-          <img src="./assets/gcu-logo.png" alt="Girijananda Chowdhury University Logo" />
+          <img src="/assets/gcu-logo.png" alt="Girijananda Chowdhury University Logo" />
         </div>
       </header>
       <nav className="navbar">
@@ -127,6 +127,7 @@ const Topbar = () => {
               <ul className='sub-menus'>
                 <li><Link to='/gallery'>Gallery</Link></li>
                 <li><Link to='/contact'>Contact</Link></li>
+                <li><Link to='/donations'>Donations</Link></li>
               </ul>
             </li>
             <li><Link to="/faq">FAQ's</Link></li>

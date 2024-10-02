@@ -26,11 +26,13 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 import AdminEventsForm from "./pages/admin/AdminEventsForm";
 import PhotoUpload from "./pages/admin/PhotoUpload";
 import AlumniArchive from "../src/pages/admin/AlumniArchive";
+import AdminEmailForm from "./pages/admin/AdminEmailForm";
 
 
 // Detail Pages
 import { TopAlumni, NotableAlumni } from "./pages/detail/Alumni";
-import { Copyright, Disclaimer, TermsOfUse, PrivacyPolicy, AlumniDirectory } from "./pages/detail/Others";
+import { Copyright, Disclaimer, TermsOfUse, ContactUs, PrivacyPolicy, AlumniDirectory } from "./pages/detail/Others";
+import FeedbackForm from "./pages/detail/Feedbackform";
 import FAQ from "./pages/detail/FAQ";
 import Contact from "./pages/detail/Contact";
 import Scholarship from "./pages/detail/Scholarship";
@@ -41,6 +43,7 @@ import Events from "./pages/detail/Events";
 import NewsList from "./pages/detail/NewsArchive";
 import SingleNews from "./pages/detail/SingleNews";
 import SingleEvent from "./pages/detail/SingleEvent";
+import Donations from "./pages/detail/Donations";
 import {
 	Overview,
 	VisionAndMission,
@@ -76,6 +79,8 @@ function App() {
 								<Route path="/news/:id" element={<SingleNews />} />
 								<Route path="/gallery" element={<Gallery />} />
 								<Route path="/contact" element={<Contact />} />
+								<Route path="/contactus" element={<ContactUs />} />
+								<Route path="/feedback" element={<FeedbackForm />} />
 								<Route path="/faq" element={<FAQ />} />
 								<Route path="/scholarship" element={<Scholarship />} />
 								<Route path="/activities" element={<Activities />} />
@@ -87,6 +92,7 @@ function App() {
 								<Route path="/privacypolicy" element={<PrivacyPolicy />} />
 								<Route path="/alumnidirectory" element={<AlumniDirectory />} />
 								<Route path="/forgot-password" element={<ForgotPassword />} />
+								<Route path="/donations" element={<Donations />} />
 
 								{/* Admin + User Routes */}
 								<Route
@@ -138,9 +144,8 @@ function App() {
 								<Route path="/news-form" element={<AdminNewsForm />} />
 								<Route path="/events-form" element={<AdminEventsForm />} />
 								<Route path="/photo-upload-form" element={<PhotoUpload />} />
+								<Route path="/email-form" element={<AdminEmailForm />} />
 							</Route>
-
-							{/* forgot password route */}
 
 						</Routes>
 					</section>

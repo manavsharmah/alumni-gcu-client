@@ -274,6 +274,7 @@
   background-color: #007bff;
   border: none;
   padding: 10px 20px;
+  margin-top: 20px;
   border-radius: 20px;
   color: #fff;
   cursor: pointer;
@@ -304,5 +305,93 @@
   .user-table th,
   .user-table td {
     padding: 8px 10px;
+  }
+}
+
+/* Email Form */
+
+.email-form-container {
+  width: 90%;
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input[type='email'],
+input[type='text'],
+textarea {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+textarea {
+  height: 120px;
+  resize: vertical;
+}
+
+.submit-button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Mobile-specific styles */
+@media screen and (max-width: 768px) {
+  .email-form-container {
+    max-width: 70%;
+    margin: 20px auto;
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  input[type='email'],
+  input[type='text'],
+  textarea,
+  .submit-button {
+    font-size: 14px;
+  }
+
+  textarea {
+    height: 100px;
+  }
+
+  .submit-button {
+    padding: 10px;
   }
 }

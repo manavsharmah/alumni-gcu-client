@@ -7,16 +7,16 @@ const AdminNewsForm = () => {
   const [formData, setFormData] = useState({
     title: '',
     content: '',
-    image: null,
+    images: []
   });
 
-  const { title, content, image } = formData;
+  const { title, content, category, images } = formData;
 
   const onChange = e => {
-    if (e.target.name !== 'image') {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (e.target.name === 'images') {
+      setFormData({ ...formData, images: Array.from(e.target.files) });
     } else {
-      setFormData({ ...formData, image: e.target.files[0] });
+      setFormData({ ...formData, [e.target.name]: e.target.value });
     }
   };
 
@@ -31,20 +31,23 @@ const AdminNewsForm = () => {
     const data = new FormData();
     data.append('title', title);
     data.append('content', content);
-    if (image) {
-      data.append('image', image);
-      console.log('Image appended:', image.name);
-    }
+    data.append('category', "news");
+
+    images.forEach((image, index) => {
+      data.append('images', image);
+      console.log(`Image ${index + 1} appended:`, image.name);
+    });
 
     try {
       const response = await api.post('/news/upload', data, {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          'Content-Type': 'multipart/form-data'
         }
       });
       setMessage('News Uploaded!');
       console.log('Response:', response.data);
-      setFormData({ title: '', content: '', image: null });
+      setFormData({ title: '', content: '', category: 'news', images: [] });
     } catch (err) {
       console.error('Error:', err.response?.data || err.message);
       if (err.response?.data?.errors) {
@@ -82,12 +85,15 @@ const AdminNewsForm = () => {
           />
         </div>
         <div className="admin-form-group">
+        </div>
+        <div className="admin-form-group">
           <input
             type="file"
             className="admin-form-input"
-            name="image"
+            name="images"
             accept="image/*"
             onChange={onChange}
+            multiple
           />
         </div>
         <button type="submit" className='admin-form-button'>Create News</button>

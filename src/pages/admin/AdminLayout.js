@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { FaTachometerAlt, FaNewspaper, FaCalendarAlt, FaArrowLeft, FaImages } from 'react-icons/fa';
+import { MdAttachEmail } from "react-icons/md";
 import "./admin.css";
 
 const AdminLayout = () => {
@@ -40,6 +41,12 @@ const AdminLayout = () => {
           <a href="/photo-upload-form">
             <FaImages />
             <span>Upload Images</span>
+          </a>
+        </li>
+        <li>
+          <a href="/email-form">
+            <MdAttachEmail />
+            <span>Send Mail</span>
           </a>
         </li>
         <li>

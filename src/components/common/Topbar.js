@@ -152,7 +152,7 @@ const Topbar = () => {
             <div className="dropdown">
               <Link to="/#" className="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img 
-                  src="./assets/profile-placeholder.svg" 
+                  src="/assets/profile-placeholder.svg" 
                   alt="profile" 
                   className='rounded-full'
                 />

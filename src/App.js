@@ -31,7 +31,7 @@ import AdminEmailForm from "./pages/admin/AdminEmailForm";
 
 // Detail Pages
 import { TopAlumni, NotableAlumni } from "./pages/detail/Alumni";
-import { Copyright, Disclaimer, TermsOfUse, ContactUs, PrivacyPolicy, AlumniDirectory } from "./pages/detail/Others";
+import { Copyright, Disclaimer, TermsOfUse, ContactUs, PrivacyPolicy } from "./pages/detail/Others";
 import FeedbackForm from "./pages/detail/Feedbackform";
 import FAQ from "./pages/detail/FAQ";
 import Contact from "./pages/detail/Contact";
@@ -44,6 +44,7 @@ import NewsList from "./pages/detail/NewsArchive";
 import SingleNews from "./pages/detail/SingleNews";
 import SingleEvent from "./pages/detail/SingleEvent";
 import Donations from "./pages/detail/Donations";
+import AlumniDirectory from "./pages/detail/AlumniDirectory";
 import {
 	Overview,
 	VisionAndMission,
@@ -113,12 +114,13 @@ function App() {
 										/>
 									}
 								/>
-								<Route
-									path="/profile"
-									element={
-										<ProtectedRoute element={<Profile />} requiredRole="user" />
-									}
-								/>
+								
+    							{/* Route for logged-in user’s own profile */}
+    							<Route exact path="/profile" element={<Profile />} />
+								
+    							{/* Route for viewing other users' profiles */}
+    							<Route exact path="/profile/:id" element={<Profile />} />
+  								
 								<Route
 									path="/update-profile"
 									element={

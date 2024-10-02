@@ -45,14 +45,19 @@ const AdminDashboard = () => {
   };
 
   const handleSearchChange = (e) => {
+    const searchTerm = e.target.value.toLowerCase();
     setSearch(e.target.value);
-    const filtered = users.filter(user =>
-      user.name.toLowerCase().includes(e.target.value.toLowerCase()) ||
-      user.email.toLowerCase().includes(e.target.value.toLowerCase()) ||
-      user.roll_no.toLowerCase().includes(e.target.value.toLowerCase()) ||
-      user.batch.toLowerCase().includes(e.target.value.toLowerCase()) ||
-      user.branch.toLowerCase().includes(e.target.value.toLowerCase())
-    );
+    
+    const filtered = users.filter(user => {
+      const nameMatch = String(user.name || '').toLowerCase().includes(searchTerm);
+      const emailMatch = String(user.email || '').toLowerCase().includes(searchTerm);
+      const rollNoMatch = String(user.roll_no || '').toLowerCase().includes(searchTerm);
+      const batchMatch = String(user.batch || '').toLowerCase().includes(searchTerm);
+      const branchMatch = String(user.branch || '').toLowerCase().includes(searchTerm);
+      
+      return nameMatch || emailMatch || rollNoMatch || batchMatch || branchMatch;
+    });
+    
     setFilteredUsers(filtered);
   };
 
@@ -89,30 +94,30 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="dashboard-container">
-      <div className='dashboard-header'>
-        <h1 className='dashboard-title'>ADMIN DASHBOARD</h1>
+    <div className="admin-dashboard-container">
+      <div className='admin-dashboard-header'>
+        <h1 className='admin-dashboard-title'>ADMIN DASHBOARD</h1>
       </div>
-      <div className="search-group">
+      <div className="admin-dashboard-search-group">
         <input
           type="text"
-          className="search-input"
+          className="admin-dashboard-search-input"
           placeholder="Search by name, email, batch, or branch"
           value={search}
           onChange={handleSearchChange}
         />
-        <button className="search-button">
+        <button className="admin-dashboard-search-button">
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
       </div>
-      <h2 className='admin-form-header'>Pending User Approvals</h2>
+      <h2 className='admin-dashboard-section-header'>Pending User Approvals</h2>
       {filteredUsers.length > 0 ? (
-        <table className="approval-table table-striped">
+        <table className="admin-dashboard-table">
           <thead>
             <tr>
               <th onClick={() => handleSort('name')}>Name {getSortIndicator('name')}</th>
               <th onClick={() => handleSort('email')}>Email {getSortIndicator('email')}</th>
-              <th onClick={() => handleSort('roll_no')}>Roll Number {getSortIndicator('branch')}</th>
+              <th onClick={() => handleSort('roll_no')}>Roll Number {getSortIndicator('roll_no')}</th>
               <th onClick={() => handleSort('batch')}>Batch {getSortIndicator('batch')}</th>
               <th onClick={() => handleSort('branch')}>Branch {getSortIndicator('branch')}</th>
               <th>Actions</th>
@@ -127,15 +132,15 @@ const AdminDashboard = () => {
                 <td>{user.batch}</td>
                 <td>{user.branch}</td>
                 <td>
-                  <button onClick={() => approveUser(user.email)} className="btn-approve">Approve</button>
-                  <button onClick={() => rejectUser(user.email)} className="btn-reject">Reject</button>
+                  <button onClick={() => approveUser(user.email)} className="admin-dashboard-btn-approve">Approve</button>
+                  <button onClick={() => rejectUser(user.email)} className="admin-dashboard-btn-reject">Reject</button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       ) : (
-        <p>No pending approvals right now.</p>
+        <p className="admin-dashboard-no-data">No pending approvals right now.</p>
       )}
     </div>
   );

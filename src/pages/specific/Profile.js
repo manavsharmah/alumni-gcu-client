@@ -8,6 +8,8 @@ const Profile = () => {
     const [userPosts, setUserPosts] = useState([]);
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
     const postsPerPage = 5;
 
     const sendRequest = async () => {
@@ -25,14 +27,18 @@ const Profile = () => {
         }
     };
 
-    const fetchUserPosts = async (userId) => {
+    const fetchUserPosts = async (userId, page) => {
+        setIsLoading(true);
         try {
-            const res = await api.get(`/posts/user/${userId}`);
+            const res = await api.get(`/posts/user/${userId}?page=${page}&limit=${postsPerPage}`);
             if (res && res.data) {
-                setUserPosts(res.data);
+                setUserPosts(res.data.posts);
+                setTotalPages(res.data.totalPages);
             }
         } catch (err) {
             console.error('Error fetching user posts:', err);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -40,20 +46,14 @@ const Profile = () => {
         sendRequest().then((data) => {
             if (data) {
                 setUser(data);
-                fetchUserPosts(data._id);
+                fetchUserPosts(data._id, currentPage);
             }
         });
-    }, []);
+    }, [currentPage]);
 
     const handlePostClick = () => {
         navigate('/welcome');
     };
-
-    // Pagination logic
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = userPosts.slice(indexOfFirstPost, indexOfLastPost);
-    const totalPages = Math.ceil(userPosts.length / postsPerPage);
 
     const handleClickPage = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -86,9 +86,11 @@ const Profile = () => {
             </div>
             <div className="user-profile-posts-section">
                 <h2 className="user-profile-posts-title">Recent Posts</h2>
-                {currentPosts.length > 0 ? (
+                {isLoading ? (
+                    <p className="user-profile-loading">Loading posts...</p>
+                ) : userPosts.length > 0 ? (
                     <div className="user-profile-posts-list">
-                        {currentPosts.map((post) => (
+                        {userPosts.map((post) => (
                             <div key={post._id} className="user-profile-post-link" onClick={handlePostClick}>
                                 <div className="user-profile-post-card">
                                     <p className="user-profile-post-content">{post.content}</p>
@@ -101,7 +103,7 @@ const Profile = () => {
                     <p className="user-profile-no-posts">No recent posts</p>
                 )}
                 {/* Pagination */}
-                {userPosts.length > postsPerPage && (
+                {totalPages > 1 && (
                     <div className="user-profile-pagination">
                         {Array.from({ length: totalPages }, (_, index) => (
                             <button 

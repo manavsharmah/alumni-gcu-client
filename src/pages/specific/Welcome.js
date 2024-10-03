@@ -3,6 +3,7 @@ import api from "../../services/api";
 import axios from "axios";
 
 axios.defaults.withCredentials = true;
+
 const PostCard = ({ post }) => {
   return (
     <div className="post-card">
@@ -32,18 +33,23 @@ const Welcome = () => {
     const [error, setError] = useState(null);
     const [posts, setPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
     const postsPerPage = 6;
 
     useEffect(() => {
-        fetchPosts();
-    }, []);
+        fetchPosts(currentPage);
+    }, [currentPage]);
 
-    const fetchPosts = async () => {
+    const fetchPosts = async (page) => {
         try {
-            const response = await api.get('/posts');
-            setPosts(response.data);
+            setIsLoading(true);
+            const response = await api.get(`/posts?page=${page}&limit=${postsPerPage}`);
+            setPosts(response.data.posts);
+            setTotalPages(response.data.totalPages);
         } catch (err) {
             setError("Failed to load posts. Please try again later.");
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -62,7 +68,8 @@ const Welcome = () => {
 
         try {
             const response = await api.post('/posts/create', { content: postContent });
-            setPosts([response.data.post, ...posts]);
+            // Refresh the current page after posting
+            fetchPosts(currentPage);
             setPostContent("");
         } catch (err) {
             setError("Failed to submit post. Please try again.");
@@ -70,12 +77,6 @@ const Welcome = () => {
             setIsLoading(false);
         }
     };
-
-    const indexOfLastPost = currentPage * postsPerPage;
-    const indexOfFirstPost = indexOfLastPost - postsPerPage;
-    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
-    const totalPages = Math.ceil(posts.length / postsPerPage);
 
     const handleClickPage = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -107,8 +108,10 @@ const Welcome = () => {
                         {error && <div className="error-message">{error}</div>}
                         
                         <div className="posts-container">
-                            {currentPosts && currentPosts.length > 0 ? (
-                                currentPosts.map((post) => (
+                            {isLoading ? (
+                                <p className="text-center">Loading posts...</p>
+                            ) : posts && posts.length > 0 ? (
+                                posts.map((post) => (
                                     <PostCard key={post._id} post={post} />
                                 ))
                             ) : (
@@ -119,17 +122,19 @@ const Welcome = () => {
                         </div>
 
                         {/* Pagination */}
-                        <div className="posts-pagination">
-                            {Array.from({ length: totalPages }, (_, index) => (
-                                <button 
-                                    key={index + 1} 
-                                    className={`posts-page-number ${currentPage === index + 1 ? 'posts-page-number-active' : ''}`} 
-                                    onClick={() => handleClickPage(index + 1)}
-                                >
-                                    {index + 1}
-                                </button>
-                            ))}
-                        </div>
+                        {totalPages > 1 && (
+                            <div className="posts-pagination">
+                                {Array.from({ length: totalPages }, (_, index) => (
+                                    <button 
+                                        key={index + 1} 
+                                        className={`posts-page-number ${currentPage === index + 1 ? 'posts-page-number-active' : ''}`} 
+                                        onClick={() => handleClickPage(index + 1)}
+                                    >
+                                        {index + 1}
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

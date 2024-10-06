@@ -1,22 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import api from "../../services/api";
-import '../pages.css'; 
+import '../pages.css';
 
 const Profile = () => {
+    const { id } = useParams();  // Get the user ID from the URL if provided
     const [user, setUser] = useState(null);
     const [userPosts, setUserPosts] = useState([]);
+    const [isLoggedInUser, setIsLoggedInUser] = useState(false);  // Flag to check if this is the logged-in user
     const navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     const postsPerPage = 5;
 
-    const sendRequest = async () => {
+    // Fetch logged-in user's profile or another user's profile based on the ID
+    const fetchUserProfile = async (userId) => {
         try {
-            const res = await api.get('/user/user');
-            if (res && res.data) {
-                return res.data;
+            let response;
+            if (userId) {
+                // Fetch another user's profile
+                response = await api.get(`/user/profile/${userId}`);
+                setIsLoggedInUser(false);  // Not the logged-in user's profile
+            } else {
+                // Fetch the logged-in user's profile
+                response = await api.get('/user/user');
+                setIsLoggedInUser(true);  // This is the logged-in user's profile
+            }
+
+            if (response && response.data) {
+                return response.data;
             } else {
                 console.error('No data found in response');
                 return null;
@@ -43,13 +56,14 @@ const Profile = () => {
     };
 
     useEffect(() => {
-        sendRequest().then((data) => {
+        // Fetch the appropriate profile based on URL param (id) or logged-in user
+        fetchUserProfile(id).then((data) => {
             if (data) {
                 setUser(data);
                 fetchUserPosts(data._id, currentPage);
             }
         });
-    }, [currentPage]);
+    }, [id, currentPage]);
 
     const handlePostClick = () => {
         navigate('/welcome');
@@ -72,7 +86,10 @@ const Profile = () => {
                     <div className="user-profile-info">
                         <h2 className="user-profile-name">{user?.name}</h2>
                         <p className="user-profile-email">{user?.email}</p>
-                        <button className="user-profile-change-picture-btn">Change Picture</button>
+                        {/* Only show the "Change Picture" button if it's the logged-in user's profile */}
+                        {isLoggedInUser && (
+                            <button className="user-profile-change-picture-btn">Change Picture</button>
+                        )}
                     </div>
                 </div>
                 <div className="user-profile-details">
@@ -81,7 +98,10 @@ const Profile = () => {
                     <p><strong>Current Working Place:</strong> {user?.currentWorkingPlace || "Not provided"}</p>
                     <p><strong>Batch:</strong> {user?.batch}</p>
                     <p><strong>Branch:</strong> {user?.branch}</p>
-                    <Link to="/update-profile" className="user-profile-update-btn">Update Profile</Link>
+                    {/* Only show the "Update Profile" link if it's the logged-in user's profile */}
+                    {isLoggedInUser && (
+                        <Link to="/update-profile" className="user-profile-update-btn">Update Profile</Link>
+                    )}
                 </div>
             </div>
             <div className="user-profile-posts-section">

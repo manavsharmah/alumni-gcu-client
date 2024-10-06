@@ -119,6 +119,14 @@ function App() {
 										<ProtectedRoute element={<Profile />} requiredRole="user" />
 									}
 								/>
+
+								<Route
+									path="/profile/:id"
+									element={
+										<ProtectedRoute element={<Profile />} requiredRole="user" />
+									}
+								/>
+								
 								<Route
 									path="/update-profile"
 									element={

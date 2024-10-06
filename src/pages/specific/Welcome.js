@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import api from "../../services/api";
 import axios from "axios";
+import RecommendedUsersList from "../../components/common/RecommendedUsersList";
 
 axios.defaults.withCredentials = true;
 
@@ -137,6 +138,9 @@ const Welcome = () => {
                         )}
                     </div>
                 </div>
+            </div>
+            <div className="post-section">
+                <RecommendedUsersList/>
             </div>
         </div>
     );

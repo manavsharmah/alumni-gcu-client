@@ -28,7 +28,6 @@ import PhotoUpload from "./pages/admin/PhotoUpload";
 import AlumniArchive from "../src/pages/admin/AlumniArchive";
 import AdminEmailForm from "./pages/admin/AdminEmailForm";
 
-
 // Detail Pages
 import { TopAlumni, NotableAlumni } from "./pages/detail/Alumni";
 import { Copyright, Disclaimer, TermsOfUse, ContactUs, PrivacyPolicy } from "./pages/detail/Others";
@@ -117,7 +116,7 @@ function App() {
 								
     							{/* Route for logged-in user’s own profile */}
     							<Route exact path="/profile" element={<Profile />} />
-								
+
     							{/* Route for viewing other users' profiles */}
     							<Route exact path="/profile/:id" element={<Profile />} />
   								

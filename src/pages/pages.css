@@ -617,6 +617,149 @@ button:hover {
   position: relative;
 }
 
+.user-profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.user-profile-main-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.5em;
+  color: #333;
+}
+
+.user-profile-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.user-profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.user-profile-info {
+  flex-grow: 1;
+}
+
+.user-profile-name {
+  font-size: 1.8em;
+  margin-bottom: 5px;
+}
+
+.user-profile-email {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.user-profile-change-picture-btn,
+.user-profile-update-btn {
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.user-profile-details h3 {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.user-profile-details p {
+  margin-bottom: 8px;
+}
+
+.user-profile-posts-section {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.user-profile-posts-title {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: bold;
+}
+
+.user-profile-post-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.user-profile-post-card {
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.user-profile-post-card:hover {
+  background-color: #f0f0f0;
+}
+
+.user-profile-post-content {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.user-profile-post-date {
+  color: #666;
+}
+
+.user-profile-no-posts {
+  color: #666;
+  font-style: italic;
+}
+
+.user-profile-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.user-profile-page-number {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: #575755;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user-profile-page-number:hover {
+  background-color: #f0f0f0;
+}
+
+.user-profile-page-number-active {
+  background-color: #3f51b5;
+  color: white;
+  border-color: #3f51b5;
+}
+
 /* News Archive */
 
 .news-container {
@@ -1431,6 +1574,7 @@ button:hover {
 }
 
 h2 {
+  color: #e74c3c;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -1756,4 +1900,3 @@ button:hover {
     padding: 8px 10px;
   }
 }
-

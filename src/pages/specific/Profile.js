@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";  // Import useParams from React Router
+import { Link, useNavigate, useParams } from "react-router-dom";
 import api from "../../services/api";
-import "../pages.css"; 
+import "../pages.css";
 
 const Profile = () => {
     const { id } = useParams();  // Get user ID from the URL, if provided
     const [user, setUser] = useState(null);  // Holds the profile data of the user being viewed
     const [loggedInUser, setLoggedInUser] = useState(null);  // Holds logged-in user data
     const [isOwnProfile, setIsOwnProfile] = useState(false);  // Determines if the logged-in user is viewing their own profile
+    const [userPosts, setUserPosts] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
+    const postsPerPage = 5;
 
-    // Fetch the profile (either the logged-in user's or another user's)
     const fetchUserProfile = async (userId) => {
         try {
             const endpoint = userId ? `/user/profile/${userId}` : '/user/user';
@@ -26,7 +31,6 @@ const Profile = () => {
         }
     };
 
-    // Fetch logged-in user's profile separately to determine ownership
     const fetchLoggedInUser = async () => {
         try {
             const res = await api.get('/user/user');  // Fetch logged-in user's profile
@@ -42,69 +46,111 @@ const Profile = () => {
         }
     };
 
+    const fetchUserPosts = async (userId, page) => {
+        setIsLoading(true);
+        try {
+            const res = await api.get(`/posts/user/${userId}?page=${page}&limit=${postsPerPage}`);
+            if (res && res.data) {
+                setUserPosts(res.data.posts);
+                setTotalPages(res.data.totalPages);
+            }
+        } catch (err) {
+            console.error('Error fetching user posts:', err);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     useEffect(() => {
-        // Fetch the logged-in user's profile to compare if they are viewing their own profile
         fetchLoggedInUser().then(loggedInUser => {
             if (loggedInUser) {
                 if (!id) {
-                    // If no ID is in the URL, the logged-in user is viewing their own profile
                     setIsOwnProfile(true);
                     setUser(loggedInUser);
+                    fetchUserPosts(loggedInUser._id, currentPage);
                 } else {
-                    // If an ID is provided in the URL, fetch that user's profile
                     fetchUserProfile(id).then((profileData) => {
                         setUser(profileData);
-                        setIsOwnProfile(loggedInUser._id === profileData._id);  // Check if logged-in user is viewing their own profile
+                        setIsOwnProfile(loggedInUser._id === profileData._id);
+                        fetchUserPosts(profileData._id, currentPage);
                     });
                 }
             }
         });
-    }, [id]);  // Re-run when `id` changes
+    }, [id, currentPage]);
+
+    const handlePostClick = () => {
+        navigate('/welcome');
+    };
+
+    const handleClickPage = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
 
     if (!user) {
         return <p>Loading profile...</p>;
     }
 
     return (
-        <div className="modern-profile-container">
-            {/* Profile Header */}
-            <div className="modern-profile-header">
-                <h1>{isOwnProfile ? "My Profile" : "Profile"}</h1>
-            </div>
-
-            {/* Profile Card */}
-            <div className="modern-profile-card">
-                <div className="profile-picture-section">
+        <div className="user-profile-container">
+            <h1 className="user-profile-main-title">{isOwnProfile ? "My Profile" : "Profile"}</h1>
+            <div className="user-profile-card">
+                <div className="user-profile-header">
                     <img 
-                        src={user.profilePicture ? user.profilePicture : "https://via.placeholder.com/150"} 
+                        src={user.profilePicture || "https://via.placeholder.com/150"} 
                         alt="Profile" 
-                        className="profile-picture" 
+                        className="user-profile-picture" 
                     />
-                    {/* Only show Change Picture button if the logged-in user is viewing their own profile */}
                     {isOwnProfile && (
-                        <button className="change-pic-button">Change Picture</button>
+                        <button className="user-profile-change-picture-btn">Change Picture</button>
                     )}
-                </div>
-
-                <div className="profile-details-section">
-                    <h2>{user.name}</h2>
-                    <p className="email-text">{user.email}</p>
-
-                    <div className="about-section">
-                        <h3>About</h3>
-                        <p><strong>Biography:</strong> {user.biography || "No biography available"}</p>
-                        <p><strong>Current Working Place:</strong> {user.currentWorkingPlace || "Not provided"}</p>
-                        <p><strong>Batch:</strong> {user.batch || "Not provided"}</p>
-                        <p><strong>Branch:</strong> {user.branch || "Not provided"}</p>
+                    <div className="user-profile-info">
+                        <h2 className="user-profile-name">{user.name}</h2>
+                        <p className="user-profile-email">{user.email}</p>
                     </div>
-
-                    {/* Show "Update Profile" button only if the logged-in user is viewing their own profile */}
+                </div>
+                <div className="user-profile-details">
+                    <h3>About</h3>
+                    <p><strong>Biography:</strong> {user.biography || "No biography available"}</p>
+                    <p><strong>Current Working Place:</strong> {user.currentWorkingPlace || "Not provided"}</p>
+                    <p><strong>Batch:</strong> {user.batch || "Not provided"}</p>
+                    <p><strong>Branch:</strong> {user.branch || "Not provided"}</p>
                     {isOwnProfile && (
-                        <a href="/update-profile">
-                            <button className="update-profile-button">Update Profile</button>
-                        </a>
+                        <Link to="/update-profile" className="user-profile-update-btn">Update Profile</Link>
                     )}
                 </div>
+            </div>
+            <div className="user-profile-posts-section">
+                <h2 className="user-profile-posts-title">Recent Posts</h2>
+                {isLoading ? (
+                    <p className="user-profile-loading">Loading posts...</p>
+                ) : userPosts.length > 0 ? (
+                    <div className="user-profile-posts-list">
+                        {userPosts.map((post) => (
+                            <div key={post._id} className="user-profile-post-link" onClick={handlePostClick}>
+                                <div className="user-profile-post-card">
+                                    <p className="user-profile-post-content">{post.content}</p>
+                                    <small className="user-profile-post-date">{new Date(post.createdAt).toLocaleString()}</small>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <p className="user-profile-no-posts">No recent posts</p>
+                )}
+                {totalPages > 1 && (
+                    <div className="user-profile-pagination">
+                        {Array.from({ length: totalPages }, (_, index) => (
+                            <button 
+                                key={index + 1} 
+                                className={`user-profile-page-number ${currentPage === index + 1 ? 'user-profile-page-number-active' : ''}`} 
+                                onClick={() => handleClickPage(index + 1)}
+                            >
+                                {index + 1}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
         </div>
     );

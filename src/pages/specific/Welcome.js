@@ -2,26 +2,43 @@ import React, { useState, useEffect } from "react";
 import api from "../../services/api";
 import axios from "axios";
 import RecommendedUsersList from "../../components/common/RecommendedUsersList";
+import { jwtDecode } from "jwt-decode";
 
 axios.defaults.withCredentials = true;
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, onDelete, currentUser }) => {
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete this post?")) {
+      await onDelete(post._id);
+    }
+  };
+
+  const canDelete = currentUser && (currentUser.role === 'admin' || currentUser._id === post.author._id);
+
   return (
-    <div className="post-card">
-      <div className="post-card-header">
-        <div className="post-author-avatar"></div>
-        <div className="post-author-info">
-          <h3 className="post-author-name">{post.author?.name || 'Anonymous'}</h3>
-          <p className="text-sm text-gray-500">
+    <div className="gcu-post-card">
+      <div className="gcu-post-card-header">
+        <div className="gcu-post-author-avatar"></div>
+        <div className="gcu-post-author-info">
+          <h3 className="gcu-post-author-name">{post.author?.name || 'Anonymous'}</h3>
+          <p className="gcu-post-author-details">
             {post.author?.batch && `${post.author.batch} - `}
             {post.author?.branch || ''}
           </p>
-          <p className="post-timestamp">
+          <p className="gcu-post-timestamp">
             {new Date(post.createdAt).toLocaleString()}
           </p>
         </div>
+        {canDelete && (
+          <button 
+            className="gcu-post-delete-button"
+            onClick={handleDelete}
+          >
+            Delete
+          </button>
+        )}
       </div>
-      <div className="post-content">
+      <div className="gcu-post-content">
         {post.content}
       </div>
     </div>
@@ -35,11 +52,22 @@ const Welcome = () => {
     const [posts, setPosts] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [currentUser, setCurrentUser] = useState(null);
     const postsPerPage = 6;
 
     useEffect(() => {
         fetchPosts(currentPage);
+        getCurrentUser();
     }, [currentPage]);
+
+    const getCurrentUser = () => {
+        const token = localStorage.getItem('accessToken');
+        if (token) {
+            const decodedToken = jwtDecode(token);
+            console.log("Decoded token:", decodedToken);
+            setCurrentUser(decodedToken);
+        }
+    };
 
     const fetchPosts = async (page) => {
         try {
@@ -69,13 +97,21 @@ const Welcome = () => {
 
         try {
             const response = await api.post('/posts/create', { content: postContent });
-            // Refresh the current page after posting
             fetchPosts(currentPage);
             setPostContent("");
         } catch (err) {
             setError("Failed to submit post. Please try again.");
         } finally {
             setIsLoading(false);
+        }
+    };
+
+    const handleDeletePost = async (postId) => {
+        try {
+            await api.delete(`/posts/${postId}`);
+            fetchPosts(currentPage);
+        } catch (err) {
+            setError("Failed to delete post. Please try again.");
         }
     };
 
@@ -113,7 +149,12 @@ const Welcome = () => {
                                 <p className="text-center">Loading posts...</p>
                             ) : posts && posts.length > 0 ? (
                                 posts.map((post) => (
-                                    <PostCard key={post._id} post={post} />
+                                    <PostCard 
+                                        key={post._id} 
+                                        post={post} 
+                                        onDelete={handleDeletePost}
+                                        currentUser={currentUser}
+                                    />
                                 ))
                             ) : (
                                 <p className="text-center text-gray-500 mt-4">
@@ -122,7 +163,6 @@ const Welcome = () => {
                             )}
                         </div>
 
-                        {/* Pagination */}
                         {totalPages > 1 && (
                             <div className="posts-pagination">
                                 {Array.from({ length: totalPages }, (_, index) => (

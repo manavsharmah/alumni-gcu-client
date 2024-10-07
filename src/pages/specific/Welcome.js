@@ -13,7 +13,7 @@ const PostCard = ({ post, onDelete, currentUser }) => {
     }
   };
 
-  const canDelete = currentUser && (currentUser.role === 'admin' || currentUser._id === post.author._id);
+  const canDelete = currentUser && (currentUser.role === 'admin' || currentUser.id === post.author._id);
 
   return (
     <div className="gcu-post-card">

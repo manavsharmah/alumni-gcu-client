@@ -1631,19 +1631,19 @@ button:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-  color: #e74c3c;
+.feedback-heading{
+  color: #1d0898;
   text-align: center;
   margin-bottom: 20px;
 }
 
-form {
+.feedback-form {
   display: flex;
   flex-direction: column;
 }
 
-input,
-textarea {
+.feedback-form-input,
+.feedback-form-textarea {
   margin-bottom: 15px;
   padding: 15px;
   border: 1px solid #ddd;
@@ -1651,12 +1651,12 @@ textarea {
   font-size: 16px;
 }
 
-textarea {
+.feedback-form-textarea {
   height: 100px;
   resize: vertical;
 }
 
-button {
+.feedback-form-button {
   background-color: #21099b;
   color: white;
   border: none;
@@ -1667,7 +1667,7 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.feedback-form-button:hover {
   background-color: #020090;
 }
 
@@ -1679,17 +1679,17 @@ button:hover {
     max-width: 70%; /* Make form take full width on small screens */
   }
 
-  h2 {
+  .feedback-heading {
     font-size: 1.5rem; /* Adjust font size */
   }
 
-  input,
-  textarea {
+  .feedback-form-input,
+  .feedback-form-textarea {
     padding: 10px;
     font-size: 14px; /* Slightly reduce font size for mobile */
   }
 
-  button {
+  .feedback-form-button {
     padding: 8px;
     font-size: 14px;
   }

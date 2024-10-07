@@ -20,11 +20,11 @@ const AdminEmailForm = () => {
 
   return (
     <div className="email-form-container">
-      <h2>Send Email to User</h2>
+      <h2 className='email-form-heading'>Send Email to User</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="recipientEmail">Recipient Email</label>
-          <input
+          <label className="email-form-label" htmlFor="recipientEmail">Recipient Email</label>
+          <input className='email-form-input'
             type="email"
             id="recipientEmail"
             value={recipientEmail}
@@ -32,9 +32,9 @@ const AdminEmailForm = () => {
             required
           />
         </div>
-        <div className="form-group">
+        <div className="email-form-group">
           <label htmlFor="subject">Subject</label>
-          <input
+          <input className='email-form-input'
             type="text"
             id="subject"
             value={subject}
@@ -44,14 +44,14 @@ const AdminEmailForm = () => {
         </div>
         <div className="form-group">
           <label htmlFor="message">Message</label>
-          <textarea
+          <textarea className='email-textarea'
             id="message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             required
           />
         </div>
-        <button type="submit" className="submit-button">
+        <button type="submit" className="email-submit-button">
           Send Email
         </button>
       </form>

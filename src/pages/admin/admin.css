@@ -320,24 +320,24 @@
   background-color: white;
 }
 
-h2 {
+.email-form-heading {
   text-align: center;
   margin-bottom: 20px;
   font-size: 1.5rem;
 }
 
-.form-group {
+.email-form-group {
   margin-bottom: 15px;
 }
 
-label {
+.email-form-label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
 }
 
-input[type='email'],
-input[type='text'],
+.email-form-input[type='email'],
+.email-form-input[type='text'],
 textarea {
   width: 100%;
   border: 1px solid #ccc;
@@ -346,12 +346,12 @@ textarea {
   font-size: 16px;
 }
 
-textarea {
+.email-textarea {
   height: 120px;
   resize: vertical;
 }
 
-.submit-button {
+.email-submit-button {
   display: block;
   width: 100%;
   padding: 12px;
@@ -364,7 +364,7 @@ textarea {
   transition: background-color 0.3s ease;
 }
 
-.submit-button:hover {
+.email-submit-button:hover {
   background-color: #0056b3;
 }
 
@@ -376,25 +376,26 @@ textarea {
     padding: 15px;
   }
 
-  h2 {
+  .email-form-heading {
     font-size: 1.2rem;
   }
 
-  input[type='email'],
-  input[type='text'],
+  .email-form-input[type='email'],
+  .email-form-input[type='text'],
   textarea,
   .submit-button {
     font-size: 14px;
   }
 
-  textarea {
+  .email-textarea {
     height: 100px;
   }
 
-  .submit-button {
+  .email-submit-button {
     padding: 10px;
   }
 }
+
 
 .admin-dashboard-container {
   padding: 20px;

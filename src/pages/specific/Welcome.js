@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import api from "../../services/api";
 import axios from "axios";
-import { jwtDecode } from "jwt-decode"; // To get current user info
-import PostForm from "../../components/forms/PostForm"; // Form to create a new post
-import PostList from "../../components/common/PostList"; // Displays the list of posts in our page
-import Pagination from "../../components/common/Pagination"; // Pagination component
-import RecommendedUsersList from "../../components/common/RecommendedUsersList"; // Displays a small lists of users
+import { jwtDecode } from "jwt-decode";
+import PostForm from "../../components/forms/PostForm";
+import PostList from "../../components/common/PostList";
+import Pagination from "../../components/common/Pagination";
+import RecommendedUsersList from "../../components/common/RecommendedUsersList";
 
 axios.defaults.withCredentials = true;
 
@@ -67,6 +67,18 @@ const Welcome = () => {
         }
     };
 
+    const handleEditPost = async (postId, newContent) => {
+        try {
+            await api.put(`/posts/${postId}`, { 
+                content: newContent,
+                lastEditedBy: currentUser.role === 'admin' ? currentUser.name : undefined
+            });
+            fetchPosts(currentPage);
+        } catch (err) {
+            setError("Failed to edit post. Please try again.");
+        }
+    };
+
     const handleClickPage = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
@@ -76,22 +88,20 @@ const Welcome = () => {
             <div className="content-wrapper">
                 <div className="post-section">
                     <div className="w-full max-w-2xl">
-                        {/* Use PostForm component */}
                         <PostForm 
                             onSubmitPost={handleSubmitPost} 
                             isLoading={isLoading} 
                             error={error} 
                         />
 
-                        {/* Use PostList component */}
                         <PostList 
                             posts={posts} 
                             onDeletePost={handleDeletePost}
+                            onEditPost={handleEditPost}
                             currentUser={currentUser}
                             isLoading={isLoading}
                         />
 
-                        {/* Use Pagination component */}
                         <Pagination 
                             totalPages={totalPages} 
                             currentPage={currentPage} 

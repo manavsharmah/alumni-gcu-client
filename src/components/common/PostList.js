@@ -1,7 +1,7 @@
 import React from "react";
 import PostCard from "../common/PostCard";
 
-const PostList = ({ posts, onDeletePost, currentUser, isLoading }) => {
+const PostList = ({ posts, onDeletePost, currentUser, isLoading, onEditPost }) => {
     return (
         <div className="posts-container">
             {isLoading ? (
@@ -11,6 +11,7 @@ const PostList = ({ posts, onDeletePost, currentUser, isLoading }) => {
                     <PostCard 
                         key={post._id} 
                         post={post} 
+                        onEdit={onEditPost}
                         onDelete={onDeletePost}
                         currentUser={currentUser}
                     />

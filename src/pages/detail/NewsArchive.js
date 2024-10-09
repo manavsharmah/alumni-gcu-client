@@ -46,9 +46,9 @@ const NewsList = () => {
         {currentNews.map((newsItem) => (
           <div key={newsItem._id} className="news-item" onClick={() => handleNewsClick(newsItem)}>
             <div className="news-thumbnail">
-							{newsItem.images && newsItem.images.length > 0 ? (
+							{newsItem.firstImage && newsItem.firstImage.length > 0 ? (
 								<img
-									src={`http://localhost:5000${newsItem.images[0]}`}
+									src={`http://localhost:5000${newsItem.firstImage}`}
 									alt="News Thumbnail"
 								/>
 							) : (

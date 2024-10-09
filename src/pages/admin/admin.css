@@ -338,7 +338,7 @@
 
 .email-form-input[type='email'],
 .email-form-input[type='text'],
-textarea {
+.email-textarea {
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -382,7 +382,7 @@ textarea {
 
   .email-form-input[type='email'],
   .email-form-input[type='text'],
-  textarea,
+  .email-textarea,
   .submit-button {
     font-size: 14px;
   }

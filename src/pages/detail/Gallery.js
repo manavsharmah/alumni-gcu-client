@@ -1,50 +1,65 @@
 import React, { useState, useEffect } from 'react';
 import '../pages.css';
+import { useNavigate } from 'react-router-dom';
 import Article from '../../components/common/Article-container';
 
-
 const Gallery = () => {
-  const [photos, setPhotos] = useState([]);
+  const [albums, setAlbums] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchPhotos = async () => {
+    const fetchAlbums = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/images/get-photos');
+        const response = await fetch('http://localhost:5000/api/images/albums');
         if (!response.ok) {
-          throw new Error('Failed to fetch photos');
+          throw new Error('Failed to fetch albums');
         }
         const data = await response.json();
-        //Checking if data is an array before setting photos
         if (Array.isArray(data)) {
-          setPhotos(data);
+          const sortedAlbums = data.sort((a, b) => new Date(b.date) - new Date(a.date));
+          setAlbums(sortedAlbums);
         } else {
-          console.error('Unexpected data format received');
-          //Handle unexpected data
+          console.error('Unexpected data format received:', data);
         }
       } catch (err) {
-        console.error('Error fetching photos:', err);
+        console.error('Error fetching albums:', err);
       }
     };
 
-    fetchPhotos();
+    fetchAlbums();
   }, []);
 
-  return (
-      <div className="page-container">
-        <Article title="Gallery">
-          {photos.length > 0 ? (
+  if (!albums) {
+    return null; 
+  }
 
-                <div>
-                  {photos.map((photo, index) => (
-                    <img key={index} src={`http://localhost:5000${photo}`} alt={`photo_${index}`} className="image" />
-                  ))}
-                </div>
-          ) : (
-            <p>Loading photos...</p> 
-          )}
-          </Article>
-        </div>  
+  const handleAlbumClick = (id) => {
+    if (id) {
+      navigate(`/album/${id}`);
+    } else {
+      console.error('Album ID is undefined');
+    }
+  };
+
+  return (
+    <div className="page-container">
+      <Article title="Gallery">
+          <div className="albums-container">
+            {albums.map((album) => (
+              <div key={album._id} className="album-card" onClick={() => handleAlbumClick(album._id)}>
+                <img
+                  src={`http://localhost:5000${album.firstImage}`}
+                  alt={`${album.albumName}_thumbnail`}
+                  className="album-thumbnail"
+                  loading="lazy"
+                />
+                <h2 className="album-title">{album.albumName}</h2>
+              </div>
+            ))}
+          </div>
+      </Article>
+    </div>
   );
-}
+};
 
 export default Gallery;

@@ -39,6 +39,7 @@ import Scholarship from "./pages/detail/Scholarship";
 import Activities from "./pages/detail/Activities";
 import { Alumnus } from "./pages/detail/GetInvolved";
 import Gallery from "./pages/detail/Gallery";
+import SingleAlbum from "./pages/detail/SingleAlbum";
 import Events from "./pages/detail/Events";
 import NewsList from "./pages/detail/NewsArchive";
 import SingleNews from "./pages/detail/SingleNews";
@@ -78,6 +79,7 @@ function App() {
 								<Route path="/news" element={<NewsList />} />
 								<Route path="/news/:id" element={<SingleNews />} />
 								<Route path="/gallery" element={<Gallery />} />
+								<Route path="/album/:id" element={<SingleAlbum />} />
 								<Route path="/contact" element={<Contact />} />
 								<Route path="/contactus" element={<ContactUs />} />
 								<Route path="/feedback" element={<FeedbackForm />} />

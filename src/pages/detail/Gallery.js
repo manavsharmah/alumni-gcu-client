@@ -48,7 +48,7 @@ const Gallery = () => {
             {albums.map((album) => (
               <div key={album._id} className="album-card" onClick={() => handleAlbumClick(album._id)}>
                 <img
-                  src={`http://localhost:5000${album.firstImage}`}
+                  src={`http://localhost:5000${album.lastImage}`}
                   alt={`${album.albumName}_thumbnail`}
                   className="album-thumbnail"
                   loading="lazy"

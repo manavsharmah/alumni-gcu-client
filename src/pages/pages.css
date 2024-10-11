@@ -1297,6 +1297,131 @@ button:hover {
   background-color: #152349;
 }
 
+/*Change Profile Picture */
+
+.profile-picture-card {
+  max-width: 500px;
+  margin: 20px auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-content {
+  padding: 24px;
+}
+
+.card-title {
+  color: #4f46e5;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.card-heading {
+  font-size: 20px;
+  font-weight: 500;
+  color: #111827;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.card-description {
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.file-upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.file-upload-area:hover {
+  background-color: #f3f4f6;
+}
+
+.file-upload-icon {
+  width: 40px;
+  height: 40px;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+
+.file-upload-text {
+  text-align: center;
+}
+
+.error-message1 {
+  color: #dc2626;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.cropper-container {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  margin-top: 16px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.zoom-control {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.zoom-icon {
+  width: 16px;
+  height: 16px;
+  color: #6b7280;
+}
+
+.zoom-slider {
+  flex-grow: 1;
+  margin: 0 8px;
+}
+
+.submit-button {
+  width: 100%;
+  background-color: #4f46e5;
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 16px;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #4338ca;
+}
+
+.submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status-message {
+  color: #10b981;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 8px;
+}
+
 /*Welcome styling*/
 
 .page-container {

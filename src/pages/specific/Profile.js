@@ -73,6 +73,10 @@ const Profile = () => {
         setCurrentPage(pageNumber);
     };
 
+    const handleChangePicture = () => {
+        navigate('/change-profile-picture');
+    };
+
     return (
         <div className="user-profile-container">
             <h1 className="user-profile-main-title">Profile</h1>
@@ -88,7 +92,9 @@ const Profile = () => {
                         <p className="user-profile-email">{user?.email}</p>
                         {/* Only show the "Change Picture" button if it's the logged-in user's profile */}
                         {isLoggedInUser && (
-                            <button className="user-profile-change-picture-btn">Change Picture</button>
+                            <button className="user-profile-change-picture-btn" onClick={handleChangePicture}>
+                                Change Picture
+                            </button>
                         )}
                     </div>
                 </div>

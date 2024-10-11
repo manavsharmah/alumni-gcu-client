@@ -19,6 +19,7 @@ import Home from "./pages/Home";
 import Welcome from "./pages/specific/Welcome";
 import Profile from "./pages/specific/Profile";
 import UpdateProfile from "./pages/specific/UpdateProfile";
+import ChangeProfilePicture from "./pages/specific/ChangeProfilePicture";
 
 // Admin Pages
 import AdminNewsForm from "./pages/admin/AdminNewsForm";
@@ -129,6 +130,13 @@ function App() {
 									}
 								/>
 								
+								<Route
+									path="/change-profile-picture"
+									element={
+										<ProtectedRoute element={<ChangeProfilePicture />} requiredRole="user" />
+									}
+								/>
+
 								<Route
 									path="/update-profile"
 									element={

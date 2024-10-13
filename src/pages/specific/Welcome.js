@@ -47,7 +47,6 @@ const Welcome = () => {
     const handleSubmitPost = async (content) => {
         setIsLoading(true);
         setError(null);
-
         try {
             await api.post("/posts/create", { content });
             fetchPosts(currentPage);
@@ -88,24 +87,22 @@ const Welcome = () => {
             <div className="content-wrapper">
                 <div className="post-section">
                     <div className="w-full max-w-2xl">
-                        <PostForm 
-                            onSubmitPost={handleSubmitPost} 
-                            isLoading={isLoading} 
-                            error={error} 
+                        <PostForm
+                            onSubmitPost={handleSubmitPost}
+                            isLoading={isLoading}
+                            error={error}
                         />
-
-                        <PostList 
-                            posts={posts} 
+                        <PostList
+                            posts={posts}
                             onDeletePost={handleDeletePost}
                             onEditPost={handleEditPost}
                             currentUser={currentUser}
                             isLoading={isLoading}
                         />
-
-                        <Pagination 
-                            totalPages={totalPages} 
-                            currentPage={currentPage} 
-                            onPageChange={handleClickPage} 
+                        <Pagination
+                            totalPages={totalPages}
+                            currentPage={currentPage}
+                            onPageChange={handleClickPage}
                         />
                     </div>
                 </div>

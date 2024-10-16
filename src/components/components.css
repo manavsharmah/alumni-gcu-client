@@ -202,6 +202,7 @@
   height: 30px;
   margin-right: 7px;
   justify-content: center;
+  border-radius: 100px;
 }
 
 .App-main {

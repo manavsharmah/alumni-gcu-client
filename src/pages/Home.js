@@ -147,6 +147,7 @@ const Home = () => {
                     </button>
                 </div>
             </section> */}
+            
             <section className='hero4'> {/* New section for gallery preview */}
                 <GalleryPreview />
             </section>

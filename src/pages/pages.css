@@ -194,9 +194,9 @@
 }
 
 .vc-img {
-  height: 195px;
-  width: 190px;
-  border-radius: 100px;
+  height: 305px;
+  width: 300px;
+  border-radius: 240px;
 }
 
 .image-body {
@@ -249,8 +249,8 @@
 }
 
 .ch-img {
-  height: 195px;
-  width: 190px;
+  height: 235px;
+  width: 230px;
   border-radius: 100px;
 }
 
@@ -833,7 +833,6 @@ button:hover {
 
 /* update profile */
 
-/* UpdateProfile.css */
 .profile-container {
   display: flex;
   justify-content: center;
@@ -950,7 +949,7 @@ button:hover {
 }
 
 /* Profile.css */
-/* Profile.css */
+
 .prof-container {
   max-width: 800px;
   margin: 0 auto;

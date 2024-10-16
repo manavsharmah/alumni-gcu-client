@@ -179,7 +179,7 @@
 
 .auth-link {
   justify-content: end;
-  color: #030303;
+  color: #ffffff;
   font-weight: bold;
   text-decoration: none;
   padding: 10px;
@@ -225,7 +225,11 @@
   font-size: 17px;
   text-decoration: none;
   margin-top: 4px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
+
 
 .dropdown-toggle:hover {
   color: #007bff;
@@ -265,6 +269,10 @@
   padding: 10px;
 }
 
+.dropdown-menu.show {
+  display: block;
+}
+
 .dropdown-menu a:hover {
   color: #007bff !important;
   background-color: #f0f0f0;
@@ -284,16 +292,22 @@
   }
 
   .logo {
-    margin-top: -50px;
+    margin-top: -110px;
+    margin-left: -40px;
   }
 
   .logo img {
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
   }
 
   .logo-gcu {
-    display: none;
+    margin-top: 10px;
+  }
+
+  .logo-gcu img {
+    height: 80px;
+    width: 240px;
   }
 
   .nav-content {
@@ -303,7 +317,7 @@
   .nav-content.open {
     display: block;
     flex-direction: column;
-    width: 100%;
+    width: 60%;
     position: absolute;
     top: 60px; /* Position the nav content below the navbar */
     left: 0;
@@ -311,6 +325,7 @@
     height: auto;
     z-index: 999; /* Ensure it appears above other content */
     border-top: 1px solid #000;
+    border-right: 1px solid #000;
   }
 
   .menu-toggle {

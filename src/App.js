@@ -148,7 +148,7 @@ function App() {
 								/>
 							</Route>
 
-							{/* Admin Routes */}
+							{/*  Admin Routes  */}
 							<Route
 								element={
 									<ProtectedRoute

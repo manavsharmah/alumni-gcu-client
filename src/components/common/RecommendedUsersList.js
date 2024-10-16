@@ -10,34 +10,105 @@ const RecommendedUsersList = () => {
   useEffect(() => {
     const fetchRecommendedUsers = async () => {
       try {
-        const response = await api.get('/user/recommend-users'); // Call the new recommendation endpoint
+        const response = await api.get('/user/recommend-users');
         setUsers(response.data);
       } catch (error) {
         console.error('Error fetching recommended users:', error);
         setError('Error fetching recommended users');
       }
     };
-
     fetchRecommendedUsers();
   }, []);
 
+  const containerStyle = {
+    padding: '20px',
+    backgroundColor: '#fff',
+    borderRadius: '8px',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+    margin: '20px 0',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '20px'
+  };
+
+  const headerStyle = {
+    fontSize: '1.5em',
+    fontWeight: 'bold',
+    marginBottom: '20px',
+    textAlign: 'center',
+    color: '#333'
+  };
+
+  const userCardStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '15px',
+    padding: '15px',
+    borderRadius: '8px',
+    border: '1px solid #ddd',
+    textDecoration: 'none',
+    color: 'inherit',
+    transition: 'transform 0.2s'
+  };
+
+  const nameStyle = {
+    fontSize: '1.2em',
+    margin: '0 0 5px'
+  };
+
+  const branchBatchStyle = {
+    fontSize: '0.9em',
+    color: '#999'
+  };
+
+  const buttonStyle = {
+    marginTop: '20px',
+    display: 'block',
+    textAlign: 'center',
+    backgroundColor: '#3498db',
+    color: '#fff',
+    padding: '10px',
+    borderRadius: '8px',
+    textDecoration: 'none'
+  };
+
+  const imgStyle = {
+    borderRadius: '50%',
+    width: '50px',
+    height: '50px',
+    objectFit: 'cover'
+  };
+
+  const handleMouseEnter = (e) => {
+    e.currentTarget.style.transform = 'scale(1.05)';
+  };
+
+  const handleMouseLeave = (e) => {
+    e.currentTarget.style.transform = 'scale(1)';
+  };
+
   return (
-    <div className="verified-users-container">
-      {error && <p className="error">{error}</p>}
-      <div className="users-list">
+    <div style={containerStyle}>
+      <div style={headerStyle}>Recommended Users</div>
+      {error && <p style={{ color: '#e74c3c' }}>{error}</p>}
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
         {users.map(user => (
-          <Link to={`/profile/${user._id}`} key={user._id} className="user-item">
-            <img src="https://via.placeholder.com/50" alt="Profile" />
-            <div className="user-info">
-              <h3>{user.name}</h3>
-              <p>{user.branch}</p>, <p>{user.batch}</p>
+          <Link 
+            to={`/profile/${user._id}`} 
+            key={user._id} 
+            style={userCardStyle}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <img src="https://via.placeholder.com/50" alt="Profile" style={imgStyle} />
+            <div>
+              <h4 style={nameStyle}>{user.name}</h4>
+              <p style={branchBatchStyle}>{user.branch}, {user.batch}</p>
             </div>
           </Link>
         ))}
       </div>
-      <button className="find-other-mates-button">
-        <Link to="/alumnidirectory">Find Other Mates</Link>
-      </button>
+      <Link to="/alumnidirectory" style={buttonStyle}>Find Other Mates</Link>
     </div>
   );
 };

@@ -8,9 +8,9 @@ const PostList = ({ posts, onDeletePost, currentUser, isLoading, onEditPost }) =
                 <p className="text-center">Loading posts...</p>
             ) : posts && posts.length > 0 ? (
                 posts.map((post) => (
-                    <PostCard 
-                        key={post._id} 
-                        post={post} 
+                    <PostCard
+                        key={post._id}
+                        post={post}
                         onEdit={onEditPost}
                         onDelete={onDeletePost}
                         currentUser={currentUser}

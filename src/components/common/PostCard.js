@@ -15,6 +15,24 @@ const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
         setIsEditing(false);
     };
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        });
+    };
+
+    const formatTime = (dateString) => {
+        const date = new Date(dateString);
+        return date.toLocaleTimeString('en-US', {
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true
+        });
+    };
+
     const canEdit = currentUser && (currentUser.role === 'admin' || currentUser.id === post.author._id);
     const canDelete = currentUser && (currentUser.role === 'admin' || currentUser.id === post.author._id);
 
@@ -30,11 +48,11 @@ const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
                             {post.author?.branch || ''}
                         </p>
                         <p className="gcu-post-timestamp">
-                            {new Date(post.createdAt).toLocaleString()}
+                            Posted: {formatDate(post.createdAt)} at {formatTime(post.createdAt)}
                         </p>
                         {post.lastEditedAt && (
                             <p className="gcu-post-edit-timestamp">
-                                Last Edited: {new Date(post.lastEditedAt).toLocaleString()}
+                                Last Edited: {formatDate(post.lastEditedAt)} at {formatTime(post.lastEditedAt)}
                                 {post.lastEditedBy && ` by ${post.lastEditedBy}`}
                             </p>
                         )}

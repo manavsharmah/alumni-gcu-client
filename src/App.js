@@ -16,7 +16,7 @@ import AdminLayout from "./pages/admin/AdminLayout";
 
 // Pages
 import Home from "./pages/Home";
-import Welcome from "./pages/specific/Welcome";
+import FeedHome from "./components/feed/FeedHome";
 import Profile from "./pages/specific/Profile";
 import UpdateProfile from "./pages/specific/UpdateProfile";
 import ChangeProfilePicture from "./pages/specific/ChangeProfilePicture";
@@ -102,7 +102,7 @@ function App() {
 									path="/welcome"
 									element={
 										<ProtectedRoute
-											element={<Welcome />}
+											element={<FeedHome />}
 											requiredRole={["admin", "user"]}
 										/>
 									}

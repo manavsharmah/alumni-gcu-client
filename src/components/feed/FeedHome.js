@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import api from "../../services/api";
-import axios from "axios";
 import { jwtDecode } from "jwt-decode";
+import api from "../../services/api";
 import PostForm from "../../components/forms/PostForm";
 import PostList from "../../components/common/PostList";
 import Pagination from "../../components/common/Pagination";
 import RecommendedUsersList from "../../components/common/RecommendedUsersList";
-
-axios.defaults.withCredentials = true;
+import JobOpportunities from "./JobOpportunities"; // New component
+import FurtherEducation from "./FurtherEducation"; // New component
+import FeedLayout from "./FeedLayout";
 
 const Welcome = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -68,10 +68,7 @@ const Welcome = () => {
 
     const handleEditPost = async (postId, newContent) => {
         try {
-            await api.put(`/posts/${postId}`, { 
-                content: newContent,
-                lastEditedBy: currentUser.role === 'admin' ? currentUser.name : undefined
-            });
+            await api.put(`/posts/${postId}`, { content: newContent });
             fetchPosts(currentPage);
         } catch (err) {
             setError("Failed to edit post. Please try again.");
@@ -82,36 +79,27 @@ const Welcome = () => {
         setCurrentPage(pageNumber);
     };
 
-    return (
-        <div className="page-container">
-            <div className="content-wrapper">
-                <div className="post-section">
-                    <div className="w-full max-w-2xl">
-                        <PostForm
-                            onSubmitPost={handleSubmitPost}
-                            isLoading={isLoading}
-                            error={error}
-                        />
-                        <PostList
-                            posts={posts}
-                            onDeletePost={handleDeletePost}
-                            onEditPost={handleEditPost}
-                            currentUser={currentUser}
-                            isLoading={isLoading}
-                        />
-                        <Pagination
-                            totalPages={totalPages}
-                            currentPage={currentPage}
-                            onPageChange={handleClickPage}
-                        />
-                    </div>
-                </div>
-            </div>
-            <div className="post-section">
-                <RecommendedUsersList />
-            </div>
-        </div>
+    // Left sidebar with Job Opportunities and Further Education
+    const leftSidebar = (
+        <>
+            <JobOpportunities />
+            <FurtherEducation />
+        </>
     );
+
+    // Main content (Post Form and Post List)
+    const mainContent = (
+        <>
+            <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
+            <PostList posts={posts} onDeletePost={handleDeletePost} onEditPost={handleEditPost} currentUser={currentUser} isLoading={isLoading} />
+            <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handleClickPage} />
+        </>
+    );
+
+    // Right sidebar with Recommended Users List
+    const rightSidebar = <RecommendedUsersList />;
+
+    return <FeedLayout leftSidebar={leftSidebar} mainContent={mainContent} rightSidebar={rightSidebar} />;
 };
 
 export default Welcome;

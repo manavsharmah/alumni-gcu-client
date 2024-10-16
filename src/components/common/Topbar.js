@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import "../components.css";
 import { useUser } from '../../services/UserContext';
 import { Link } from 'react-router-dom';
+import api from '../../services/api';
 
 const Topbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
   const { user, logout, loading } = useUser(); // Use the custom hook to get the user data
+  const [profilePhoto, setProfilePhoto] = useState(null);
 
   const toggleNav = () => {
     setIsNavOpen(!isNavOpen);
@@ -64,6 +66,26 @@ const Topbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const fetchProfilePhoto = async () => {
+      if (user) {
+        try {
+          const response = await api.get('/user/profile-photo');
+          if (response.data && response.data.profilePhoto) {
+            setProfilePhoto(response.data.profilePhoto);
+          } else {
+            setProfilePhoto(null);
+          }
+        } catch (error) {
+          console.error('Error fetching profile photo:', error);
+          setProfilePhoto(null);
+        }
+      }
+    };
+  
+    fetchProfilePhoto();
+  }, [user]);
+  
   if (loading) {
     return <div>Loading...</div>; // Show a loading indicator while the user data is being fetched
   }
@@ -151,11 +173,15 @@ const Topbar = () => {
           ) : (
             <div className="dropdown">
               <Link to="/#" className="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img 
-                  src="./assets/profile-placeholder.svg" 
-                  alt="profile" 
-                  className='rounded-full'
-                />
+              <img 
+                src={profilePhoto ? `http://localhost:5000/${profilePhoto.replace(/\\/g, '/')}` : './assets/profile-placeholder.svg'}
+                alt="profile" 
+                className='rounded-full'
+                onError={(e) => {
+                  e.target.onerror = null; 
+                  e.target.src = './assets/profile-placeholder.svg';
+                }}
+              />
                 {user.name}
               </Link>
               <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">

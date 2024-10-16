@@ -3,7 +3,11 @@
 .form-container {
     display: flex;
     justify-content: center;
-    padding: 60px 0px;
+    align-items: center;
+    min-height: 100vh; /* Ensure it takes full screen height */
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Allow vertical scrolling if needed */
 }
 
 .login-container {

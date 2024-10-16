@@ -98,7 +98,7 @@ function ChangeProfilePicture() {
         <div className="card-content">
           <div className="card-title">Profile</div>
           <h2 className="card-heading">Change Profile Picture</h2>
-          <p className="card-description">Upload a new profile picture or adjust the current one.</p>
+          <p className="card-description">Upload a new profile picture</p>
           
           <label htmlFor="dropzone-file" className="file-upload-area">
             <div className="file-upload-text">

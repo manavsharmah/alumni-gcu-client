@@ -551,6 +551,94 @@
   }
 }
 
+/* =========Gallery(All AlbumView)========= */
+
+
+.albums-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; 
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  box-sizing: border-box; 
+}
+
+.album-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex: 0 1 calc(33.33% - 20px); /* Slightly adjusted */
+  max-width: calc(33.33% - 20px); /* Slightly adjusted */
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 10px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.album-card:hover {
+  transform: scale(1.05);
+}
+
+.album-thumbnail {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.album-title {
+  margin-top: 10px; /* Ensures space between the image and the title */
+  font-size: 18px;
+  text-align: center;
+  width: 100%; /* Ensures the title takes up the full width under the image */
+}
+
+/* =========Gallery(Specific AlbumView)========= */
+
+  .images-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .image-wrapper {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+  .image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .image-overlay span {
+    color: white;
+    font-size: 16px;
+  }
+  .image-wrapper:hover .image {
+    transform: scale(1.1);
+  }
+  .image-wrapper:hover .image-overlay {
+    opacity: 1;
+  }
+
+  
 
 /* =======User Profile Styling========== */
 
@@ -615,6 +703,149 @@ button:hover {
   flex-direction: column;
   padding: 30px 10px;
   position: relative;
+}
+
+.user-profile-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.user-profile-main-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.5em;
+  color: #333;
+}
+
+.user-profile-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.user-profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.user-profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+}
+
+.user-profile-info {
+  flex-grow: 1;
+}
+
+.user-profile-name {
+  font-size: 1.8em;
+  margin-bottom: 5px;
+}
+
+.user-profile-email {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.user-profile-change-picture-btn,
+.user-profile-update-btn {
+  background-color: #3f51b5;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.user-profile-details h3 {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.user-profile-details p {
+  margin-bottom: 8px;
+}
+
+.user-profile-posts-section {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.user-profile-posts-title {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: bold;
+}
+
+.user-profile-post-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.user-profile-post-card {
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  padding: 15px;
+  margin-bottom: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.user-profile-post-card:hover {
+  background-color: #f0f0f0;
+}
+
+.user-profile-post-content {
+  font-size: 1.1em;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.user-profile-post-date {
+  color: #666;
+}
+
+.user-profile-no-posts {
+  color: #666;
+  font-style: italic;
+}
+
+.user-profile-pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.user-profile-page-number {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background-color: #575755;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.user-profile-page-number:hover {
+  background-color: #f0f0f0;
+}
+
+.user-profile-page-number-active {
+  background-color: #3f51b5;
+  color: white;
+  border-color: #3f51b5;
 }
 
 /* News Archive */
@@ -1065,6 +1296,131 @@ button:hover {
   background-color: #152349;
 }
 
+/*Change Profile Picture */
+
+.profile-picture-card {
+  max-width: 500px;
+  margin: 20px auto;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-content {
+  padding: 24px;
+}
+
+.card-title {
+  color: #4f46e5;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.card-heading {
+  font-size: 20px;
+  font-weight: 500;
+  color: #111827;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.card-description {
+  color: #6b7280;
+  margin-bottom: 16px;
+}
+
+.file-upload-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  border: 2px dashed #d1d5db;
+  border-radius: 8px;
+  background-color: #f9fafb;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.file-upload-area:hover {
+  background-color: #f3f4f6;
+}
+
+.file-upload-icon {
+  width: 40px;
+  height: 40px;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+
+.file-upload-text {
+  text-align: center;
+}
+
+.error-message1 {
+  color: #dc2626;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.cropper-container {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  margin-top: 16px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.zoom-control {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.zoom-icon {
+  width: 16px;
+  height: 16px;
+  color: #6b7280;
+}
+
+.zoom-slider {
+  flex-grow: 1;
+  margin: 0 8px;
+}
+
+/* .submit-button {
+  width: 100%;
+  background-color: #4f46e5;
+  color: white;
+  font-weight: bold;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 16px;
+}
+
+.submit-button:hover:not(:disabled) {
+  background-color: #4338ca;
+}
+
+.submit-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.status-message {
+  color: #10b981;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 8px;
+} */
+
 /*Welcome styling*/
 
 .page-container {
@@ -1137,16 +1493,138 @@ button:hover {
   background-color: #1a91da;
 }
 
+/* New styles for PostCard and delete button */
+.gcu-post-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.gcu-post-card-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.gcu-post-card-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.gcu-post-author-avatar {
+  width: 50px;
+  height: 50px;
+  background-color: #bbb;
+  border-radius: 50%;
+  margin-bottom: 8px;
+}
+
+.gcu-post-author-info {
+  text-align: center;
+}
+
+.gcu-post-author-name {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.gcu-post-author-details, .gcu-post-timestamp, .gcu-post-edit-timestamp {
+  font-size: 0.9em;
+  color: #666;
+  margin: 4px 0;
+}
+
+.gcu-post-card-middle {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.gcu-post-content {
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+.gcu-post-card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-left: 16px;
+}
+
+.gcu-edit-button, .gcu-delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 1em;
+  margin-top: 4px;
+}
+
+.gcu-edit-button {
+  color: #3498db;
+  font-weight: bold;
+}
+
+.gcu-delete-button {
+  color: #e74c3c;
+  font-weight: bold;
+}
+
+.gcu-edit-form {
+  margin-top: 16px;
+}
+
+.gcu-edit-textarea {
+  width: 100%;
+  height: 80px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  font-size: 1em;
+}
+
+.gcu-edit-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.gcu-edit-save-button, .gcu-edit-cancel-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.gcu-edit-save-button {
+  background-color: #2ecc71;
+  color: #fff;
+  margin-right: 8px;
+}
+
+.gcu-edit-cancel-button {
+  background-color: #e74c3c;
+  color: #fff;
+}
+
 .users-container {
   width: 300px;
   padding-left: 20%;
-}
-
-.page-container {
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  min-height: calc(100vh - 60px);
 }
 
 /* Modern Profile Container */
@@ -1429,19 +1907,19 @@ button:hover {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-h2 {
-  color: #e74c3c;
+.feedback-heading{
+  color: #1d0898;
   text-align: center;
   margin-bottom: 20px;
 }
 
-form {
+.feedback-form {
   display: flex;
   flex-direction: column;
 }
 
-input,
-textarea {
+.feedback-form-input,
+.feedback-form-textarea {
   margin-bottom: 15px;
   padding: 15px;
   border: 1px solid #ddd;
@@ -1449,12 +1927,12 @@ textarea {
   font-size: 16px;
 }
 
-textarea {
+.feedback-form-textarea {
   height: 100px;
   resize: vertical;
 }
 
-button {
+.feedback-form-button {
   background-color: #21099b;
   color: white;
   border: none;
@@ -1465,7 +1943,7 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.feedback-form-button:hover {
   background-color: #020090;
 }
 
@@ -1477,17 +1955,17 @@ button:hover {
     max-width: 70%; /* Make form take full width on small screens */
   }
 
-  h2 {
+  .feedback-heading {
     font-size: 1.5rem; /* Adjust font size */
   }
 
-  input,
-  textarea {
+  .feedback-form-input,
+  .feedback-form-textarea {
     padding: 10px;
     font-size: 14px; /* Slightly reduce font size for mobile */
   }
 
-  button {
+  .feedback-form-button {
     padding: 8px;
     font-size: 14px;
   }

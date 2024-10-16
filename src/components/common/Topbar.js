@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import "../components.css";
 import { useUser } from '../../services/UserContext';
 import { Link } from 'react-router-dom';
+import api from '../../services/api';
 
 const Topbar = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
+  const [profilePhoto, setProfilePhoto] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { user, logout, loading } = useUser();
 
@@ -52,8 +54,48 @@ const Topbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  useEffect(() => {
+    const fetchProfilePhoto = async () => {
+      if (user) {
+        try {
+          const response = await api.get('/user/profile-photo');
+          if (response.data && response.data.profilePhoto) {
+            setProfilePhoto(response.data.profilePhoto);
+          } else {
+            setProfilePhoto(null);
+          }
+        } catch (error) {
+          console.error('Error fetching profile photo:', error);
+          setProfilePhoto(null);
+        }
+      }
+    };
+  }, []);
 
+  useEffect(() => {
+    const fetchProfilePhoto = async () => {
+      if (user) {
+        try {
+          const response = await api.get('/user/profile-photo');
+          if (response.data && response.data.profilePhoto) {
+            setProfilePhoto(response.data.profilePhoto);
+          } else {
+            setProfilePhoto(null);
+          }
+        } catch (error) {
+          console.error('Error fetching profile photo:', error);
+          setProfilePhoto(null);
+        }
+      }
+    };
+  
+    fetchProfilePhoto();
+  }, [user]);
+  
+  if (loading) {
+    return <div>Loading...</div>; // Show a loading indicator while the user data is being fetched
+  }
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -139,9 +181,13 @@ const Topbar = () => {
                 onClick={() => setIsDropdownOpen((prev) => !prev)}
               >
                 <img
-                  src="/assets/profile-placeholder.svg"
+                  src={profilePhoto ? `http://localhost:5000/${profilePhoto.replace(/\\/g, '/')}` : './assets/profile-placeholder.svg'}
                   alt="profile"
                   className="rounded-full"
+                  onError={(e) => {
+                    e.target.onerror = null; 
+                    e.target.src = './assets/profile-placeholder.svg';
+                  }}
                 />
                 <span className="dropdown-username">{user.name}</span>
               </div>

@@ -25,9 +25,10 @@ const FeedbackForm = () => {
 
   return (
     <div className="feedback-form-container">
-      <h2>FEEDBACK FORM</h2>
+      <h2 className='feedback-heading'>FEEDBACK FORM</h2>
       <form onSubmit={handleSubmit}>
         <input
+          className='feedback-form-input'
           type="text"
           name="name"
           value={formData.name}
@@ -36,6 +37,7 @@ const FeedbackForm = () => {
           required
         />
         <input
+          className='feedback-form-input'
           type="email"
           name="email"
           value={formData.email}
@@ -44,6 +46,7 @@ const FeedbackForm = () => {
           required
         />
         <input
+          className='feedback-form-input'
           type="text"
           name="subject"
           value={formData.subject}
@@ -52,13 +55,14 @@ const FeedbackForm = () => {
           required
         />
         <textarea
+          className='feedback-form-textarea'
           name="message"
           value={formData.message}
           onChange={handleChange}
           placeholder="Message"
           required
         />
-        <button type="submit">SUBMIT</button>
+        <button className="feedback-form-button" type="submit">SUBMIT</button>
       </form>
     </div>
   );

@@ -16,9 +16,10 @@ import AdminLayout from "./pages/admin/AdminLayout";
 
 // Pages
 import Home from "./pages/Home";
-import Welcome from "./pages/specific/Welcome";
+import FeedHome from "./components/feed/FeedHome";
 import Profile from "./pages/specific/Profile";
 import UpdateProfile from "./pages/specific/UpdateProfile";
+import ChangeProfilePicture from "./pages/specific/ChangeProfilePicture";
 
 // Admin Pages
 import AdminNewsForm from "./pages/admin/AdminNewsForm";
@@ -39,6 +40,7 @@ import Scholarship from "./pages/detail/Scholarship";
 import Activities from "./pages/detail/Activities";
 import { Alumnus } from "./pages/detail/GetInvolved";
 import Gallery from "./pages/detail/Gallery";
+import SingleAlbum from "./pages/detail/SingleAlbum";
 import Events from "./pages/detail/Events";
 import NewsList from "./pages/detail/NewsArchive";
 import SingleNews from "./pages/detail/SingleNews";
@@ -78,6 +80,7 @@ function App() {
 								<Route path="/news" element={<NewsList />} />
 								<Route path="/news/:id" element={<SingleNews />} />
 								<Route path="/gallery" element={<Gallery />} />
+								<Route path="/album/:id" element={<SingleAlbum />} />
 								<Route path="/contact" element={<Contact />} />
 								<Route path="/contactus" element={<ContactUs />} />
 								<Route path="/feedback" element={<FeedbackForm />} />
@@ -99,7 +102,7 @@ function App() {
 									path="/welcome"
 									element={
 										<ProtectedRoute
-											element={<Welcome />}
+											element={<FeedHome />}
 											requiredRole={["admin", "user"]}
 										/>
 									}
@@ -119,6 +122,21 @@ function App() {
 										<ProtectedRoute element={<Profile />} requiredRole="user" />
 									}
 								/>
+
+								<Route
+									path="/profile/:id"
+									element={
+										<ProtectedRoute element={<Profile />} requiredRole="user" />
+									}
+								/>
+								
+								<Route
+									path="/change-profile-picture"
+									element={
+										<ProtectedRoute element={<ChangeProfilePicture />} requiredRole="user" />
+									}
+								/>
+
 								<Route
 									path="/update-profile"
 									element={

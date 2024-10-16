@@ -1,6 +1,7 @@
 import React from 'react';
 import Article from '../../components/common/Article-container';
 import "../pages.css";
+import VerifiedUsersList from "../../components/common/VerifiedUsersList";
 
 
 const Copyright = () => {
@@ -56,11 +57,9 @@ const PrivacyPolicy = () => {
 
 const AlumniDirectory = () => {
     return (
-        <div className="page-container">
-            <Article title="Alumni Directory">
-                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil dolorem veritatis debitis similique quos! Provident rerum quibusdam qui inventore molestiae, optio dolorem minus. Similique beatae accusamus nihil ut distinctio in error ipsum neque sint a, itaque totam vitae ipsa? Quos quod incidunt tempore laboriosam, minus nesciunt modi error amet veritatis, excepturi reiciendis qui saepe explicabo id doloremque et. Aspernatur cupiditate consectetur nobis iusto libero quisquam debitis, corrupti incidunt quibusdam aut ullam praesentium reprehenderit dicta tempore quasi explicabo minima? Molestiae fugit nam a, possimus unde minima autem voluptatum. Alias doloribus dicta voluptatibus aliquam. Accusantium odio id hic quos nesciunt ab consequuntur, blanditiis mollitia numquam necessitatibus. Molestiae repellendus qui sunt recusandae! Harum pariatur veritatis quia neque similique iusto et modi magnam dolor esse quibusdam quod voluptas, necessitatibus, nulla, laboriosam earum. Ducimus aliquid quae est incidunt id alias velit, consequuntur quod facere culpa quisquam accusantium quos sed dignissimos minima deserunt fugiat ratione accusamus? </p>
-            </Article>
-        </div>
+        <>
+            <VerifiedUsersList/>
+        </>
     )
 }
 

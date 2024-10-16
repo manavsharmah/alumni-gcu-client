@@ -34,7 +34,7 @@ const UpdateProfile = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      await axiosInstance.put('http://localhost:5000/api/auth/update-profile', {
+      await axiosInstance.put('http://localhost:5000/api/user/update-profile', {
         biography,
         currentWorkingPlace,
         socialLinks: { linkedin, facebook },

@@ -320,25 +320,25 @@
   background-color: white;
 }
 
-h2 {
+.email-form-heading {
   text-align: center;
   margin-bottom: 20px;
   font-size: 1.5rem;
 }
 
-.form-group {
+.email-form-group {
   margin-bottom: 15px;
 }
 
-label {
+.email-form-label {
   display: block;
   margin-bottom: 5px;
   font-weight: bold;
 }
 
-input[type='email'],
-input[type='text'],
-textarea {
+.email-form-input[type='email'],
+.email-form-input[type='text'],
+.email-textarea {
   width: 100%;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -346,12 +346,12 @@ textarea {
   font-size: 16px;
 }
 
-textarea {
+.email-textarea {
   height: 120px;
   resize: vertical;
 }
 
-.submit-button {
+.email-submit-button {
   display: block;
   width: 100%;
   padding: 12px;
@@ -364,7 +364,7 @@ textarea {
   transition: background-color 0.3s ease;
 }
 
-.submit-button:hover {
+.email-submit-button:hover {
   background-color: #0056b3;
 }
 
@@ -376,22 +376,128 @@ textarea {
     padding: 15px;
   }
 
-  h2 {
+  .email-form-heading {
     font-size: 1.2rem;
   }
 
-  input[type='email'],
-  input[type='text'],
-  textarea,
+  .email-form-input[type='email'],
+  .email-form-input[type='text'],
+  .email-textarea,
   .submit-button {
     font-size: 14px;
   }
 
-  textarea {
+  .email-textarea {
     height: 100px;
   }
 
-  .submit-button {
+  .email-submit-button {
     padding: 10px;
+  }
+}
+
+
+.admin-dashboard-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.admin-dashboard-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.admin-dashboard-title {
+  font-size: 24px;
+  color: #333;
+}
+
+.admin-dashboard-search-group {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.admin-dashboard-search-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px 0 0 4px;
+  font-size: 16px;
+}
+
+.admin-dashboard-search-button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+}
+
+.admin-dashboard-section-header {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+}
+
+.admin-dashboard-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.admin-dashboard-table th,
+.admin-dashboard-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.admin-dashboard-table th {
+  background-color: #f2f2f2;
+  cursor: pointer;
+}
+
+.admin-dashboard-table tbody tr:nth-child(odd) {
+  background-color: #f8f9fa;
+}
+
+.admin-dashboard-btn-approve,
+.admin-dashboard-btn-reject {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.admin-dashboard-btn-approve {
+  background-color: #28a745;
+  color: white;
+}
+
+.admin-dashboard-btn-reject {
+  background-color: #dc3545;
+  color: white;
+}
+
+.admin-dashboard-no-data {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .admin-dashboard-table {
+    display: block;
+    overflow-x: auto;
+  }
+  
+  .admin-dashboard-btn-approve,
+  .admin-dashboard-btn-reject {
+    padding: 6px 10px;
+    font-size: 14px;
   }
 }

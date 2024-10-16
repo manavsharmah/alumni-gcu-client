@@ -29,7 +29,7 @@ const Topbar = () => {
     }
   };
 
-  const closeDropdown = () => setIsDropdownOpen(false); // Close on Profile click
+  const closeDropdown = () => setIsDropdownOpen(false); // Close on Profile Click
 
   useEffect(() => {
     const navItems = document.querySelectorAll('.nav-content li a');

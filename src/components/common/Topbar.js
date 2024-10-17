@@ -106,6 +106,11 @@ const Topbar = () => {
               alt="Girijananda Chowdhury University Alumni Association Logo"
             />
           </Link>
+          
+        </div>
+        <div className="title">
+          <h2>Girijananda Chowdhury University</h2>
+          <h2>Alumni Association</h2>
         </div>
         <div className="logo-gcu">
           <img src="/assets/gcu-logo.png" alt="Girijananda Chowdhury University Logo" />

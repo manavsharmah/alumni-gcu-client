@@ -1044,3 +1044,218 @@ justify-content: center;
   }
 }
 
+/* Post Card Wrapper */
+.gcu-post-card {
+  background-color: #fff; /* Dark background */
+  border-radius: 15px;
+  padding: 16px;
+  margin-bottom: 20px;
+  width: 700px ;
+  height: auto;
+  color: #fff; /* Light text color */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: box-shadow 0.3s ease;
+}
+
+.gcu-post-card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Avatar and Author Info */
+.gcu-post-card-left {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.gcu-post-author-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #9f7aea; /* Placeholder for avatar */
+  margin-right: 12px;
+}
+
+.gcu-post-author-info h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+  color: #000;
+}
+
+.gcu-post-author-details {
+  font-size: 0.85rem;
+  color: #000;
+}
+
+/* Timestamp */
+.gcu-post-timestamp, .gcu-post-edit-timestamp {
+  font-size: 0.75rem;
+  color: #000;
+  margin-top: 5px;
+}
+
+/* Middle Section */
+.gcu-post-card-middle {
+  margin-bottom: 15px;
+}
+
+.gcu-post-content {
+  font-size: 0.95rem;
+  color: #000;
+  line-height: 1.4;
+}
+
+.gcu-edit-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.gcu-edit-textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #444;
+  border: none;
+  color: #fff;
+}
+
+.gcu-edit-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.gcu-edit-save-button, .gcu-edit-cancel-button {
+  background-color: #9f7aea;
+  color: #000;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* Like and Comment Section */
+.gcu-post-card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.gcu-post-icons {
+  display: flex;
+  align-items: center;
+}
+
+.gcu-post-icons i {
+  margin-right: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #000;
+}
+
+.gcu-post-icons i:hover {
+  color: #9f7aea;
+}
+
+.gcu-post-icons span {
+  margin-left: 5px;
+  font-size: 0.9rem;
+}
+
+/* Right Section - Edit/Delete Buttons */
+.gcu-post-card-right {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.gcu-edit-button, .gcu-delete-button {
+  background-color: transparent;
+  border: none;
+  color: #9f7aea;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) { /* Tablet and Mobile */
+  
+  .gcu-post-card {
+    min-width: auto;  /* Remove fixed width */
+    width: 100%;      /* Set width to 100% */
+    padding: 12px;    /* Adjust padding for smaller screens */
+  }
+
+  .gcu-post-card-left {
+    flex-direction: column; /* Stack the avatar and author info */
+    align-items: flex-start; /* Align items to the left */
+  }
+
+  .gcu-post-author-avatar {
+    width: 40px; /* Slightly reduce avatar size */
+    height: 40px;
+    margin-bottom: 10px;
+  }
+
+  .gcu-post-author-info h3 {
+    font-size: 0.9rem; /* Adjust font size for mobile */
+  }
+
+  .gcu-post-author-details {
+    font-size: 0.8rem; /* Adjust font size for mobile */
+  }
+
+  /* Middle Section - Adjust spacing */
+  .gcu-post-card-middle {
+    margin-bottom: 10px;
+  }
+
+  .gcu-post-content {
+    font-size: 0.9rem; /* Slightly smaller font for mobile */
+  }
+
+  /* Buttons */
+  .gcu-edit-save-button, .gcu-edit-cancel-button {
+    padding: 6px 10px; /* Reduce button padding */
+  }
+
+  /* Like and Comment Section */
+  .gcu-post-icons i {
+    font-size: 1rem;  /* Reduce icon size */
+  }
+
+  /* Right Section - Edit/Delete Buttons */
+  .gcu-edit-button, .gcu-delete-button {
+    font-size: 1rem; /* Reduce button size */
+  }
+}
+
+@media screen and (max-width: 480px) { /* Small mobile */
+  .gcu-post-card {
+    padding: 10px; /* Further reduce padding for very small screens */
+  }
+
+  .gcu-post-author-info h3 {
+    font-size: 0.85rem; /* Even smaller font size for tiny screens */
+  }
+
+  .gcu-post-author-details {
+    font-size: 0.75rem;
+  }
+
+  .gcu-post-content {
+    font-size: 0.85rem; /* Slightly smaller font for post content */
+  }
+
+  /* Adjust icon size for small mobile */
+  .gcu-post-icons i {
+    font-size: 0.9rem;
+  }
+}

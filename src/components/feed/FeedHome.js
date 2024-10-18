@@ -8,6 +8,8 @@ import RecommendedUsersList from "../../components/common/RecommendedUsersList";
 import JobOpportunities from "./JobOpportunities"; // New component
 import FurtherEducation from "./FurtherEducation"; // New component
 import FeedLayout from "./FeedLayout";
+import FeedNavbar from "./FeedNavbar";
+import VerifiedUsersList from "../common/VerifiedUsersList";
 
 const Welcome = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -16,6 +18,7 @@ const Welcome = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [currentUser, setCurrentUser] = useState(null);
+    const [activeTab, setActiveTab] = useState("home");
     const postsPerPage = 6;
 
     useEffect(() => {
@@ -79,25 +82,56 @@ const Welcome = () => {
         setCurrentPage(pageNumber);
     };
 
-    // Left sidebar with Job Opportunities and Further Education
+    // Left sidebar 
     const leftSidebar = (
         <>
-            <JobOpportunities />
-            <FurtherEducation />
+            {activeTab === "home" && (
+                <>
+                    <JobOpportunities />
+                    <FurtherEducation />
+                </>
+            )}
+            {activeTab === "jobs" && <FurtherEducation />}
+            {activeTab === "education" && <JobOpportunities />}
+            {activeTab === "friends" && null}
         </>
     );
+    
 
-    // Main content (Post Form and Post List)
+    // Main content 
     const mainContent = (
         <>
-            <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
-            <PostList posts={posts} onDeletePost={handleDeletePost} onEditPost={handleEditPost} currentUser={currentUser} isLoading={isLoading} />
+            <FeedNavbar activeTab={activeTab} setActiveTab={setActiveTab} />
+            {activeTab === "home" && (
+                <>
+                    <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
+                    <PostList
+                        posts={posts}
+                        onDeletePost={handleDeletePost}
+                        onEditPost={handleEditPost}
+                        currentUser={currentUser}
+                        isLoading={isLoading}
+                    />
+                </>
+            )}
+            {activeTab === "friends" && <VerifiedUsersList />}
+            {activeTab === "jobs" && <JobOpportunities />}  {/* Show Job Opportunities when tab is clicked */}
+            {activeTab === "education" && <FurtherEducation />}  {/* Show Education Opportunities when tab is clicked */}
             <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handleClickPage} />
         </>
     );
+    
 
-    // Right sidebar with Recommended Users List
-    const rightSidebar = <RecommendedUsersList />;
+    // Right sidebar
+    const rightSidebar = (
+        <>
+            {activeTab === "home" && <RecommendedUsersList />}
+            {activeTab === "jobs" && <RecommendedUsersList />}
+            {activeTab === "education" && <VerifiedUsersList />}
+            {activeTab === "friends" && null}
+        </>
+    );
+    
 
     return <FeedLayout leftSidebar={leftSidebar} mainContent={mainContent} rightSidebar={rightSidebar} />;
 };

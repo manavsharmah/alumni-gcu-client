@@ -14,5 +14,68 @@
   
   .main-content {
     width: 55%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
+
+  @media screen and (max-width: 768px) {  /* Tablet and mobile screens */
+    .feed-layout-container {
+        flex-direction: column;
+        padding: 10px; /* Adjust padding */
+    }
+
+    .left-sidebar,
+    .right-sidebar {
+        display: none;  /* Hide sidebars */
+    }
+
+    .main-content {
+        width: 100%;  /* Full width for main content */
+        padding: 0;
+        margin: 0;
+    }
+}
+
   
+/* Feed NavBar */
+.feed-navbar {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+.feed-navbar-list {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feed-nav-item {
+  display: flex;
+  align-items: center;
+  margin: 0 15px;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.3s ease;
+}
+
+.feed-nav-item:hover {
+  color: #000;
+}
+
+.feed-nav-item.active {
+  color: #27357f; /* Active tab color */
+  font-weight: bold;
+}
+
+.nav-icon {
+  margin-right: 8px;
+  font-size: 2em; /* Adjust icon size here */
+}
+
+/* Optional: Hide text labels for a more compact view */
+.feed-nav-item span {
+  display: none; /* Hide text if only icons are preferred */
+}

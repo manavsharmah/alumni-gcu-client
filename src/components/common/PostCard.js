@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import '../components.css'; // Add your CSS file
 
 const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -15,22 +16,23 @@ const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
         setIsEditing(false);
     };
 
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('en-GB', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric'
-        });
-    };
+    const getRelativeTime = (dateString) => {
+        const postDate = new Date(dateString);
+        const now = new Date();
+        const diffInMs = now - postDate;
+        const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+        const diffInHours = Math.floor(diffInMinutes / 60);
+        const diffInDays = Math.floor(diffInHours / 24);
 
-    const formatTime = (dateString) => {
-        const date = new Date(dateString);
-        return date.toLocaleTimeString('en-US', {
-            hour: 'numeric',
-            minute: '2-digit',
-            hour12: true
-        });
+        if (diffInMinutes < 1) {
+            return 'Just now';
+        } else if (diffInMinutes < 60) {
+            return `${diffInMinutes} min`;
+        } else if (diffInHours < 24) {
+            return `${diffInHours} hr${diffInHours > 1 ? 's' : ''}`;
+        } else {
+            return `${diffInDays} day${diffInDays > 1 ? 's' : ''}`;
+        }
     };
 
     const canEdit = currentUser && (currentUser.role === 'admin' || currentUser.id === post.author._id);
@@ -39,26 +41,27 @@ const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
     return (
         <div className="gcu-post-card">
             <div className="gcu-post-card-wrapper">
+                {/* Left Section with Author Info */}
                 <div className="gcu-post-card-left">
                     <div className="gcu-post-author-avatar"></div>
                     <div className="gcu-post-author-info">
-                        <h3 className="gcu-post-author-name">{post.author?.name || 'Anonymous'}</h3>
+                        <h3>{post.author?.name || 'Anonymous'}</h3>
                         <p className="gcu-post-author-details">
-                            {post.author?.batch && `${post.author.batch} - `}
+                            {post.author?.batch && `${post.author.batch} - `} 
                             {post.author?.branch || ''}
                         </p>
                         <p className="gcu-post-timestamp">
-                            Posted: {formatDate(post.createdAt)} at {formatTime(post.createdAt)}
+                            {getRelativeTime(post.createdAt)}
                         </p>
                         {post.lastEditedAt && (
                             <p className="gcu-post-edit-timestamp">
-                                Last Edited: {formatDate(post.lastEditedAt)} at {formatTime(post.lastEditedAt)}
-                                {post.lastEditedBy && ` by ${post.lastEditedBy}`}
+                                Last Edited: {getRelativeTime(post.lastEditedAt)}
                             </p>
                         )}
                     </div>
                 </div>
-                
+
+                {/* Middle Section - Post Content */}
                 <div className="gcu-post-card-middle">
                     {isEditing ? (
                         <div className="gcu-edit-form">
@@ -78,13 +81,14 @@ const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
                     )}
                 </div>
 
+                {/* Right Section - Edit/Delete Buttons */}
                 <div className="gcu-post-card-right">
                     {canEdit && !isEditing && (
                         <button 
                             className="gcu-edit-button"
                             onClick={() => setIsEditing(true)}
                         >
-                            ✏️ Edit
+                            ✏️
                         </button>
                     )}
                     {canDelete && (
@@ -92,7 +96,7 @@ const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
                             className="gcu-delete-button"
                             onClick={handleDelete}
                         >
-                            🗑️ Delete
+                            🗑️
                         </button>
                     )}
                 </div>

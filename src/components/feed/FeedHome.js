@@ -22,9 +22,16 @@ const Welcome = () => {
     const postsPerPage = 6;
 
     useEffect(() => {
-        fetchPosts(currentPage);
+        let category = 'post';  // Default category is 'post'
+        if (activeTab === 'jobs') {
+            category = 'job';  // Fetch job opportunities
+        } else if (activeTab === 'education') {
+            category = 'education';  // Fetch education opportunities
+        }
+        fetchPosts(currentPage, category);  // Fetch posts based on the selected category
         getCurrentUser();
-    }, [currentPage]);
+    }, [activeTab, currentPage]);  // Re-run when active tab or current page changes
+    
 
     const getCurrentUser = () => {
         const token = localStorage.getItem("accessToken");
@@ -34,10 +41,10 @@ const Welcome = () => {
         }
     };
 
-    const fetchPosts = async (page) => {
+    const fetchPosts = async (page, category = 'post') => {
         try {
             setIsLoading(true);
-            const response = await api.get(`/posts?page=${page}&limit=${postsPerPage}`);
+            const response = await api.get(`/posts?page=${page}&limit=${postsPerPage}&category=${category}`);
             setPosts(response.data.posts);
             setTotalPages(response.data.totalPages);
         } catch (err) {
@@ -46,19 +53,21 @@ const Welcome = () => {
             setIsLoading(false);
         }
     };
+    
 
-    const handleSubmitPost = async (content) => {
+    const handleSubmitPost = async (content, category) => {
         setIsLoading(true);
         setError(null);
         try {
-            await api.post("/posts/create", { content });
-            fetchPosts(currentPage);
+            await api.post("/posts/create", { content, category });  // Pass content and category
+            fetchPosts(currentPage, category);
         } catch (err) {
             setError("Failed to submit post. Please try again.");
         } finally {
             setIsLoading(false);
         }
     };
+    
 
     const handleDeletePost = async (postId) => {
         try {
@@ -102,6 +111,8 @@ const Welcome = () => {
     const mainContent = (
         <>
             <FeedNavbar activeTab={activeTab} setActiveTab={setActiveTab} />
+            
+            {/* Home Tab (Regular Posts) */}
             {activeTab === "home" && (
                 <>
                     <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
@@ -115,11 +126,32 @@ const Welcome = () => {
                 </>
             )}
             {activeTab === "friends" && <VerifiedUsersList />}
-            {activeTab === "jobs" && <JobOpportunities />}  {/* Show Job Opportunities when tab is clicked */}
-            {activeTab === "education" && <FurtherEducation />}  {/* Show Education Opportunities when tab is clicked */}
+            {/* Jobs Tab (Job Opportunities) */}
+            {activeTab === "jobs" && (
+                <PostList
+                    posts={posts}
+                    onDeletePost={handleDeletePost}
+                    onEditPost={handleEditPost}
+                    currentUser={currentUser}
+                    isLoading={isLoading}
+                />
+            )}
+            
+            {/* Education Tab (Education Opportunities) */}
+            {activeTab === "education" && (
+                <PostList
+                    posts={posts}
+                    onDeletePost={handleDeletePost}
+                    onEditPost={handleEditPost}
+                    currentUser={currentUser}
+                    isLoading={isLoading}
+                />
+            )}
+            
             <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handleClickPage} />
         </>
     );
+    
     
 
     // Right sidebar

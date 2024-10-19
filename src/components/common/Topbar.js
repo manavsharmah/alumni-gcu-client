@@ -197,7 +197,7 @@ const Topbar = () => {
                 <span className="dropdown-username">{user.name}</span>
               </div>
               <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}>
-                <Link className="dropdown-item" to={`/profile/${user._id}`} onClick={closeDropdown}>
+                <Link className="dropdown-item" to={`/profile`} onClick={closeDropdown}>
                   Profile
                 </Link>
                 <Link className="dropdown-item" to="/" onClick={handleLogout}>

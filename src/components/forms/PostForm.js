@@ -5,6 +5,7 @@ import { useUser } from '../../services/UserContext';
 
 const PostForm = ({ onSubmitPost, isLoading, error }) => {
     const [postContent, setPostContent] = useState("");
+    const [category, setCategory] = useState("post"); // Default category
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { user } = useUser(); // Use the custom hook to get the user data
     const [profilePhoto, setProfilePhoto] = useState(null);
@@ -14,10 +15,15 @@ const PostForm = ({ onSubmitPost, isLoading, error }) => {
         setPostContent(e.target.value);
     };
 
+    const handleCategoryChange = (e) => {
+        setCategory(e.target.value);
+    };
+
     const handlePostSubmit = () => {
         if (postContent.trim()) {
-            onSubmitPost(postContent);
+            onSubmitPost(postContent, category); // Send category along with the content
             setPostContent(""); 
+            setCategory("post");  // Reset category to default after submission
             closeModal();  // Close modal after submission
         }
     };
@@ -87,6 +93,19 @@ const PostForm = ({ onSubmitPost, isLoading, error }) => {
                             maxLength={maxLength}
                             className="modal-textarea"
                         />
+                        {/* Dropdown for selecting the category */}
+                        <div className="category-selector">
+                            <label htmlFor="category">Choose a category:</label>
+                            <select 
+                                id="category"
+                                value={category}
+                                onChange={handleCategoryChange}
+                            >
+                                <option value="post">Regular Post</option>
+                                <option value="job">Job Opportunity</option>
+                                <option value="education">Education Opportunity</option>
+                            </select>
+                        </div>
                         <div className="post-footer">
                             <span className={`char-count ${postContent.length > maxLength * 0.9 ? 'warning' : ''}`}>
                                 {postContent.length}/{maxLength}

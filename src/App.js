@@ -117,7 +117,7 @@ function App() {
 									}
 								/>
 								<Route
-									path="/profile/:id"
+									path="/profile"
 									element={
 										<ProtectedRoute element={<Profile />} requiredRole="user" />
 									}

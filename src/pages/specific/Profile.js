@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import api from "../../services/api";
+import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
 import '../pages.css';
 
 const Profile = () => {
@@ -12,14 +13,13 @@ const Profile = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
-    const [profilePhoto, setProfilePhoto] = useState(null);
     const postsPerPage = 5;
 
     // Fetch logged-in user's profile or another user's profile based on the ID
     const fetchUserProfile = async (userId) => {
         try {
             let response;
-            if (userId) {
+            if (userId) {   
                 // Fetch another user's profile
                 response = await api.get(`/user/profile/${userId}`);
                 setIsLoggedInUser(false);  // Not the logged-in user's profile
@@ -66,25 +66,6 @@ const Profile = () => {
         });
     }, [id, currentPage]);
 
-    useEffect(() => {
-        const fetchProfilePhoto = async () => {
-          if (user) {
-            try {
-              const response = await api.get('/user/profile-photo');
-              if (response.data && response.data.profilePhoto) {
-                setProfilePhoto(response.data.profilePhoto);
-              } else {
-                setProfilePhoto(null);
-              }
-            } catch (error) {
-              console.error('Error fetching profile photo:', error);
-              setProfilePhoto(null);
-            }
-          }
-        };
-        fetchProfilePhoto();
-  }, [user]);
-
     const handlePostClick = () => {
         navigate('/welcome');
     };
@@ -102,23 +83,10 @@ const Profile = () => {
             <h1 className="user-profile-main-title">Profile</h1>
             <div className="user-profile-card">
                 <div className="user-profile-header">
-                {isLoggedInUser ? (
-						<img
-							src={
-								profilePhoto
-									? `http://localhost:5000/${profilePhoto.replace(/\\/g, "/")}`
-									: "https://via.placeholder.com/150"
-							}
-							alt="Profile"
-							className="user-profile-picture"
-						/>
-					) : (
-						<img
-							src="https://via.placeholder.com/150"
-							alt="Profile"
-							className="user-profile-picture"
-						/>
-					)}
+                    <ProfilePhoto 
+                        userId={user?._id}
+                        className="user-profile-picture"
+                    />
                     <div className="user-profile-info">
                         <h2 className="user-profile-name">{user?.name}</h2>
                         <p className="user-profile-email">{user?.email}</p>

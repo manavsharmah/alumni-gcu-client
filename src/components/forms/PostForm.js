@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import './form.css'; // Link to the external CSS file
-import api from '../../services/api';
 import { useUser } from '../../services/UserContext';
+import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
 
 const PostForm = ({ onSubmitPost, isLoading, error }) => {
     const [postContent, setPostContent] = useState("");
     const [category, setCategory] = useState("post"); // Default category
     const [isModalOpen, setIsModalOpen] = useState(false);
     const { user } = useUser(); // Use the custom hook to get the user data
-    const [profilePhoto, setProfilePhoto] = useState(null);
     const maxLength = 300;
 
     const handlePostChange = (e) => {
@@ -36,38 +35,13 @@ const PostForm = ({ onSubmitPost, isLoading, error }) => {
         setIsModalOpen(false);
     };
 
-    useEffect(() => {
-        const fetchProfilePhoto = async () => {
-          if (user) {
-            try {
-              const response = await api.get('/user/profile-photo');
-              if (response.data && response.data.profilePhoto) {
-                setProfilePhoto(response.data.profilePhoto);
-              } else {
-                setProfilePhoto(null);
-              }
-            } catch (error) {
-              console.error('Error fetching profile photo:', error);
-              setProfilePhoto(null);
-            }
-          }
-        };
-      
-        fetchProfilePhoto();
-      }, [user]);
-
     return (
         <div className="post-form-container">
             {!isModalOpen && (
                 <div className="post-form-collapsed" onClick={openModal}>
-                    <img 
-                        src={profilePhoto ? `http://localhost:5000/${profilePhoto.replace(/\\/g, '/')}` : './assets/profile-placeholder.svg'}
-                        alt="profile" 
-                        className='rounded-full'
-                        onError={(e) => {
-                        e.target.onerror = null; 
-                        e.target.src = './assets/profile-placeholder.svg';
-                        }}
+                    <ProfilePhoto 
+                        userId={user._id}
+                        className="rounded-full"
                     />
                     <input
                         type="text"

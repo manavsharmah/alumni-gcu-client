@@ -1075,7 +1075,6 @@ justify-content: center;
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background-color: #9f7aea; /* Placeholder for avatar */
   margin-right: 12px;
 }
 
@@ -1181,6 +1180,13 @@ justify-content: center;
   color: #9f7aea;
   cursor: pointer;
   font-size: 1.2rem;
+}
+
+/*Reccommended users*/
+.recommended-profile-picture {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
 }
 
 

@@ -44,7 +44,7 @@ const Welcome = () => {
     const fetchPosts = async (page, category = 'post') => {
         try {
             setIsLoading(true);
-            const response = await api.get(`/posts?page=${page}&limit=${postsPerPage}&category=${category}`);
+            const response = await api.get(`/posts/get-post?page=${page}&limit=${postsPerPage}&category=${category}`);
             setPosts(response.data.posts);
             setTotalPages(response.data.totalPages);
         } catch (err) {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
 import "../components.css";
+import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
 
 const RecommendedUsersList = () => {
   const [users, setUsers] = useState([]);
@@ -72,12 +73,12 @@ const RecommendedUsersList = () => {
     textDecoration: 'none'
   };
 
-  const imgStyle = {
-    borderRadius: '50%',
-    width: '50px',
-    height: '50px',
-    objectFit: 'cover'
-  };
+  // const imgStyle = {
+  //   borderRadius: '50%',
+  //   width: '50px',
+  //   height: '50px',
+  //   objectFit: 'cover'
+  // };
 
   const handleMouseEnter = (e) => {
     e.currentTarget.style.transform = 'scale(1.05)';
@@ -100,7 +101,10 @@ const RecommendedUsersList = () => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <img src="https://via.placeholder.com/50" alt="Profile" style={imgStyle} />
+            <ProfilePhoto 
+              userId={user?._id}
+              className="recommended-profile-picture"
+            />
             <div>
               <h4 style={nameStyle}>{user.name}</h4>
               <p style={branchBatchStyle}>{user.branch}, {user.batch}</p>

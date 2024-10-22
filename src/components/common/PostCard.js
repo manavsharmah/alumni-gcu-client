@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import '../components.css'; // Add your CSS file
+import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
 
 const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -43,7 +44,10 @@ const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
             <div className="gcu-post-card-wrapper">
                 {/* Left Section with Author Info */}
                 <div className="gcu-post-card-left">
-                    <div className="gcu-post-author-avatar"></div>
+                    <ProfilePhoto 
+                        userId={post.author?._id}
+                        className="gcu-post-author-avatar"
+                    />
                     <div className="gcu-post-author-info">
                         <h3>{post.author?.name || 'Anonymous'}</h3>
                         <p className="gcu-post-author-details">

@@ -1059,6 +1059,27 @@ button:hover {
   text-justify: inter-word;
 }
 
+/*Event card*/
+.events-delete-btn {
+  background-color: #e63946; 
+  color: #fff;               
+  border: none;              
+  padding: 8px 12px;         
+  border-radius: 5px;       
+  cursor: pointer;           
+  font-weight: bold;         
+  transition: background-color 0.3s ease; 
+}
+
+.events-delete-btn:hover {
+  background-color: #d62828; /* Darker red on hover */
+}
+
+.events-delete-btn:active {
+  background-color: #b71d1d; /* Even darker red when clicked */
+}
+
+
 
 /* update profile */
 

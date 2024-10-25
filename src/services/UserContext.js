@@ -11,16 +11,16 @@ export const UserProvider = ({ children }) => {
         const fetchUser = async () => {
             const accessToken = localStorage.getItem('accessToken');
             if (accessToken) {
-            try {
-                const res = await api.get('/user/user');
-                if (res && res.data) {
-                    setUser(res.data);
-                }
-            } catch (err) {
-                console.error('Error during HTTP request:', err);
-            } 
-        }
-        };
+                try {
+                    const res = await api.get('/user/user');
+                    if (res && res.data) {
+                        setUser({ ...res.data, token: accessToken }); // Include token in user state
+                    }
+                } catch (err) {
+                    console.error('Error during HTTP request:', err);
+                } 
+            }
+        };        
         fetchUser();
     }, []);
 
@@ -28,14 +28,15 @@ export const UserProvider = ({ children }) => {
         try {
             const res = await axios.post('http://localhost:5000/api/auth/login', credentials, { withCredentials: true }); 
             if (res && res.data) {
-                setUser(res.data.user); 
-                localStorage.setItem('accessToken', res.data.accessToken); //storing in localstorage
+                setUser({ ...res.data.user, token: res.data.accessToken }); // Add token to user state
+                localStorage.setItem('accessToken', res.data.accessToken); // Store in local storage
             }
         } catch (err) {
             console.error('Error during login:', err);
             throw err; 
         }
     };
+    
 
     const logout = async () => {
         try {

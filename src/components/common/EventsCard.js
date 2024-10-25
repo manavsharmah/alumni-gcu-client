@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../components.css"; // Assuming your styles are in the same file as the NewsCard component
+import { useUser } from '../../services/UserContext';
 
 const EventCard = () => {
   const [events, setEvents] = useState([]);
   const [currentEventIndex, setCurrentEventIndex] = useState(0);
   const navigate = useNavigate();
-  const rotationInterval = 25000; // Rotation interval in milliseconds (25 seconds)
+  const { user } = useUser();
+  const rotationInterval = 25000;
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -35,6 +36,28 @@ const EventCard = () => {
     navigate(`/events/${eventItem._id}`);
   };
 
+  // const handleEdit = (e, eventItem) => {
+  //   e.stopPropagation(); // Prevent event bubbling
+  //   navigate(`/edit-event/${eventItem._id}`);
+  // };
+
+  const handleDelete = async (e, eventId) => {
+    e.stopPropagation(); // Prevent event bubbling
+    const confirmDelete = window.confirm("Are you sure you want to delete this event?");
+    if (!confirmDelete) return; // Exit if the user cancels
+
+    const accessToken = localStorage.getItem('accessToken');
+    
+    try {
+        await axios.delete(`http://localhost:5000/api/events/delete/${eventId}`, {
+            headers: { Authorization: `Bearer ${accessToken}` }
+        });
+        setEvents(events.filter(event => event._id !== eventId)); // Update the state after deletion
+    } catch (error) {
+        console.error('Error deleting event:', error);
+    }
+};
+
   if (events.length === 0) return null;
 
   const currentEvent = events[currentEventIndex];
@@ -43,15 +66,15 @@ const EventCard = () => {
     <div className="event-card-container">
       <h2 className="news-event-title">EVENTS</h2>
       <div className="event-card" onClick={() => handleEventClick(currentEvent)}>
-      {currentEvent.images && currentEvent.images.length > 0 ? (
-								<img
-									src={`http://localhost:5000${currentEvent.images[0]}`}
-									alt="Events Thumbnail"
-                  className="event-card-thumbnail"
-								/>
-							) : (
-								<img src="./assets/gcu-building.jpg" alt="Default Thumbnail" className="event-card-thumbnail" />
-							)}
+        {currentEvent.images && currentEvent.images.length > 0 ? (
+          <img
+            src={`http://localhost:5000${currentEvent.images[0]}`}
+            alt="Events Thumbnail"
+            className="event-card-thumbnail"
+          />
+        ) : (
+          <img src="./assets/gcu-building.jpg" alt="Default Thumbnail" className="event-card-thumbnail" />
+        )}
         <div className="event-card-content">
           <span className="event-card-label">Event</span>
           <h3 className="event-card-title">{currentEvent.title}</h3>
@@ -60,6 +83,22 @@ const EventCard = () => {
             Date: {new Date(currentEvent.event_date).toLocaleDateString()} 
             <span>Time: {currentEvent.event_time}</span>
           </p>
+          {user && user.role === 'admin' && (
+            <div className="admin-buttons">
+              {/* <button 
+                onClick={(e) => handleEdit(e, currentEvent)} 
+                className="edit-btn"
+              >
+                ✏️
+              </button> */}
+              <button 
+                onClick={(e) => handleDelete(e, currentEvent._id)} 
+                className="events-delete-btn"
+              >
+                🗑️
+              </button>
+            </div>
+          )}
         </div>
       </div>
       <span className="read-more-span" onClick={() => navigate('/events')}>

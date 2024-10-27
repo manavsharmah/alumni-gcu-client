@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { FaTachometerAlt, FaNewspaper, FaCalendarAlt, FaArrowLeft, FaImages } from 'react-icons/fa';
+import { FaTachometerAlt, FaNewspaper, FaCalendarAlt, FaArrowLeft, FaImages, FaAddressBook } from 'react-icons/fa';
+import { IoPersonAdd } from "react-icons/io5";
 import { MdAttachEmail } from "react-icons/md";
 import "./admin.css";
 
@@ -21,7 +22,7 @@ const AdminLayout = () => {
         </li>
         <li>
           <a href="/alumni-archive">
-            <FaTachometerAlt />
+            <FaAddressBook />
             <span>Alumni-Archive</span>
           </a>
         </li>
@@ -47,6 +48,12 @@ const AdminLayout = () => {
           <a href="/email-form">
             <MdAttachEmail />
             <span>Send Mail</span>
+          </a>
+        </li>
+        <li>
+          <a href="/add-bulk-alumni">
+            <IoPersonAdd />
+            <span>Add Alumni</span>
           </a>
         </li>
         <li>

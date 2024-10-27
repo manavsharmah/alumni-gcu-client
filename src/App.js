@@ -7,6 +7,7 @@ import Login from "./components/forms/LoginForm";
 import Register from "./components/forms/RegisterForm";
 import ResetPassword from "./components/forms/ResetPassword";
 import AdminLogin from "./components/common/AdminLogin";
+import EditEvent from "./components/common/EditEvent";
 
 // Layout Components
 import ForgotPassword from "./components/forms/ForgotPassword";
@@ -165,6 +166,7 @@ function App() {
 								<Route path="/photo-upload-form" element={<PhotoUpload />} />
 								<Route path="/email-form" element={<AdminEmailForm />} />
 								<Route path="/add-bulk-alumni" element={<BulkAddAlumni />} />
+								<Route path="/edit-event/:id" element={<EditEvent />} />
 							</Route>
 
 						</Routes>

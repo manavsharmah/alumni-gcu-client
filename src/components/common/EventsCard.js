@@ -10,6 +10,7 @@ const EventCard = () => {
   const { user } = useUser();
   const rotationInterval = 25000;
 
+  // Fetch events when component mounts
   useEffect(() => {
     const fetchEvents = async () => {
       try {
@@ -24,6 +25,7 @@ const EventCard = () => {
     fetchEvents();
   }, []);
 
+  // Rotate current event being displayed
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentEventIndex((prevIndex) => (prevIndex + 1) % events.length);
@@ -36,28 +38,29 @@ const EventCard = () => {
     navigate(`/events/${eventItem._id}`);
   };
 
-  // const handleEdit = (e, eventItem) => {
-  //   e.stopPropagation(); // Prevent event bubbling
-  //   navigate(`/edit-event/${eventItem._id}`);
-  // };
+  const handleEdit = (e, eventItem) => {
+    e.stopPropagation(); // Prevent event bubbling
+    navigate(`/edit-event/${eventItem._id}`); // Navigate to the edit page with event ID
+  };
 
   const handleDelete = async (e, eventId) => {
-    e.stopPropagation(); // Prevent event bubbling
+    e.stopPropagation();
     const confirmDelete = window.confirm("Are you sure you want to delete this event?");
-    if (!confirmDelete) return; // Exit if the user cancels
+    if (!confirmDelete) return;
 
-    const accessToken = localStorage.getItem('accessToken');
+    const accessToken = localStorage.getItem('accessToken'); // Retrieve token from local storage
     
     try {
         await axios.delete(`http://localhost:5000/api/events/delete/${eventId}`, {
             headers: { Authorization: `Bearer ${accessToken}` }
         });
-        setEvents(events.filter(event => event._id !== eventId)); // Update the state after deletion
+        setEvents(events.filter(event => event._id !== eventId)); // Update state after deletion
     } catch (error) {
         console.error('Error deleting event:', error);
     }
-};
+  };
 
+  // Show nothing if no events are available
   if (events.length === 0) return null;
 
   const currentEvent = events[currentEventIndex];
@@ -83,14 +86,15 @@ const EventCard = () => {
             Date: {new Date(currentEvent.event_date).toLocaleDateString()} 
             <span>Time: {currentEvent.event_time}</span>
           </p>
+          {/* Admin-only edit and delete buttons */}
           {user && user.role === 'admin' && (
             <div className="admin-buttons">
-              {/* <button 
+              <button 
                 onClick={(e) => handleEdit(e, currentEvent)} 
-                className="edit-btn"
+                className="events-edit-btn"
               >
                 ✏️
-              </button> */}
+              </button>
               <button 
                 onClick={(e) => handleDelete(e, currentEvent._id)} 
                 className="events-delete-btn"

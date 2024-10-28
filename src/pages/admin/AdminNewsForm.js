@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Modal from './AdminModal';  // Reusable modal
-import './admin.css';  // Assuming your styles are in this file
+import NewsEditModal from '../../components/common/NewsEditModal';  // Import the edit modal
+import './admin.css';
 import api from '../../services/api';
 
 const AdminNewsForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isNewsModalOpen, setIsNewsModalOpen] = useState(false);  // State to control modal visibility
+  const [isNewsModalOpen, setIsNewsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [message, setMessage] = useState('');
-  const [modalContent, setModalContent] = useState(null);  // To store modal content dynamically
+  const [modalContent, setModalContent] = useState(null);
   const [modalTitle, setModalTitle] = useState("");
-  const [newsList, setNewsList] = useState([]);  // Store fetched news
+  const [newsList, setNewsList] = useState([]);
   const [selectedNews, setSelectedNews] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
@@ -19,7 +21,7 @@ const AdminNewsForm = () => {
 
   const { title, content, images } = formData;
 
-  const onChange = e => {
+  const onChange = (e) => {
     if (e.target.name === 'images') {
       setFormData({ ...formData, images: Array.from(e.target.files) });
     } else {
@@ -29,56 +31,42 @@ const AdminNewsForm = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (!title.trim() || !content.trim()) {
-      setMessage('Title and content cannot be empty');
-      return;
-    }
-
     const data = new FormData();
     data.append('title', title);
     data.append('content', content);
-    data.append('category', "news");
-
     images.forEach(image => {
       data.append('images', image);
     });
 
     try {
-      const response = await api.post('/news/upload', data, {
-        headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'multipart/form-data'
-        }
+      await api.post('/news/upload', data, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}`, 'Content-Type': 'multipart/form-data' }
       });
       setMessage('News Uploaded!');
-      setFormData({ title: '', content: '', images: [] });
-      setIsModalOpen(false);  // Close the modal on successful submission
-    } catch (err) {
+      setIsModalOpen(false);
+      fetchNews(); // Refresh news list after creation
+    } catch (error) {
       setMessage('Error Creating News');
     }
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);  // Close modal
+  const fetchNews = async () => {
+    try {
+      const response = await api.get('/news/get-news');
+      setNewsList(response.data);
+    } catch (error) {
+      console.error('Error fetching news:', error);
+    }
   };
 
   useEffect(() => {
-    const fetchNews = async () => {
-      try {
-        const response = await api.get('http://localhost:5000/api/news/get-news');
-        setNewsList(response.data);
-      } catch (error) {
-        console.error('Error fetching news:', error);
-      }
-    };
-
     fetchNews();
   }, []);
 
   const openNewsModal = (newsItem) => {
-    setSelectedNews(newsItem);  // Set the selected news item for the modal
+    setSelectedNews(newsItem);
     setModalTitle(newsItem.title);
-    const newsDetails = (
+    setModalContent(
       <>
         <p><strong>Date:</strong> {new Date(newsItem.date).toLocaleDateString()}</p>
         <p><strong>Content:</strong> {newsItem.content}</p>
@@ -88,7 +76,6 @@ const AdminNewsForm = () => {
         )}
       </>
     );
-    setModalContent(newsDetails);
     setIsNewsModalOpen(true);
   };
 
@@ -99,16 +86,17 @@ const AdminNewsForm = () => {
   };
 
   const handleEdit = (newsItem) => {
-    console.log('Editing news:', newsItem._id);  // Redirect to edit page or open edit modal
+    setSelectedNews(newsItem); // Set the selected news item for editing
+    setIsEditModalOpen(true); // Open edit modal
   };
 
   const handleDelete = async (newsId) => {
     if (window.confirm("Are you sure you want to delete this news?")) {
       try {
-        await api.delete(`http://localhost:5000/api/news/delete/${newsId}`, {
+        await api.delete(`/news/delete/${newsId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
-        setNewsList(newsList.filter(news => news._id !== newsId));  // Update news list after deletion
+        setNewsList(newsList.filter(news => news._id !== newsId));
         setMessage('News Deleted Successfully');
       } catch (error) {
         console.error('Error deleting news:', error);
@@ -120,51 +108,43 @@ const AdminNewsForm = () => {
   return (
     <div className="admin-news-container">
       <h2>News Management</h2>
-      {/* Add more content to this page as needed */}
-      
-      <button className="admin-button" onClick={() => setIsModalOpen(true)}>Create News</button> {/* Open modal */}
+      <button className="admin-button" onClick={() => setIsModalOpen(true)}>Create News</button>
 
-      {/* Reusable Modal Component to show form */}
+      {/* Create News Modal */}
       <Modal
         title="Create News"
         content={(
           <form onSubmit={onSubmit} encType="multipart/form-data">
-            <div className="admin-form-group">
-              <input
-                type='text'
-                className="admin-form-input"
-                placeholder='Title'
-                value={title}
-                onChange={onChange}
-                name='title'
-                required
-              />
-            </div>
-            <div className="admin-form-group">
-              <textarea
-                className="admin-form-textarea"
-                placeholder='Content'
-                value={content}
-                onChange={onChange}
-                name='content'
-                required
-              />
-            </div>
-            <div className="admin-form-group">
-              <input
-                type="file"
-                className="admin-form-input"
-                name="images"
-                accept="image/*"
-                onChange={onChange}
-                multiple
-              />
-            </div>
+            <input
+              type='text'
+              className="admin-form-input"
+              placeholder='Title'
+              value={title}
+              onChange={onChange}
+              name='title'
+              required
+            />
+            <textarea
+              className="admin-form-textarea"
+              placeholder='Content'
+              value={content}
+              onChange={onChange}
+              name='content'
+              required
+            />
+            <input
+              type="file"
+              className="admin-form-input"
+              name="images"
+              accept="image/*"
+              onChange={onChange}
+              multiple
+            />
             <button type="submit" className='admin-form-button'>Create News</button>
           </form>
         )}
         isOpen={isModalOpen}
-        closeModal={closeModal}
+        closeModal={() => setIsModalOpen(false)}
       />
       {message && <p className="admin-form-message">{message}</p>}
 
@@ -179,20 +159,12 @@ const AdminNewsForm = () => {
         </thead>
         <tbody>
           {newsList.map((newsItem) => (
-            <tr key={newsItem._id} onClick={() => openNewsModal(newsItem)} style={{ cursor: 'pointer' }}>
+            <tr key={newsItem._id} onClick={() => openNewsModal(newsItem)}>
               <td>
                 {newsItem.firstImage ? (
-                  <img
-                    src={`http://localhost:5000${newsItem.firstImage}`}
-                    alt="Thumbnail"
-                    style={{ height: '100px', objectFit: 'cover' }}
-                  />
+                  <img src={`http://localhost:5000${newsItem.firstImage}`} alt="Thumbnail" style={{ height: '100px', objectFit: 'cover' }} />
                 ) : (
-                  <img
-                    src="./assets/gcu-building.jpg"
-                    alt="Default Thumbnail"
-                    style={{ height: '100px', objectFit: 'cover' }}
-                  />
+                  <img src="./assets/gcu-building.jpg" alt="Default Thumbnail" style={{ height: '100px', objectFit: 'cover' }} />
                 )}
               </td>
               <td>{newsItem.title}</td>
@@ -205,13 +177,23 @@ const AdminNewsForm = () => {
         </tbody>
       </table>
 
-      {/* Reusable Modal for viewing news details */}
+      {/* News Details Modal */}
       <Modal
         title={modalTitle}
         content={modalContent}
         isOpen={isNewsModalOpen}
         closeModal={closeNewsModal}
       />
+
+      {/* Edit News Modal */}
+      {isEditModalOpen && selectedNews && (
+        <NewsEditModal
+          isOpen={isEditModalOpen}
+          onClose={() => setIsEditModalOpen(false)}
+          newsItem={selectedNews}
+          onNewsUpdated={fetchNews} // Refresh news list after edit
+        />
+      )}
     </div>
   );
 };

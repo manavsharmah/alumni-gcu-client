@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 import * as XLSX from 'xlsx';  // For Excel download
 import Papa from 'papaparse';
+import Modal from "./AdminModal";
 
 const AlumniArchive = () => {
   const [users, setUsers] = useState([]);
@@ -16,6 +17,9 @@ const AlumniArchive = () => {
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null });
   const [searchPerformed, setSearchPerformed] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);  // Modal state
+  const [modalContent, setModalContent] = useState(null);  // State to store dynamic modal content
+  const [modalTitle, setModalTitle] = useState("");  // State for modal title
 
   const branches = [
     'Computer Science and Engineering',
@@ -123,6 +127,32 @@ const AlumniArchive = () => {
     setSearch('');
   };
 
+   // Function to handle row click
+   const handleRowClick = (user) => {
+    // Generate detailed user content for the modal
+    const userContent = (
+      <>
+        <p><strong>Email:</strong> {user.email}</p>
+        <p><strong>Batch:</strong> {user.batch}</p>
+        <p><strong>Branch:</strong> {user.branch}</p>
+        <p><strong>Phone:</strong> {user.phone || 'Not available'}</p>
+        <p><strong>Address:</strong> {user.address || 'Not available'}</p>
+        <p><strong>LinkedIn:</strong> <a href={user.linkedin} target="_blank" rel="noopener noreferrer">{user.linkedin}</a></p>
+      </>
+    );
+
+    // Set modal title and content
+    setModalTitle(`${user.name}'s Details`);
+    setModalContent(userContent);
+    setIsModalOpen(true);  // Open the modal
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);  // Close the modal
+    setModalContent(null);  // Clear content
+    setModalTitle("");  // Clear title
+  };
+
   return (
     <div className="dashboard-container">
       <div className='dashboard-header'>
@@ -200,7 +230,7 @@ const AlumniArchive = () => {
               </thead>
               <tbody>
                 {filteredUsers.map(user => (
-                  <tr key={user._id}>
+                  <tr key={user._id} onClick={() => handleRowClick(user)} style={{ cursor: 'pointer' }}>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     <td>{user.batch}</td>
@@ -209,11 +239,18 @@ const AlumniArchive = () => {
                 ))}
               </tbody>
             </table>
+            
           ) : (
             <p>No users found based on your search criteria.</p>
           )}
         </>
       )}
+      <Modal
+        title={modalTitle}
+        content={modalContent}
+        isOpen={isModalOpen}
+        closeModal={closeModal}
+      />
     </div>
   );
 };

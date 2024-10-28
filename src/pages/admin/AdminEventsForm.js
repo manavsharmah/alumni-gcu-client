@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Modal from './AdminModal';  // Reusable modal
+import EditEventModal from '../../components/common/EditEventModal';
 import './admin.css';  // Assuming your styles are in this file
 import api from '../../services/api';
 
 const AdminEventsForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEventModalOpen, setIsEventModalOpen] = useState(false);    // State to control modal visibility
+  const [isEventModalOpen, setIsEventModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false); // State for edit modal
   const [message, setMessage] = useState('');
-  const [modalContent, setModalContent] = useState(null);  // To store modal content dynamically
+  const [modalContent, setModalContent] = useState(null);
   const [modalTitle, setModalTitle] = useState("");
-  const [eventList, setEventList] = useState([]);  // Store fetched events
+  const [eventList, setEventList] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
@@ -22,7 +24,7 @@ const AdminEventsForm = () => {
 
   const { title, content, organizer, event_date, event_time, images } = formData;
 
-  const onChange = e => {
+  const onChange = (e) => {
     if (e.target.name !== 'images') {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     } else {
@@ -40,27 +42,28 @@ const AdminEventsForm = () => {
     data.append('event_time', event_time);
     data.append('category', "events");
 
-    images.forEach(image => {
+    images.forEach((image) => {
       data.append('images', image);
     });
 
     try {
       const response = await api.post('/events/upload', data, {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
           'Content-Type': 'multipart/form-data'
         }
       });
       setMessage('Event Uploaded!');
       setFormData({ title: '', content: '', organizer: '', event_date: '', event_time: '', images: [] });
-      setIsModalOpen(false);  // Close the modal on successful submission
+      setIsModalOpen(false);
+      setEventList([...eventList, response.data]); // Add new event to the list
     } catch (err) {
       setMessage('Error Creating Event');
     }
   };
 
   const closeModal = () => {
-    setIsModalOpen(false);  // Close modal
+    setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -77,7 +80,7 @@ const AdminEventsForm = () => {
   }, []);
 
   const openEventModal = (eventItem) => {
-    setSelectedEvent(eventItem);  // Set the selected event item for the modal
+    setSelectedEvent(eventItem);
     setModalTitle(eventItem.title);
     const eventDetails = (
       <>
@@ -100,7 +103,8 @@ const AdminEventsForm = () => {
   };
 
   const handleEdit = (eventItem) => {
-    console.log('Editing event:', eventItem._id);  // Redirect to edit page or open edit modal
+    setSelectedEvent(eventItem); // Set selected event data for editing
+    setIsEditModalOpen(true); // Open edit modal
   };
 
   const handleDelete = async (eventId) => {
@@ -109,7 +113,7 @@ const AdminEventsForm = () => {
         await api.delete(`http://localhost:5000/api/events/delete/${eventId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
-        setEventList(eventList.filter(event => event._id !== eventId));  // Update event list after deletion
+        setEventList(eventList.filter(event => event._id !== eventId));
         setMessage('Event Deleted Successfully');
       } catch (error) {
         console.error('Error deleting event:', error);
@@ -118,14 +122,17 @@ const AdminEventsForm = () => {
     }
   };
 
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+    setSelectedEvent(null); // Clear selected event after closing
+  };
+
   return (
     <div className="admin-events-container">
       <h2>Event Management</h2>
-      {/* Add more content to this page as needed */}
 
-      <button className="admin-button" onClick={() => setIsModalOpen(true)}>Create Event</button> {/* Open modal */}
+      <button className="admin-button" onClick={() => setIsModalOpen(true)}>Create Event</button>
 
-      {/* Reusable Modal Component to show form */}
       <Modal
         title="Create Event"
         content={(
@@ -133,13 +140,13 @@ const AdminEventsForm = () => {
             <div className="admin-input-group">
               <label htmlFor="title">Title</label>
               <input
-                type='text'
+                type="text"
                 className="admin-form-input"
                 id="title"
-                placeholder='Title'
+                placeholder="Title"
                 value={title}
                 onChange={onChange}
-                name='title'
+                name="title"
                 required
               />
             </div>
@@ -148,46 +155,46 @@ const AdminEventsForm = () => {
               <textarea
                 id="content"
                 className="admin-form-input"
-                placeholder='Content'
+                placeholder="Content"
                 value={content}
                 onChange={onChange}
-                name='content'
+                name="content"
                 required
               />
             </div>
             <div className="admin-input-group">
               <label htmlFor="organizer">Organizer</label>
               <input
-                type='text'
+                type="text"
                 className="admin-form-input"
                 id="organizer"
-                placeholder='Organizer'
+                placeholder="Organizer"
                 value={organizer}
                 onChange={onChange}
-                name='organizer'
+                name="organizer"
               />
             </div>
             <div className="admin-input-group">
               <label htmlFor="event_date">Event Date</label>
               <input
-                type='date'
+                type="date"
                 className="admin-form-input"
                 id="event_date"
                 value={event_date}
                 onChange={onChange}
-                name='event_date'
+                name="event_date"
                 required
               />
             </div>
             <div className="admin-input-group">
               <label htmlFor="event_time">Event Time</label>
               <input
-                type='time'
+                type="time"
                 className="admin-form-input"
                 id="event_time"
                 value={event_time}
                 onChange={onChange}
-                name='event_time'
+                name="event_time"
               />
             </div>
             <div className="admin-form-group">
@@ -201,7 +208,7 @@ const AdminEventsForm = () => {
                 multiple
               />
             </div>
-            <button type="submit" className='admin-form-button'>Create Event</button>
+            <button type="submit" className="admin-form-button">Create Event</button>
           </form>
         )}
         isOpen={isModalOpen}
@@ -209,7 +216,6 @@ const AdminEventsForm = () => {
       />
       {message && <p className="message">{message}</p>}
 
-      {/* Events Table */}
       <table className="admin-table">
         <thead>
           <tr>
@@ -246,13 +252,26 @@ const AdminEventsForm = () => {
         </tbody>
       </table>
 
-      {/* Reusable Modal for viewing event details */}
+      {/* Event Details Modal */}
       <Modal
         title={modalTitle}
         content={modalContent}
         isOpen={isEventModalOpen}
         closeModal={closeEventModal}
       />
+
+      {/* Edit Event Modal */}
+      {isEditModalOpen && selectedEvent && (
+        <EditEventModal
+          eventId={selectedEvent._id}
+          isOpen={isEditModalOpen}
+          onClose={closeEditModal}
+          onEventUpdated={() => {
+            setMessage('Event updated successfully');
+            closeEditModal();
+          }}
+        />
+      )}
     </div>
   );
 };

@@ -2,14 +2,14 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../pages.css';
-import { UserContext } from '../../services/UserContext'; // Import your UserContext
+import { UserContext } from '../../services/UserContext';
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [eventsPerPage] = useState(10);
   const navigate = useNavigate();
-  const { user } = useContext(UserContext); // Assume this provides user details including admin status
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -39,25 +39,6 @@ const EventList = () => {
     navigate(`/events/${eventItem._id}`);
   };
 
-  // Edit function to navigate to the edit page
-  const handleEdit = (eventItem) => {
-    navigate(`/edit-event/${eventItem._id}`); // Assuming you have a route for editing events
-  };
-
-  const handleDelete = async (eventId) => {
-    const confirmDelete = window.confirm("Are you sure you want to delete this event?");
-    if (!confirmDelete) return; // Exit if the user cancels
-
-    try {
-        await axios.delete(`http://localhost:5000/api/events/delete/${eventId}`, {
-            headers: { Authorization: `Bearer ${user.token}` }
-        });
-        setEvents(events.filter(event => event._id !== eventId)); // Update the state after deletion
-    } catch (error) {
-        console.error('Error deleting event:', error);
-    }
-  };
-
   const totalPages = Math.ceil(events.length / eventsPerPage);
 
   return (
@@ -84,12 +65,6 @@ const EventList = () => {
               <p className="news-summary">
                 {eventItem.content.substring(0, 100)}...
               </p>
-              {user && user.role === 'admin' && ( // Show buttons only if the user is an admin
-                <div className="admin-buttons">
-                  <button onClick={() => handleEdit(eventItem)} className="edit-btn">✏️</button>
-                  <button onClick={() => handleDelete(eventItem._id)} className="events-delete-btn">🗑️</button>
-                </div>
-              )}
             </div>
           </div>
         ))}

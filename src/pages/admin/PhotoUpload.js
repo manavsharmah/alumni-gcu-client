@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import "./admin.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import api from "../../services/api";
+import ModalGalleryManager from './ModalGalleryManager';
+import { Button } from 'react-bootstrap';
 
 const PhotoUpload = ({ onUploadSuccess }) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -9,6 +11,7 @@ const PhotoUpload = ({ onUploadSuccess }) => {
   const [previewUrls, setPreviewUrls] = useState([]);
   const [albumName, setAlbumName] = useState('');
   const [existingAlbums, setExistingAlbums] = useState([]);
+  const [showGalleryModal, setShowGalleryModal] = useState(false);
   const fileInputRef = useRef(null);
 
   useEffect(() => {
@@ -95,8 +98,17 @@ const PhotoUpload = ({ onUploadSuccess }) => {
 
   return (
     <div className="photo-upload-container text-center p-4" style={{ maxWidth: "500px", margin: "auto" }}>
-      <h2 className="mb-4">Upload Images</h2>
-
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h2>Upload Images</h2>
+        <Button 
+          variant="danger"
+          onClick={() => setShowGalleryModal(true)}
+          className="ms-2"
+        >
+          Open Photo Deleter
+        </Button>
+      </div>
+      
       <div className="mb-3">
         <select className="form-select" onChange={(e) => setAlbumName(e.target.value)} value={albumName}>
           <option value="">Select an existing album (optional)</option>
@@ -148,6 +160,11 @@ const PhotoUpload = ({ onUploadSuccess }) => {
       >
         {uploading ? 'Uploading...' : 'Upload'}
       </button>
+      
+      <ModalGalleryManager 
+        show={showGalleryModal}
+        onHide={() => setShowGalleryModal(false)}
+      />
     </div>
   );
 };

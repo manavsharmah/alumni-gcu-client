@@ -108,21 +108,21 @@ function App() {
 								<Route
 									path="/profile"
 									element={
-										<ProtectedRoute element={<Profile />} requiredRole="user" />
+										<ProtectedRoute element={<Profile />} requiredRole={["admin", "user"]} />
 									}
 								/>
 
 								<Route
 									path="/profile/:id"
 									element={
-										<ProtectedRoute element={<Profile />} requiredRole="user" />
+										<ProtectedRoute element={<Profile />} requiredRole={["admin", "user"]} />
 									}
 								/>
 								
 								<Route
 									path="/change-profile-picture"
 									element={
-										<ProtectedRoute element={<ChangeProfilePicture />} requiredRole="user" />
+										<ProtectedRoute element={<ChangeProfilePicture />} requiredRole={["admin", "user"]} />
 									}
 								/>
 
@@ -131,7 +131,7 @@ function App() {
 									element={
 										<ProtectedRoute
 											element={<UpdateProfile />}
-											requiredRole="user"
+											requiredRole={["admin", "user"]}
 										/>
 									}
 								/>

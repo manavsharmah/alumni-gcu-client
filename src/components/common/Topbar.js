@@ -85,52 +85,36 @@ const Topbar = () => {
         <div className={`nav-content ${isNavOpen ? 'open' : ''}`}>
           <ul>
             <li>
-              <Link to="#">About</Link>
-              <ul className="sub-menus">
-                <li><Link to="/overview">Overview</Link></li>
-                <li><Link to="/vision">Vision and Mission</Link></li>
-                <li><Link to="/objectives">Objectives and Activities</Link></li>
-                <li><Link to="/council">Governing Council</Link></li>
-                <li><Link to="/presidents">Past Presidents</Link></li>
-                <li><Link to="/chapters">Alumni Chapters</Link></li>
+             <Link to="#">About</Link>
+              <ul className='sub-menus'>
+                <li><Link to='/overview'>Overview</Link></li>
+                <li><Link to='/vision'>Vision and Mission</Link></li>
+                <li><Link to='/objectives'>Objectives and Activities</Link></li>
+                <li><Link to='/council'>Governing Council</Link></li>
               </ul>
             </li>
             <li>
-              <Link to="#">Get Involved</Link>
-              <ul className="sub-menus">
-                <li><Link to="/alumnus">Alumnus - Stake Holder Forum</Link></li>
-              </ul>
+            <Link to='/alumnus'>Association Members</Link>
             </li>
             <li>
-              <Link to="#">Alumni Achievers</Link>
-              <ul className="sub-menus">
-                <li><Link to="/top-alumni">Top Alumni in Lime Light</Link></li>
-                <li><Link to="/notable-alumni">Notable Alumni</Link></li>
-              </ul>
+            <Link to='/top-alumni'>Alumni-Achievers</Link>
             </li>
             <li><Link to="/scholarship">Scholarships</Link></li>
             <li>
-              <Link to="#">Newsroom</Link>
-              <ul className="sub-menus">
-                <li><Link to="/news">News Archive</Link></li>
-              </ul>
+              <Link to="/news">News</Link>
             </li>
-            <li><Link to="/activities">Activities</Link></li>
-            <li>
-              <Link to="#">More</Link>
-              <ul className="sub-menus">
-                <li><Link to="/gallery">Gallery</Link></li>
-                <li><Link to="/contact">Contact</Link></li>
-                <li><Link to="/donations">Donations</Link></li>
-              </ul>
-            </li>
-            <li><Link to="/faq">FAQ's</Link></li>
+            <li><Link to="/events">Events</Link></li>
+
+            <li><Link to="/gallery">Gallery</Link></li>
             {user && (
               <>
                 <li><Link to="/welcome">Feed</Link></li>
                 {user.role === 'admin' && <li><Link to="/admin-dashboard">Admin Dashboard</Link></li>}
               </>
             )}
+            <li>
+            <Link to='/donations'>Donations</Link>
+            </li>
           </ul>
         </div>
 

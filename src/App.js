@@ -32,13 +32,10 @@ import BulkAddAlumni from "./pages/admin/AlumniRecordUpload";
 
 
 // Detail Pages
-import { TopAlumni, NotableAlumni } from "./pages/detail/Alumni";
+import { TopAlumni } from "./pages/detail/Alumni";
 import { Copyright, Disclaimer, TermsOfUse, ContactUs, PrivacyPolicy, AlumniDirectory } from "./pages/detail/Others";
 import FeedbackForm from "./pages/detail/Feedbackform";
-import FAQ from "./pages/detail/FAQ";
-import Contact from "./pages/detail/Contact";
 import Scholarship from "./pages/detail/Scholarship";
-import Activities from "./pages/detail/Activities";
 import { Alumnus } from "./pages/detail/GetInvolved";
 import Gallery from "./pages/detail/Gallery";
 import SingleAlbum from "./pages/detail/SingleAlbum";
@@ -51,9 +48,7 @@ import {
 	Overview,
 	VisionAndMission,
 	Objectives,
-	GoverningCouncil,
-	PastPresidents,
-	AlumniChapters,
+	GoverningCouncil
 } from "./pages/detail/About";
 
 function App() {
@@ -73,11 +68,8 @@ function App() {
 								<Route path="/vision" element={<VisionAndMission />} />
 								<Route path="/objectives" element={<Objectives />} />
 								<Route path="/council" element={<GoverningCouncil />} />
-								<Route path="/presidents" element={<PastPresidents />} />
-								<Route path="/chapters" element={<AlumniChapters />} />
 								<Route path="/alumnus" element={<Alumnus />} />
 								<Route path="/top-alumni" element={<TopAlumni />} />
-								<Route path="/notable-alumni" element={<NotableAlumni />} />
 								<Route path="/news" element={<NewsList />} />
 								<Route path="/news/:id" element={<SingleNews />} />
 								<Route path="/gallery" element={<Gallery />} />
@@ -85,7 +77,6 @@ function App() {
 								<Route path="/contact" element={<Contact />} />
 								<Route path="/contactus" element={<ContactUs />} />
 								<Route path="/feedback" element={<FeedbackForm />} />
-								<Route path="/faq" element={<FAQ />} />
 								<Route path="/scholarship" element={<Scholarship />} />
 								<Route path="/activities" element={<Activities />} />
 								<Route path="/events" element={<Events />} />
@@ -94,7 +85,6 @@ function App() {
 								<Route path="/disclaimer" element={<Disclaimer />} />
 								<Route path="/termsofuse" element={<TermsOfUse />} />
 								<Route path="/privacypolicy" element={<PrivacyPolicy />} />
-								<Route path="/alumnidirectory" element={<AlumniDirectory />} />
 								<Route path="/forgot-password" element={<ForgotPassword />} />
 								<Route path="/donations" element={<Donations />} />
 

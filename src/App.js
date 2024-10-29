@@ -74,11 +74,9 @@ function App() {
 								<Route path="/news/:id" element={<SingleNews />} />
 								<Route path="/gallery" element={<Gallery />} />
 								<Route path="/album/:id" element={<SingleAlbum />} />
-								<Route path="/contact" element={<Contact />} />
 								<Route path="/contactus" element={<ContactUs />} />
 								<Route path="/feedback" element={<FeedbackForm />} />
 								<Route path="/scholarship" element={<Scholarship />} />
-								<Route path="/activities" element={<Activities />} />
 								<Route path="/events" element={<Events />} />
 								<Route path="/events/:id" element={<SingleEvent />} />
 								<Route path="/copyright" element={<Copyright />} />

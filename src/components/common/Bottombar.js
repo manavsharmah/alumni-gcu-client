@@ -28,7 +28,6 @@ const Bottombar = () => {
         <Link to="/disclaimer">Disclaimer</Link>
         <Link to="/termsofuse">Terms of Use</Link>
         <Link to="/privacypolicy">Privacy Policy</Link>
-        <Link to="/alumnidirectory">Alumni Directory</Link>
       </div>
     </div>
   )

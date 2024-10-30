@@ -31,6 +31,7 @@
   height: 100%;
   padding-top: 20px;
   color: #fff;
+  overflow-y: auto;
 }
 
 /* .logo-container {
@@ -74,6 +75,12 @@
 
 .admin-sidebar ul li a span {
   font-size: 1em; /* Increase label size */
+}
+
+.active-link {
+  background-color: #1d2a44;
+  color: #fff;
+  border-left: 4px solid #4caf50; /* Optional: Adds a left border for emphasis */
 }
 
 /* admin dashboard  */

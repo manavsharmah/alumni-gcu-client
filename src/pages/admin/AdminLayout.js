@@ -1,9 +1,11 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import { FaTachometerAlt, FaNewspaper, FaCalendarAlt, FaArrowLeft, FaImages, FaAddressBook } from 'react-icons/fa';
 import { IoPersonAdd } from "react-icons/io5";
 import { MdAttachEmail } from "react-icons/md";
 import "./admin.css";
+
+const getActiveClass = ({ isActive }) => (isActive ? "active-link" : "");
 
 const AdminLayout = () => {
   return (
@@ -15,52 +17,52 @@ const AdminLayout = () => {
       </div> */}
       <ul>
         <li>
-          <a href="/admin-dashboard">
+          <NavLink to="/admin-dashboard" className={getActiveClass}>
             <FaTachometerAlt />
             <span>Dashboard</span>
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="/alumni-archive">
+          <NavLink to="/alumni-archive" className={getActiveClass}>
             <FaAddressBook />
             <span>Alumni-Archive</span>
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="/news-form">
+          <NavLink to="/news-form" className={getActiveClass}>
             <FaNewspaper />
             <span>Create New News</span>
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="/events-form">
+          <NavLink to="/events-form" className={getActiveClass}>
             <FaCalendarAlt />
             <span>Create New Event</span>
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="/photo-upload-form">
+          <NavLink to="/photo-upload-form" className={getActiveClass}>
             <FaImages />
             <span>Upload Images</span>
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="/email-form">
+          <NavLink to="/email-form" className={getActiveClass}>
             <MdAttachEmail />
             <span>Send Mail</span>
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="/add-bulk-alumni">
+          <NavLink to="/add-bulk-alumni" className={getActiveClass}>
             <IoPersonAdd />
             <span>Add Alumni</span>
-          </a>
+          </NavLink>
         </li>
         <li>
-          <a href="/">
+          <NavLink to="/" className={getActiveClass}>
             <FaArrowLeft />
             <span>Back to Website</span>
-          </a>
+          </NavLink>
         </li>
       </ul>
     </nav>

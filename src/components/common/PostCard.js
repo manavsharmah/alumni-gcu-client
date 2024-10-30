@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import '../components.css'; // Add your CSS file
+import { Link } from 'react-router-dom';
+import '../components.css';
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
 
 const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
@@ -44,14 +45,18 @@ const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
             <div className="gcu-post-card-wrapper">
                 {/* Left Section with Author Info */}
                 <div className="gcu-post-card-left">
-                    <ProfilePhoto 
-                        userId={post.author?._id}
-                        className="gcu-post-author-avatar"
-                    />
+                    <Link to={`/profile/${post.author?._id}`}>
+                        <ProfilePhoto 
+                            userId={post.author?._id}
+                            className="gcu-post-author-avatar"
+                        />
+                    </Link>
                     <div className="gcu-post-author-info">
-                        <h3>{post.author?.name || 'Anonymous'}</h3>
+                        <Link to={`/profile/${post.author?._id}`} className="gcu-post-author-name">
+                            <h3>{post.author?.name || 'Anonymous'}</h3>
+                        </Link>
                         <p className="gcu-post-author-details">
-                            {post.author?.batch && `${post.author.batch} - `} 
+                            {post.author?.batch && `${post.author.batch} - `}
                             {post.author?.branch || ''}
                         </p>
                         <p className="gcu-post-timestamp">

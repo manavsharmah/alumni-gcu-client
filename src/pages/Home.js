@@ -59,6 +59,22 @@ const Home = () => {
                 </div>
             </section>
 
+            <section className='hero8'>
+                <div className='ch-image'>
+                    <img src="./assets/Pres-img-ssa.jpg" alt="SSA President" className='vc-img'/>
+                </div>
+                <div className='pres-text'>
+                    <h2 className='ch-heading'>Message from the President</h2>
+                    <br />
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sint animi placeat dolorum dolores iure molestiae? Asperiores, ea.</p>
+                    <p className='pres-name'>Shri. Jasoda Ranjan Das
+                        <br />
+                        President of SSA Society
+                    </p>
+                </div>
+                
+            </section>
+
 
             <section className='hero5'>
                 <div className='ch-text'>

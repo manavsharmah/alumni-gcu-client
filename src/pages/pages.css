@@ -156,14 +156,14 @@
 
 
 .hero2 {
-  background-color: #fffbe9;
+  background-color: #27357f;
   display: flex;
   justify-content: space-around;
   height: 430px;
 }
 
 .vc-text{
-  color: #000000;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -211,14 +211,14 @@
 
 
 .hero5 {
-  background-color: #27357f;
+  background-color: #fffbe9;
   display: flex;
   justify-content: space-around;
   height: 430px;
 }
 
 .ch-text{
-  color: #ffffff;
+  color: #000000;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -265,14 +265,14 @@
 }
 
 .hero6 {
-  background-color: #27357f;
+  background-color: #fffbe9;
   display: flex;
   justify-content: space-around;
   height: 430px;
 }
 
 .reg-text{
-  color: #ffffff;
+  color: #000000;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -332,6 +332,26 @@
   justify-content: center;
   padding: 20px;
   gap: 30px;
+}
+
+.hero8 {
+  background-color: #27357f;
+  display: flex;
+  justify-content: space-around;
+  height: 430px;
+}
+
+.pres-text {
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pres-name {
+  font-weight: bold;
+  font-size: 15px;
 }
 
 .news-events-container{
@@ -511,6 +531,22 @@
   }
 
   .vc-image {
+    padding: 20px;
+  }
+
+  .hero8 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .pres-text {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .pres-name {
     padding: 20px;
   }
   
@@ -1518,11 +1554,13 @@ button:hover {
   flex-direction: column;
   align-items: center;
   margin-top: 30px;
+  overflow-y: auto;
 }
 
 .modern-profile-header {
   text-align: center;
   margin-bottom: 40px;
+  overflow-y: auto;
 }
 
 .modern-profile-header h1 {

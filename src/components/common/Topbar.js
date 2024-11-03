@@ -42,10 +42,16 @@ const Topbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const navbar = document.querySelector('.navbar');
-      if (window.scrollY > 137) {
-        navbar.classList.add('sticky');
+      const appHeader = document.querySelector('.App-header');
+
+      if (window.innerWidth > 768) {  // Only apply on desktop view
+        if (window.scrollY > 137) {
+          appHeader.classList.add('sticky');
+        } else {
+          appHeader.classList.remove('sticky');
+        }
       } else {
-        navbar.classList.remove('sticky');
+        appHeader.classList.remove('sticky'); // Remove sticky on mobile
       }
     };
 
@@ -60,94 +66,91 @@ const Topbar = () => {
   return (
     <div className="App">
       <header className="App-header">
-        <div className="logo">
-          <Link to="/">
-            <img
-              src="/assets/LOGO 1.jpg"
-              alt="Girijananda Chowdhury University Alumni Association Logo"
-            />
-          </Link>
+        <div className="header-container">
+          <div className="logo">
+            <Link to="/">
+              <img
+                src="/assets/LOGO 1.jpg"
+                alt="Girijananda Chowdhury University Alumni Association Logo"
+              />
+            </Link>
+            
+          </div>
           
-        </div>
-        <div className="title">
-          <h2>Girijananda Chowdhury University</h2>
-          <h2>Alumni Association</h2>
-        </div>
-        <div className="logo-gcu">
-          <img src="/assets/gcu-logo.png" alt="Girijananda Chowdhury University Logo" />
+
+        <nav className="navbar">
+          <button className="menu-toggle" onClick={toggleNav}>
+            &#9776;
+          </button>
+          <div className={`nav-content ${isNavOpen ? 'open' : ''}`}>
+            <ul>
+              <li>
+              <Link to="#">About</Link>
+                <ul className='sub-menus'>
+                  <li><Link to='/overview'>Overview</Link></li>
+                  <li><Link to='/vision'>Vision and Mission</Link></li>
+                  <li><Link to='/objectives'>Objectives and Activities</Link></li>
+                  <li><Link to='/council'>Governing Council</Link></li>
+                </ul>
+              </li>
+              <li>
+              <Link to='/alumnus'>Association Members</Link>
+              </li>
+              <li>
+              <Link to='/top-alumni'>Alumni-Achievers</Link>
+              </li>
+              <li><Link to="/scholarship">Scholarships</Link></li>
+              <li>
+                <Link to="/news">News</Link>
+              </li>
+              <li><Link to="/events">Events</Link></li>
+
+              <li><Link to="/gallery">Gallery</Link></li>
+              {user && (
+                <>
+                  <li><Link to="/welcome">Feed</Link></li>
+                  {user.role === 'admin' && <li><Link to="/admin-dashboard">Admin Dashboard</Link></li>}
+                </>
+              )}
+              <li>
+              <Link to='/donations'>Donations</Link>
+              </li>
+            </ul>
+          </div>
+          </nav>
+
+          <div className="auth-links">
+            {!user ? (
+              <div className="auth-nav">
+                <Link to="/register" className="auth-link">Register</Link>&nbsp;|&nbsp;
+                <Link to="/login" className="auth-link">Login</Link>
+              </div>
+            ) : (
+              <div className="dropdown">
+                <div
+                  className="dropdown-toggle"
+                  onClick={() => setIsDropdownOpen((prev) => !prev)}
+                >
+                  <ProfilePhoto 
+                    userId={user._id}
+                    className="rounded-full"
+                  />
+                  <span className="dropdown-username">{user.name}</span>
+                </div>
+                <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}>
+                  <Link className="dropdown-item" to={`/profile`} onClick={closeDropdown}>
+                    Profile
+                  </Link>
+                  <Link className="dropdown-item" to="/" onClick={handleLogout}>
+                    Logout
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </header>
-
-      <nav className="navbar">
-        <button className="menu-toggle" onClick={toggleNav}>
-          &#9776;
-        </button>
-        <div className={`nav-content ${isNavOpen ? 'open' : ''}`}>
-          <ul>
-            <li>
-             <Link to="#">About</Link>
-              <ul className='sub-menus'>
-                <li><Link to='/overview'>Overview</Link></li>
-                <li><Link to='/vision'>Vision and Mission</Link></li>
-                <li><Link to='/objectives'>Objectives and Activities</Link></li>
-                <li><Link to='/council'>Governing Council</Link></li>
-              </ul>
-            </li>
-            <li>
-            <Link to='/alumnus'>Association Members</Link>
-            </li>
-            <li>
-            <Link to='/top-alumni'>Alumni-Achievers</Link>
-            </li>
-            <li><Link to="/scholarship">Scholarships</Link></li>
-            <li>
-              <Link to="/news">News</Link>
-            </li>
-            <li><Link to="/events">Events</Link></li>
-
-            <li><Link to="/gallery">Gallery</Link></li>
-            {user && (
-              <>
-                <li><Link to="/welcome">Feed</Link></li>
-                {user.role === 'admin' && <li><Link to="/admin-dashboard">Admin Dashboard</Link></li>}
-              </>
-            )}
-            <li>
-            <Link to='/donations'>Donations</Link>
-            </li>
-          </ul>
-        </div>
-
-        <div className="auth-links">
-          {!user ? (
-            <div className="auth-nav">
-              <Link to="/register" className="auth-link">Register</Link>&nbsp;|&nbsp;
-              <Link to="/login" className="auth-link">Login</Link>
-            </div>
-          ) : (
-            <div className="dropdown">
-              <div
-                className="dropdown-toggle"
-                onClick={() => setIsDropdownOpen((prev) => !prev)}
-              >
-                <ProfilePhoto 
-                  userId={user._id}
-                  className="rounded-full"
-                />
-                <span className="dropdown-username">{user.name}</span>
-              </div>
-              <div className={`dropdown-menu ${isDropdownOpen ? 'show' : ''}`}>
-                <Link className="dropdown-item" to={`/profile`} onClick={closeDropdown}>
-                  Profile
-                </Link>
-                <Link className="dropdown-item" to="/" onClick={handleLogout}>
-                  Logout
-                </Link>
-              </div>
-            </div>
-          )}
-        </div>
-      </nav>
+      
     </div>
   );
 };

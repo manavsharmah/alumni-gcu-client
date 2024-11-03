@@ -11,17 +11,31 @@ const UpdateProfile = () => {
   const [formData, setFormData] = useState({
     biography: '',
     currentWorkingPlace: '',
+    address: '',
+    designation: '',
+    achievements: '',
     linkedin: '',
     facebook: '',
   });
 
-  const { biography, currentWorkingPlace, linkedin, facebook } = formData;
+  const {
+    biography,
+    currentWorkingPlace,
+    address,
+    designation,
+    achievements,
+    linkedin,
+    facebook,
+  } = formData;
 
   useEffect(() => {
     if (user) {
       setFormData({
         biography: user.biography || '',
         currentWorkingPlace: user.currentWorkingPlace || '',
+        address: user.address || '',
+        designation: user.designation || '',
+        achievements: user.achievements || '',
         linkedin: user.socialLinks?.linkedin || '',
         facebook: user.socialLinks?.facebook || '',
       });
@@ -37,6 +51,9 @@ const UpdateProfile = () => {
       await axiosInstance.put('http://localhost:5000/api/user/update-profile', {
         biography,
         currentWorkingPlace,
+        address,
+        designation,
+        achievements,
         socialLinks: { linkedin, facebook },
       });
       setMessage('Profile Updated!');
@@ -98,14 +115,50 @@ const UpdateProfile = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="formLinkedin">
-                    <FaLinkedin size={24} /> LinkedIn:
-                  </label>
+                  <label htmlFor="formAddress">Current Address:</label>
                   <input
                     className="form-input"
                     type="text"
+                    id="formAddress"
+                    name="address"
+                    value={address}
+                    onChange={onChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="formDesignation">Designation:</label>
+                  <input
+                    className="form-input"
+                    type="text"
+                    id="formDesignation"
+                    name="designation"
+                    value={designation}
+                    onChange={onChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="formAchievements">Achievements:</label>
+                  <textarea
+                    className="form-input"
+                    id="formAchievements"
+                    name="achievements"
+                    value={achievements}
+                    onChange={onChange}
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="formLinkedin">
+                    <FaLinkedin size={24} /> LinkedIn Profile URL:
+                  </label>
+                  <input
+                    className="form-input"
+                    type="url"
                     id="formLinkedin"
                     name="linkedin"
+                    placeholder="https://www.linkedin.com/in/your-profile"
                     value={linkedin}
                     onChange={onChange}
                   />
@@ -113,13 +166,14 @@ const UpdateProfile = () => {
 
                 <div className="form-group">
                   <label htmlFor="formFacebook">
-                    <FaFacebook size={24} /> Facebook:
+                    <FaFacebook size={24} /> Facebook Profile URL:
                   </label>
                   <input
                     className="form-input"
-                    type="text"
+                    type="url"
                     id="formFacebook"
                     name="facebook"
+                    placeholder="https://www.facebook.com/your-profile"
                     value={facebook}
                     onChange={onChange}
                   />

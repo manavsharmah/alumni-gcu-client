@@ -34,6 +34,7 @@ const AdminNewsForm = () => {
     const data = new FormData();
     data.append('title', title);
     data.append('content', content);
+    data.append('category', "news")//upload-images middleware requires the category so dont DELETE THIS again!!!
     images.forEach(image => {
       data.append('images', image);
     });

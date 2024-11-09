@@ -17,8 +17,6 @@ const EditEventModal = ({ eventId, isOpen, onClose, onEventUpdated }) => {
 
   useEffect(() => {
     if (user?.role !== 'admin' || !isOpen) return;
-
-    // Fetch event data when the modal opens
     const fetchEventData = async () => {
       try {
         const response = await axios.get(`http://localhost:5000/api/events/get-event/${eventId}`);
@@ -30,22 +28,14 @@ const EditEventModal = ({ eventId, isOpen, onClose, onEventUpdated }) => {
     fetchEventData();
   }, [eventId, user, isOpen]);
 
-  // Handle input change for the form fields
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setEventData({ ...eventData, [name]: value });
   };
 
-  // const handleImageUpload = (images) => {
-  //   setNewImages(images);
-  // };
-
-  // Submit updated event data
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const confirmEdit = window.confirm("Are you sure you want to update this event?");
-    if (!confirmEdit) return;
-
+    if (!window.confirm("Are you sure you want to update this event?")) return;
     const formData = new FormData();
     Object.entries(eventData).forEach(([key, value]) => formData.append(key, value));
     newImages.forEach((image) => formData.append('images', image));
@@ -54,8 +44,8 @@ const EditEventModal = ({ eventId, isOpen, onClose, onEventUpdated }) => {
       await axios.put(`http://localhost:5000/api/events/edit/${eventId}`, formData, {
         headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
       });
-      onEventUpdated(); // Refresh event list or card
-      onClose(); // Close modal
+      onEventUpdated();
+      onClose();
     } catch (error) {
       console.error('Error updating event:', error);
     }
@@ -68,68 +58,56 @@ const EditEventModal = ({ eventId, isOpen, onClose, onEventUpdated }) => {
       <div className="edit-modal-content" style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
         <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Edit Event</h2>
         <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
-          <input
-            type="text"
-            name="title"
-            value={eventData.title}
-            onChange={handleInputChange}
-            placeholder="Title"
-            style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ccc", fontSize: "16px" }}
-          />
-          <textarea
-            name="content"
-            value={eventData.content}
-            onChange={handleInputChange}
-            placeholder="Content"
-            rows="4"
-            style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ccc", fontSize: "16px" }}
-          ></textarea>
-          <input
-            type="text"
-            name="organizer"
-            value={eventData.organizer}
-            onChange={handleInputChange}
-            placeholder="Organizer"
-            style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ccc", fontSize: "16px" }}
-          />
-          <input
-            type="date"
-            name="event_date"
-            value={eventData.event_date}
-            onChange={handleInputChange}
-            style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ccc", fontSize: "16px" }}
-          />
-          <input
-            type="time"
-            name="event_time"
-            value={eventData.event_time}
-            onChange={handleInputChange}
-            style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ccc", fontSize: "16px" }}
-          />
-          <input
-            type="date"
-            name="posted_date"
-            value={eventData.posted_date}
-            onChange={handleInputChange}
-            style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ccc", fontSize: "16px" }}
-          />
-          <button
-            type="submit"
-            style={{ padding: "10px", borderRadius: "5px", backgroundColor: "#4CAF50", color: "white", fontSize: "16px", cursor: "pointer" }}
-          >
-            Update Event
-          </button>
-          <button
-            type="button"
-            onClick={onClose}
-            style={{ marginTop: "10px", padding: "10px", borderRadius: "5px", backgroundColor: "#f44336", color: "white", fontSize: "16px", cursor: "pointer" }}
-          >
-            Cancel
-          </button>
+          <label>Title</label>
+          <input type="text" name="title" value={eventData.title} onChange={handleInputChange} style={inputStyle} />
+          
+          <label>Content</label>
+          <textarea name="content" value={eventData.content} onChange={handleInputChange} rows="4" style={inputStyle}></textarea>
+          
+          <label>Organizer</label>
+          <input type="text" name="organizer" value={eventData.organizer} onChange={handleInputChange} style={inputStyle} />
+          
+          <label>Event Date</label>
+          <input type="date" name="event_date" value={eventData.event_date} onChange={handleInputChange} style={inputStyle} />
+          
+          <label>Event Time</label>
+          <input type="time" name="event_time" value={eventData.event_time} onChange={handleInputChange} style={inputStyle} />
+          
+          <label>Posted Date</label>
+          <input type="date" name="posted_date" value={eventData.posted_date} onChange={handleInputChange} style={inputStyle} />
+          
+          <button type="submit" style={submitStyle}>Update Event</button>
+          <button type="button" onClick={onClose} style={cancelStyle}>Cancel</button>
         </form>
       </div>
     </div>
   );
+};
+
+const inputStyle = {
+  padding: "10px",
+  borderRadius: "5px",
+  border: "1px solid #ccc",
+  fontSize: "16px"
+};
+
+const submitStyle = {
+  padding: "10px",
+  borderRadius: "5px",
+  backgroundColor: "#4CAF50",
+  color: "white",
+  fontSize: "16px",
+  cursor: "pointer"
+};
+
+const cancelStyle = {
+  marginTop: "10px",
+  padding: "10px",
+  borderRadius: "5px",
+  backgroundColor: "#f44336",
+  color: "white",
+  fontSize: "16px",
+  cursor: "pointer"
 };
 
 export default EditEventModal;

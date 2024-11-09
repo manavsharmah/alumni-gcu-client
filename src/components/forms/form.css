@@ -4,10 +4,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Ensure it takes full screen height */
+    min-height: 80vh; /* Ensure it takes full screen height */
     padding: 20px;
     box-sizing: border-box;
     overflow-y: auto; /* Allow vertical scrolling if needed */
+    width: 100%;
 }
 
 .login-container {
@@ -109,7 +110,7 @@
     width: 100%;
     margin-top: 10px;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #3f51b5;
     color: white;
     border: none;
     border-radius: 5px;
@@ -118,7 +119,7 @@
 }
 
 .submit-button:hover {
-    background-color: #0056b3;
+    background-color: #2e397a;
 }
 
 .btn-secondary {

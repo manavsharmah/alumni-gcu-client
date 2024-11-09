@@ -79,6 +79,7 @@ const Profile = () => {
     };
 
     return (
+        <div className='main'>
         <div className="user-profile-container">
             <h1 className="user-profile-main-title">Profile</h1>
             <div className="user-profile-card">
@@ -143,6 +144,7 @@ const Profile = () => {
                     </div>
                 )}
             </div>
+        </div>
         </div>
     );
 };

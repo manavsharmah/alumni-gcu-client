@@ -37,36 +37,38 @@ const Login = () => {
     };
 
     return (
-        <div className="form-container">
-        <div className="login-container">
-            <form className="login-form" onSubmit={onSubmit}>
-                <h2>Login For Access</h2>
-                <hr />
-                {error && <p className="error">{error}</p>}
-                <div className="input-group">
-                    <label htmlFor="email">
-                        <FaEnvelope />
-                    </label>
-                    <input type='email' id="email" name='email' placeholder='Email id' value={email} onChange={onChange} required />
-                </div>
-                <div className="input-group">
-                    <label htmlFor="password">
-                        <FaLock />
-                    </label>
-                    <input type={showPassword ? 'text' : 'password'} id="password" name='password' placeholder='Password' value={password} onChange={onChange} required />
-                    <span id="togglePassword" onClick={toggleShowPassword}>
-                        {showPassword ? <FaEyeSlash /> : <FaEye />}
-                    </span>
-                </div>
-                <div className="forgot-password">
-                    <p>Forgot Password? <a href='/forgot-password'>Click Here</a></p>
-                </div>
-                <div className="register">
-                    <p>Not registered? <a href="/register">Register</a></p>
-                </div>
-                <button type='submit' className='submit-button'>Login</button>
-            </form>
-        </div>
+        <div className='main'>
+            <div className="form-container">
+            <div className="login-container">
+                <form className="login-form" onSubmit={onSubmit}>
+                    <h2>Login For Access</h2>
+                    <hr />
+                    {error && <p className="error">{error}</p>}
+                    <div className="input-group">
+                        <label htmlFor="email">
+                            <FaEnvelope />
+                        </label>
+                        <input type='email' id="email" name='email' placeholder='Email id' value={email} onChange={onChange} required />
+                    </div>
+                    <div className="input-group">
+                        <label htmlFor="password">
+                            <FaLock />
+                        </label>
+                        <input type={showPassword ? 'text' : 'password'} id="password" name='password' placeholder='Password' value={password} onChange={onChange} required />
+                        <span id="togglePassword" onClick={toggleShowPassword}>
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </span>
+                    </div>
+                    <div className="forgot-password">
+                        <p>Forgot Password? <a href='/forgot-password'>Click Here</a></p>
+                    </div>
+                    <div className="register">
+                        <p>Not registered? <a href="/register">Register</a></p>
+                    </div>
+                    <button type='submit' className='submit-button'>Login</button>
+                </form>
+            </div>
+            </div>
         </div>
     );
 };

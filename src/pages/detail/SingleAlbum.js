@@ -58,6 +58,7 @@ const SingleAlbum = () => {
   }));
 
   return (
+    <div className="main">
     <div className="page-container">
       <Article title="Gallery">
         <h1>{album.albumName}</h1>
@@ -108,6 +109,7 @@ const SingleAlbum = () => {
           }}
         />
       </Article>
+    </div>
     </div>
   );
 };

@@ -42,6 +42,7 @@ const EventList = () => {
   const totalPages = Math.ceil(events.length / eventsPerPage);
 
   return (
+    <div className='main'>
     <div className="news-container">
       <h2 className="news-title">Events Category</h2>
       <div className="news-list">
@@ -80,6 +81,7 @@ const EventList = () => {
           </button>
         ))}
       </div>
+    </div>
     </div>
   );
 };

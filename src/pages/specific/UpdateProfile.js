@@ -66,6 +66,7 @@ const UpdateProfile = () => {
   };
 
   return (
+    <div className='main'>
     <div className="modern-profile-container">
       <h2 className="card-header">Update Profile</h2>
       <div className="modern-profile-card">
@@ -194,6 +195,7 @@ const UpdateProfile = () => {
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 };

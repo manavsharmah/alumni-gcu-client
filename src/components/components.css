@@ -22,6 +22,9 @@
   background-color: #ffffff;
   color: #000;
   width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
   transition: all 0.3s ease;
   z-index: 1000;
   border: 1px solid #d1caca;
@@ -54,6 +57,12 @@
   align-items: center;
   gap: 20px;
   flex-grow: 1;
+}
+
+.separator {
+  display: inline-block;
+  text-align: center;
+  padding-top: 20px;
 }
 
 /* .navbar.sticky {
@@ -148,6 +157,7 @@
 .auth-links {
   display: flex;
   align-items: center;
+  padding-bottom: 30px;
 }
 
 .auth-nav .auth-link {
@@ -218,9 +228,9 @@
   border-radius: 100px;
 }
 
-.App-main {
-  padding: 20px;
-}
+/* .App-main {
+  padding-top: 140px;
+} */
 
 .menu-toggle {
   display: none;
@@ -305,9 +315,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
-    position: sticky; /* Make App-header sticky */
-    top: 0; /* Stick to the top of the viewport */
-    z-index: 1000; /* Ensure it stays above other content */
   }
 
   .menu-toggle {
@@ -342,6 +349,7 @@
     align-items: center;
     position: relative;
     z-index: 1000; /* Ensure it stays above the nav content */
+    padding-top: 30px;
   }
 
   .auth-nav {
@@ -424,7 +432,7 @@
   }
 
   .App-main {
-    padding: 20px;
+    padding-top: 140px;
     flex-grow: 1;
     margin-top: 0;
     margin-left: 0;

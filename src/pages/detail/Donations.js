@@ -39,15 +39,17 @@ const Donations = () => {
   };
 
   return (
-    <div className='page-container'>
-      <Article title="Donations">
-        <p>Support our cause by making a donation.</p>
-        <div className="razorpay-button-container">
-          <button onClick={handlePayment} className="razorpay-button">
-            Donate Now
-          </button>
-        </div>
-      </Article>     
+    <div className='main'>
+      <div className='page-container'>
+        <Article title="Donations">
+          <p>Support our cause by making a donation.</p>
+          <div className="razorpay-button-container">
+            <button onClick={handlePayment} className="razorpay-button">
+              Donate Now
+            </button>
+          </div>
+        </Article>     
+      </div>
     </div>
   );
 };

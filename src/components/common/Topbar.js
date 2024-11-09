@@ -39,25 +39,25 @@ const Topbar = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const navbar = document.querySelector('.navbar');
-      const appHeader = document.querySelector('.App-header');
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const navbar = document.querySelector('.navbar');
+  //     const appHeader = document.querySelector('.App-header');
 
-      if (window.innerWidth > 768) {  // Only apply on desktop view
-        if (window.scrollY > 137) {
-          appHeader.classList.add('sticky');
-        } else {
-          appHeader.classList.remove('sticky');
-        }
-      } else {
-        appHeader.classList.remove('sticky'); // Remove sticky on mobile
-      }
-    };
+  //     if (window.innerWidth > 768) {  // Only apply on desktop view
+  //       if (window.scrollY > 137) {
+  //         appHeader.classList.add('sticky');
+  //       } else {
+  //         appHeader.classList.remove('sticky');
+  //       }
+  //     } else {
+  //       appHeader.classList.remove('sticky'); // Remove sticky on mobile
+  //     }
+  //   };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  //   window.addEventListener('scroll', handleScroll);
+  //   return () => window.removeEventListener('scroll', handleScroll);
+  // }, []);
   
   if (loading) {
     return <div>Loading...</div>; // Show a loading indicator while the user data is being fetched
@@ -122,7 +122,8 @@ const Topbar = () => {
           <div className="auth-links">
             {!user ? (
               <div className="auth-nav">
-                <Link to="/register" className="auth-link">Register</Link>&nbsp;|&nbsp;
+                <Link to="/register" className="auth-link">Register</Link>
+                <span className="separator">&nbsp;|&nbsp;</span>
                 <Link to="/login" className="auth-link">Login</Link>
               </div>
             ) : (

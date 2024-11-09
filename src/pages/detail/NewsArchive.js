@@ -40,41 +40,45 @@ const NewsList = () => {
   const totalPages = Math.ceil(news.length / newsPerPage);
   
   return (
-    <div className="news-container">
-      <h2 className="news-title">News Category</h2>
-      <div className="news-list">
-        {currentNews.map((newsItem) => (
-          <div key={newsItem._id} className="news-item" onClick={() => handleNewsClick(newsItem)}>
-            <div className="news-thumbnail">
-							{newsItem.firstImage && newsItem.firstImage.length > 0 ? (
-								<img
-									src={`http://localhost:5000${newsItem.firstImage}`}
-									alt="News Thumbnail"
-								/>
-							) : (
-								<img src="./assets/gcu-building.jpg" alt="Default Thumbnail" />
-							)}
-						</div>
-            <div className="news-content">
-              <h3 className="news-headline">{newsItem.title}</h3>
-              <p className="news-date">{new Date(newsItem.date).toLocaleDateString()}</p>
-              <p className="news-summary">{newsItem.content.substring(0, 100)}...</p>
-              <button className="read-more-btn">Read More</button>
+    <div className='main'>
+      <div className='page-container'>
+      <div className="news-container">
+        <h2 className="news-title">News Category</h2>
+        <div className="news-list">
+          {currentNews.map((newsItem) => (
+            <div key={newsItem._id} className="news-item" onClick={() => handleNewsClick(newsItem)}>
+              <div className="news-thumbnail">
+                {newsItem.firstImage && newsItem.firstImage.length > 0 ? (
+                  <img
+                    src={`http://localhost:5000${newsItem.firstImage}`}
+                    alt="News Thumbnail"
+                  />
+                ) : (
+                  <img src="./assets/gcu-building.jpg" alt="Default Thumbnail" />
+                )}
+              </div>
+              <div className="news-content">
+                <h3 className="news-headline">{newsItem.title}</h3>
+                <p className="news-date">{new Date(newsItem.date).toLocaleDateString()}</p>
+                <p className="news-summary">{newsItem.content.substring(0, 100)}...</p>
+                <button className="read-more-btn">Read More</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        {/* Pagination */}
+        <div className="pagination">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+            <button
+              key={number}
+              onClick={() => paginate(number)}
+              className={`page-number ${currentPage === number ? 'active' : ''}`}
+            >
+              {number}
+            </button>
+          ))}
+        </div>
       </div>
-      {/* Pagination */}
-      <div className="pagination">
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-          <button
-            key={number}
-            onClick={() => paginate(number)}
-            className={`page-number ${currentPage === number ? 'active' : ''}`}
-          >
-            {number}
-          </button>
-        ))}
       </div>
     </div>
   );

@@ -85,6 +85,7 @@ const Register = () => {
     };
 
     return (
+        <div className='main'>
         <div className="form-container"> 
         <div className="register-container">
             <form className="register-form" onSubmit={onSubmit}>
@@ -163,6 +164,7 @@ const Register = () => {
                 </div>
                 <button type='submit' className='submit-button' disabled={!emailAvailable}>Register</button>
             </form>
+        </div>
         </div>
         </div>
     );

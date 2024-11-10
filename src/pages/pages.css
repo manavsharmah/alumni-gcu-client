@@ -1067,6 +1067,7 @@ button:hover {
   line-height: 1.8;
   color: #333333;
   width: 60%;
+  white-space: pre-wrap;
 }
 
 .single-news-content img {
@@ -1112,6 +1113,7 @@ button:hover {
   line-height: 1.8;
   color: #333333;
   width: 60%;
+  white-space: pre-wrap;
 }
 
 .event-organizer {

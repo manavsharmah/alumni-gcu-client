@@ -115,7 +115,14 @@ const SingleNews = () => {
         )}
       </div>
 
-      <p className="single-news-content">{newsItem.content}</p>
+      <p className="single-news-content">
+        {newsItem.content.split('\n').map((line, index) => (
+          <React.Fragment key={index}>
+            {line}
+            <br />
+          </React.Fragment>
+        ))}
+      </p>
     </div>
   );
 };

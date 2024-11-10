@@ -118,7 +118,14 @@ const SingleEvent = () => {
       </div>
 
       <h5 className="event-organizer">Organized by: {eventItem.organizer} on <br />{new Date(eventItem.event_date).toLocaleDateString()} at {eventItem.event_time}</h5>
-      <p className="single-event-content">{eventItem.content}</p>
+      <p className="single-event-content">
+        {eventItem.content.split('\n').map((line, index) => (
+          <React.Fragment key={index}>
+            {line}
+            <br />
+          </React.Fragment>
+        ))}
+      </p>
     </div>
   );
 };

@@ -49,7 +49,7 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
     const canDelete = currentUser && (currentUser.role === 'admin' || currentUser.id === post.author._id);
 
     // Check if the current user has liked the post
-    const hasLiked = post.likes.includes(currentUser.id);
+    const hasLiked = Array.isArray(post.likes) && post.likes.includes(currentUser.id);
     console.log('onLike prop:', onLike);
 
     return (

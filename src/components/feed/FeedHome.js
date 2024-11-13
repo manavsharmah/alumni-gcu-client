@@ -93,13 +93,25 @@ const Welcome = () => {
 
     const handleLike = async (postId) => {
         try {
-          await api.put(`/posts/${postId}/like`);
-          fetchPosts(currentPage);
+            const response = await api.put(`/posts/${postId}/like`);
+            const updatedPost = response.data;
+    
+            // Check if likes is an array and contains the updated count
+            if (!Array.isArray(updatedPost.likes)) {
+                console.error("Error: likes should be an array");
+                return;
+            }
+    
+            // Update the posts state with the new likes array
+            setPosts((prevPosts) =>
+                prevPosts.map((post) =>
+                    post._id === postId ? { ...post, likes: updatedPost.likes } : post
+                )
+            );
         } catch (err) {
-          setError("Failed to toggle like. Please try again.");
+            setError("Failed to toggle like. Please try again.");
         }
-      };
-
+    };
     // Left sidebar 
     const leftSidebar = (
         <>

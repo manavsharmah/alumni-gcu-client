@@ -91,6 +91,15 @@ const Welcome = () => {
         setCurrentPage(pageNumber);
     };
 
+    const handleLike = async (postId) => {
+        try {
+          await api.put(`/posts/${postId}/like`);
+          fetchPosts(currentPage);
+        } catch (err) {
+          setError("Failed to toggle like. Please try again.");
+        }
+      };
+
     // Left sidebar 
     const leftSidebar = (
         <>
@@ -122,6 +131,7 @@ const Welcome = () => {
                         onEditPost={handleEditPost}
                         currentUser={currentUser}
                         isLoading={isLoading}
+                        onLike={handleLike}
                     />
                 </>
             )}
@@ -134,6 +144,7 @@ const Welcome = () => {
                     onEditPost={handleEditPost}
                     currentUser={currentUser}
                     isLoading={isLoading}
+                    onLike={handleLike}
                 />
             )}
             

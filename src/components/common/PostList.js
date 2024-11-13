@@ -1,7 +1,7 @@
 import React from "react";
 import PostCard from "../common/PostCard";
 
-const PostList = ({ posts, onDeletePost, currentUser, isLoading, onEditPost }) => {
+const PostList = ({ posts, onDeletePost, currentUser, isLoading, onEditPost, onLike }) => {
     return (
         <div className="posts-container">
             {isLoading ? (
@@ -14,6 +14,7 @@ const PostList = ({ posts, onDeletePost, currentUser, isLoading, onEditPost }) =
                         onEdit={onEditPost}
                         onDelete={onDeletePost}
                         currentUser={currentUser}
+                        onLike={onLike}
                     />
                 ))
             ) : (

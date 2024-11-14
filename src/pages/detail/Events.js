@@ -47,8 +47,8 @@ const EventList = () => {
       <h2 className="news-title">Events Category</h2>
       <div className="news-list">
         {currentEvents.map((eventItem) => (
-          <div key={eventItem._id} className="news-item">
-            <div className="news-thumbnail" onClick={() => handleEventClick(eventItem)}>
+          <div key={eventItem._id} className="news-item" onClick={() => handleEventClick(eventItem)}>
+            <div className="news-thumbnail">
               {eventItem.images && eventItem.images.length > 0 ? (
                 <img
                   src={`http://localhost:5000${eventItem.images[0]}`}

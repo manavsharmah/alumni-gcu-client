@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { FaTachometerAlt, FaNewspaper, FaCalendarAlt, FaArrowLeft, FaImages, FaAddressBook } from 'react-icons/fa';
 import { IoPersonAdd } from "react-icons/io5";
-import { MdAttachEmail } from "react-icons/md";
+import { MdAttachEmail, MdFeed, MdFeedback } from "react-icons/md";
 import "./admin.css";
 
 const getActiveClass = ({ isActive }) => (isActive ? "active-link" : "");
@@ -56,6 +56,12 @@ const AdminLayout = () => {
           <NavLink to="/add-bulk-alumni" className={getActiveClass}>
             <IoPersonAdd />
             <span>Add Alumni</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/view-feedback" className={getActiveClass}>
+            <MdFeedback />
+            <span>Feedbacks</span>
           </NavLink>
         </li>
         <li>

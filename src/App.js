@@ -51,6 +51,7 @@ import {
 	Objectives,
 	GoverningCouncil
 } from "./pages/detail/About";
+import AdminFeedbackPanel from "./pages/admin/AdminFeedbackPanel";
 
 function App() {
   return (
@@ -153,6 +154,7 @@ function App() {
                 <Route path="/photo-upload-form" element={<PhotoUpload />} />
                 <Route path="/email-form" element={<AdminEmailForm />} />
                 <Route path="/add-bulk-alumni" element={<BulkAddAlumni />} />
+                <Route path="/view-feedback" element={<AdminFeedbackPanel />} />
               </Route>
             </Routes>
           </section>

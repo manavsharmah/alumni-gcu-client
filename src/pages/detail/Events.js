@@ -66,6 +66,7 @@ const EventList = () => {
               <p className="news-summary">
                 {eventItem.content.substring(0, 100)}...
               </p>
+              <button className="read-more-btn">Read More</button>
             </div>
           </div>
         ))}

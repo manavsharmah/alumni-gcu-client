@@ -59,57 +59,57 @@ const SingleAlbum = () => {
 
   return (
     <div className="main">
-    <div className="page-container">
-      <Article title="Gallery">
-        <h1>{album.albumName}</h1>
-        <div className="images-container">
-          {album.images.map((image, index) => (
-            <div
-              key={index}
-              className="image-wrapper"
-              onClick={() => {
-                setPhotoIndex(index);
-                setIsOpen(true);
-              }}
-            >
-              <img
-                src={`http://localhost:5000${image}`}
-                alt={`${album.albumName}_image_${index}`}
-                className="image"
-                loading="lazy" 
-              />
-              <div className="image-overlay">
-                <span>Click to enlarge</span>
+      <div className="page-container">
+        <Article title="Gallery">
+          <h1>{album.albumName}</h1>
+          <div className="images-container">
+            {album.images.map((image, index) => (
+              <div
+                key={index}
+                className="image-wrapper"
+                onClick={() => {
+                  setPhotoIndex(index);
+                  setIsOpen(true);
+                }}
+              >
+                <img
+                  src={`http://localhost:5000${image}`}
+                  alt={`${album.albumName}_image_${index}`}
+                  className="image"
+                  loading="lazy" 
+                />
+                <div className="image-overlay">
+                  <span>Click to enlarge</span>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-        <Lightbox
-          open={isOpen}
-          close={() => setIsOpen(false)}
-          slides={slides}
-          index={photoIndex}
-          plugins={[Thumbnails, Fullscreen, Zoom, Download]}
-          thumbnails={{
-            position: "bottom",
-            width: 120,
-            height: 80,
-            gap: 16,
-            imageFit: "contain",
-          }}
-          zoom={{
-            maxZoomPixelRatio: 3,
-            scrollToZoom: true,
-          }}
-          on={{
-            view: ({ index }) => setPhotoIndex(index),
-          }}
-          styles={{
-            container: { backgroundColor: "rgba(0, 0, 0, 0.95)" },
-          }}
-        />
-      </Article>
-    </div>
+            ))}
+          </div>
+          <Lightbox
+            open={isOpen}
+            close={() => setIsOpen(false)}
+            slides={slides}
+            index={photoIndex}
+            plugins={[Thumbnails, Fullscreen, Zoom, Download]}
+            thumbnails={{
+              position: "bottom",
+              width: 120,
+              height: 80,
+              gap: 16,
+              imageFit: "contain",
+            }}
+            zoom={{
+              maxZoomPixelRatio: 3,
+              scrollToZoom: true,
+            }}
+            on={{
+              view: ({ index }) => setPhotoIndex(index),
+            }}
+            styles={{
+              container: { backgroundColor: "rgba(0, 0, 0, 0.95)" },
+            }}
+          />
+        </Article>
+      </div>
     </div>
   );
 };

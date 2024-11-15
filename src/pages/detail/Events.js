@@ -43,45 +43,45 @@ const EventList = () => {
 
   return (
     <div className='main'>
-    <div className="news-container">
-      <h2 className="news-title">Events Category</h2>
-      <div className="news-list">
-        {currentEvents.map((eventItem) => (
-          <div key={eventItem._id} className="news-item">
-            <div className="news-thumbnail" onClick={() => handleEventClick(eventItem)}>
-              {eventItem.images && eventItem.images.length > 0 ? (
-                <img
-                  src={`http://localhost:5000${eventItem.images[0]}`}
-                  alt="Events Thumbnail"
-                />
-              ) : (
-                <img src="./assets/gcu-building.jpg" alt="Default Thumbnail" />
-              )}
+      <div className="news-container">
+        <h2 className="news-title">Events Category</h2>
+        <div className="news-list">
+          {currentEvents.map((eventItem) => (
+            <div key={eventItem._id} className="news-item">
+              <div className="news-thumbnail" onClick={() => handleEventClick(eventItem)}>
+                {eventItem.images && eventItem.images.length > 0 ? (
+                  <img
+                    src={`http://localhost:5000${eventItem.images[0]}`}
+                    alt="Events Thumbnail"
+                  />
+                ) : (
+                  <img src="./assets/gcu-building.jpg" alt="Default Thumbnail" />
+                )}
+              </div>
+              <div className="news-content">
+                <h3 className="news-headline">{eventItem.title}</h3>
+                <p className="news-date">
+                  {new Date(eventItem.event_date).toLocaleDateString()} at {eventItem.event_time}
+                </p>
+                <p className="news-summary">
+                  {eventItem.content.substring(0, 100)}...
+                </p>
+              </div>
             </div>
-            <div className="news-content">
-              <h3 className="news-headline">{eventItem.title}</h3>
-              <p className="news-date">
-                {new Date(eventItem.event_date).toLocaleDateString()} at {eventItem.event_time}
-              </p>
-              <p className="news-summary">
-                {eventItem.content.substring(0, 100)}...
-              </p>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        <div className="pagination">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
+            <button
+              key={number}
+              onClick={() => paginate(number)}
+              className={`page-number ${currentPage === number ? "active" : ""}`}
+            >
+              {number}
+            </button>
+          ))}
+        </div>
       </div>
-      <div className="pagination">
-        {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-          <button
-            key={number}
-            onClick={() => paginate(number)}
-            className={`page-number ${currentPage === number ? "active" : ""}`}
-          >
-            {number}
-          </button>
-        ))}
-      </div>
-    </div>
     </div>
   );
 };

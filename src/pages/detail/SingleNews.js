@@ -47,35 +47,50 @@ const SingleNews = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="single-news-container">
-      <style>
-        {`
-          .carousel-control-prev,
-          .carousel-control-next {
-            background: none !important;
-            border: none !important;
-            opacity: 0.7 !important;
-            transition: opacity 0.1s ease !important;
-          }
-        `}
-      </style>
+    <div className="main">
+      <div className="single-news-container">
+        <style>
+          {`
+            .carousel-control-prev,
+            .carousel-control-next {
+              background: none !important;
+              border: none !important;
+              opacity: 0.7 !important;
+              transition: opacity 0.1s ease !important;
+            }
+          `}
+        </style>
 
-      <h2 className="single-news-title">
-        <p className="single-news-date">{new Date(newsItem.date).toLocaleDateString()}</p>
-        {newsItem.title}
-      </h2>
+        <h2 className="single-news-title">
+          <p className="single-news-date">{new Date(newsItem.date).toLocaleDateString()}</p>
+          {newsItem.title}
+        </h2>
 
-      <div id="newsImageCarousel" className="carousel slide" data-bs-ride="carousel" ref={carouselRef}>
-        <div className="carousel-inner">
-          {newsItem.images && newsItem.images.length > 0 ? (
-            newsItem.images.map((image, index) => (
-              <div 
-                key={index} 
-                className={`carousel-item ${index === 0 ? "active" : ""}`}
-              >
-                <img
-                  src={`http://localhost:5000${image}`}
-                  alt={`News Image ${index + 1}`}
+        <div id="newsImageCarousel" className="carousel slide" data-bs-ride="carousel" ref={carouselRef}>
+          <div className="carousel-inner">
+            {newsItem.images && newsItem.images.length > 0 ? (
+              newsItem.images.map((image, index) => (
+                <div 
+                  key={index} 
+                  className={`carousel-item ${index === 0 ? "active" : ""}`}
+                >
+                  <img
+                    src={`http://localhost:5000${image}`}
+                    alt={`News Image ${index + 1}`}
+                    className="d-block w-100"
+                    style={{
+                      height: "500px",
+                      objectFit: "cover",
+                      objectPosition: "center"
+                    }}
+                  />
+                </div>
+              ))
+            ) : (
+              <div className="carousel-item active">
+                <img 
+                  src="./assets/gcu-building.jpg" 
+                  alt="Default Thumbnail" 
                   className="d-block w-100"
                   style={{
                     height: "500px",
@@ -84,38 +99,25 @@ const SingleNews = () => {
                   }}
                 />
               </div>
-            ))
-          ) : (
-            <div className="carousel-item active">
-              <img 
-                src="./assets/gcu-building.jpg" 
-                alt="Default Thumbnail" 
-                className="d-block w-100"
-                style={{
-                  height: "500px",
-                  objectFit: "cover",
-                  objectPosition: "center"
-                }}
-              />
-            </div>
+            )}
+          </div>
+
+          {newsItem.images && newsItem.images.length > 1 && (
+            <>
+              <button className="carousel-control-prev" type="button" data-bs-target="#newsImageCarousel" data-bs-slide="prev">
+                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Previous</span>
+              </button>
+              <button className="carousel-control-next" type="button" data-bs-target="#newsImageCarousel" data-bs-slide="next">
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="visually-hidden">Next</span>
+              </button>
+            </>
           )}
         </div>
 
-        {newsItem.images && newsItem.images.length > 1 && (
-          <>
-            <button className="carousel-control-prev" type="button" data-bs-target="#newsImageCarousel" data-bs-slide="prev">
-              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Previous</span>
-            </button>
-            <button className="carousel-control-next" type="button" data-bs-target="#newsImageCarousel" data-bs-slide="next">
-              <span className="carousel-control-next-icon" aria-hidden="true"></span>
-              <span className="visually-hidden">Next</span>
-            </button>
-          </>
-        )}
+        <p className="single-news-content">{newsItem.content}</p>
       </div>
-
-      <p className="single-news-content">{newsItem.content}</p>
     </div>
   );
 };

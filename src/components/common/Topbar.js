@@ -11,12 +11,12 @@ const Topbar = () => {
 
   const toggleNav = () => {
     setIsNavOpen((prev) => !prev);
-    document.querySelector('.navbar').classList.toggle('open');
+    document.querySelector('.header-nav').classList.toggle('open');
   };
 
   const closeNav = () => {
     setIsNavOpen(false);
-    document.querySelector('.navbar').classList.remove('open');
+    document.querySelector('.header-nav').classList.remove('open');
   };
 
   const handleLogout = async () => {
@@ -41,7 +41,7 @@ const Topbar = () => {
 
   // useEffect(() => {
   //   const handleScroll = () => {
-  //     const navbar = document.querySelector('.navbar');
+  //     const header-nav = document.querySelector('.header-nav');
   //     const appHeader = document.querySelector('.App-header');
 
   //     if (window.innerWidth > 768) {  // Only apply on desktop view
@@ -78,12 +78,15 @@ const Topbar = () => {
           </div>
           
 
-        <nav className="navbar">
+        <nav className="header-nav">
           <button className="menu-toggle" onClick={toggleNav}>
             &#9776;
           </button>
           <div className={`nav-content ${isNavOpen ? 'open' : ''}`}>
             <ul>
+              <li>
+              <Link to='/'>Home</Link>
+              </li>
               <li>
               <Link to="#">About</Link>
                 <ul className='sub-menus'>
@@ -119,13 +122,13 @@ const Topbar = () => {
           </div>
           </nav>
 
-          <div className="auth-links">
-            {!user ? (
-              <div className="auth-nav">
-                <Link to="/register" className="auth-link">Register</Link>
-                <span className="separator">&nbsp;|&nbsp;</span>
-                <Link to="/login" className="auth-link">Login</Link>
-              </div>
+          <div className="auth-container">
+          {!user ? (
+            <div className="auth-links">
+              <Link to="/register" className="auth-link">Register</Link>
+              <span className="separator">|</span>
+              <Link to="/login" className="auth-link">Login</Link>
+            </div>
             ) : (
               <div className="dropdown">
                 <div

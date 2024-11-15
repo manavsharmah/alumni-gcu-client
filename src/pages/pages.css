@@ -31,13 +31,6 @@
   width: 90%;
 }
 
-/* .news-card {
-  display: flex;
-  border-color: #27357f;
-  background-color: #e2e4eb;
-  height: 800px;
-} */
-
 
 
 .card-body ul {
@@ -99,7 +92,7 @@
 
 .main {
   background-color: #f5f6fa;
-  padding-top: 140px;
+  padding-top: 120px;
 
 }
 
@@ -117,24 +110,27 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10px;
 }
 
 .left-box h2 {
   justify-content: center;
-  width: 35%;
+  width: 65%;
+  text-align: center;
   font-size: 36px;
   margin-bottom: 20px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Georgia", sans-serif;
   font-weight: bold;
 }
 
 
 .left-box p {
-  width: 35%;
+  width: 65%;
+  text-align: center;
   font-size: 18px;
   line-height: 1.5;
   margin-bottom: 20px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Georgia", sans-serif;
 }
 
 .button {
@@ -151,9 +147,10 @@
 }
 
 .right-box img {
-  height: 610px;
-  justify-content: end;
-  align-items: end;
+  width: 100%; /* Allow image to scale down with the container */
+  height: auto; /* Maintain aspect ratio */
+  max-height: 610px; /* Optional: set a maximum height */
+  object-fit: cover; /* Ensures the image covers the container properly */
 }
 
 .hero-image {
@@ -179,21 +176,23 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 15px;
 }
 
 .vc-text p {
-  font-family: "Poppins", sans-serif;
+  font-family: "Georgia", sans-serif;
 }
 
 .vc-heading {
   font-size: 30px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Georgia", sans-serif;
   font-weight: bold;
 }
 
 .vc-name {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 20px;
+  font-family: "Georgia", sans-serif;
 }
 
 .vc-image {
@@ -234,21 +233,22 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 15px;
 }
 
 .ch-text p {
-  font-family: "Poppins", sans-serif;
+  font-family: "Georgia", sans-serif;
 }
 
 .ch-heading {
   font-size: 30px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Georgia", sans-serif;
   font-weight: bold;
 }
 
 .ch-name {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 20px;
 }
 
 .ch-image {
@@ -290,19 +290,18 @@
   align-items: center;
 }
 
+.reg-text p {
+  font-family: "Georgia", sans-serif;
+}
+
 .ch-text p {
-  font-family: "Poppins", sans-serif;
+  font-family: "Georgia", sans-serif;
 }
 
 .ch-heading {
   font-size: 30px;
-  font-family: "Poppins", sans-serif;
+  font-family: "Georgia", sans-serif;
   font-weight: bold;
-}
-
-.ch-name {
-  font-weight: bold;
-  font-size: 15px;
 }
 
 .ch-image {
@@ -338,7 +337,7 @@
 }
 
 .hero4 {
-  justify-content: center;
+  justify-content: space-evenly;
   padding: 20px;
   gap: 30px;
 }
@@ -356,15 +355,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 15px;
 }
+
 
 .pres-name {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 20px;
+  font-family: "Georgia", sans-serif;
 }
 
 .news-events-container{
-  width: 60%;
+  /* width: 60%; */
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -485,6 +487,12 @@
     line-height: 1.5;
     margin-bottom: 20px;
   }
+
+  .vc-img {
+    height: 235px;
+    width: 230px;
+    border-radius: 240px;
+  }
   
   .news-events-container{
     width: 100%;
@@ -558,24 +566,24 @@
   .pres-name {
     padding: 20px;
   }
-  
 }
-/*=========News and Events tablet view======== */
-@media screen and (max-width: 1024px) and (min-width: 768px){
-  .news-events-container{
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 8px;
-    }
-    .page-container{
-    padding: 10px 20px;
-  
-  
-    }
-    }
+
+@media screen and (max-width: 912px) {
+  .news-events-container {
+    flex-direction: column; /* Stack items vertically */
+    /* align-items: stretch;  */
+    padding: 16px 0px; /* Adjust padding */
+  }
+}
+
+@media screen and (max-width: 508px) {
+  .news-events-container {
+    flex-direction: column; /* Stack items vertically */
+    align-items: stretch; /* Ensure items take full width */
+    padding: 12px 0px; /* Adjust padding */
+  }
+}
+
 
  /* =========Gallery========= */
  .gallery {

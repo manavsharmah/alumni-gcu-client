@@ -5,8 +5,8 @@ import PostForm from "../../components/forms/PostForm";
 import PostList from "../../components/common/PostList";
 import Pagination from "../../components/common/Pagination";
 import RecommendedUsersList from "../../components/common/RecommendedUsersList";
-import JobOpportunities from "./JobOpportunities"; // New component
-import FurtherEducation from "./FurtherEducation"; // New component
+import JobOpportunities from "./JobOpportunities";
+import FurtherEducation from "./FurtherEducation";
 import FeedLayout from "./FeedLayout";
 import FeedNavbar from "./FeedNavbar";
 import VerifiedUsersList from "../common/VerifiedUsersList";
@@ -22,16 +22,12 @@ const Welcome = () => {
     const postsPerPage = 6;
 
     useEffect(() => {
-        let category = 'post';  // Default category is 'post'
-        if (activeTab === 'jobs') {
-            category = 'job';  // Fetch job opportunities
-        } else if (activeTab === 'education') {
-            category = 'education';  // Fetch education opportunities
-        }
-        fetchPosts(currentPage, category);  // Fetch posts based on the selected category
+        let category = 'post';
+        if (activeTab === 'jobs') category = 'job';
+        else if (activeTab === 'education') category = 'education';
+        fetchPosts(currentPage, category);
         getCurrentUser();
-    }, [activeTab, currentPage]);  // Re-run when active tab or current page changes
-    
+    }, [activeTab, currentPage]);
 
     const getCurrentUser = () => {
         const token = localStorage.getItem("accessToken");
@@ -53,13 +49,12 @@ const Welcome = () => {
             setIsLoading(false);
         }
     };
-    
 
     const handleSubmitPost = async (content, category) => {
         setIsLoading(true);
         setError(null);
         try {
-            await api.post("/posts/create", { content, category });  // Pass content and category
+            await api.post("/posts/create", { content, category });
             fetchPosts(currentPage, category);
         } catch (err) {
             setError("Failed to submit post. Please try again.");
@@ -67,7 +62,6 @@ const Welcome = () => {
             setIsLoading(false);
         }
     };
-    
 
     const handleDeletePost = async (postId) => {
         try {
@@ -87,108 +81,113 @@ const Welcome = () => {
         }
     };
 
-    const handleClickPage = (pageNumber) => {
-        setCurrentPage(pageNumber);
-    };
+    const handleClickPage = (pageNumber) => setCurrentPage(pageNumber);
 
     const handleLike = async (postId) => {
         try {
             const response = await api.put(`/posts/${postId}/like`);
-            const updatedPost = response.data;
-    
-            // Check if likes is an array and contains the updated count
-            if (!Array.isArray(updatedPost.likes)) {
-                console.error("Error: likes should be an array");
-                return;
-            }
-    
-            // Update the posts state with the new likes array
             setPosts((prevPosts) =>
                 prevPosts.map((post) =>
-                    post._id === postId ? { ...post, likes: updatedPost.likes } : post
+                    post._id === postId ? { ...post, likes: response.data.likes } : post
                 )
             );
         } catch (err) {
             setError("Failed to toggle like. Please try again.");
         }
     };
-    // Left sidebar 
-    const leftSidebar = (
-        <>
-            {activeTab === "home" && (
+
+    const handleAddComment = async (postId, content) => {
+        try {
+            const response = await api.post(`/posts/${postId}/comments`, { content });
+            setPosts((prevPosts) =>
+                prevPosts.map((post) =>
+                    post._id === postId ? { ...post, comments: response.data.comments } : post
+                )
+            );
+        } catch (err) {
+            setError("Failed to add comment. Please try again.");
+        }
+    };
+    const handleDeleteComment = async (postId, commentId) => {
+        try {
+            const response = await api.delete(`/posts/${postId}/comments/${commentId}`);
+            setPosts((prevPosts) =>
+                prevPosts.map((post) =>
+                    post._id === postId ? { ...post, comments: response.data.comments } : post
+                )
+            );
+        } catch (err) {
+            setError("Failed to delete comment. Please try again.");
+        }
+    };
+
+    return (
+        <FeedLayout
+            leftSidebar={
                 <>
-                    <JobOpportunities />
-                    <FurtherEducation />
+                    {activeTab === "home" && (
+                        <>
+                            <JobOpportunities />
+                            <FurtherEducation />
+                        </>
+                    )}
+                    {activeTab === "jobs" && <FurtherEducation />}
+                    {activeTab === "education" && <JobOpportunities />}
                 </>
-            )}
-            {activeTab === "jobs" && <FurtherEducation />}
-            {activeTab === "education" && <JobOpportunities />}
-            {activeTab === "friends" && null}
-        </>
-    );
-    
-
-    // Main content 
-    const mainContent = (
-        <>
-            <FeedNavbar activeTab={activeTab} setActiveTab={setActiveTab} />
-            
-            {/* Home Tab (Regular Posts) */}
-            {activeTab === "home" && (
+            }
+            mainContent={
                 <>
-                    <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
-                    <PostList
-                        posts={posts}
-                        onDeletePost={handleDeletePost}
-                        onEditPost={handleEditPost}
-                        currentUser={currentUser}
-                        isLoading={isLoading}
-                        onLike={handleLike}
-                    />
+                    <FeedNavbar activeTab={activeTab} setActiveTab={setActiveTab} />
+                    {activeTab === "home" && (
+                        <>
+                            <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
+                            <PostList
+                                posts={posts}
+                                onDeletePost={handleDeletePost}
+                                onEditPost={handleEditPost}
+                                currentUser={currentUser}
+                                isLoading={isLoading}
+                                onLike={handleLike}
+                                onComment={handleAddComment}
+                                onDeleteComment={handleDeleteComment}
+                            />
+                        </>
+                    )}
+                    {activeTab === "jobs" && (
+                        <PostList
+                            posts={posts}
+                            onDeletePost={handleDeletePost}
+                            onEditPost={handleEditPost}
+                            currentUser={currentUser}
+                            isLoading={isLoading}
+                            onLike={handleLike}
+                            onComment={handleAddComment}
+                            onDeleteComment={handleDeleteComment}
+                        />
+                    )}
+                    {activeTab === "education" && (
+                        <PostList
+                            posts={posts}
+                            onDeletePost={handleDeletePost}
+                            onEditPost={handleEditPost}
+                            currentUser={currentUser}
+                            isLoading={isLoading}
+                            onLike={handleLike}
+                            onComment={handleAddComment}
+                        />
+                    )}
+                    <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handleClickPage} />
                 </>
-            )}
-            {activeTab === "friends" && <VerifiedUsersList />}
-            {/* Jobs Tab (Job Opportunities) */}
-            {activeTab === "jobs" && (
-                <PostList
-                    posts={posts}
-                    onDeletePost={handleDeletePost}
-                    onEditPost={handleEditPost}
-                    currentUser={currentUser}
-                    isLoading={isLoading}
-                    onLike={handleLike}
-                />
-            )}
-            
-            {/* Education Tab (Education Opportunities) */}
-            {activeTab === "education" && (
-                <PostList
-                    posts={posts}
-                    onDeletePost={handleDeletePost}
-                    onEditPost={handleEditPost}
-                    currentUser={currentUser}
-                    isLoading={isLoading}
-                />
-            )}
-            
-            <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handleClickPage} />
-        </>
+            }
+            rightSidebar={
+                <>
+                    {activeTab === "home" && <RecommendedUsersList />}
+                    {activeTab === "jobs" && <RecommendedUsersList />}
+                    {activeTab === "education" && <VerifiedUsersList />}
+                </>
+            }
+        />
     );
-    
-    
-
-    // Right sidebar
-    const rightSidebar = (
-        <>
-            {activeTab === "home" && <RecommendedUsersList />}
-            {activeTab === "jobs" && <RecommendedUsersList />}
-            {activeTab === "education" && <VerifiedUsersList />}
-            {activeTab === "friends" && null}
-        </>
-    );
-    
-
-    return <FeedLayout leftSidebar={leftSidebar} mainContent={mainContent} rightSidebar={rightSidebar} />;
 };
 
 export default Welcome;

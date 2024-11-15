@@ -1381,7 +1381,7 @@ justify-content: center;
 .gcu-post-timestamp, .gcu-post-edit-timestamp {
   font-size: 0.75rem;
   color: #000;
-  margin-top: -17px;
+  /* margin-top: -17px; */
 }
 
 /* Middle Section */
@@ -1556,6 +1556,112 @@ justify-content: center;
   width: 45px;
   height: 45px;
   border-radius: 50%;
+}
+
+/*Reply section in feed*/
+/* Modal styles */
+.gcu-reply-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  background-color: #2e2e2e; /* Dark grey background for contrast */
+  color: #ffffff; /* White text */
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  padding: 20px;
+}
+
+.gcu-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #555; /* Subtle divider */
+  padding-bottom: 10px;
+}
+
+.gcu-close-modal-button {
+  background: none;
+  border: none;
+  color: #ff4d4d; /* Red close button for visibility */
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.gcu-close-modal-button:hover {
+  color: #ff1a1a;
+}
+
+.gcu-comments-container {
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.gcu-comment-card {
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #3e3e3e; /* Slightly lighter background for comments */
+  border-radius: 5px;
+  border: 1px solid #555;
+}
+
+.gcu-comment-card p {
+  margin: 5px 0;
+  color: #e0e0e0; /* Light grey for better readability */
+}
+
+.gcu-reply-form {
+  margin-top: 20px;
+}
+
+.gcu-reply-textarea {
+  width: 100%;
+  padding: 10px;
+  background-color: #3e3e3e;
+  border: 1px solid #555;
+  border-radius: 5px;
+  color: #ffffff;
+}
+
+.gcu-reply-textarea::placeholder {
+  color: #cccccc; /* Subtle placeholder color */
+}
+
+.gcu-reply-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.gcu-reply-submit-button {
+  padding: 8px 15px;
+  background-color: #4caf50; /* Green submit button */
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.gcu-reply-submit-button:hover {
+  background-color: #45a045;
+}
+
+.gcu-reply-cancel-button {
+  padding: 8px 15px;
+  background-color: #dc3545; /* Red cancel button */
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.gcu-reply-cancel-button:hover {
+  background-color: #c82333;
 }
 
 

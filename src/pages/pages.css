@@ -149,8 +149,8 @@
 .right-box img {
   width: 100%; /* Allow image to scale down with the container */
   height: auto; /* Maintain aspect ratio */
-  max-height: 610px; /* Optional: set a maximum height */
-  object-fit: cover; /* Ensures the image covers the container properly */
+  max-height: 610px; 
+  object-fit: cover; 
 }
 
 .hero-image {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../components.css';
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
 
-const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
+const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editedContent, setEditedContent] = useState(post.content);
 
@@ -16,6 +16,14 @@ const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
     const handleEdit = async () => {
         await onEdit(post._id, editedContent);
         setIsEditing(false);
+    };
+
+    const handleLike = async () => {
+        try {
+            await onLike(post._id); // Call onLike with only the post ID
+        } catch (error) {
+            console.error("Error liking post:", error);
+        }
     };
 
     const getRelativeTime = (dateString) => {
@@ -37,8 +45,12 @@ const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
         }
     };
 
-    const canEdit = currentUser && (currentUser.role === 'admin' || currentUser.id === post.author._id);
+    const canEdit = currentUser && (currentUser.id === post.author._id);
     const canDelete = currentUser && (currentUser.role === 'admin' || currentUser.id === post.author._id);
+
+    // Check if the current user has liked the post
+    const hasLiked = Array.isArray(post.likes) && post.likes.includes(currentUser.id);
+    console.log('onLike prop:', onLike);
 
     return (
         <div className="gcu-post-card">
@@ -90,7 +102,7 @@ const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
                     )}
                 </div>
 
-                {/* Right Section - Edit/Delete Buttons */}
+                {/* Right Section - Edit/Delete/Like Buttons */}
                 <div className="gcu-post-card-right">
                     {canEdit && !isEditing && (
                         <button 
@@ -108,6 +120,13 @@ const PostCard = ({ post, onDelete, onEdit, currentUser }) => {
                             🗑️
                         </button>
                     )}
+                    {/* Like Button */}
+                    <button
+                        className={`gcu-like-button ${hasLiked ? 'liked' : ''}`}
+                        onClick={handleLike}
+                    >
+                        👍 {post.likes.length}
+                    </button>
                 </div>
             </div>
         </div>

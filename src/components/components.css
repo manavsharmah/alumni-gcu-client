@@ -1003,6 +1003,7 @@ justify-content: center;
 /* Article-container */
 
 .article-container {
+  background-color: #ffffff;
   border: 1px solid #c4c4c4;
   border-radius: 8px;
   padding: 16px;
@@ -1069,7 +1070,12 @@ justify-content: center;
     display: none;
   }
 }
-
+/* Tablet view articles*/
+@media screen and (max-width: 1024px) and (min-width: 768px){
+  .article-container{
+    max-width: 97%;
+  }
+}
 
 /* News and event Card */
 
@@ -1268,7 +1274,6 @@ justify-content: center;
 
 .gallery-preview-container {
   padding: 20px;
-  background-color: #eceef3;
   text-align: center;
   border-radius: 8px;
   margin: 20px auto;

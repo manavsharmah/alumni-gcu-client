@@ -4,7 +4,6 @@ import { FaUser, FaEnvelope, FaPhone, FaUniversity, FaLock, FaEye, FaEyeSlash } 
 import api from '../../services/api';
 import './form.css';
 
-
 const branches = [
     'Computer Science and Engineering',
     'Mechanical Engineering',
@@ -52,30 +51,33 @@ const Register = () => {
         try {
             const response = await api.post('/user/check-email', { email });
             setEmailAvailable(response.data.available);
+            return response.data.available;  // Return availability status to use in onSubmit
         } catch (err) {
             console.error(err.response.data);
+            return false;  // Return false if there's an error
         }
     };
     
     const onChange = e => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-        
-        if (name === 'email') {
-            checkEmailAvailability(value);
-        }
     };
 
     const onSubmit = async e => {
         e.preventDefault();
-        if (validateForm() && emailAvailable) {
+
+        if (!validateForm()) return;  // If form validation fails, stop here
+
+        const emailOk = await checkEmailAvailability(email);  // Check if email is available
+
+        if (emailOk) {
             try {
                 await api.post('/user/register', formData);
                 navigate('/login');
             } catch (err) {
                 console.error(err.response.data);
             }
-        } else if (!emailAvailable) {
+        } else {
             setErrors({ email: "Email is already registered" });
         }
     };
@@ -142,7 +144,7 @@ const Register = () => {
                         value={batch} 
                         onChange={onChange} 
                         min="2006" 
-                        max={new Date().getFullYear() + 4} // Assuming a valid range, you can adjust as necessary
+                        max={new Date().getFullYear() + 4} 
                         required 
                     />
                     {errors.batch && <small>{errors.batch}</small>}

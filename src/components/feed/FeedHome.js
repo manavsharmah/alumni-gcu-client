@@ -91,6 +91,27 @@ const Welcome = () => {
         setCurrentPage(pageNumber);
     };
 
+    const handleLike = async (postId) => {
+        try {
+            const response = await api.put(`/posts/${postId}/like`);
+            const updatedPost = response.data;
+    
+            // Check if likes is an array and contains the updated count
+            if (!Array.isArray(updatedPost.likes)) {
+                console.error("Error: likes should be an array");
+                return;
+            }
+    
+            // Update the posts state with the new likes array
+            setPosts((prevPosts) =>
+                prevPosts.map((post) =>
+                    post._id === postId ? { ...post, likes: updatedPost.likes } : post
+                )
+            );
+        } catch (err) {
+            setError("Failed to toggle like. Please try again.");
+        }
+    };
     // Left sidebar 
     const leftSidebar = (
         <>
@@ -122,6 +143,7 @@ const Welcome = () => {
                         onEditPost={handleEditPost}
                         currentUser={currentUser}
                         isLoading={isLoading}
+                        onLike={handleLike}
                     />
                 </>
             )}
@@ -134,6 +156,7 @@ const Welcome = () => {
                     onEditPost={handleEditPost}
                     currentUser={currentUser}
                     isLoading={isLoading}
+                    onLike={handleLike}
                 />
             )}
             

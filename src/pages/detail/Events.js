@@ -27,7 +27,7 @@ const EventList = () => {
     fetchEvents();
   }, []);
 
-  const indexOfLastEvent = currentPage * eventsPerPage;
+  const indexOfLastEvent = currentPage * eventsPerPage;   /*Shows index of current page*/
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
   const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
 

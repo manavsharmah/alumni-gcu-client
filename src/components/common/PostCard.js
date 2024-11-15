@@ -63,7 +63,9 @@ const PostCard = ({ post, onDelete, onEdit, onLike, onComment, onDeleteComment, 
 
     const handleCommentDelete = async (commentId) => {
         await onDeleteComment(post._id, commentId);
-        setComments(comments.filter((comment) => comment._id !== commentId));
+        // Refetch or update comments to maintain author details
+        const updatedComments = comments.filter((comment) => comment._id !== commentId);
+        setComments(updatedComments);
     };
 
     const canEdit = currentUser && currentUser.id === post.author._id;
@@ -180,13 +182,13 @@ const PostCard = ({ post, onDelete, onEdit, onLike, onComment, onDeleteComment, 
                                         </p>
                                         <p>{comment.content}</p>
                                         {(currentUser.id === comment.author._id || currentUser.role === "admin") && (
-                                            <button
-                                                className="gcu-reply-delete-button"
-                                                onClick={() => handleCommentDelete(comment._id)}
-                                            >
-                                                <FontAwesomeIcon icon={faTrash} />
-                                            </button>
-                                        )}
+                                        <button
+                                            className="gcu-reply-delete-button"
+                                            onClick={() => handleCommentDelete(comment._id)}
+                                        >
+                                            <FontAwesomeIcon icon={faTrash} />
+                                        </button>
+                                    )}
                                     </div>
                                 ))
                             ) : (

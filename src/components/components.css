@@ -104,8 +104,8 @@
   color: #ffffff;
   text-decoration: underline;
   text-decoration-color: #fbcf0a;
-  text-decoration-thickness: 4px; /* Thinner underline for submenus */
-  text-underline-offset: 4px; /* Close to the text for submenus */
+  text-decoration-thickness: 4px; 
+  text-underline-offset: 4px; 
 }
 
 .nav-content .sub-menus {

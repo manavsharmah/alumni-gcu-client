@@ -2,6 +2,16 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import '../components.css';
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { 
+    faEdit, 
+    faTrash, 
+    faThumbsUp, 
+    faSave, 
+    faTimes,
+    faComment,
+    faShare
+} from "@fortawesome/free-solid-svg-icons";
 
 const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -20,7 +30,7 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
 
     const handleLike = async () => {
         try {
-            await onLike(post._id); // Call onLike with only the post ID
+            await onLike(post._id);
         } catch (error) {
             console.error("Error liking post:", error);
         }
@@ -47,14 +57,35 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
 
     const canEdit = currentUser && (currentUser.id === post.author._id);
     const canDelete = currentUser && (currentUser.role === 'admin' || currentUser.id === post.author._id);
-
-    // Check if the current user has liked the post
     const hasLiked = Array.isArray(post.likes) && post.likes.includes(currentUser.id);
-    console.log('onLike prop:', onLike);
 
     return (
         <div className="gcu-post-card">
             <div className="gcu-post-card-wrapper">
+                {/* Top-right Edit/Delete buttons */}
+                {(canEdit || canDelete) && (
+                    <div className="gcu-top-actions">
+                        {canEdit && !isEditing && (
+                            <button 
+                                className="gcu-edit-button"
+                                onClick={() => setIsEditing(true)}
+                                title="Edit post"
+                            >
+                                <FontAwesomeIcon icon={faEdit} />
+                            </button>
+                        )}
+                        {canDelete && (
+                            <button 
+                                className="gcu-delete-button"
+                                onClick={handleDelete}
+                                title="Delete post"
+                            >
+                                <FontAwesomeIcon icon={faTrash} />
+                            </button>
+                        )}
+                    </div>
+                )}
+
                 {/* Left Section with Author Info */}
                 <div className="gcu-post-card-left">
                     <Link to={`/profile/${post.author?._id}`}>
@@ -93,39 +124,43 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
                                 placeholder="Edit your post..."
                             />
                             <div className="gcu-edit-buttons">
-                                <button onClick={handleEdit} className="gcu-edit-save-button">💾 Save</button>
-                                <button onClick={() => setIsEditing(false)} className="gcu-edit-cancel-button">✖️ Cancel</button>
+                                <button onClick={handleEdit} className="gcu-edit-save-button">
+                                    <FontAwesomeIcon icon={faSave} /> Save
+                                </button>
+                                <button onClick={() => setIsEditing(false)} className="gcu-edit-cancel-button">
+                                    <FontAwesomeIcon icon={faTimes} /> Cancel
+                                </button>
                             </div>
                         </div>
                     ) : (
                         <p className="gcu-post-content">{post.content}</p>
                     )}
                 </div>
+                
+                <hr className="gcu-horizontal-line" />
 
-                {/* Right Section - Edit/Delete/Like Buttons */}
-                <div className="gcu-post-card-right">
-                    {canEdit && !isEditing && (
-                        <button 
-                            className="gcu-edit-button"
-                            onClick={() => setIsEditing(true)}
-                        >
-                            ✏️
-                        </button>
-                    )}
-                    {canDelete && (
-                        <button 
-                            className="gcu-delete-button"
-                            onClick={handleDelete}
-                        >
-                            🗑️
-                        </button>
-                    )}
-                    {/* Like Button */}
+                {/* Bottom action buttons */}
+                <div className="gcu-post-actions">
                     <button
-                        className={`gcu-like-button ${hasLiked ? 'liked' : ''}`}
+                        className={`gcu-action-button ${hasLiked ? 'liked' : ''}`}
                         onClick={handleLike}
+                        title={hasLiked ? "Unlike post" : "Like post"}
                     >
-                        👍 {post.likes.length}
+                        <FontAwesomeIcon icon={faThumbsUp} /> {post.likes.length}
+                    </button>
+                    <button
+                        className="gcu-action-button"
+                        onClick={() => {}}
+                        title="Comment on post"
+                    >
+                        <FontAwesomeIcon icon={faComment} />
+                    </button>
+                    <button
+                        className="gcu-action-button"
+                        onClick={() => {}}
+                        title="Share post"
+                    >
+                        <FontAwesomeIcon icon={faShare} />
                     </button>
                 </div>
             </div>

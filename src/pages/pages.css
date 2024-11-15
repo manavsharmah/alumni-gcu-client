@@ -457,7 +457,7 @@
 } */
 
 
-@media screen and (max-width: 768px) and (min-width: 640px){
+@media screen and (max-width: 768px) {
   .hero {
     display: flex;
     justify-content: center;

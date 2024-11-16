@@ -1,7 +1,7 @@
 import React from "react";
 import PostCard from "../common/PostCard";
 
-const PostList = ({ posts, onDeletePost, currentUser, isLoading, onEditPost, onLike, onComment, onDeleteComment }) => {
+const PostList = ({ posts, onDeletePost, currentUser, isLoading, onEditPost, onLike }) => {
     return (
         <div className="gcu-posts-container">
             {isLoading ? (
@@ -15,8 +15,6 @@ const PostList = ({ posts, onDeletePost, currentUser, isLoading, onEditPost, onL
                         onDelete={onDeletePost}
                         currentUser={currentUser}
                         onLike={onLike}
-                        onComment={onComment} // Pass the comment handler
-                        onDeleteComment={onDeleteComment}
                     />
                 ))
             ) : (

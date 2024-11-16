@@ -1396,6 +1396,10 @@ justify-content: center;
   padding-left: 74px;
   padding-right: 40px;
   margin-top: -25px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .gcu-edit-form {
@@ -1469,14 +1473,54 @@ justify-content: center;
   font-size: 0.9rem;
 }
 
-/* Right Section - Edit/Delete Buttons */
+/* Right top Three dot Menu + action buttons */
+
+.gcu-menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  color: #333; /* Add this to make the icon visible */
+  font-size: 16px; /* Add this to control icon size */
+}
+
+.gcu-menu-button:hover {
+  background-color: #8f8f8f29;
+  border-radius: 100px;
+}
+
+.gcu-dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 25px; /* Adjust this value to position below the three dots */
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
+  min-width: 120px; /* Add this to ensure menu has enough width */
+}
+
+.gcu-menu-item {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+.gcu-menu-item:hover {
+  background-color: #f5f5f5;
+}
 
 .gcu-top-actions {
   position: absolute;
   top: 10px;
   right: 10px;
   display: flex;
-  gap: 5px;
 }
 
 .gcu-post-card-wrapper {
@@ -1492,9 +1536,9 @@ justify-content: center;
 .gcu-action-button {
   background-color: transparent;
   border: none;
-  color: #5c5c5c;
+  color: #6e6e6e;
   cursor: pointer;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   padding: 8px 16px;
   border-radius: 50px;
   transition: all 0.2s ease;
@@ -1522,26 +1566,6 @@ justify-content: center;
   justify-content: flex-end;
 }
 
-.gcu-edit-button, .gcu-delete-button {
-  background-color: transparent;
-  border: none;
-  color: #5c5c5c;
-  cursor: pointer;
-  font-size: 1.1rem;
-  margin-right: 5px;
-}
-
-.gcu-delete-button:hover {
-  background-color: #ff00001c;
-  border-radius: 50px;
-  color: #e81111;
-}
-
-.gcu-edit-button:hover {
-  background-color: #00ff511c;
-  border-radius: 50px;
-  color: #008B5D;
-}
 
 .gcu-edit-save-button:hover {
  background-color: #53a9ffb5;
@@ -1739,7 +1763,7 @@ justify-content: center;
     min-width: auto;
   }
   .gcu-action-button {
-    font-size: 1.28rem;
+    font-size: 1.1rem;
   }
 
   .gcu-action-button:hover {
@@ -1750,19 +1774,12 @@ justify-content: center;
   .gcu-action-button.liked {
     color: #3e5df9;
   }
-
-  .gcu-delete-button:hover, .gcu-edit-button:hover {
-    background-color: transparent;
-    color: #5c5c5c;
-  }
 }
 
 @media screen and (max-width: 768px) { /* Tablet and Mobile */
   
   .gcu-post-card {
-    min-width: auto;  /* Remove fixed width */
-    width: 100%;      /* Set width to 100% */
-    padding: 12px;    /* Adjust padding for smaller screens */
+    width: 460px; 
   }
 
   .gcu-post-author-info h3 {
@@ -1780,6 +1797,10 @@ justify-content: center;
 
   .gcu-post-content {
     font-size: 0.9rem; /* Slightly smaller font for mobile */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
   }
 
   /* Buttons */
@@ -1792,13 +1813,8 @@ justify-content: center;
     font-size: 1rem;  /* Reduce icon size */
   }
 
-  /* Right Section - Edit/Delete Buttons */
-  .gcu-edit-button, .gcu-delete-button {
-    font-size: 1rem; /* Reduce button size */
-  }
-
   .gcu-action-button {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
   }
 
   .gcu-action-button:hover {
@@ -1810,9 +1826,8 @@ justify-content: center;
     color: #3e5df9;
   }
 
-  .gcu-delete-button:hover, .gcu-edit-button:hover {
+  .gcu-menu-button:hover {
     background-color: transparent;
-    color: #5c5c5c;
   }
 
 }
@@ -1820,9 +1835,9 @@ justify-content: center;
 @media screen and (max-width: 480px) { /* Small mobile */
 
   .gcu-post-author-avatar {
-    width: 40px; /* Slightly reduce avatar size */
-    height: 40px;
-    margin-bottom: 10px;
+    width: 30px; 
+    height: 30px;
+    margin: 0 0 5px 0;
   }
 
   .gcu-post-card-left {
@@ -1831,6 +1846,7 @@ justify-content: center;
   }
 
   .gcu-post-card {
+    width: 360px;
     padding: 10px; /* Further reduce padding for very small screens */
   }
 
@@ -1844,10 +1860,31 @@ justify-content: center;
 
   .gcu-post-content {
     font-size: 0.85rem; /* Slightly smaller font for post content */
+    padding: 0 10px;
   }
 
   /* Adjust icon size for small mobile */
   .gcu-post-icons i {
     font-size: 0.9rem;
+  }
+
+  .gcu-action-button {
+    font-size: 0.9rem;
+  }
+
+  .gcu-menu-button:hover {
+    background-color: transparent;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .gcu-post-card {
+    width: 355px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .gcu-post-card {
+    width: 230px;
   }
 }

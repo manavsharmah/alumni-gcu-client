@@ -6,11 +6,8 @@ import CommentModal from "./CommentModal";
 import api from "../../services/api"; // Add this import
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
-    faEdit, 
-    faTrash, 
+    faEllipsisH,
     faThumbsUp, 
-    faSave, 
-    faTimes,
     faComment,
     faShare
 } from "@fortawesome/free-solid-svg-icons";
@@ -20,11 +17,13 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
     const [editedContent, setEditedContent] = useState(post.content);
     const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
     const [comments, setComments] = useState(post.comments || []);
+    const [showMenu, setShowMenu] = useState(false);
 
     const handleDelete = async () => {
         if (window.confirm("Are you sure you want to delete this post?")) {
             await onDelete(post._id);
         }
+        setShowMenu(false);
     };
 
     const handleEdit = async () => {
@@ -86,27 +85,40 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
     return (
         <div className="gcu-post-card">
             <div className="gcu-post-card-wrapper">
-                {/* Top-right Edit/Delete buttons */}
+                {/* Three-dot menu */}
                 {(canEdit || canDelete) && (
                     <div className="gcu-top-actions">
-                        {canEdit && !isEditing && (
+                        <div className="relative">
                             <button 
-                                className="gcu-edit-button"
-                                onClick={() => setIsEditing(true)}
-                                title="Edit post"
+                                className="gcu-menu-button"
+                                onClick={() => setShowMenu(!showMenu)}
                             >
-                                <FontAwesomeIcon icon={faEdit} />
+                                <FontAwesomeIcon icon={faEllipsisH} />
                             </button>
-                        )}
-                        {canDelete && (
-                            <button 
-                                className="gcu-delete-button"
-                                onClick={handleDelete}
-                                title="Delete post"
-                            >
-                                <FontAwesomeIcon icon={faTrash} />
-                            </button>
-                        )}
+                            {showMenu && (
+                                <div className="gcu-dropdown-menu">
+                                    {canEdit && !isEditing && (
+                                        <button 
+                                            className="gcu-menu-item"
+                                            onClick={() => {
+                                                setIsEditing(true);
+                                                setShowMenu(false);
+                                            }}
+                                        >
+                                            Edit
+                                        </button>
+                                    )}
+                                    {canDelete && (
+                                        <button 
+                                            className="gcu-menu-item"
+                                            onClick={handleDelete}
+                                        >
+                                            Delete
+                                        </button>
+                                    )}
+                                </div>
+                            )}
+                        </div>
                     </div>
                 )}
 
@@ -149,10 +161,16 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
                             />
                             <div className="gcu-edit-buttons">
                                 <button onClick={handleEdit} className="gcu-edit-save-button">
-                                    <FontAwesomeIcon icon={faSave} /> Save
+                                    Save
                                 </button>
-                                <button onClick={() => setIsEditing(false)} className="gcu-edit-cancel-button">
-                                    <FontAwesomeIcon icon={faTimes} /> Cancel
+                                <button 
+                                    onClick={() => {
+                                        setIsEditing(false);
+                                        setEditedContent(post.content);
+                                    }} 
+                                    className="gcu-edit-cancel-button"
+                                >
+                                    Cancel
                                 </button>
                             </div>
                         </div>

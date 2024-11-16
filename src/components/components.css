@@ -1381,7 +1381,7 @@ justify-content: center;
 .gcu-post-timestamp, .gcu-post-edit-timestamp {
   font-size: 0.75rem;
   color: #000;
-  /* margin-top: -17px; */
+  margin-top: -17px;
 }
 
 /* Middle Section */
@@ -1551,28 +1551,29 @@ justify-content: center;
   background-color: #d41616b9;
  }
 
-/*Reccommended users*/
-.recommended-profile-picture {
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
+ /* Comment Modal styles */
+.gcu-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
 
-/*Reply section in feed*/
-/* Modal styles */
-.gcu-reply-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  max-width: 500px;
-  background-color: #2e2e2e; /* Dark grey background for contrast */
-  color: #ffffff; /* White text */
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  z-index: 1000;
+.gcu-modal-content {
+  background-color: white;
   padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .gcu-modal-header {
@@ -1580,90 +1581,108 @@ justify-content: center;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
-  border-bottom: 1px solid #555; /* Subtle divider */
-  padding-bottom: 10px;
 }
 
-.gcu-close-modal-button {
+.gcu-modal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.gcu-modal-close {
   background: none;
   border: none;
-  color: #ff4d4d; /* Red close button for visibility */
-  font-size: 18px;
+  font-size: 1.2rem;
   cursor: pointer;
+  color: #666;
 }
 
-.gcu-close-modal-button:hover {
-  color: #ff1a1a;
-}
-
-.gcu-comments-container {
-  max-height: 300px;
+/* Comments list styles */
+.gcu-comments-list {
+  flex: 1;
   overflow-y: auto;
   margin-bottom: 20px;
 }
 
-.gcu-comment-card {
+.gcu-comment {
   padding: 10px;
+  border-bottom: 1px solid #eee;
   margin-bottom: 10px;
-  background-color: #3e3e3e; /* Slightly lighter background for comments */
-  border-radius: 5px;
-  border: 1px solid #555;
 }
 
-.gcu-comment-card p {
-  margin: 5px 0;
-  color: #e0e0e0; /* Light grey for better readability */
+.gcu-comment-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
-.gcu-reply-form {
-  margin-top: 20px;
+.gcu-comment-author {
+  font-weight: 600;
+  margin-right: 10px;
 }
 
-.gcu-reply-textarea {
+.gcu-comment-time {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.gcu-comment-delete {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #dc3545;
+  cursor: pointer;
+}
+
+.gcu-comment-text {
+  margin: 0;
+  color: #333;
+}
+
+/* Comment form styles */
+.gcu-comment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gcu-comment-input {
   width: 100%;
   padding: 10px;
-  background-color: #3e3e3e;
-  border: 1px solid #555;
-  border-radius: 5px;
-  color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 80px;
 }
 
-.gcu-reply-textarea::placeholder {
-  color: #cccccc; /* Subtle placeholder color */
-}
-
-.gcu-reply-buttons {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.gcu-reply-submit-button {
-  padding: 8px 15px;
-  background-color: #4caf50; /* Green submit button */
-  color: #ffffff;
+.gcu-comment-submit {
+  align-self: flex-end;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
 }
 
-.gcu-reply-submit-button:hover {
-  background-color: #45a045;
+.gcu-comment-submit:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
-.gcu-reply-cancel-button {
-  padding: 8px 15px;
-  background-color: #dc3545; /* Red cancel button */
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.gcu-no-comments {
+  text-align: center;
+  color: #666;
+  padding: 20px;
 }
 
-.gcu-reply-cancel-button:hover {
-  background-color: #c82333;
-}
 
+/*Reccommended users*/
+.recommended-profile-picture {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+}
 
 /* Responsive Styles */
 

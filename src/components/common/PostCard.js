@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../components.css';
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
 import CommentModal from "./CommentModal";
-import api from "../../services/api";
+import api from "../../services/api"; // Add this import
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
     faEdit, 
@@ -40,6 +40,26 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
         }
     };
 
+    const handleCommentSubmit = async (commentText) => {
+        try {
+            const response = await api.post(`/posts/${post._id}/comments`, {
+                text: commentText
+            });
+            setComments([...comments, response.data]);
+        } catch (error) {
+            console.error("Error posting comment:", error);
+        }
+    };
+
+    const handleDeleteComment = async (commentId) => {
+        try {
+            await api.delete(`/posts/${post._id}/comments/${commentId}`);
+            setComments(comments.filter(comment => comment._id !== commentId));
+        } catch (error) {
+            console.error("Error deleting comment:", error);
+        }
+    };
+
     const getRelativeTime = (dateString) => {
         const postDate = new Date(dateString);
         const now = new Date();
@@ -57,13 +77,6 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
         } else {
             return `${diffInDays} day${diffInDays > 1 ? 's' : ''}`;
         }
-    };
-
-    const handleCommentDelete = async (commentId) => {
-        await onDeleteComment(post._id, commentId);
-        // Refetch or update comments to maintain author details
-        const updatedComments = comments.filter((comment) => comment._id !== commentId);
-        setComments(updatedComments);
     };
 
     const canEdit = currentUser && (currentUser.id === post.author._id);
@@ -152,84 +165,37 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
 
                 {/* Bottom action buttons */}
                 <div className="gcu-post-actions">
-                <button
-                    className={`gcu-action-button ${hasLiked ? 'liked' : ''}`}
-                    onClick={handleLike}
-                    title={hasLiked ? "Unlike post" : "Like post"}
-                >
-                    <FontAwesomeIcon icon={faThumbsUp} /> {post.likes.length}
-                </button>
-                <button
-                    className="gcu-action-button"
-                    onClick={() => setIsCommentModalOpen(true)}
-                    title="Comment on post"
-                >
-                    <FontAwesomeIcon icon={faComment} /> {comments.length}
-                </button>
-                <button
-                    className="gcu-action-button"
-                    onClick={() => {}}
-                    title="Share post"
-                >
-                    <FontAwesomeIcon icon={faShare} />
-                </button>
-            </div>
+                    <button
+                        className={`gcu-action-button ${hasLiked ? 'liked' : ''}`}
+                        onClick={handleLike}
+                        title={hasLiked ? "Unlike post" : "Like post"}
+                    >
+                        <FontAwesomeIcon icon={faThumbsUp} /> {post.likes.length}
+                    </button>
+                    <button
+                        className="gcu-action-button"
+                        onClick={() => setIsCommentModalOpen(true)}
+                        title="Comment on post"
+                    >
+                        <FontAwesomeIcon icon={faComment} /> {comments.length}
+                    </button>
+                    <button
+                        className="gcu-action-button"
+                        onClick={() => {}}
+                        title="Share post"
+                    >
+                        <FontAwesomeIcon icon={faShare} />
+                    </button>
+                </div>
 
-                {showReplyModal && (
-                    <div className="gcu-reply-modal">
-                        <div className="gcu-modal-header">
-                            <h3>Replies</h3>
-                            <button
-                                onClick={() => setShowReplyModal(false)}
-                                className="gcu-close-modal-button"
-                            >
-                                <FontAwesomeIcon icon={faTimes} />
-                            </button>
-                        </div>
-                        <div className="gcu-comments-container">
-                            {post.comments.length > 0 ? (
-                                post.comments.map((comment) => (
-                                    <div key={comment._id} className="gcu-comment-card">
-                                        <p>
-                                            <strong>{comment.author.name}</strong> -{" "}
-                                            {getRelativeTime(comment.createdAt)}
-                                        </p>
-                                        <p>{comment.content}</p>
-                                        {(currentUser.id === comment.author._id || currentUser.role === "admin") && (
-                                        <button
-                                            className="gcu-reply-delete-button"
-                                            onClick={() => handleCommentDelete(comment._id)}
-                                        >
-                                            <FontAwesomeIcon icon={faTrash} />
-                                        </button>
-                                    )}
-                                    </div>
-                                ))
-                            ) : (
-                                <p>No replies yet.</p>
-                            )}
-                        </div>
-                        <div className="gcu-reply-form">
-                            <textarea
-                                value={replyContent}
-                                onChange={(e) => setReplyContent(e.target.value)}
-                                placeholder="Write a reply..."
-                                className="gcu-reply-textarea"
-                            />
-                            <div className="gcu-reply-buttons">
-                                <button onClick={handleCommentSubmit} className="gcu-reply-submit-button">
-                                    Submit
-                                </button>
-                                <button
-                                    onClick={() => setReplyContent("")}
-                                    className="gcu-reply-cancel-button"
-                                >
-                                    Clear
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                )}
+                <CommentModal
+                    isOpen={isCommentModalOpen}
+                    onClose={() => setIsCommentModalOpen(false)}
+                    onSubmitComment={handleCommentSubmit}
+                    onDeleteComment={handleDeleteComment}
+                    comments={comments}
+                    currentUser={currentUser}
+                />
             </div>
         </div>
     );

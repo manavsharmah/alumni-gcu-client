@@ -5,6 +5,25 @@ import { faTimes, faTrash } from "@fortawesome/free-solid-svg-icons";
 const CommentModal = ({ isOpen, onClose, onSubmitComment, comments, onDeleteComment, currentUser }) => {
   const [commentText, setCommentText] = useState('');
 
+  const getRelativeTime = (dateString) => {
+    const postDate = new Date(dateString);
+    const now = new Date();
+    const diffInMs = now - postDate;
+    const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+    const diffInHours = Math.floor(diffInMinutes / 60);
+    const diffInDays = Math.floor(diffInHours / 24);
+
+    if (diffInMinutes < 1) {
+      return 'Just now';
+    } else if (diffInMinutes < 60) {
+      return `${diffInMinutes} min${diffInMinutes > 1 ? 's' : ''} ago`;
+    } else if (diffInHours < 24) {
+      return `${diffInHours} hr${diffInHours > 1 ? 's' : ''} ago`;
+    } else {
+      return `${diffInDays} day${diffInDays > 1 ? 's' : ''} ago`;
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (commentText.trim()) {
@@ -36,7 +55,7 @@ const CommentModal = ({ isOpen, onClose, onSubmitComment, comments, onDeleteComm
                 <div className="gcu-comment-header">
                   <span className="gcu-comment-author">{comment.author.name}</span>
                   <span className="gcu-comment-time">
-                    {new Date(comment.createdAt).toLocaleDateString()}
+                    {getRelativeTime(comment.createdAt)}
                   </span>
                   {(currentUser.id === comment.author._id || currentUser.role === 'admin') && (
                     <button 

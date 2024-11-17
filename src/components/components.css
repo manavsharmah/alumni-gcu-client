@@ -1650,16 +1650,18 @@ justify-content: center;
 }
 
 .gcu-comment {
-  padding: 12px;
+  padding: 16px;
   border-bottom: 1px solid #ddd; /* Slightly darker border */
   margin-bottom: 10px;
   background-color: #fff; /* White background for contrast */
   border-radius: 4px; /* Rounded corners */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .gcu-comment-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 5px;
 }
 
@@ -1667,20 +1669,24 @@ justify-content: center;
   font-weight: 600;
   color: #007bff; /* Primary blue for author names */
   margin-right: 10px;
+  align-items: flex-start;
 }
 
 .gcu-comment-time {
   color: #888; /* Medium gray for timestamps */
   font-size: 0.9rem;
+  margin-left: auto;
+  margin-right: 50px;
 }
 
 .gcu-comment-delete {
-  margin-left: auto;
+  position: relative;
+  margin-left: 10px;
   background: none;
   border: none;
-  color: #dc3545; /* Red for delete button */
+  color: #dc3545; /* Red color for delete */
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 1.2rem;
   transition: color 0.3s ease;
 }
 
@@ -1691,6 +1697,16 @@ justify-content: center;
 .gcu-comment-text {
   margin: 0;
   color: #444; /* Dark gray for text */
+  line-height: 1.5;
+  white-space: pre-wrap; /* Preserve line breaks and spaces */
+  word-wrap: break-word; /* Prevent long words from overflowing */
+}
+
+.gcu-comment-counter {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: -5px;
+  text-align: right;
 }
 
 /* Comment form styles */
@@ -1710,6 +1726,9 @@ justify-content: center;
   font-size: 1rem;
   color: #333;
   background-color: #fff; /* White for input field */
+  line-height: 1.5;
+  word-wrap: break-word; /* Prevent long words from overflowing */
+  white-space: pre-wrap; /* Ensure line breaks work */
 }
 
 .gcu-comment-input:focus {

@@ -580,24 +580,6 @@
   object-fit: cover;
 }
 
-.edit-btn, .delete-btn {
-  padding: 5px 10px;
-  margin-right: 5px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.delete-btn {
-  background-color: #dc3545;
-}
-
-.edit-btn:hover, .delete-btn:hover {
-  opacity: 0.8;
-}
-
 .create-news-events {
   margin-bottom: 20px;
   padding: 10px 15px;

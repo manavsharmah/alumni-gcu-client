@@ -3,6 +3,9 @@ import Modal from './AdminModal';  // Reusable modal
 import EditEventModal from '../../components/common/EditEventModal';
 import './admin.css';  // Assuming your styles are in this file
 import api from '../../services/api';
+import SharedImagesDeleteModal from './SharedImagesDeleteModal';
+import SharedImagesAddModal from './SharedImagesAddModal';
+import ActionMenu from './ActionMenu';
 
 const AdminEventsForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,6 +24,11 @@ const AdminEventsForm = () => {
     event_time: '',
     images: [],
   });
+
+  const [isDeleteImagesModalOpen, setIsDeleteImagesModalOpen] = useState(false);
+  const [selectedEventsForImages, setSelectedEventsForImages] = useState(null);
+  const [isAddImagesModalOpen, setIsAddImagesModalOpen] = useState(false);
+  const [selectedEventsForAddImages, setSelectedEventsForAddImages] = useState(null);
 
   const { title, content, organizer, event_date, event_time, images } = formData;
 
@@ -66,16 +74,16 @@ const AdminEventsForm = () => {
     setIsModalOpen(false);
   };
 
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await api.get('http://localhost:5000/api/events/get-events');
-        setEventList(response.data);
-      } catch (error) {
-        console.error('Error fetching events:', error);
-      }
-    };
+  const fetchEvents = async () => {
+    try {
+      const response = await api.get('/events/get-events');
+      setEventList(response.data);
+    } catch (error) {
+      console.error('Error fetching events:', error);
+    }
+  };
 
+  useEffect(() => {
     fetchEvents();
   }, []);
 
@@ -127,11 +135,21 @@ const AdminEventsForm = () => {
     setSelectedEvent(null); // Clear selected event after closing
   };
 
+  const handleDeleteImages = (eventItem) => {
+    setSelectedEventsForImages(eventItem);
+    setIsDeleteImagesModalOpen(true);
+  };
+
+  const handleAddImages = (eventItem) => {
+    setSelectedEventsForAddImages(eventItem);
+    setIsAddImagesModalOpen(true);
+  };
+
   return (
     <div className="admin-events-container">
       <h2>Event Management</h2>
 
-      <button className="admin-button" onClick={() => setIsModalOpen(true)}>Create Event</button>
+      <button className="create-news-events" onClick={() => setIsModalOpen(true)}>Create Event</button>
 
       <Modal
         title="Create Event"
@@ -244,8 +262,12 @@ const AdminEventsForm = () => {
               </td>
               <td>{eventItem.title}</td>
               <td>
-                <button onClick={(e) => { e.stopPropagation(); handleEdit(eventItem); }} className="edit-btn">Edit</button>
-                <button onClick={(e) => { e.stopPropagation(); handleDelete(eventItem._id); }} className="delete-btn">Delete</button>
+              <ActionMenu
+                  onEdit={() => handleEdit(eventItem)}
+                  onDelete={() => handleDelete(eventItem._id)}
+                  onDeleteImages={() => handleDeleteImages(eventItem)}
+                  onAddImages={() => handleAddImages(eventItem)}
+              />
               </td>
             </tr>
           ))}
@@ -272,6 +294,31 @@ const AdminEventsForm = () => {
           }}
         />
       )}
+
+      {/* Delete Images Modal */}
+      {isDeleteImagesModalOpen && selectedEventsForImages && (
+  <SharedImagesDeleteModal
+    isOpen={isDeleteImagesModalOpen}
+    onClose={() => setIsDeleteImagesModalOpen(false)}
+    itemId={selectedEventsForImages._id}
+    api={api}
+    onImagesDeleted={fetchEvents}
+    category="events"
+  />
+)}
+
+      {/* Add Images Modal */}
+      {isAddImagesModalOpen && selectedEventsForAddImages && (
+  <SharedImagesAddModal
+    isOpen={isAddImagesModalOpen}
+    onClose={() => setIsAddImagesModalOpen(false)}
+    itemId={selectedEventsForAddImages._id}
+    itemTitle={selectedEventsForAddImages.title}
+    api={api}
+    onImagesAdded={fetchEvents}
+    category="events"
+  />
+)}
     </div>
   );
 };

@@ -52,6 +52,7 @@ import {
 	GoverningCouncil
 } from "./pages/detail/About";
 import AdminFeedbackPanel from "./pages/admin/AdminFeedbackPanel";
+import AdminStats from "./pages/admin/AdminStats";
 
 function App() {
   return (
@@ -147,6 +148,7 @@ function App() {
                   />
                 }
               >
+                <Route path="/admin-stats" element={<AdminStats />} />
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 <Route path="/alumni-archive" element={<AlumniArchive />} />
                 <Route path="/news-form" element={<AdminNewsForm />} />
@@ -154,7 +156,7 @@ function App() {
                 <Route path="/photo-upload-form" element={<PhotoUpload />} />
                 <Route path="/email-form" element={<AdminEmailForm />} />
                 <Route path="/add-bulk-alumni" element={<BulkAddAlumni />} />
-                <Route path="/view-feedback" element={<AdminFeedbackPanel />} />
+                <Route path="/view-feedback" element={<AdminFeedbackPanel />} />                
               </Route>
             </Routes>
           </section>

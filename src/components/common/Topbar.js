@@ -112,7 +112,7 @@ const Topbar = () => {
               {user && (
                 <>
                   <li><Link to="/welcome">Feed</Link></li>
-                  {user.role === 'admin' && <li><Link to="/admin-dashboard">Admin Dashboard</Link></li>}
+                  {user.role === 'admin' && <li><Link to="/admin-stats">Admin Dashboard</Link></li>}
                 </>
               )}
               <li>

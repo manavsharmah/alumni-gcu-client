@@ -17,9 +17,15 @@ const AdminLayout = () => {
       </div> */}
       <ul>
         <li>
-          <NavLink to="/admin-dashboard" className={getActiveClass}>
+          <NavLink to="/admin-stats" className={getActiveClass}>
             <FaTachometerAlt />
             <span>Dashboard</span>
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/admin-dashboard" className={getActiveClass}>
+            <FaTachometerAlt />
+            <span>Approve</span>
           </NavLink>
         </li>
         <li>

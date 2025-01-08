@@ -1011,19 +1011,22 @@ justify-content: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 60%;
   box-sizing: border-box;
+  
 }
 
 .container-title {
-  font-size: 1.5em;
-  margin-bottom: 10px;
+  font-size: 30px;
+  margin-bottom: 30px;
   text-align: center;
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: bold;
 }
 
 .container-content {
-  font-size: 1em;
+  font-size: 18px;
   line-height: 1.5;
+  font-family: 'IBM Plex Sans', sans-serif;
+  word-spacing: 10px;
 }
 
 /* Quick Nav  */

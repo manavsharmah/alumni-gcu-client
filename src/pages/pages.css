@@ -924,6 +924,7 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   padding: 30px 0px;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .news-title {

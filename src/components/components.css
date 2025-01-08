@@ -1016,6 +1016,9 @@ justify-content: center;
 .container-title {
   font-size: 1.5em;
   margin-bottom: 10px;
+  text-align: center;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: bold;
 }
 
 .container-content {

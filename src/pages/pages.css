@@ -149,8 +149,8 @@
 .right-box img {
   width: 100%; /* Allow image to scale down with the container */
   height: auto; /* Maintain aspect ratio */
-  max-height: 610px; /* Optional: set a maximum height */
-  object-fit: cover; /* Ensures the image covers the container properly */
+  max-height: 610px; 
+  object-fit: cover; 
 }
 
 .hero-image {
@@ -456,6 +456,7 @@
 .carousel-control:hover {
   background-color: rgba(0, 0, 0, 0.7);
 } */
+
 
 
 @media screen and (max-width: 768px) and (min-width: 0px){
@@ -925,6 +926,7 @@ button:hover {
   flex-direction: column;
   justify-content: center;
   padding: 30px 0px;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .news-title {

@@ -6,6 +6,7 @@
   justify-content: space-between;
   width: 100%;
   max-width: 2000px;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 /* App Header Layout */
@@ -104,8 +105,8 @@
   color: #ffffff;
   text-decoration: underline;
   text-decoration-color: #fbcf0a;
-  text-decoration-thickness: 4px; /* Thinner underline for submenus */
-  text-underline-offset: 4px; /* Close to the text for submenus */
+  text-decoration-thickness: 4px; 
+  text-underline-offset: 4px; 
 }
 
 .nav-content .sub-menus {
@@ -952,7 +953,7 @@ justify-content: center;
 .verified-users-container {
   padding: 20px;
   width: 300px;
-  margin: auto;
+  margin: 20px;
   background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -1029,16 +1030,22 @@ justify-content: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 60%;
   box-sizing: border-box;
+  
 }
 
 .container-title {
-  font-size: 1.5em;
-  margin-bottom: 10px;
+  font-size: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: bold;
 }
 
 .container-content {
-  font-size: 1em;
-  line-height: 1.5;
+  font-size: 18px;
+  line-height: 1.7;
+  font-family: 'IBM Plex Sans', sans-serif;
+  word-spacing: 10px;
 }
 
 /* Quick Nav  */
@@ -1050,7 +1057,7 @@ justify-content: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   max-width: 300px;
-  height: auto;
+  height: 240px;
 }
 
 
@@ -1418,7 +1425,7 @@ justify-content: center;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: box-shadow 0.3s ease;
+  transition: box-shadow 0.2s ease;
 }
 
 .gcu-post-card:hover {
@@ -1430,20 +1437,26 @@ justify-content: center;
   display: flex;
   align-items: center;
   margin-bottom: 15px;
+  padding: 10px;
 }
 
 .gcu-post-author-avatar {
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  margin-right: 12px;
+  margin-right: 20px;
+  margin-top: -14px;
 }
 
 .gcu-post-author-info h3 {
-  font-size: 1rem;
+  font-size: 1.15rem;
   font-weight: 600;
   margin: 0;
   color: #000;
+}
+
+.gcu-post-author-info a {
+  text-decoration: none;
 }
 
 .gcu-post-author-details {
@@ -1455,7 +1468,7 @@ justify-content: center;
 .gcu-post-timestamp, .gcu-post-edit-timestamp {
   font-size: 0.75rem;
   color: #000;
-  margin-top: 5px;
+  margin-top: -17px;
 }
 
 /* Middle Section */
@@ -1464,9 +1477,16 @@ justify-content: center;
 }
 
 .gcu-post-content {
-  font-size: 0.95rem;
+  font-size: 1.3rem;
   color: #000;
   line-height: 1.4;
+  padding-left: 74px;
+  padding-right: 40px;
+  margin-top: -25px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 100%;
 }
 
 .gcu-edit-form {
@@ -1476,11 +1496,13 @@ justify-content: center;
 
 .gcu-edit-textarea {
   width: 100%;
-  padding: 10px;
+  height: auto;
+  padding: 20px 30px;
   border-radius: 5px;
-  background-color: #444;
+  background-color: #ffffff;
   border: none;
-  color: #fff;
+  color: #313131;
+  border: #5f5f5f solid;
 }
 
 .gcu-edit-buttons {
@@ -1489,9 +1511,19 @@ justify-content: center;
   margin-top: 10px;
 }
 
-.gcu-edit-save-button, .gcu-edit-cancel-button {
-  background-color: #9f7aea;
-  color: #000;
+.gcu-edit-save-button {
+  background-color: #3e5df9;
+  color: #ffffff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.gcu-edit-cancel-button {
+  background-color: #d41616;
+  color: #fff;
   border: none;
   padding: 8px 12px;
   border-radius: 5px;
@@ -1528,20 +1560,299 @@ justify-content: center;
   font-size: 0.9rem;
 }
 
-/* Right Section - Edit/Delete Buttons */
+/* Right top Three dot Menu + action buttons */
+
+.gcu-menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  color: #333; /* Add this to make the icon visible */
+  font-size: 16px; /* Add this to control icon size */
+}
+
+.gcu-menu-button:hover {
+  background-color: #8f8f8f29;
+  border-radius: 100px;
+}
+
+.gcu-dropdown-menu {
+  position: absolute;
+  right: 0;
+  top: 25px; /* Adjust this value to position below the three dots */
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
+  min-width: 120px; /* Add this to ensure menu has enough width */
+}
+
+.gcu-menu-item {
+  display: block;
+  width: 100%;
+  padding: 8px 16px;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #333;
+}
+
+.gcu-menu-item:hover {
+  background-color: #f5f5f5;
+}
+
+.gcu-top-actions {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+}
+
+.gcu-post-card-wrapper {
+  position: relative;
+}
+
+.gcu-post-actions {
+  display: flex;
+  justify-content: space-around;
+  padding: 0 20px;
+}
+
+.gcu-action-button {
+  background-color: transparent;
+  border: none;
+  color: #6e6e6e;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 8px 16px;
+  border-radius: 50px;
+  transition: all 0.2s ease;
+}
+
+.gcu-action-button:hover {
+  background-color: #0048ff1c;
+  color: #3e5df9;
+}
+
+.gcu-action-button.liked {
+  color: #3e5df9;
+}
+
+.gcu-horizontal-line {
+  width: 100%;
+  border: none;
+  border-top: 1px solid #5c5c5c; /* Adjust color and thickness as needed */
+  margin-top: 26px;
+  margin-bottom: 12px;
+}
+
 .gcu-post-card-right {
   display: flex;
   justify-content: flex-end;
+}
+
+
+.gcu-edit-save-button:hover {
+ background-color: #53a9ffb5;
+}
+
+.gcu-edit-cancel-button:hover {
+  background-color: #d41616b9;
+ }
+
+/* Comment Modal styles */
+.gcu-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Darker overlay for better contrast */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.gcu-modal-content {
+  background-color: #f9f9f9; /* Light gray background for less strain */
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+}
+
+.gcu-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.gcu-modal-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  color: #333; /* Darker text for better visibility */
+}
+
+.gcu-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #555; /* Medium gray */
+  transition: color 0.3s ease;
+}
+
+.gcu-modal-close:hover {
+  color: #000; /* Darker gray on hover */
+}
+
+/* Comments list styles */
+.gcu-comments-list {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding-right: 10px; /* Prevent text clipping due to scrollbar */
+}
+
+.gcu-comments-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.gcu-comments-list::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+
+.gcu-comments-list::-webkit-scrollbar-thumb:hover {
+  background-color: #bbb;
+}
+
+.gcu-comment {
+  padding: 16px;
+  border-bottom: 1px solid #ddd; /* Slightly darker border */
+  margin-bottom: 10px;
+  background-color: #fff; /* White background for contrast */
+  border-radius: 4px; /* Rounded corners */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.gcu-comment-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.gcu-comment-author {
+  font-weight: 600;
+  color: #007bff; /* Primary blue for author names */
+  margin-right: 10px;
+  align-items: flex-start;
+}
+
+.gcu-comment-time {
+  color: #888; /* Medium gray for timestamps */
+  font-size: 0.9rem;
+  margin-left: auto;
+  margin-right: 50px;
+}
+
+.gcu-comment-delete {
+  position: relative;
+  margin-left: 10px;
+  background: none;
+  border: none;
+  color: #dc3545; /* Red color for delete */
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+.gcu-comment-delete:hover {
+  color: #a71d2a; /* Darker red on hover */
+}
+
+.gcu-comment-text {
+  margin: 0;
+  color: #444; /* Dark gray for text */
+  line-height: 1.5;
+  white-space: pre-wrap; /* Preserve line breaks and spaces */
+  word-wrap: break-word; /* Prevent long words from overflowing */
+}
+
+.gcu-comment-counter {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: -5px;
+  text-align: right;
+}
+
+/* Comment form styles */
+.gcu-comment-form {
+  display: flex;
+  flex-direction: column;
   gap: 10px;
 }
 
-.gcu-edit-button, .gcu-delete-button {
-  background-color: transparent;
-  border: none;
-  color: #9f7aea;
-  cursor: pointer;
-  font-size: 1.2rem;
+.gcu-comment-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  min-height: 80px;
+  font-size: 1rem;
+  color: #333;
+  background-color: #fff; /* White for input field */
+  line-height: 1.5;
+  word-wrap: break-word; /* Prevent long words from overflowing */
+  white-space: pre-wrap; /* Ensure line breaks work */
 }
+
+.gcu-comment-input:focus {
+  outline: none;
+  border-color: #007bff; /* Blue border on focus */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.gcu-comment-submit {
+  align-self: flex-end;
+  padding: 10px 20px;
+  background-color: #007bff; /* Primary blue */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.gcu-comment-submit:disabled {
+  background-color: #ccc; /* Light gray for disabled button */
+  cursor: not-allowed;
+}
+
+.gcu-comment-submit:not(:disabled):hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+.gcu-no-comments {
+  text-align: center;
+  color: #666;
+  padding: 20px;
+  font-size: 1rem;
+}
+
+
 
 /*Reccommended users*/
 .recommended-profile-picture {
@@ -1550,25 +1861,31 @@ justify-content: center;
   border-radius: 50%;
 }
 
-
 /* Responsive Styles */
+
+@media screen and (max-width: 1280px) {
+
+  .gcu-post-card {
+    min-width: auto;
+  }
+  .gcu-action-button {
+    font-size: 1.1rem;
+  }
+
+  .gcu-action-button:hover {
+    background-color: transparent;
+    color: #5c5c5c;
+  }
+
+  .gcu-action-button.liked {
+    color: #3e5df9;
+  }
+}
+
 @media screen and (max-width: 768px) { /* Tablet and Mobile */
   
   .gcu-post-card {
-    min-width: auto;  /* Remove fixed width */
-    width: 100%;      /* Set width to 100% */
-    padding: 12px;    /* Adjust padding for smaller screens */
-  }
-
-  .gcu-post-card-left {
-    flex-direction: column; /* Stack the avatar and author info */
-    align-items: flex-start; /* Align items to the left */
-  }
-
-  .gcu-post-author-avatar {
-    width: 40px; /* Slightly reduce avatar size */
-    height: 40px;
-    margin-bottom: 10px;
+    width: 460px; 
   }
 
   .gcu-post-author-info h3 {
@@ -1586,6 +1903,10 @@ justify-content: center;
 
   .gcu-post-content {
     font-size: 0.9rem; /* Slightly smaller font for mobile */
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
   }
 
   /* Buttons */
@@ -1598,14 +1919,40 @@ justify-content: center;
     font-size: 1rem;  /* Reduce icon size */
   }
 
-  /* Right Section - Edit/Delete Buttons */
-  .gcu-edit-button, .gcu-delete-button {
-    font-size: 1rem; /* Reduce button size */
+  .gcu-action-button {
+    font-size: 0.9rem;
   }
+
+  .gcu-action-button:hover {
+    background-color: transparent;
+    color: #5c5c5c;
+  }
+
+  .gcu-action-button.liked {
+    color: #3e5df9;
+  }
+
+  .gcu-menu-button:hover {
+    background-color: transparent;
+  }
+
 }
 
 @media screen and (max-width: 480px) { /* Small mobile */
+
+  .gcu-post-author-avatar {
+    width: 30px; 
+    height: 30px;
+    margin: 0 0 5px 0;
+  }
+
+  .gcu-post-card-left {
+    flex-direction: column; /* Stack the avatar and author info */
+    align-items: flex-start; /* Align items to the left */
+  }
+
   .gcu-post-card {
+    width: 360px;
     padding: 10px; /* Further reduce padding for very small screens */
   }
 
@@ -1619,10 +1966,60 @@ justify-content: center;
 
   .gcu-post-content {
     font-size: 0.85rem; /* Slightly smaller font for post content */
+    padding: 0 10px;
   }
 
   /* Adjust icon size for small mobile */
   .gcu-post-icons i {
     font-size: 0.9rem;
   }
+
+  .gcu-action-button {
+    font-size: 0.9rem;
+  }
+
+  .gcu-menu-button:hover {
+    background-color: transparent;
+  }
 }
+
+@media screen and (max-width: 380px) {
+  .gcu-post-card {
+    width: 355px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .gcu-post-card {
+    width: 230px;
+  }
+}
+
+
+/* Loading spinner styles */
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.circle {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 123, 255, 0.25); /* Light blue border */
+  border-top: 4px solid #007bff; /* Solid blue on top */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(360deg);
+  }
+}
+

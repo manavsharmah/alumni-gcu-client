@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { jwtDecode } from "jwt-decode";
 import api from "../../services/api";
 import PostForm from "../../components/forms/PostForm";
 import PostList from "../../components/common/PostList";
-import Pagination from "../../components/common/Pagination";
 import RecommendedUsersList from "../../components/common/RecommendedUsersList";
 import JobOpportunities from "./JobOpportunities"; // New component
 import FurtherEducation from "./FurtherEducation"; // New component
 import FeedLayout from "./FeedLayout";
 import FeedNavbar from "./FeedNavbar";
 import VerifiedUsersList from "../common/VerifiedUsersList";
+import Spinner from "../common/LoadingSpinner"; // Import Spinner
 
 const Welcome = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -19,19 +19,38 @@ const Welcome = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [currentUser, setCurrentUser] = useState(null);
     const [activeTab, setActiveTab] = useState("home");
+    const [hasMore, setHasMore] = useState(true);
+
+    const loaderRef = useRef(null);
     const postsPerPage = 6;
 
     useEffect(() => {
-        let category = 'post';  // Default category is 'post'
-        if (activeTab === 'jobs') {
-            category = 'job';  // Fetch job opportunities
-        } else if (activeTab === 'education') {
-            category = 'education';  // Fetch education opportunities
+        let category = "post"; // Default category is 'post'
+        if (activeTab === "jobs") {
+            category = "job"; // Fetch job opportunities
+        } else if (activeTab === "education") {
+            category = "education"; // Fetch education opportunities
         }
-        fetchPosts(currentPage, category);  // Fetch posts based on the selected category
+        fetchPosts(1, category, true); // Reset posts when the active tab changes
         getCurrentUser();
-    }, [activeTab, currentPage]);  // Re-run when active tab or current page changes
-    
+    }, [activeTab]);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                if (entries[0].isIntersecting && hasMore && !isLoading) {
+                    fetchPosts(currentPage + 1);
+                }
+            },
+            { threshold: 1.0 }
+        );
+
+        if (loaderRef.current) observer.observe(loaderRef.current);
+
+        return () => {
+            if (loaderRef.current) observer.unobserve(loaderRef.current);
+        };
+    }, [currentPage, hasMore, isLoading]);
 
     const getCurrentUser = () => {
         const token = localStorage.getItem("accessToken");
@@ -41,38 +60,41 @@ const Welcome = () => {
         }
     };
 
-    const fetchPosts = async (page, category = 'post') => {
+    const fetchPosts = async (page, category = "post", reset = false) => {
         try {
             setIsLoading(true);
-            const response = await api.get(`/posts/get-post?page=${page}&limit=${postsPerPage}&category=${category}`);
-            setPosts(response.data.posts);
+            const response = await api.get(
+                `/posts/get-post?page=${page}&limit=${postsPerPage}&category=${category}`
+            );
+            const newPosts = response.data.posts;
+            setPosts((prevPosts) => (reset ? newPosts : [...prevPosts, ...newPosts]));
+            setCurrentPage(page);
             setTotalPages(response.data.totalPages);
+            setHasMore(page < response.data.totalPages);
         } catch (err) {
             setError("Failed to load posts. Please try again later.");
         } finally {
             setIsLoading(false);
         }
     };
-    
 
     const handleSubmitPost = async (content, category) => {
         setIsLoading(true);
         setError(null);
         try {
-            await api.post("/posts/create", { content, category });  // Pass content and category
-            fetchPosts(currentPage, category);
+            await api.post("/posts/create", { content, category }); // Pass content and category
+            fetchPosts(1, category, true); // Reset posts after creating a new one
         } catch (err) {
             setError("Failed to submit post. Please try again.");
         } finally {
             setIsLoading(false);
         }
     };
-    
 
     const handleDeletePost = async (postId) => {
         try {
             await api.delete(`/posts/${postId}`);
-            fetchPosts(currentPage);
+            fetchPosts(1, activeTab === "jobs" ? "job" : activeTab === "education" ? "education" : "post", true);
         } catch (err) {
             setError("Failed to delete post. Please try again.");
         }
@@ -81,28 +103,17 @@ const Welcome = () => {
     const handleEditPost = async (postId, newContent) => {
         try {
             await api.put(`/posts/${postId}`, { content: newContent });
-            fetchPosts(currentPage);
+            fetchPosts(1, activeTab === "jobs" ? "job" : activeTab === "education" ? "education" : "post", true);
         } catch (err) {
             setError("Failed to edit post. Please try again.");
         }
-    };
-
-    const handleClickPage = (pageNumber) => {
-        setCurrentPage(pageNumber);
     };
 
     const handleLike = async (postId) => {
         try {
             const response = await api.put(`/posts/${postId}/like`);
             const updatedPost = response.data;
-    
-            // Check if likes is an array and contains the updated count
-            if (!Array.isArray(updatedPost.likes)) {
-                console.error("Error: likes should be an array");
-                return;
-            }
-    
-            // Update the posts state with the new likes array
+
             setPosts((prevPosts) =>
                 prevPosts.map((post) =>
                     post._id === postId ? { ...post, likes: updatedPost.likes } : post
@@ -112,7 +123,12 @@ const Welcome = () => {
             setError("Failed to toggle like. Please try again.");
         }
     };
-    // Left sidebar 
+
+    const handleClickPage = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    // Left sidebar
     const leftSidebar = (
         <>
             {activeTab === "home" && (
@@ -126,25 +142,28 @@ const Welcome = () => {
             {activeTab === "friends" && null}
         </>
     );
-    
 
-    // Main content 
+    // Main content
     const mainContent = (
         <>
             <FeedNavbar activeTab={activeTab} setActiveTab={setActiveTab} />
-            
+
             {/* Home Tab (Regular Posts) */}
             {activeTab === "home" && (
                 <>
                     <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
-                    <PostList
-                        posts={posts}
-                        onDeletePost={handleDeletePost}
-                        onEditPost={handleEditPost}
-                        currentUser={currentUser}
-                        isLoading={isLoading}
-                        onLike={handleLike}
-                    />
+                    {isLoading && posts.length === 0 ? (
+                        <Spinner />
+                    ) : (
+                        <PostList
+                            posts={posts}
+                            onDeletePost={handleDeletePost}
+                            onEditPost={handleEditPost}
+                            currentUser={currentUser}
+                            isLoading={isLoading}
+                            onLike={handleLike}
+                        />
+                    )}
                 </>
             )}
             {activeTab === "friends" && <VerifiedUsersList />}
@@ -159,7 +178,7 @@ const Welcome = () => {
                     onLike={handleLike}
                 />
             )}
-            
+
             {/* Education Tab (Education Opportunities) */}
             {activeTab === "education" && (
                 <PostList
@@ -170,12 +189,11 @@ const Welcome = () => {
                     isLoading={isLoading}
                 />
             )}
-            
-            <Pagination totalPages={totalPages} currentPage={currentPage} onPageChange={handleClickPage} />
+
+            {isLoading && <Spinner />}
+            <div ref={loaderRef} style={{ height: "1px" }}></div>
         </>
     );
-    
-    
 
     // Right sidebar
     const rightSidebar = (
@@ -186,7 +204,6 @@ const Welcome = () => {
             {activeTab === "friends" && null}
         </>
     );
-    
 
     return <FeedLayout leftSidebar={leftSidebar} mainContent={mainContent} rightSidebar={rightSidebar} />;
 };

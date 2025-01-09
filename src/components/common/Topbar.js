@@ -58,25 +58,49 @@ const Topbar = () => {
             </Link>
           </div>
 
-          <nav className="header-nav">
-            <button className="menu-toggle" onClick={toggleNav}>
-              &#9776;
-            </button>
-            <div className={`nav-content ${isNavOpen ? 'open' : ''}`}>
-              <ul>
-                <li><Link to='/'>Home</Link></li>
-                <li><Link to="/alumnus">Association Members</Link></li>
-                <li><Link to="/news">News</Link></li>
-                {user && (
-                  <>
-                    <li><Link to="/welcome">Feed</Link></li>
-                    {user.role === 'admin' && <li><Link to="/admin-dashboard">Admin Dashboard</Link></li>}
-                  </>
-                )}
-                <li><Link to='/donations'>Donations</Link></li>
-              </ul>
-            </div>
-          </nav>
+        <nav className="header-nav">
+          <button className="menu-toggle" onClick={toggleNav}>
+            &#9776;
+          </button>
+          <div className={`nav-content ${isNavOpen ? 'open' : ''}`}>
+            <ul>
+              <li>
+              <Link to='/'>Home</Link>
+              </li>
+              <li>
+              <Link to="#">About</Link>
+                <ul className='sub-menus'>
+                  <li><Link to='/overview'>Overview</Link></li>
+                  <li><Link to='/vision'>Vision and Mission</Link></li>
+                  <li><Link to='/objectives'>Objectives and Activities</Link></li>
+                  <li><Link to='/council'>Governing Council</Link></li>
+                </ul>
+              </li>
+              <li>
+              <Link to='/alumnus'>Association Members</Link>
+              </li>
+              <li>
+              <Link to='/top-alumni'>Alumni-Achievers</Link>
+              </li>
+              <li><Link to="/scholarship">Scholarships</Link></li>
+              <li>
+                <Link to="/news">News</Link>
+              </li>
+              <li><Link to="/events">Events</Link></li>
+
+              <li><Link to="/gallery">Gallery</Link></li>
+              {user && (
+                <>
+                  <li><Link to="/welcome">Feed</Link></li>
+                  {user.role === 'admin' && <li><Link to="/admin-stats">Admin Dashboard</Link></li>}
+                </>
+              )}
+              <li>
+              
+              </li>
+            </ul>
+          </div>
+         </nav>
 
           <div className="auth-container">
             {!user ? (

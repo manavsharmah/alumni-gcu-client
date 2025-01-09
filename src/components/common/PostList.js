@@ -3,9 +3,9 @@ import PostCard from "../common/PostCard";
 
 const PostList = ({ posts, onDeletePost, currentUser, isLoading, onEditPost, onLike }) => {
     return (
-        <div className="posts-container">
+        <div className="gcu-posts-container">
             {isLoading ? (
-                <p className="text-center">Loading posts...</p>
+                <p className="gcu-text-center">Loading posts...</p>
             ) : posts && posts.length > 0 ? (
                 posts.map((post) => (
                     <PostCard
@@ -18,7 +18,7 @@ const PostList = ({ posts, onDeletePost, currentUser, isLoading, onEditPost, onL
                     />
                 ))
             ) : (
-                <p className="text-center text-gray-500 mt-4">
+                <p className="gcu-text-center gcu-text-gray-500 gcu-mt-4">
                     No posts yet. Be the first to post!
                 </p>
             )}

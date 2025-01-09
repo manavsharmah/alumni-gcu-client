@@ -3,6 +3,9 @@ import Modal from './AdminModal';  // Reusable modal
 import NewsEditModal from '../../components/common/NewsEditModal';  // Import the edit modal
 import './admin.css';
 import api from '../../services/api';
+import SharedImagesDeleteModal from './SharedImagesDeleteModal';
+import SharedImagesAddModal from './SharedImagesAddModal';
+import ActionMenu from './ActionMenu';
 
 const AdminNewsForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,6 +21,10 @@ const AdminNewsForm = () => {
     content: '',
     images: []
   });
+  const [isDeleteImagesModalOpen, setIsDeleteImagesModalOpen] = useState(false);
+  const [selectedNewsForImages, setSelectedNewsForImages] = useState(null);
+  const [isAddImagesModalOpen, setIsAddImagesModalOpen] = useState(false);
+  const [selectedNewsForAddImages, setSelectedNewsForAddImages] = useState(null);
 
   const { title, content, images } = formData;
 
@@ -106,10 +113,20 @@ const AdminNewsForm = () => {
     }
   };
 
+  const handleDeleteImages = (newsItem) => {
+    setSelectedNewsForImages(newsItem);
+    setIsDeleteImagesModalOpen(true);
+  };
+
+  const handleAddImages = (newsItem) => {
+    setSelectedNewsForAddImages(newsItem);
+    setIsAddImagesModalOpen(true);
+  };
+
   return (
     <div className="admin-news-container">
       <h2>News Management</h2>
-      <button className="admin-button" onClick={() => setIsModalOpen(true)}>Create News</button>
+      <button className="create-news-events" onClick={() => setIsModalOpen(true)}>Create News</button>
 
       {/* Create News Modal */}
       <Modal
@@ -169,9 +186,13 @@ const AdminNewsForm = () => {
                 )}
               </td>
               <td>{newsItem.title}</td>
-              <td>
-                <button onClick={(e) => { e.stopPropagation(); handleEdit(newsItem); }} className="edit-btn">Edit</button>
-                <button onClick={(e) => { e.stopPropagation(); handleDelete(newsItem._id); }} className="delete-btn">Delete</button>
+              <td onClick={(e) => e.stopPropagation()}>
+                <ActionMenu
+                  onEdit={() => handleEdit(newsItem)}
+                  onDelete={() => handleDelete(newsItem._id)}
+                  onDeleteImages={() => handleDeleteImages(newsItem)}
+                  onAddImages={() => handleAddImages(newsItem)}
+                />
               </td>
             </tr>
           ))}
@@ -193,6 +214,31 @@ const AdminNewsForm = () => {
           onClose={() => setIsEditModalOpen(false)}
           newsItem={selectedNews}
           onNewsUpdated={fetchNews} // Refresh news list after edit
+        />
+      )}
+
+      {/* Delete Images Modal */}
+      {isDeleteImagesModalOpen && selectedNewsForImages && (
+        <SharedImagesDeleteModal
+          isOpen={isDeleteImagesModalOpen}
+          onClose={() => setIsDeleteImagesModalOpen(false)}
+          itemId={selectedNewsForImages._id}
+          api={api}
+          onImagesDeleted={fetchNews}
+          category="news"
+        />
+      )}
+
+      {/* Add Images Modal */}
+      {isAddImagesModalOpen && selectedNewsForAddImages && (
+        <SharedImagesAddModal
+          isOpen={isAddImagesModalOpen}
+          onClose={() => setIsAddImagesModalOpen(false)}
+          itemId={selectedNewsForAddImages._id}
+          itemTitle={selectedNewsForAddImages.title}
+          api={api}
+          onImagesAdded={fetchNews}
+          category="news"
         />
       )}
     </div>

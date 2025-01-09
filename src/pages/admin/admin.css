@@ -580,25 +580,7 @@
   object-fit: cover;
 }
 
-.edit-btn, .delete-btn {
-  padding: 5px 10px;
-  margin-right: 5px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.delete-btn {
-  background-color: #dc3545;
-}
-
-.edit-btn:hover, .delete-btn:hover {
-  opacity: 0.8;
-}
-
-.admin-button {
+.create-news-events {
   margin-bottom: 20px;
   padding: 10px 15px;
   background-color: #28a745;
@@ -606,4 +588,247 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+/* ImagesDeleteModal and ImageAddModal styling */
+
+/* Common Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-contents {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow: auto;
+  padding: 20px;
+}
+
+.modal-title {
+  margin: 0 0 20px 0;
+  padding: 0 0 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.modal-message {
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.modal-message.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.modal-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1rem 0 0 0;
+  border-top: 1px solid #eee;
+  margin-top: 20px;
+}
+
+/* Delete Modal Specific Styles */
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #f0f0f0; /* Updated to match the screenshot */
+  border-radius: 4px;
+}
+
+.image-container {
+  position: relative;
+  cursor: pointer;
+  border: 3px solid transparent;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.image-container.selected {
+  border-color: #007bff;
+}
+
+.image-container img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+.image-filename {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 4px;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Add Modal Specific Styles */
+.form-group {
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.form-group input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  background-color: white;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+/* Button Styles */
+.admin-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.admin-button.cancel {
+  background-color: #6c757d;
+}
+
+.admin-button.delete {
+  background-color: #dc3545;
+}
+
+.admin-button.delete:disabled {
+  background-color: #dc3545aa;
+}
+
+.admin-button.upload {
+  background-color: #28a745;
+}
+
+.admin-button.upload:disabled {
+  background-color: #28a745aa;
+}
+
+
+/*Action Menu*/
+.action-menu-container {
+  position: relative;
+  display: inline-block;
+}
+
+.action-menu-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+}
+
+.action-menu-button:hover {
+  background-color: #f0f0f0;
+}
+
+.action-menu-dropdown {
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  background: white;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  border: 1px solid #e0e0e0;
+  min-width: 180px;
+  z-index: 1000;
+}
+
+.menu-item {
+  display: block;
+  width: 100%;
+  padding: 20px 26px;
+  text-align: left;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 18px;
+  border-bottom: #66666617 solid;
+  border-bottom-width: thin;
+}
+
+.menu-item:hover {
+  background-color: #f5f5f5;
+}
+
+.edit-button {
+  color: #0066ff;
+}
+
+.delete-button {
+  color: #dc3545;
+}
+
+.delete-images-button {
+  color: #fd7e14;
+}
+
+.add-images-button {
+  color: #28a745;
+}
+
+.edit-button:hover {
+  background-color: #f0f7ff;
+}
+
+.delete-button:hover {
+  background-color: #fff5f5;
+}
+
+.delete-images-button:hover {
+  background-color: #fff4e6;
+}
+
+.add-images-button:hover {
+  background-color: #f0fff4;
+}
+
+/* Add these rules to your existing CSS */
+.action-menu-dropdown.dropdown-above {
+  bottom: 100%;
+  top: auto;
+  margin-top: 0;
+  margin-bottom: 8px;
 }

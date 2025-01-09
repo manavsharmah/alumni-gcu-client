@@ -1,3 +1,7 @@
 *{
     margin: 0;
 }
+body {
+    font-size: 18px;
+    font-family: 'IBM Plex Sans', sans-serif;
+}

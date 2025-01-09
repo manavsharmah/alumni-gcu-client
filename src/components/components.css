@@ -443,6 +443,25 @@
     font-weight: inherit;
   }
 
+  .dropdown-username {
+    display: none; /* Hide the username on mobile */
+  }
+
+  .dropdown-toggle {
+      padding: 5px;
+  }
+
+  .dropdown {
+      justify-content: flex-end;
+  }
+
+  .dropdown-toggle img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+
   .App-main {
     padding-top: 140px;
     width: 100%;
@@ -1278,9 +1297,22 @@ justify-content: center;
   border-radius: 8px;
   margin: 20px auto;
   width: 80%;
-  justify-content: space-evenly;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-flow: column;
 }
 
+/* .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 3rem;
+  flex-flow: column;
+  position: relative;
+} */
 .gallery-heading {
   display: flex;
   flex-wrap: wrap;
@@ -1311,6 +1343,54 @@ justify-content: center;
   transform: scale(1.1);
   box-shadow: 0 8px 16px #27357f;
 }
+
+
+.carousel {
+  max-width: 90%;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  gap: 15px;
+}
+
+.carousel .item {
+  width: 18%; /* Consistent size for all images */
+  height: 280px;
+  max-width: 220px;
+  margin: 10px;
+  transition: transform 0.5s ease-in-out, filter 0.5s ease-in-out;
+  object-fit: cover;
+  filter: brightness(1);
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.carousel .item:hover {
+  transform: scale(1.2); /* All images expand equally on hover */
+  filter: brightness(1.2);
+  z-index: 10;
+}
+
+.carousel .item:not(:hover) {
+  transform: scale(1);
+  filter: brightness(1);
+  z-index: 1;
+}
+
+/* .gallery-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.gallery-preview-container {
+  padding: 20px;
+  text-align: center;
+} */
+
 
 @media (max-width: 768px) {
   .gallery-preview-container {

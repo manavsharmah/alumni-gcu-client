@@ -54,6 +54,11 @@ import {
 import AdminFeedbackPanel from "./pages/admin/AdminFeedbackPanel";
 import AdminStats from "./pages/admin/AdminStats";
 
+
+import AboutAssociation from "./pages/articles/About-Association";
+import MissionAndVision from "./pages/articles/MissionAndVision";
+import VCMessage from "./pages/articles/VCMessage";
+
 function App() {
   return (
     <UserProvider>
@@ -90,6 +95,10 @@ function App() {
                 <Route path="/termsofuse" element={<TermsOfUse />} />
                 <Route path="/privacypolicy" element={<PrivacyPolicy />} />
                 <Route path="/donations" element={<Donations />} />
+
+                <Route path="/test" element={<AboutAssociation />} />
+                <Route path="/test2" element={<MissionAndVision />} />
+                <Route path="/test3" element={<VCMessage />} />
 
                 {/* Admin + User Routes */}
                 <Route

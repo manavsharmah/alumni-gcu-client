@@ -6,6 +6,7 @@ const GalleryPreview = () => {
     const [photos, setPhotos] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const navigate = useNavigate();
+    const visiblePhotosCount = 5; // Show 5 photos at once
   
     useEffect(() => {
       const fetchPhotos = async () => {
@@ -30,29 +31,32 @@ const GalleryPreview = () => {
   
     useEffect(() => {
       const interval = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 7) % photos.length);
-      }, 10000); // Change images every 10 seconds
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % photos.length);
+      }, 5000); // Change images every 5 seconds
       return () => clearInterval(interval);
     }, [photos.length]);
 
     const handleImageClick = () => {
-        navigate('/gallery'); // Navigate to the gallery page
-      };
+        navigate('/gallery'); 
+    };
   
     return (
       <div className="gallery-preview-container">
         <h2 className="gallery-heading">Gallery Preview</h2>
         {photos.length > 0 ? (
-          <div className="gallery-preview">
-            {photos.slice(currentIndex, currentIndex + 7).map((photo, index) => (
-            <img
-              key={index}
-              src={`http://localhost:5000${photo.image}`}
-              alt={`photo_${index}`}
-              className="preview-image"
-              onClick={handleImageClick} // Add click handler
-            />
-          ))}
+          <div className="carousel">
+              {photos
+                  .slice(currentIndex, currentIndex + visiblePhotosCount)
+                  .concat(photos.slice(0, Math.max(0, visiblePhotosCount - (photos.length - currentIndex))))
+                  .map((photo, index) => (
+                      <img
+                          key={index}
+                          src={`http://localhost:5000${photo.image}`}
+                          alt={`photo_${index}`}
+                          className="item"
+                          onClick={handleImageClick}
+                      />
+                  ))}
           </div>
         ) : (
           <p>Loading photos...</p>
@@ -62,3 +66,4 @@ const GalleryPreview = () => {
   };
   
   export default GalleryPreview;
+

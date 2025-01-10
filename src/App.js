@@ -6,7 +6,6 @@ import { UserProvider } from "./services/UserContext";
 import Login from "./components/forms/LoginForm";
 import Register from "./components/forms/RegisterForm";
 import ResetPassword from "./components/forms/ResetPassword";
-import AdminLogin from "./components/common/AdminLogin";
 
 // Layout Components
 import ForgotPassword from "./components/forms/ForgotPassword";
@@ -35,7 +34,7 @@ import BulkAddAlumni from "./pages/admin/AlumniRecordUpload";
 // Detail Pages
 import { TopAlumni } from "./pages/detail/Alumni";
 import { Copyright, Disclaimer, TermsOfUse, ContactUs, PrivacyPolicy, AlumniDirectory } from "./pages/detail/Others";
-import FeedbackForm from "./pages/detail/Feedbackform";
+import FeedbackForm from "./components/forms/Feedbackform";
 import Scholarship from "./pages/detail/Scholarship";
 import { Alumnus } from "./pages/detail/GetInvolved";
 import Gallery from "./pages/detail/Gallery";
@@ -54,6 +53,12 @@ import {
 import AdminFeedbackPanel from "./pages/admin/AdminFeedbackPanel";
 import AdminStats from "./pages/admin/AdminStats";
 
+// test pages
+import AboutAssociation from "./pages/articles/About-Association";
+import MissionAndVision from "./pages/articles/MissionAndVision";
+import VCMessage from "./pages/articles/VCMessage";
+
+
 function App() {
   return (
     <UserProvider>
@@ -66,7 +71,6 @@ function App() {
                 <Route path="/login" element={<PublicRoute element={<Login />} />} />
                 <Route path="/register" element={<PublicRoute element={<Register />} />} />
                 <Route path="/forgot-password" element={<PublicRoute element={<ForgotPassword />} />} />
-                <Route path="/admin-login" element={<PublicRoute element={<AdminLogin />} />} />
 
                 {/* Open Routes */}
                 <Route path="/" element={<Home />} />
@@ -90,6 +94,10 @@ function App() {
                 <Route path="/termsofuse" element={<TermsOfUse />} />
                 <Route path="/privacypolicy" element={<PrivacyPolicy />} />
                 <Route path="/donations" element={<Donations />} />
+
+                <Route path="/test" element={<AboutAssociation />} />
+                <Route path="/test2" element={<MissionAndVision />} />
+                <Route path="/test3" element={<VCMessage />} />
 
                 {/* Admin + User Routes */}
                 <Route

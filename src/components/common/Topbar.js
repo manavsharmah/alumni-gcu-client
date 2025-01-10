@@ -39,25 +39,6 @@ const Topbar = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const header-nav = document.querySelector('.header-nav');
-  //     const appHeader = document.querySelector('.App-header');
-
-  //     if (window.innerWidth > 768) {  // Only apply on desktop view
-  //       if (window.scrollY > 137) {
-  //         appHeader.classList.add('sticky');
-  //       } else {
-  //         appHeader.classList.remove('sticky');
-  //       }
-  //     } else {
-  //       appHeader.classList.remove('sticky'); // Remove sticky on mobile
-  //     }
-  //   };
-
-  //   window.addEventListener('scroll', handleScroll);
-  //   return () => window.removeEventListener('scroll', handleScroll);
-  // }, []);
   
   if (loading) {
     return <div>Loading...</div>; // Show a loading indicator while the user data is being fetched

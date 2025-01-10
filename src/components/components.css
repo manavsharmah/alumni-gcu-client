@@ -1,13 +1,5 @@
 /* ======Topbar====== */
 
-.header-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 2000px;
-  font-family: 'IBM Plex Sans', sans-serif;
-}
 
 /* App Header Layout */
 .App-header {
@@ -35,6 +27,15 @@
   width: 100%;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: top 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 2000px;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 /* Logo Styles */
@@ -626,245 +627,6 @@
 }
 
 
-
-
-
-
-/* =====>Signup styling<======= */
-
-/* .container{
-display: flex;
-flex-direction:column;
-margin:auto;
-margin-top: 200px;
-width:600px;
-background:#ffffff;
-padding-bottom: 30px;
-} */
-
-.header{
-display:flex;
-flex-direction:column;
-align-items:center;
-gap: 9px;
-width:100%;
-margin-top:30px;
-}
-
-.text{
-color: #f5f905;
-font-size: 48px;
-font-weight:700;
-}
-
-.underline{
-width:61px;
-height:6px;
-background: blue;
-border-radius:9px;
-}
-
-.inputs{
-margin-top: 55px;
-display: flex;
-flex-direction: column;
-gap:25px;
-}
-
-.input{
-display:flex;
-align-items:center;
-margin:auto;
-width:480px;
-height:80px;
-background:#eaeaea;
-border-radius:6px;
-}
-
-.input img{
-margin: 0px 30px;
-}
-
-.input input{
-height:40px;
-width:400px;
-background: transparent;
-border:none;
-outline:none;
-color:#797979;
-font-size: 20px;
-}
-
-/* .forgot-password{
-padding-left:75px;
-margin-left: 75px;
-margin-top:27px;
-color: #797979;
-font-size:18px;
-}
-
-.forgot-password span{
-color: blue;
-cursor:pointer;
-} */
-
-.submit-container{
-display:flex;
-gap:30px;
-margin: 60px auto;
-}
-
-.submit{
-display:flex;
-justify-content: center;
-align-items:center;
-width:220px;
-height:59px;
-color:white;
-background:blue;
-border-radius:50px;
-font-size:19px;
-font-weight:700;
-cursor:pointer;
-}
-
-
-
-/* =====Signup/Login===== */
-
-/* .container {
-display: flex;
-justify-content: center;
-margin-top: 90px;
-padding-bottom: 50px;
-
-}
-
-.card {
-margin-left: -250px;
-border-radius: 7px;
-width: 800px;
-display: flex;
-box-shadow: 5px 5px 30px rgb(197, 196, 196);
-}
-
-
-.card-body {
-border-radius: 7px;
-background-color: #ffffff;
-padding: 15px;
-}
-
-.card-title {
-font-size: 28px;
-font-weight: bold;
-}
-
-.input {
-height: 60px;
-padding: 20px;
-flex-wrap: wrap;
-}
-
-
-.btn-primary {
-background-color: #27357f;
-width: 300px;
-height: 60px;
-justify-content: center;
-margin-left: 230px;
-font-size: 20px;
-}
-
-.btn-primary:hover {
-background-color: #1b265f;
-}
-
-.already-registered {
-padding-left:75px;
-margin-left: 75px;
-margin-top:27px;
-color: #797979;
-font-size:18px;
-}
-
-.already-registered a {
-text-decoration: none;
-}
-
-.already-registered span {
-color: blue;
-cursor:pointer;
-}
-
-.container2 {
-display: flex;
-height: 400px;
-margin-top: 200px;
-} */
-
-
-/* @media (max-width: 768px) {
-.col-md-6 {
-width: 100%;
-}
-}
-
-@media (max-width: 480px) {
-
-.container {
-padding: 10px;
-}
-.card {
-width: 60%; 
-margin: 20px auto;
-}
-
-.card-title {
-font-size: 20px;
-}
-
-.input {
-width: 80%;
-height: 50px;
-flex-wrap: wrap;
-}
-
-.input input {
-font-size: 14px;
-height: 40px;
-margin-top: -14px;
-}
-
-.input select {
-width: 100%;
-height: 40px;
-padding: 10px;
-font-size: 14px;
-border: 1px solid #ccc;
-border-radius: 5px;
-}
-
-.already-registered {
-font-size: 12px;
-}
-
-.forgot-password {
-font-size: 12px;
-}
-
-.submit-container {
-display: flex;
-justify-content: center;
-align-items: center;
-}
-
-.btn {
-justify-content: center;
-}
-} */
-
-
 /* =======Bottom Bar======== */
 
 .bottombar {
@@ -1003,7 +765,7 @@ justify-content: center;
 
 /* Article-container */
 
-.article-container {
+/* .article-container {
   background-color: #ffffff;
   border: 1px solid #c4c4c4;
   border-radius: 8px;
@@ -1027,7 +789,7 @@ justify-content: center;
   line-height: 1.7;
   font-family: 'IBM Plex Sans', sans-serif;
   word-spacing: 10px;
-}
+} */
 
 /* Quick Nav  */
 
@@ -1068,7 +830,7 @@ justify-content: center;
 }
 
 /* Mobile styles */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .article-container {
     max-width: 97%;
   }
@@ -1076,13 +838,13 @@ justify-content: center;
   .quick-nav {
     display: none;
   }
-}
+} */
 /* Tablet view articles*/
-@media screen and (max-width: 1024px) and (min-width: 768px){
+/* @media screen and (max-width: 1024px) and (min-width: 768px){
   .article-container{
     max-width: 97%;
   }
-}
+} */
 
 /* News and event Card */
 

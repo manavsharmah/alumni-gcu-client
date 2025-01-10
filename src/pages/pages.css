@@ -31,8 +31,6 @@
   width: 90%;
 }
 
-
-
 .card-body ul {
   list-style: none;
   padding: 0;
@@ -374,89 +372,6 @@
   padding: 24px 0px;
 }
 
-/* .office-bearers-carousel {
-  text-align: center;
-  margin-top: 50px;
-}
-
-.carousel-container {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
-.carousel-slide {
-  display: flex;
-  transition: transform 0.5s ease-in-out;
-}
-
-.carousel-item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 100%; 
-  box-sizing: border-box;
-  padding: 20px;
-  background-color: #f8f8f8;
-}
-
-.office-bearer-image {
-  flex: 1;
-  text-align: center;
-}
-
-.office-bearer-image img {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
-  border-radius: 10px;
-}
-
-.office-bearer-text {
-  flex: 1;
-  padding: 20px;
-  text-align: left;
-}
-
-.office-bearer-text h3 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.office-bearer-text p {
-  font-size: 18px;
-  color: #555;
-}
-
-.carousel-control {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  padding: 10px;
-  font-size: 24px;
-  cursor: pointer;
-  z-index: 10;
-}
-
-.prev {
-  left: 0;
-}
-
-.next {
-  right: 0;
-}
-
-.carousel-control:hover {
-  background-color: rgba(0, 0, 0, 0.7);
-} */
-
-
 @media screen and (max-width: 768px) {
   .hero {
     display: flex;
@@ -710,17 +625,6 @@
 /* =======User Profile Styling========== */
 
 
-
-/*.container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  background-color: #fff;
-} */
-
-
 .form {
   display: flex;
   flex-direction: column;
@@ -756,15 +660,6 @@ button:hover {
 }
 
 
-/* .page-container {
-  display: flex;
-  justify-content: center;
-  min-height: calc(100vh - 60px);
-  padding: 60px 0px ; /* Adjust based on navbar height */
-  /* background-color: #f5f5f5; 
-  align-items: flex-start;
-  min-height: 100vh;
-}  */
 .users-container {
   display: flex;
   flex-direction: column;
@@ -1498,35 +1393,6 @@ button:hover {
   margin: 0 8px;
 }
 
-/* .submit-button {
-  width: 100%;
-  background-color: #4f46e5;
-  color: white;
-  font-weight: bold;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 16px;
-}
-
-.submit-button:hover:not(:disabled) {
-  background-color: #4338ca;
-}
-
-.submit-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.status-message {
-  color: #10b981;
-  font-size: 14px;
-  text-align: center;
-  margin-top: 8px;
-} */
-
 /*Welcome styling*/
 
 .page-container {
@@ -1600,6 +1466,7 @@ button:hover {
 }
 
 /* Modern Profile Container */
+
 .modern-profile-container {
   width: 100%;
   display: flex;
@@ -1871,80 +1738,6 @@ button:hover {
 
 .razorpay-button:hover {
   background-color: #2980b9;
-}
-
-/* Feedback Form */
-.feedback-form-container {
-  max-width: 40%;
-  margin: 40px auto; /* Center the form on the screen for both mobile and desktop */
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.feedback-heading{
-  color: #1d0898;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.feedback-form {
-  display: flex;
-  flex-direction: column;
-}
-
-.feedback-form-input,
-.feedback-form-textarea {
-  margin-bottom: 15px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-.feedback-form-textarea {
-  height: 100px;
-  resize: vertical;
-}
-
-.feedback-form-button {
-  background-color: #21099b;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.feedback-form-button:hover {
-  background-color: #020090;
-}
-
-/* Mobile View */
-@media (max-width: 768px) {
-  .feedback-form-container {
-    margin: 20px auto;
-    padding: 15px;
-    max-width: 70%; /* Make form take full width on small screens */
-  }
-
-  .feedback-heading {
-    font-size: 1.5rem; /* Adjust font size */
-  }
-
-  .feedback-form-input,
-  .feedback-form-textarea {
-    padding: 10px;
-    font-size: 14px; /* Slightly reduce font size for mobile */
-  }
-
-  .feedback-form-button {
-    padding: 8px;
-    font-size: 14px;
-  }
 }
 
 /* General Container */

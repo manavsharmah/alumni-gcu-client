@@ -389,8 +389,7 @@
 
   .email-form-input[type='email'],
   .email-form-input[type='text'],
-  .email-textarea,
-  .submit-button {
+  .email-textarea {
     font-size: 14px;
   }
 

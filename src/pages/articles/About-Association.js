@@ -5,7 +5,7 @@ const AboutAssociation = () => {
 
     return (
         <div className="main">
-            <div className="article-container">
+            <div className="art-container">
                 <div className="about-header">
                     <h1>About the Association</h1>
                 </div>

@@ -5,7 +5,7 @@ import "./articles.css";
 const MissionAndVision = () => {
   return (
     <div className="main">
-      <div className="article-container">
+      <div className="art-container">
       <div className="mv-container">
         <div className="mv-sub-container">
           <div className="mv-left">

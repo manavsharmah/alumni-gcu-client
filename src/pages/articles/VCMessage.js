@@ -4,7 +4,7 @@ import "./articles.css";
 const VCMessage = () => {
     return (
         <div className="main">
-            <div className="article-container">
+            <div className="art-container">
                 <div className="vc-message-container">
                     <div class="letter">
                         <h3>From the Vice-Chancellor’s desk:</h3>

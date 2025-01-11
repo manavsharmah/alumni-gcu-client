@@ -46,9 +46,6 @@ import SingleNews from "./pages/detail/SingleNews";
 import SingleEvent from "./pages/detail/SingleEvent";
 import Donations from "./pages/detail/Donations";
 import {
-	Overview,
-	VisionAndMission,
-	Objectives,
 	GoverningCouncil
 } from "./pages/detail/About";
 import AdminFeedbackPanel from "./pages/admin/AdminFeedbackPanel";
@@ -75,9 +72,6 @@ function App() {
 
                 {/* Open Routes */}
                 <Route path="/" element={<Home />} />
-                <Route path="/overview" element={<Overview />} />
-                <Route path="/vision" element={<VisionAndMission />} />
-                <Route path="/objectives" element={<Objectives />} />
                 <Route path="/council" element={<GoverningCouncil />} />
                 <Route path="/alumnus" element={<Alumnus />} />
                 <Route path="/top-alumni" element={<TopAlumni />} />
@@ -96,9 +90,9 @@ function App() {
                 <Route path="/privacypolicy" element={<PrivacyPolicy />} />
                 <Route path="/donations" element={<Donations />} />
 
-                <Route path="/test" element={<AboutAssociation />} />
-                <Route path="/test2" element={<MissionAndVision />} />
-                <Route path="/test3" element={<VCMessage />} />
+                <Route path="/overview" element={<AboutAssociation />} />
+                <Route path="/vision" element={<MissionAndVision />} />
+                <Route path="/vcmsg" element={<VCMessage />} />
 
                 {/* Admin + User Routes */}
                 <Route

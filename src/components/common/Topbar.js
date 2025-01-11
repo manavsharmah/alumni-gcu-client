@@ -17,7 +17,7 @@ const Topbar = () => {
     document.querySelector('.header-nav').classList.toggle('open');
   };
 
-  // Close the mobile navigation
+  // Close mobile navigation
   const closeNav = () => {
     setIsNavOpen(false);
     document.querySelector('.header-nav').classList.remove('open');

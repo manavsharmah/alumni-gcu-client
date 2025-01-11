@@ -78,12 +78,12 @@ const Topbar = () => {
             <ul>
               <li><Link to="/">Home</Link></li>
               <li>
-                <Link to="#">About</Link>
-                <ul className="sub-menus">
-                  <li><Link to="/overview">Overview</Link></li>
-                  <li><Link to="/vision">Vision and Mission</Link></li>
-                  <li><Link to="/objectives">Objectives and Activities</Link></li>
-                  <li><Link to="/council">Governing Council</Link></li>
+              <Link to="#">About</Link>
+                <ul className='sub-menus'>
+                  <li><Link to='/overview'>Overview</Link></li>
+                  <li><Link to='/vision'>Vision and Mission</Link></li>
+                  <li><Link to='/vcmsg'>VC Message</Link></li>
+                  <li><Link to='/council'>Governing Council</Link></li>
                 </ul>
               </li>
               <li><Link to="/alumnus">Association Members</Link></li>

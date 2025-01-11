@@ -1050,6 +1050,7 @@ button:hover {
 
   .news-headline {
       font-size: 1.2em;
+      margin: 10px;
   }
 
   .read-more-btn {
@@ -1453,6 +1454,14 @@ button:hover {
 }
 
 /*Change Profile Picture */
+.profile-photo-container {
+  display: flex;
+  justify-content: center;  /* Center horizontally */
+  align-items: center;      /* Center vertically */
+  height: 80vh;            /* Take full height of the viewport */
+  width: 100%;              /* Take full width of the page */
+  background-color: #f3f4f6; /* Optional background color */
+}
 
 .profile-picture-card {
   max-width: 500px;
@@ -1546,6 +1555,45 @@ button:hover {
 .zoom-slider {
   flex-grow: 1;
   margin: 0 8px;
+}
+
+@media screen and (max-width: 480px) {
+  .profile-picture-card {
+    padding: 8px;
+    margin: 10px;
+  }
+
+  .card-title {
+    font-size: 10px;
+  }
+
+  .card-heading {
+    font-size: 16px;
+  }
+
+  .card-description {
+    font-size: 12px;
+  }
+
+  .file-upload-area {
+    height: 180px;  /* Further reduced height for smaller screens */
+  }
+
+  .file-upload-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .zoom-control {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .zoom-slider {
+    margin: 8px 0;
+    width: 100%;
+  }
 }
 
 /* .submit-button {

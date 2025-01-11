@@ -1440,14 +1440,28 @@ justify-content: center;
 
 @media (max-width: 768px) {
   .gallery-preview-container {
-    width: 90%;
+      width: 95%;
   }
+
   .gallery-preview {
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
   }
+
   .preview-image {
-    width: 120px;
-    height: 120px; 
+      width: 120px;
+      height: 120px;
+  }
+
+  .carousel {
+      flex-wrap: wrap; /* Allow wrapping on mobile */
+      gap: 8px;
+      justify-content: center;
+  }
+
+  .carousel .item {
+      width: 30%;          /* Larger size for mobile */
+      max-width: 200px;    
+      height: 240px;
   }
 }
 

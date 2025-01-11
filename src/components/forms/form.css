@@ -117,8 +117,23 @@
     cursor: pointer;
     font-size: 16px;
 }
+.remove-button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #3f51b5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
 
 .submit-button:hover {
+    background-color: #2e397a;
+}
+
+.remove-button:hover {
     background-color: #2e397a;
 }
 

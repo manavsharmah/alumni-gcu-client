@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { UserProvider } from "./services/UserContext";
+import { VisitorCounterProvider } from "./services/VisitorCounterContext";
 
 // Common Components
 import Login from "./components/forms/LoginForm";
@@ -49,7 +50,7 @@ import {
 	GoverningCouncil
 } from "./pages/detail/About";
 import AdminFeedbackPanel from "./pages/admin/AdminFeedbackPanel";
-import AdminStats from "./pages/admin/AdminStats";
+import DashboardCharts from "./pages/admin/AdminStats";
 
 
 import AboutAssociation from "./pages/articles/About-Association";
@@ -59,6 +60,7 @@ import VCMessage from "./pages/articles/VCMessage";
 function App() {
   return (
     <UserProvider>
+      <VisitorCounterProvider>
       <React.Fragment>
         <div className="w-full md:flex">
           <section className="flex flex-1 h-full">
@@ -151,7 +153,7 @@ function App() {
                   />
                 }
               >
-                <Route path="/admin-stats" element={<AdminStats />} />
+                <Route path="/admin-stats" element={<DashboardCharts />} />
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 <Route path="/alumni-archive" element={<AlumniArchive />} />
                 <Route path="/news-form" element={<AdminNewsForm />} />
@@ -165,6 +167,7 @@ function App() {
           </section>
         </div>
       </React.Fragment>
+      </VisitorCounterProvider>
     </UserProvider>
   );
 }

@@ -1,66 +1,124 @@
 import React, { useState, useEffect } from 'react';
 import "./admin.css";
 import api from "../../services/api";
-import { Bar }  from 'react-chartjs-2';
+import { Bar, Pie, Line } from 'react-chartjs-2';
+import VisitorCounterBanner from '../../components/common/VisitorCounter';
 
 import {
-    Chart as ChartJS,
-    BarElement,
-    CategoryScale,
-    LinearScale,
-    Title,
-    Tooltip,
-    Legend,
-  } from 'chart.js';
-  
-  ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend);
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+} from 'chart.js';
 
-const AdminStats = () => {
-  const [stats, setStats] = useState(null);
+// Register elements
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement
+);
 
-  useEffect(() => {
-    const fetchStats = async () => {
-      try {
-        const res = await api.get('/admin/stats');
-        setStats(res.data);
-      } catch (err) {
-        console.error("Error fetching stats:", err);
-      }
+  const DashboardCharts = () => {
+    const [metrics, setMetrics] = useState({
+        totalUsers: 0,
+        totalUnverifiedUsers: 0,
+        totalPosts: 0,
+        totalComments: 0,
+        totalFeedback: 0
+    });
+    const [registrations, setRegistrations] = useState([]);
+    const [categories, setCategories] = useState({});
+    const [activeUsers, setActiveUsers] = useState([]);
+
+    useEffect(() => {
+        const fetchMetrics = async () => {
+            try {
+                const metricsRes = await api.get('/admin/metrics');
+                setMetrics(metricsRes.data);
+
+                const registrationsRes = await api.get('/admin/users/registrations');
+                setRegistrations(registrationsRes.data.data);
+
+                const categoriesRes = await api.get('/admin/posts/categories');
+                setCategories(categoriesRes.data.categories);
+
+                const activeUsersRes = await api.get('/admin/users/active');
+                setActiveUsers(activeUsersRes.data.users);
+            } catch (err) {
+                console.error('Error fetching data:', err);
+            }
+        };
+
+        fetchMetrics();
+    }, []);
+
+    const registrationChartData = {
+        labels: registrations.map(reg => reg.month),
+        datasets: [{
+            label: 'User Registrations',
+            data: registrations.map(reg => reg.count),
+            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
     };
 
-    fetchStats();
-  }, []);
+    const categoryChartData = {
+        labels: Object.keys(categories),
+        datasets: [{
+            label: 'Posts by Category',
+            data: Object.values(categories),
+            backgroundColor: ['rgba(75, 192, 192, 0.6)', 'rgba(153, 102, 255, 0.6)', 'rgba(255, 159, 64, 0.6)'],
+            borderColor: ['rgba(75, 192, 192, 1)', 'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)'],
+            borderWidth: 1
+        }]
+    };
 
-  const chartData = stats
-    ? {
-        labels: ['Total Users', 'Pending Users', 'Approved Users'],
-        datasets: [
-          {
-            label: 'User Statistics',
-            data: [stats.totalUsers, stats.pendingUsers, stats.approvedUsers],
-            backgroundColor: ['#3b82f6', '#fbbf24', '#10b981'],
-          },
-        ],
-      }
-    : null;
 
-  return (
-    <div className="admin-dashboard-container">
-      <div className="admin-dashboard-header">
-        <h1 className="admin-dashboard-title">Admin Dashboard - Stats</h1>
-      </div>
-      <div className="admin-dashboard-content">
-        {chartData ? (
-          <div className="admin-stats-chart">
-            <h2 className="admin-dashboard-section-header">Website Statistics</h2>
-            <Bar data={chartData} />
-          </div>
-        ) : (
-          <p className="admin-dashboard-no-data">Loading stats...</p>
-        )}
-      </div>
-    </div>
-  );
+    return (
+        <div className="dashboard-charts">
+            <div className="metrics-overview">
+                <div className="metric-card">Total Users: {metrics.totalUsers}</div>
+                <div className="metric-card">Unverified Users: {metrics.totalUnverifiedUsers}</div>
+                <div className="metric-card">Total Posts: {metrics.totalPosts}</div>
+                <div className="metric-card">Total Comments: {metrics.totalComments}</div>
+                <div className="metric-card">Total Feedback: {metrics.totalFeedback}</div>
+            </div>
+            <VisitorCounterBanner />
+            <div className="chart-container">
+                <h3>User Registrations Over Time</h3>
+                <div className="chart">
+                  <Line data={registrationChartData} />
+                </div>
+            </div>
+            <div className="chart-container">
+                <h3>Posts by Category</h3>
+                <div className="chart">
+                  <Pie data={categoryChartData} />
+                </div>
+            </div>
+            <div className="chart-container">
+                <h3>Top Active Users</h3>
+                <ul>
+                    {activeUsers.map(user => (
+                        <li key={user.email}>
+                            {user.name} ({user.email}) - {user.postCount} posts
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    );
 };
 
-export default AdminStats;
+export default DashboardCharts;

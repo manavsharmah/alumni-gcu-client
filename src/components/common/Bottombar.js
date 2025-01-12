@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
 import GCUImage from '../../assets/GCU-Logo-White-footer.png';
+import VisitorCounterBanner from './VisitorCounter';
 
 const Bottombar = () => {
   return (
@@ -36,6 +37,7 @@ const Bottombar = () => {
         <p>Email: <a href="mailto:info@gcuniversity.ac.in">info@gcuniversity.ac.in</a></p>
         <p>Phone: 7099034050</p>
         <p>Women Helpline: 7099004706</p>
+        <VisitorCounterBanner />
       </div>
       <div className="social-links">
         <h4>Follow Us</h4>

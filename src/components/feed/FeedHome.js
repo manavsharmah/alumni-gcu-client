@@ -131,22 +131,14 @@ const Welcome = () => {
     // Left sidebar
     const leftSidebar = (
         <>
-            {activeTab === "home" && (
-                <>
-                    <JobOpportunities />
-                    <FurtherEducation />
-                </>
-            )}
-            {activeTab === "jobs" && <FurtherEducation />}
-            {activeTab === "education" && <JobOpportunities />}
-            {activeTab === "friends" && null}
+            <FeedNavbar activeTab={activeTab} setActiveTab={setActiveTab} />
         </>
     );
 
     // Main content
     const mainContent = (
         <>
-            <FeedNavbar activeTab={activeTab} setActiveTab={setActiveTab} />
+            
 
             {/* Home Tab (Regular Posts) */}
             {activeTab === "home" && (
@@ -169,6 +161,8 @@ const Welcome = () => {
             {activeTab === "friends" && <VerifiedUsersList />}
             {/* Jobs Tab (Job Opportunities) */}
             {activeTab === "jobs" && (
+                <>
+                <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
                 <PostList
                     posts={posts}
                     onDeletePost={handleDeletePost}
@@ -176,18 +170,20 @@ const Welcome = () => {
                     currentUser={currentUser}
                     isLoading={isLoading}
                     onLike={handleLike}
-                />
+                /></>
             )}
 
             {/* Education Tab (Education Opportunities) */}
             {activeTab === "education" && (
+                <>
+                <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
                 <PostList
                     posts={posts}
                     onDeletePost={handleDeletePost}
                     onEditPost={handleEditPost}
                     currentUser={currentUser}
                     isLoading={isLoading}
-                />
+                /></>
             )}
 
             {isLoading && <Spinner />}

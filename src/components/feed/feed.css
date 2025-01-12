@@ -5,7 +5,6 @@
     justify-content: space-between;
     width: 100%;
     padding: 20px;
-    min-height: 100vh;
     font-family: 'IBM Plex Sans', sans-serif;
   }
   
@@ -19,38 +18,41 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 
   @media screen and (max-width: 1279px) {  /* Tablet and mobile screens */
 
-    .left-sidebar {
+    .right-sidebar {
         display: none;  /* Hide sidebars */
     }
 
     .main-content {
-      width: 70%;
+      width: 100%;
       margin: 0 auto;
     }
 
-    .right-sidebar {
-      width: 25%;
+    .left-sidebar {
+      width: 30%;
       margin-left: 2%;
     }
-    
-    /* Ensure posts take up proper width */
-    /* .post-card {
-      width: 100%;
-      margin-bottom: 20px;
-    } */
 }
 
 @media screen and (max-width: 1023px) {
   .main-content {
     width: 100%;
   }
-  
+
   .right-sidebar {
     display: none;
+  }
+
+  .left-sidebar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+      left: 0;
+      z-index: 1000;
   }
 }
 
@@ -60,7 +62,6 @@
         padding: 10px; /* Adjust padding */
     }
 
-    .left-sidebar,
     .right-sidebar {
         display: none;  /* Hide sidebars */
     }
@@ -74,43 +75,144 @@
 
   
 /* Feed NavBar */
-.feed-navbar {
+
+.feed-sidebar {
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  background-color: #ffffff;
+  overflow-x: hidden;
+  transition: 0.3s;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+}
+
+.feed-sidebar.closed {
+  width: 70px;
+}
+
+.feed-sidebar .sidebar-header {
+  padding: 20px;
   display: flex;
-  justify-content: center;
-  padding: 10px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.feed-sidebar .sidebar-header h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #4a90e2;
+}
+
+.feed-sidebar .toggle-btn {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.feed-sidebar .toggle-btn:hover {
+  color: #4a90e2;
 }
 
 .feed-navbar-list {
-  display: flex;
   list-style: none;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
-.feed-nav-item {
+.feed-navbar-list .feed-nav-item {
+  padding: 15px 25px;
+  text-decoration: none;
+  font-size: 16px;
+  color: #333;
   display: flex;
   align-items: center;
-  margin: 0 15px;
+  transition: 0.2s;
   cursor: pointer;
-  color: #666;
-  transition: color 0.3s ease;
 }
 
-.feed-nav-item:hover {
-  color: #000;
+.feed-navbar-list .feed-nav-item:hover {
+  background-color: #e6f0ff;
+  color: #4a90e2;
 }
 
-.feed-nav-item.active {
-  color: #27357f; /* Active tab color */
+.feed-navbar-list .feed-nav-item.active {
+  background-color: #e6f0ff;
   font-weight: bold;
+  color: #4a90e2;
 }
 
-.nav-icon {
-  margin-right: 8px;
-  font-size: 2em; /* Adjust icon size here */
+.feed-navbar-list .feed-nav-item .nav-icon {
+  min-width: 30px;
+  font-size: 20px;
 }
 
-/* Optional: Hide text labels for a more compact view */
-.feed-nav-item span {
-  display: none; /* Hide text if only icons are preferred */
+.feed-sidebar.closed .sidebar-header h3 {
+  display: none;
+}
+
+.feed-sidebar.closed .feed-nav-item span {
+  display: none;
+}
+
+@media screen and (max-width: 1023px) {
+    /* Bottom navigation bar for FeedNavbar */
+    .feed-sidebar {
+      display: flex;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: auto; /* Adjust height as needed */
+      background-color:  #ffffff;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      justify-content: space-around; /* Evenly distribute items horizontally */
+      align-items: center;
+      border-top: 1px solid #e0e0e0; /* Optional border for separation */
+    }
+  
+    .feed-sidebar .sidebar-header {
+      display: none; /* Hide header in bottom nav */
+    }
+  
+    .feed-navbar-list {
+      display: flex;
+      flex-direction: row; /* Align items horizontally */
+      width: 100%;
+      justify-content: space-around; /* Space between items */
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+  
+    .feed-navbar-list .feed-nav-item {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      padding: 10px 0;
+      font-size: 14px; /* Adjust font size */
+      color: #333;
+      cursor: pointer;
+    }
+  
+    .feed-navbar-list .feed-nav-item.active {
+      padding: 10px 20px;
+      color: #4a90e2; /* Highlight active tab */
+      font-weight: bold;
+    }
+  
+    .feed-navbar-list .feed-nav-item .nav-icon {
+      font-size: 20px; /* Adjust icon size */
+      
+      margin: 0 auto 5px; /* Center icon and add spacing below */
+    }
+  
+    .feed-sidebar.closed {
+      display: none; /* Ensure it hides if manually toggled closed */
+    }
 }

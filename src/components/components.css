@@ -1483,6 +1483,7 @@ justify-content: center;
 
 .gcu-post-card:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 /* Avatar and Author Info */
@@ -2076,7 +2077,25 @@ justify-content: center;
   }
 }
 
-/* Visitor counter banner */
+.gcu-share-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 4px;
+  z-index: 1000;
+  animation: fadeInOut 2s ease;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; }
+}/* Visitor counter banner */
 
 
 .visitor-counter-container {

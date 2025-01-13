@@ -10,6 +10,8 @@ import FeedLayout from "./FeedLayout";
 import FeedNavbar from "./FeedNavbar";
 import VerifiedUsersList from "../common/VerifiedUsersList";
 import Spinner from "../common/LoadingSpinner"; // Import Spinner
+import { useParams, useNavigate } from 'react-router-dom';
+import FeedPostView from './FeedPostView';
 
 const Welcome = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -20,6 +22,8 @@ const Welcome = () => {
     const [currentUser, setCurrentUser] = useState(null);
     const [activeTab, setActiveTab] = useState("home");
     const [hasMore, setHasMore] = useState(true);
+    const { postId } = useParams();
+    const navigate = useNavigate();
 
     const loaderRef = useRef(null);
     const postsPerPage = 6;
@@ -140,54 +144,62 @@ const Welcome = () => {
         <>
             
 
-            {/* Home Tab (Regular Posts) */}
-            {activeTab === "home" && (
+            {postId ? (
+                <FeedPostView 
+                    onBack={() => navigate('/welcome')} 
+                />
+            ) : (
                 <>
-                    <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
-                    {isLoading && posts.length === 0 ? (
-                        <Spinner />
-                    ) : (
-                        <PostList
+                    {/* Home Tab (Regular Posts) */}
+                    {activeTab === "home" && (
+                        <>
+                            <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
+                            {isLoading && posts.length === 0 ? (
+                                <Spinner />
+                            ) : (
+                                <PostList
+                                    posts={posts}
+                                    onDeletePost={handleDeletePost}
+                                    onEditPost={handleEditPost}
+                                    currentUser={currentUser}
+                                    isLoading={isLoading}
+                                    onLike={handleLike}
+                                />
+                            )}
+                        </>
+                    )}
+                    {activeTab === "friends" && <VerifiedUsersList />}
+                    {/* Jobs Tab (Job Opportunities) */}
+                    {activeTab === "jobs" && (
+                        <>
+                <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
+                <PostList
                             posts={posts}
                             onDeletePost={handleDeletePost}
                             onEditPost={handleEditPost}
                             currentUser={currentUser}
                             isLoading={isLoading}
                             onLike={handleLike}
-                        />
+                        /></>
                     )}
+
+                    {/* Education Tab (Education Opportunities) */}
+                    {activeTab === "education" && (
+                        <>
+                <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
+                <PostList
+                            posts={posts}
+                            onDeletePost={handleDeletePost}
+                            onEditPost={handleEditPost}
+                            currentUser={currentUser}
+                            isLoading={isLoading}
+                        /></>
+                    )}
+
+                    {isLoading && <Spinner />}
+                    <div ref={loaderRef} style={{ height: "1px" }}></div>
                 </>
             )}
-            {activeTab === "friends" && <VerifiedUsersList />}
-            {/* Jobs Tab (Job Opportunities) */}
-            {activeTab === "jobs" && (
-                <>
-                <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
-                <PostList
-                    posts={posts}
-                    onDeletePost={handleDeletePost}
-                    onEditPost={handleEditPost}
-                    currentUser={currentUser}
-                    isLoading={isLoading}
-                    onLike={handleLike}
-                /></>
-            )}
-
-            {/* Education Tab (Education Opportunities) */}
-            {activeTab === "education" && (
-                <>
-                <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
-                <PostList
-                    posts={posts}
-                    onDeletePost={handleDeletePost}
-                    onEditPost={handleEditPost}
-                    currentUser={currentUser}
-                    isLoading={isLoading}
-                /></>
-            )}
-
-            {isLoading && <Spinner />}
-            <div ref={loaderRef} style={{ height: "1px" }}></div>
         </>
     );
 

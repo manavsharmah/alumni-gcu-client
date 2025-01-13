@@ -11,13 +11,35 @@ import {
     faComment,
     faShare
 } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from 'react-router-dom';
 
-const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
+const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = false, onCommentClick }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [editedContent, setEditedContent] = useState(post.content);
     const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
     const [comments, setComments] = useState(post.comments || []);
     const [showMenu, setShowMenu] = useState(false);
+    const [showShareToast, setShowShareToast] = useState(false);
+    const navigate = useNavigate();
+
+    const handleCommentButtonClick = (e) => {
+        e.stopPropagation(); // Prevent post click navigation
+        if (isInFeedView && onCommentClick) {
+            onCommentClick(); // Call the provided handler in FeedView
+        } else {
+            setIsCommentModalOpen(true); // Open modal in regular view
+        }
+    };
+    const handlePostClick = (e) => {
+        // Don't navigate if clicking on buttons or links
+        if (e.target.closest('button') || 
+            e.target.closest('a') || 
+            e.target.closest('.gcu-edit-form') ||
+            e.target.closest('.gcu-comment-form')) {
+            return;
+        }
+        navigate(`/welcome/post/${post._id}`);
+    };
 
     const handleDelete = async () => {
         if (window.confirm("Are you sure you want to delete this post?")) {
@@ -82,8 +104,21 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
     const canDelete = currentUser && (currentUser.role === 'admin' || currentUser.id === post.author._id);
     const hasLiked = Array.isArray(post.likes) && post.likes.includes(currentUser.id);
 
+    const handleShare = async (e) => {
+        e.stopPropagation(); // Prevent post click navigation
+        const postUrl = `${window.location.origin}/welcome/post/${post._id}`;
+        
+        try {
+            await navigator.clipboard.writeText(postUrl);
+            setShowShareToast(true);
+            setTimeout(() => setShowShareToast(false), 2000);
+        } catch (err) {
+            console.error('Failed to copy URL:', err);
+        }
+    };
+
     return (
-        <div className="gcu-post-card">
+        <div className="gcu-post-card" onClick={handlePostClick}>
             <div className="gcu-post-card-wrapper">
                 {/* Three-dot menu */}
                 {(canEdit || canDelete) && (
@@ -191,21 +226,28 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
                         <FontAwesomeIcon icon={faThumbsUp} /> {post.likes.length}
                     </button>
                     <button
-                        className="gcu-action-button"
-                        onClick={() => setIsCommentModalOpen(true)}
-                        title="Comment on post"
-                    >
-                        <FontAwesomeIcon icon={faComment} /> {comments.length}
-                    </button>
+                className="gcu-action-button"
+                onClick={handleCommentButtonClick}
+                title="Comment on post"
+            >
+                <FontAwesomeIcon icon={faComment} /> {comments.length}
+            </button>
                     <button
                         className="gcu-action-button"
-                        onClick={() => {}}
+                        onClick={handleShare}
                         title="Share post"
                     >
                         <FontAwesomeIcon icon={faShare} />
                     </button>
                 </div>
 
+                {showShareToast && (
+                    <div className="gcu-share-toast">
+                        Link copied to clipboard!
+                    </div>
+                )}
+
+                {!isInFeedView && (
                 <CommentModal
                     isOpen={isCommentModalOpen}
                     onClose={() => setIsCommentModalOpen(false)}
@@ -214,6 +256,7 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser }) => {
                     comments={comments}
                     currentUser={currentUser}
                 />
+            )}
             </div>
         </div>
     );

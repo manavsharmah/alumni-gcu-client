@@ -106,6 +106,15 @@ function App() {
                     />
                   }
                 />
+                <Route 
+                  path="/welcome/post/:postId" 
+                  element={
+                    <ProtectedRoute
+                      element={<FeedHome />}
+                      requiredRole={["admin", "user"]}
+                    />
+                  }
+                />
                 <Route
                   path="/reset-password"
                   element={

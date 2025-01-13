@@ -28,7 +28,7 @@ const ProfilePhoto = ({ userId, className = '' }) => {
 
   return (
     <img
-      src={profilePhoto ? `http://localhost:5000/${profilePhoto.replace(/\\/g, "/")}` : `../assets/profile-placeholder.svg`}
+      src={profilePhoto ? `http://localhost:5000/${profilePhoto.replace(/\\/g, "/")}` : `/assets/profile-placeholder.svg`}
       alt="Profile"
       className={`profile-photo ${className}`}
     />

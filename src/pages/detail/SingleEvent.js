@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../pages.css";
 
 const SingleEvent = () => {
 	const { id } = useParams();
+	const navigate = useNavigate();
 	const [eventItem, setEventItem] = useState(null);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState(null);
@@ -15,19 +16,39 @@ const SingleEvent = () => {
 				const response = await axios.get(
 					`http://localhost:5000/api/events/get-event/${id}`
 				);
+				
+				if (!response.data || Object.keys(response.data).length === 0) {
+					navigate('/404', { replace: true });
+					return;
+				}
+				
 				setEventItem(response.data);
 				setLoading(false);
 			} catch (err) {
-				setError(err.message);
+				if (err.response) {
+					switch (err.response.status) {
+						case 404:
+							navigate('/404', { replace: true });
+							return;
+						case 500:
+							navigate('/server-error', { replace: true });
+							return;
+						default:
+							setError(err.message);
+					}
+				} else {
+					setError(err.message);
+				}
 				setLoading(false);
 			}
 		};
 
 		fetchEvent();
-	}, [id]);
+	}, [id, navigate]);
 
 	if (loading) return <p>Loading...</p>;
 	if (error) return <p>{error}</p>;
+	if (!eventItem) return null;
 
 	return (
 		<div className="main">
@@ -57,7 +78,7 @@ const SingleEvent = () => {
 								<div key={index} className="single-news-events-image-container">
 									<img
 										src={`http://localhost:5000${image}`}
-										alt={`Eventss Image ${index + 1}`}
+										alt={`Events Image ${index + 1}`}
 										className="single-news-events-image"
 									/>
 								</div>

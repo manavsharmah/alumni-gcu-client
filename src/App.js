@@ -22,6 +22,7 @@ import FeedHome from "./components/feed/FeedHome";
 import Profile from "./pages/specific/Profile";
 import UpdateProfile from "./pages/specific/UpdateProfile";
 import ChangeProfilePicture from "./pages/specific/ChangeProfilePicture";
+import { NotFound, Forbidden, ServerError } from "./pages/detail/ErrorPage";
 
 // Admin Pages
 import AdminNewsForm from "./pages/admin/AdminNewsForm";
@@ -151,6 +152,9 @@ function App() {
                     />
                   }
                 />
+                <Route path="/forbidden" element={<Forbidden />} />
+                <Route path="/server-error" element={<ServerError />} />
+                <Route path="*" element={<NotFound />} />
               </Route>
 
               {/* Admin Routes */}
@@ -171,6 +175,7 @@ function App() {
                 <Route path="/email-form" element={<AdminEmailForm />} />
                 <Route path="/add-bulk-alumni" element={<BulkAddAlumni />} />
                 <Route path="/view-feedback" element={<AdminFeedbackPanel />} />                
+                <Route path="*" element={<NotFound />} />                
               </Route>
             </Routes>
           </section>
@@ -181,4 +186,4 @@ function App() {
   );
 }
 
-export default App;
+export default App;

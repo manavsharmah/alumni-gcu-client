@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Topbar from './common/Topbar';
 import Bottombar from './common/Bottombar';
 
-const RootLayout = () => {
+const RootLayout = ({ hideBottomBar }) => {
   return (
     <div className="d-flex flex-column min-vh-100 ">  
       <Topbar />
@@ -12,7 +12,7 @@ const RootLayout = () => {
         <Outlet />
       </section>
 
-      <Bottombar />
+      {!hideBottomBar && <Bottombar />}
     </div>
   )
 }

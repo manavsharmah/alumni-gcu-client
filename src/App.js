@@ -97,24 +97,7 @@ function App() {
                 <Route path="/vcmsg" element={<VCMessage />} />
 
                 {/* Admin + User Routes */}
-                <Route
-                  path="/welcome"
-                  element={
-                    <ProtectedRoute
-                      element={<FeedHome />}
-                      requiredRole={["admin", "user"]}
-                    />
-                  }
-                />
-                <Route 
-                  path="/welcome/post/:postId" 
-                  element={
-                    <ProtectedRoute
-                      element={<FeedHome />}
-                      requiredRole={["admin", "user"]}
-                    />
-                  }
-                />
+                
                 <Route
                   path="/reset-password"
                   element={
@@ -147,6 +130,30 @@ function App() {
                   element={
                     <ProtectedRoute
                       element={<UpdateProfile />}
+                      requiredRole={["admin", "user"]}
+                    />
+                  }
+                />
+              </Route>
+
+              {/* Welcome routes without bottomabar     */}
+
+              <Route element={<RootLayout hideBottomBar={true} />}>
+                <Route 
+                  path="/welcome" 
+                  element={
+                    <ProtectedRoute
+                      element={<FeedHome />}
+                      requiredRole={["admin", "user"]}
+                    />
+                  }
+                />
+
+                <Route 
+                  path="/welcome/post/:postId" 
+                  element={
+                    <ProtectedRoute
+                      element={<FeedHome />}
                       requiredRole={["admin", "user"]}
                     />
                   }

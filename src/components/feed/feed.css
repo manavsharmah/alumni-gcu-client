@@ -4,13 +4,16 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    padding: 20px;
     font-family: 'IBM Plex Sans', sans-serif;
   }
   
-  .left-sidebar,
+  .left-sidebar {
+    width: 20%;
+  }
+
   .right-sidebar {
     width: 20%;
+    margin: 10px 20px 10px 20px;
   }
   
   .main-content {
@@ -18,7 +21,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    padding: 20px;
   }
 
   @media screen and (max-width: 1279px) {  /* Tablet and mobile screens */
@@ -41,6 +44,7 @@
 @media screen and (max-width: 1023px) {
   .main-content {
     width: 100%;
+    margin-bottom: 50px;
   }
 
   .right-sidebar {
@@ -69,7 +73,7 @@
     .main-content {
         width: 100%;  /* Full width for main content */
         padding: 0;
-        margin: 0;
+        margin-bottom: 50px;
     }
 }
 
@@ -78,6 +82,7 @@
 
 .feed-sidebar {
   width: 250px;
+  height: 100%;
   position: fixed;
   z-index: 1;
   background-color: #ffffff;

@@ -98,24 +98,7 @@ function App() {
                 <Route path="/vcmsg" element={<VCMessage />} />
 
                 {/* Admin + User Routes */}
-                <Route
-                  path="/welcome"
-                  element={
-                    <ProtectedRoute
-                      element={<FeedHome />}
-                      requiredRole={["admin", "user"]}
-                    />
-                  }
-                />
-                <Route 
-                  path="/welcome/post/:postId" 
-                  element={
-                    <ProtectedRoute
-                      element={<FeedHome />}
-                      requiredRole={["admin", "user"]}
-                    />
-                  }
-                />
+                
                 <Route
                   path="/reset-password"
                   element={
@@ -155,6 +138,30 @@ function App() {
                 <Route path="/forbidden" element={<Forbidden />} />
                 <Route path="/server-error" element={<ServerError />} />
                 <Route path="*" element={<NotFound />} />
+              </Route>
+
+              {/* Welcome routes without bottomabar     */}
+
+              <Route element={<RootLayout hideBottomBar={true} />}>
+                <Route 
+                  path="/welcome" 
+                  element={
+                    <ProtectedRoute
+                      element={<FeedHome />}
+                      requiredRole={["admin", "user"]}
+                    />
+                  }
+                />
+
+                <Route 
+                  path="/welcome/post/:postId" 
+                  element={
+                    <ProtectedRoute
+                      element={<FeedHome />}
+                      requiredRole={["admin", "user"]}
+                    />
+                  }
+                />
               </Route>
 
               {/* Admin Routes */}

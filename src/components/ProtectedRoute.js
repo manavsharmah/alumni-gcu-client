@@ -17,7 +17,7 @@ const ProtectedRoute = ({ element, requiredRole }) => {
 
   // Check if user has any of the required roles
   if (requiredRole && requiredRole.length > 0 && !requiredRole.includes(user.role)) {
-    return <Navigate to="/unauthorized" />;
+    return <Navigate to="/forbidden" />;
   }
 
   return element;

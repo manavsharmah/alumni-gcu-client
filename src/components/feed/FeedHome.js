@@ -4,8 +4,6 @@ import api from "../../services/api";
 import PostForm from "../../components/forms/PostForm";
 import PostList from "../../components/common/PostList";
 import RecommendedUsersList from "../../components/common/RecommendedUsersList";
-import JobOpportunities from "./JobOpportunities"; // New component
-import FurtherEducation from "./FurtherEducation"; // New component
 import FeedLayout from "./FeedLayout";
 import FeedNavbar from "./FeedNavbar";
 import VerifiedUsersList from "../common/VerifiedUsersList";

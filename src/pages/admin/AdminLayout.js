@@ -71,6 +71,12 @@ const AdminLayout = () => {
           </NavLink>
         </li>
         <li>
+          <NavLink to="/create-admin" className={getActiveClass}>
+            <IoPersonAdd />
+            <span>Create Admin</span>
+          </NavLink>
+        </li>
+        <li>
           <NavLink to="/" className={getActiveClass}>
             <FaArrowLeft />
             <span>Back to Website</span>

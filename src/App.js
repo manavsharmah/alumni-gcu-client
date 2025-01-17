@@ -32,6 +32,7 @@ import PhotoUpload from "./pages/admin/PhotoUpload";
 import AlumniArchive from "../src/pages/admin/AlumniArchive";
 import AdminEmailForm from "./pages/admin/AdminEmailForm";
 import BulkAddAlumni from "./pages/admin/AlumniRecordUpload";
+import CreateAdmin from "./pages/admin/CreateAdmin";
 
 
 // Detail Pages
@@ -181,7 +182,8 @@ function App() {
                 <Route path="/photo-upload-form" element={<PhotoUpload />} />
                 <Route path="/email-form" element={<AdminEmailForm />} />
                 <Route path="/add-bulk-alumni" element={<BulkAddAlumni />} />
-                <Route path="/view-feedback" element={<AdminFeedbackPanel />} />                
+                <Route path="/view-feedback" element={<AdminFeedbackPanel />} />   
+                <Route path="/create-admin" element={<CreateAdmin />} />             
                 <Route path="*" element={<NotFound />} />                
               </Route>
             </Routes>

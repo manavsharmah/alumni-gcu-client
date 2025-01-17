@@ -90,7 +90,10 @@ const FeedPostView = ({ onBack }) => {
 	const handleLike = async (postId) => {
 		try {
 			const response = await api.put(`/posts/${postId}/like`);
-			setPost(response.data);
+			setPost(prevPost => ({
+					...prevPost,
+					likes: response.data.likes || []
+			}));
 		} catch (err) {
 			setError("Failed to toggle like. Please try again.");
 		}

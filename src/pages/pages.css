@@ -1124,12 +1124,12 @@ button:hover {
 }
 
 .single-news-events-title {
-  font-size: 2rem;
+  font-size: 2.2rem;
   font-weight: bold;
   color: #FFFFFF;
   width: 100%;
   background-color: #0E0E10;
-  padding: 50px 150px ;
+  padding: 50px 150px;
   margin-bottom: 15px;
 }
 
@@ -1147,12 +1147,20 @@ button:hover {
   gap: 2rem;
 }
 
+.single-news-events-flex-container.no-images {
+  gap: 0;
+}
+
 .single-news-events-content-section {
   flex: 0 0 70%;
 }
 
+.single-news-events-content-section.full-width {
+  flex: 0 0 100%;
+}
+
 .single-news-events-content {
-  font-size: 1.1rem;
+  font-size: 1.32rem;
   line-height: 1.8;
   color: #333333;
   white-space: pre-wrap;

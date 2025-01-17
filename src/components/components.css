@@ -1,4 +1,4 @@
-/* ======Topbar====== */
+/* ========Topbar======== */
 
 .header-container {
   display: flex;
@@ -1483,6 +1483,7 @@ justify-content: center;
 
 .gcu-post-card:hover {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 }
 
 /* Avatar and Author Info */
@@ -2076,3 +2077,70 @@ justify-content: center;
   }
 }
 
+.gcu-share-toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 4px;
+  z-index: 1000;
+  animation: fadeInOut 2s ease;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { opacity: 0; }
+}/* Visitor counter banner */
+
+
+.visitor-counter-container {
+  margin: 12px;
+  width: auto;
+  height: auto;
+  padding: 10px;
+  border: 5px inset #C0C0C0;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, #555353, #282727);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.visitor-counter-title {
+  font-size: 16px;
+  padding-bottom: 5px;
+  color: #efba1e;
+}
+
+.visitor-count-container {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(90deg, #333, #444);
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.digit {
+  display: inline-block;
+  padding: 0px 8px;
+  font-size: 36px;
+  font-weight: bold;
+  color: #efba1e;
+  background: #000;
+  border: 1px solid #C0C0C0;
+  border-radius: 4px;
+  width: auto;
+  height: auto;
+  text-align: center;
+  box-shadow: inset 0px -2px 4px rgba(0, 0, 0, 0.6);
+  font-family: "Courier New", Courier, monospace;
+}

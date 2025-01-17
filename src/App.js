@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { UserProvider } from "./services/UserContext";
+import { VisitorCounterProvider } from "./services/VisitorCounterContext";
 
 // Common Components
 import Login from "./components/forms/LoginForm";
@@ -21,6 +22,7 @@ import FeedHome from "./components/feed/FeedHome";
 import Profile from "./pages/specific/Profile";
 import UpdateProfile from "./pages/specific/UpdateProfile";
 import ChangeProfilePicture from "./pages/specific/ChangeProfilePicture";
+import { NotFound, Forbidden, ServerError } from "./pages/detail/ErrorPage";
 
 // Admin Pages
 import AdminNewsForm from "./pages/admin/AdminNewsForm";
@@ -30,6 +32,7 @@ import PhotoUpload from "./pages/admin/PhotoUpload";
 import AlumniArchive from "../src/pages/admin/AlumniArchive";
 import AdminEmailForm from "./pages/admin/AdminEmailForm";
 import BulkAddAlumni from "./pages/admin/AlumniRecordUpload";
+import CreateAdmin from "./pages/admin/CreateAdmin";
 
 
 // Detail Pages
@@ -49,7 +52,7 @@ import {
 	GoverningCouncil
 } from "./pages/detail/About";
 import AdminFeedbackPanel from "./pages/admin/AdminFeedbackPanel";
-import AdminStats from "./pages/admin/AdminStats";
+import DashboardCharts from "./pages/admin/AdminStats";
 
 
 import AboutAssociation from "./pages/articles/About-Association";
@@ -59,6 +62,7 @@ import VCMessage from "./pages/articles/VCMessage";
 function App() {
   return (
     <UserProvider>
+      <VisitorCounterProvider>
       <React.Fragment>
         <div className="w-full md:flex">
           <section className="flex flex-1 h-full">
@@ -95,15 +99,7 @@ function App() {
                 <Route path="/vcmsg" element={<VCMessage />} />
 
                 {/* Admin + User Routes */}
-                <Route
-                  path="/welcome"
-                  element={
-                    <ProtectedRoute
-                      element={<FeedHome />}
-                      requiredRole={["admin", "user"]}
-                    />
-                  }
-                />
+                
                 <Route
                   path="/reset-password"
                   element={
@@ -140,6 +136,33 @@ function App() {
                     />
                   }
                 />
+                <Route path="/forbidden" element={<Forbidden />} />
+                <Route path="/server-error" element={<ServerError />} />
+                <Route path="*" element={<NotFound />} />
+              </Route>
+
+              {/* Welcome routes without bottomabar     */}
+
+              <Route element={<RootLayout hideBottomBar={true} />}>
+                <Route 
+                  path="/welcome" 
+                  element={
+                    <ProtectedRoute
+                      element={<FeedHome />}
+                      requiredRole={["admin", "user"]}
+                    />
+                  }
+                />
+
+                <Route 
+                  path="/welcome/post/:postId" 
+                  element={
+                    <ProtectedRoute
+                      element={<FeedHome />}
+                      requiredRole={["admin", "user"]}
+                    />
+                  }
+                />
               </Route>
 
               {/* Admin Routes */}
@@ -151,7 +174,7 @@ function App() {
                   />
                 }
               >
-                <Route path="/admin-stats" element={<AdminStats />} />
+                <Route path="/admin-stats" element={<DashboardCharts />} />
                 <Route path="/admin-dashboard" element={<AdminDashboard />} />
                 <Route path="/alumni-archive" element={<AlumniArchive />} />
                 <Route path="/news-form" element={<AdminNewsForm />} />
@@ -159,14 +182,17 @@ function App() {
                 <Route path="/photo-upload-form" element={<PhotoUpload />} />
                 <Route path="/email-form" element={<AdminEmailForm />} />
                 <Route path="/add-bulk-alumni" element={<BulkAddAlumni />} />
-                <Route path="/view-feedback" element={<AdminFeedbackPanel />} />                
+                <Route path="/view-feedback" element={<AdminFeedbackPanel />} />   
+                <Route path="/create-admin" element={<CreateAdmin />} />             
+                <Route path="*" element={<NotFound />} />                
               </Route>
             </Routes>
           </section>
         </div>
       </React.Fragment>
+      </VisitorCounterProvider>
     </UserProvider>
   );
 }
 
-export default App;
+export default App;

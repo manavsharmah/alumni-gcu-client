@@ -830,4 +830,109 @@
   top: auto;
   margin-top: 0;
   margin-bottom: 8px;
+}  
+
+/* Admin charts */
+
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f5f5f5;
+  color: #333;
+  font-family: Arial, sans-serif;
+}
+
+.metrics-overview {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.metric h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #555;
+}
+
+.metric p {
+  margin: 5px 0 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000;
+}
+
+.chart-container {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 32px;
+  margin-bottom: 32px;
+}
+
+.chart {
+  height: 500px;
+}
+
+.chart-title {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+}
+
+.top-users-list {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.top-users-list h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: #333;
+}
+
+.top-users-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.top-users-list li {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+}
+
+.top-users-list li:last-child {
+  border-bottom: none;
+}
+
+.top-users-list li span {
+  font-size: 16px;
+}
+
+/* Responsive Design (Optional if needed in future) */
+@media (max-width: 768px) {
+  .metrics-overview {
+    flex-direction: column;
+    gap: 10px;
+  }
 }

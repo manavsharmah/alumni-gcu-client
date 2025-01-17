@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Article from "../../components/common/Article-container";
 import Lightbox from "yet-another-react-lightbox";
@@ -10,18 +10,21 @@ import Download from "yet-another-react-lightbox/plugins/download";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import "../pages.css";
+import Spinner from "../../components/common/LoadingSpinner";
 
 const SingleAlbum = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [album, setAlbum] = useState(null);
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchAlbum = async () => {
       if (!id) {
-        setError("No album ID provided");
+        navigate('/404', { replace: true });
         return;
       }
 
@@ -29,29 +32,39 @@ const SingleAlbum = () => {
         const response = await axios.get(
           `http://localhost:5000/api/images/album/${id}`
         );
+        
+        if (!response.data || Object.keys(response.data).length === 0) {
+          navigate('/404', { replace: true });
+          return;
+        }
+
         setAlbum(response.data);
+        setLoading(false);
       } catch (err) {
-        console.error(
-          "Error fetching album:",
-          err.response ? err.response.data : err.message
-        );
-        setError(
-          "Error fetching album: " +
-            (err.response ? JSON.stringify(err.response.data) : err.message)
-        );
+        if (err.response) {
+          switch (err.response.status) {
+            case 404:
+              navigate('/404', { replace: true });
+              return;
+            case 500:
+              navigate('/server-error', { replace: true });
+              return;
+            default:
+              setError(err.message);
+          }
+        } else {
+          setError(err.message);
+        }
+        setLoading(false);
       }
     };
 
     fetchAlbum();
-  }, [id]);
+  }, [id, navigate]);
 
-  if (error) {
-    return <p>{error}</p>;
-  }
-
-  if (!album) {
-    return null; 
-  }
+  if (loading) return <div><Spinner /></div>;
+  if (error) return <p>{error}</p>;
+  if (!album) return null;
 
   const slides = album.images.map((image) => ({
     src: `http://localhost:5000${image}`,

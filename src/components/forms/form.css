@@ -240,6 +240,7 @@
 
 .close-btn {
     background: none;
+    color: red;
     border: none;
     font-size: 1.5em;
     cursor: pointer;

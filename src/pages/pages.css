@@ -167,7 +167,7 @@
 
 .right-box img {
   width: 100%; /* Allow image to scale down with the container */
-  height: auto; /* Maintain aspect ratio */
+  height: auto; /* Maintain the aspect ratio */
   max-height: 610px; 
   object-fit: cover; 
 }
@@ -2335,3 +2335,66 @@ button:hover {
   }
 }
 
+/* ErrorPage.css */
+.error-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  background-color: #f8f9fa;
+  width: 100%;
+}
+
+.error-content {
+  text-align: center;
+  padding: 2rem;
+  margin-top: 110px;
+}
+
+.error-title {
+  font-size: 8rem;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1;
+}
+
+.error-message {
+  margin-top: 1.5rem;
+}
+
+.error-message h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 1rem;
+}
+
+.error-message p {
+  color: #6c757d;
+  margin-bottom: 2rem;
+}
+
+.home-button {
+  display: inline-block;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.home-button:hover {
+  background-color: var(--hover-color);
+  color: white;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .error-title {
+    font-size: 6rem;
+  }
+  
+  .error-message h2 {
+    font-size: 1.5rem;
+  }
+}

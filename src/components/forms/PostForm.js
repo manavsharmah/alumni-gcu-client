@@ -46,7 +46,7 @@ const PostForm = ({ onSubmitPost, isLoading, error }) => {
                     <input
                         type="text"
                         className="collapsed-input"
-                        placeholder="Start a post, try writing with AI"
+                        placeholder="Create a post"
                         readOnly
                     />
                 </div>

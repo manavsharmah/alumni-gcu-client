@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../pages.css";
+import  Spinner  from "../../components/common/LoadingSpinner";
 
 const SingleNews = () => {
 	const { id } = useParams();
@@ -49,7 +50,7 @@ const SingleNews = () => {
 		fetchNews();
 	}, [id, navigate]);
 
-	if (loading) return <p>Loading...</p>;
+	if (loading) return <div><Spinner /></div>;
 	if (error) return <p>{error}</p>;
 	if (!newsItem) return null;
 

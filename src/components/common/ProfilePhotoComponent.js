@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
+import Spinner  from './LoadingSpinner'
 
 const ProfilePhoto = ({ userId, className = '' }) => {
   const [profilePhoto, setProfilePhoto] = useState(null);
@@ -24,7 +25,7 @@ const ProfilePhoto = ({ userId, className = '' }) => {
     fetchProfilePhoto();
   }, [userId]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div><Spinner /></div>;
 
   return (
     <img

@@ -10,6 +10,7 @@ import Download from "yet-another-react-lightbox/plugins/download";
 import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import "../pages.css";
+import Spinner from "../../components/common/LoadingSpinner";
 
 const SingleAlbum = () => {
   const { id } = useParams();
@@ -61,7 +62,7 @@ const SingleAlbum = () => {
     fetchAlbum();
   }, [id, navigate]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <div><Spinner /></div>;
   if (error) return <p>{error}</p>;
   if (!album) return null;
 

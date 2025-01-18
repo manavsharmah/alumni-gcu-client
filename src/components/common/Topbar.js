@@ -86,8 +86,8 @@ const Topbar = () => {
                   <li><Link to='/council'>Governing Council</Link></li>
                 </ul>
               </li>
-              <li><Link to="/alumnus">Association Members</Link></li>
-              <li><Link to="/top-alumni">Alumni-Achievers</Link></li>
+              <li><Link to="/association-members">Association Members</Link></li>
+              <li><Link to="/alumni-achievers">Alumni-Achievers</Link></li>
               <li><Link to="/scholarship">Scholarships</Link></li>
               <li><Link to="/news">News</Link></li>
               <li><Link to="/events">Events</Link></li>

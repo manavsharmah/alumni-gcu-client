@@ -17,22 +17,22 @@ const SingleEvent = () => {
 				const response = await axios.get(
 					`http://localhost:5000/api/events/get-event/${id}`
 				);
-				
+
 				if (!response.data || Object.keys(response.data).length === 0) {
-					navigate('/404', { replace: true });
+					navigate("/404", { replace: true });
 					return;
 				}
-				
+
 				setEventItem(response.data);
 				setLoading(false);
 			} catch (err) {
 				if (err.response) {
 					switch (err.response.status) {
 						case 404:
-							navigate('/404', { replace: true });
+							navigate("/404", { replace: true });
 							return;
 						case 500:
-							navigate('/server-error', { replace: true });
+							navigate("/server-error", { replace: true });
 							return;
 						default:
 							setError(err.message);
@@ -47,9 +47,16 @@ const SingleEvent = () => {
 		fetchEvent();
 	}, [id, navigate]);
 
-	if (loading) return <div><Spinner /></div>;
+	if (loading)
+		return (
+			<div>
+				<Spinner />
+			</div>
+		);
 	if (error) return <p>{error}</p>;
 	if (!eventItem) return null;
+
+	const hasImages = eventItem.images && eventItem.images.length > 0;
 
 	return (
 		<div className="main">
@@ -61,8 +68,16 @@ const SingleEvent = () => {
 					{eventItem.title}
 				</h2>
 
-				<div className="single-news-events-flex-container">
-					<div className="single-news-events-content-section">
+				<div
+					className={`single-news-events-flex-container ${
+						!hasImages ? "no-images" : ""
+					}`}
+				>
+					<div
+						className={`single-news-events-content-section ${
+							!hasImages ? "full-width" : ""
+						}`}
+					>
 						<div className="single-news-events-content">
 							{eventItem.content.split("\n").map((line, index) => (
 								<React.Fragment key={index}>
@@ -73,9 +88,9 @@ const SingleEvent = () => {
 						</div>
 					</div>
 
-					<div className="single-news-events-images-section">
-						{eventItem.images && eventItem.images.length > 0 ? (
-							eventItem.images.map((image, index) => (
+					{hasImages && (
+						<div className="single-news-events-images-section">
+							{eventItem.images.map((image, index) => (
 								<div key={index} className="single-news-events-image-container">
 									<img
 										src={`http://localhost:5000${image}`}
@@ -83,17 +98,9 @@ const SingleEvent = () => {
 										className="single-news-events-image"
 									/>
 								</div>
-							))
-						) : (
-							<div className="single-news-events-image-container">
-								<img
-									src="/assets/gcu-building.jpg"
-									alt="Default Thumbnail"
-									className="single-news-events-image"
-								/>
-							</div>
-						)}
-					</div>
+							))}
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

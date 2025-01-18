@@ -77,6 +77,12 @@ const AdminLayout = () => {
           </NavLink>
         </li>
         <li>
+        <NavLink to="/flagged-posts" className={getActiveClass}>
+            <MdFeed />
+            <span>Flagged Posts</span>
+        </NavLink>
+        </li>
+        <li>
           <NavLink to="/" className={getActiveClass}>
             <FaArrowLeft />
             <span>Back to Website</span>

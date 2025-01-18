@@ -9,7 +9,8 @@ import {
     faEllipsisH,
     faThumbsUp, 
     faComment,
-    faShare
+    faShare,
+    faFlag
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from 'react-router-dom';
 
@@ -81,6 +82,16 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
         }
     };
 
+    const handleReport = async (e) => {
+        e.stopPropagation(); // Prevent post click navigation
+        try {
+            await api.post(`/posts/report`, { postId: post._id });
+            alert('Post reported successfully!');
+        } catch (err) {
+            console.error('Error reporting post:', err);
+        }
+    };
+
     const getRelativeTime = (dateString) => {
         const postDate = new Date(dateString);
         const now = new Date();
@@ -103,6 +114,7 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
     const canEdit = currentUser && (currentUser.id === post.author._id);
     const canDelete = currentUser && (currentUser.role === 'admin' || currentUser.id === post.author._id);
     const hasLiked = Array.isArray(post.likes) && post.likes.includes(currentUser.id);
+    const canReport = currentUser && (currentUser.id !== post.author._id);
 
     const handleShare = async (e) => {
         e.stopPropagation(); // Prevent post click navigation
@@ -133,7 +145,7 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                             {showMenu && (
                                 <div className="gcu-dropdown-menu">
                                     {canEdit && !isEditing && (
-                                        <button 
+                                        <button
                                             className="gcu-menu-item"
                                             onClick={() => {
                                                 setIsEditing(true);
@@ -144,10 +156,7 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                                         </button>
                                     )}
                                     {canDelete && (
-                                        <button 
-                                            className="gcu-menu-item"
-                                            onClick={handleDelete}
-                                        >
+                                        <button className="gcu-menu-item" onClick={handleDelete}>
                                             Delete
                                         </button>
                                     )}
@@ -226,12 +235,12 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                         <FontAwesomeIcon icon={faThumbsUp} /> {post.likes.length}
                     </button>
                     <button
-                className="gcu-action-button"
-                onClick={handleCommentButtonClick}
-                title="Comment on post"
-            >
-                <FontAwesomeIcon icon={faComment} /> {comments.length}
-            </button>
+                        className="gcu-action-button"
+                        onClick={handleCommentButtonClick}
+                        title="Comment on post"
+                    >
+                        <FontAwesomeIcon icon={faComment} /> {comments.length}
+                    </button>
                     <button
                         className="gcu-action-button"
                         onClick={handleShare}
@@ -239,6 +248,15 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                     >
                         <FontAwesomeIcon icon={faShare} />
                     </button>
+                    {canReport && (
+                        <button
+                            className="gcu-action-button"
+                            onClick={handleReport}
+                            title="Report post"
+                        >
+                            <FontAwesomeIcon icon={faFlag} />
+                        </button>
+                    )}
                 </div>
 
                 {showShareToast && (

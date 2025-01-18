@@ -103,6 +103,7 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
     const canEdit = currentUser && (currentUser.id === post.author._id);
     const canDelete = currentUser && (currentUser.role === 'admin' || currentUser.id === post.author._id);
     const hasLiked = Array.isArray(post.likes) && post.likes.includes(currentUser.id);
+    const canReport = currentUser && (currentUser.id !== post.author._id);
 
     const handleShare = async (e) => {
         e.stopPropagation(); // Prevent post click navigation
@@ -133,7 +134,7 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                             {showMenu && (
                                 <div className="gcu-dropdown-menu">
                                     {canEdit && !isEditing && (
-                                        <button 
+                                        <button
                                             className="gcu-menu-item"
                                             onClick={() => {
                                                 setIsEditing(true);
@@ -144,11 +145,24 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                                         </button>
                                     )}
                                     {canDelete && (
-                                        <button 
-                                            className="gcu-menu-item"
-                                            onClick={handleDelete}
-                                        >
+                                        <button className="gcu-menu-item" onClick={handleDelete}>
                                             Delete
+                                        </button>
+                                    )}
+                                    {canReport && (
+                                        <button
+                                            className="gcu-menu-item"
+                                            onClick={async () => {
+                                                try {
+                                                    await api.post(`/posts/report`, { postId: post._id });
+                                                    alert('Post reported successfully!');
+                                                } catch (err) {
+                                                    console.error('Error reporting post:', err);
+                                                }
+                                                setShowMenu(false);
+                                            }}
+                                        >
+                                            Report
                                         </button>
                                     )}
                                 </div>

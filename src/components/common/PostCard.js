@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '../components.css';
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
 import CommentModal from "./CommentModal";
-import api from "../../services/api"; // Add this import
+import api from "../../services/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
     faEllipsisH,
@@ -13,6 +13,7 @@ import {
     faFlag
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = false, onCommentClick }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -24,15 +25,15 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
     const navigate = useNavigate();
 
     const handleCommentButtonClick = (e) => {
-        e.stopPropagation(); // Prevent post click navigation
+        e.stopPropagation();
         if (isInFeedView && onCommentClick) {
-            onCommentClick(); // Call the provided handler in FeedView
+            onCommentClick();
         } else {
-            setIsCommentModalOpen(true); // Open modal in regular view
+            setIsCommentModalOpen(true);
         }
     };
+
     const handlePostClick = (e) => {
-        // Don't navigate if clicking on buttons or links
         if (e.target.closest('button') || 
             e.target.closest('a') || 
             e.target.closest('.gcu-edit-form') ||
@@ -68,8 +69,24 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                 text: commentText
             });
             setComments([...comments, response.data]);
+            toast.success('Comment added successfully!', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         } catch (error) {
             console.error("Error posting comment:", error);
+            toast.error('Failed to add comment. Please try again.', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         }
     };
 
@@ -77,18 +94,49 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
         try {
             await api.delete(`/posts/${post._id}/comments/${commentId}`);
             setComments(comments.filter(comment => comment._id !== commentId));
+            toast.success('Comment deleted successfully!', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         } catch (error) {
             console.error("Error deleting comment:", error);
+            toast.error('Failed to delete comment. Please try again.', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         }
     };
 
     const handleReport = async (e) => {
-        e.stopPropagation(); // Prevent post click navigation
+        e.stopPropagation();
         try {
             await api.post(`/posts/report`, { postId: post._id });
-            alert('Post reported successfully!');
+            toast.success('Post reported successfully!', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         } catch (err) {
             console.error('Error reporting post:', err);
+            toast.error('Failed to report post. Please try again.', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         }
     };
 
@@ -117,7 +165,7 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
     const canReport = currentUser && (currentUser.id !== post.author._id);
 
     const handleShare = async (e) => {
-        e.stopPropagation(); // Prevent post click navigation
+        e.stopPropagation();
         const postUrl = `${window.location.origin}/welcome/post/${post._id}`;
         
         try {
@@ -266,15 +314,15 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                 )}
 
                 {!isInFeedView && (
-                <CommentModal
-                    isOpen={isCommentModalOpen}
-                    onClose={() => setIsCommentModalOpen(false)}
-                    onSubmitComment={handleCommentSubmit}
-                    onDeleteComment={handleDeleteComment}
-                    comments={comments}
-                    currentUser={currentUser}
-                />
-            )}
+                    <CommentModal
+                        isOpen={isCommentModalOpen}
+                        onClose={() => setIsCommentModalOpen(false)}
+                        onSubmitComment={handleCommentSubmit}
+                        onDeleteComment={handleDeleteComment}
+                        comments={comments}
+                        currentUser={currentUser}
+                    />
+                )}
             </div>
         </div>
     );

@@ -11,6 +11,8 @@ import VerifiedUsersList from "../common/VerifiedUsersList";
 import Spinner from "../common/LoadingSpinner"; // Import Spinner
 import { useParams, useNavigate } from 'react-router-dom';
 import FeedPostView from './FeedPostView';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Welcome = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -24,7 +26,6 @@ const Welcome = () => {
     const location = useLocation();
     const { postId } = useParams();
     const navigate = useNavigate();
-
     const loaderRef = useRef(null);
     const currentPageRef = useRef(1);
     const postsPerPage = 6;
@@ -46,9 +47,17 @@ const Welcome = () => {
             if (!reset) setIsFetchingMore(true);
 
             try {
-                const response = await api.get(
-                    `/posts/get-post?page=${page}&limit=${postsPerPage}&category=${category}&excludeUser=${currentUser?.id}`
-                );
+                let endpoint;
+                if (activeTab === "my-posts") {
+                    endpoint = `/posts/user/${currentUser.id}?page=${page}&limit=${postsPerPage}`;
+                } else {
+                    endpoint = `/posts/get-post?page=${page}&limit=${postsPerPage}&category=${category}`;
+                    if (activeTab !== "my-posts") {
+                        endpoint += `&excludeUser=${currentUser?.id}`;
+                    }
+                }
+
+                const response = await api.get(endpoint);
 
                 setPosts((prevPosts) => {
                     if (reset) return response.data.posts;
@@ -65,7 +74,7 @@ const Welcome = () => {
                 setIsLoading(false);
             }
         },
-        [currentUser]
+        [currentUser, activeTab]
     );
 
     // Initial posts fetch when tab changes
@@ -80,6 +89,8 @@ const Welcome = () => {
                     ? "job"
                     : activeTab === "education"
                     ? "education"
+                    : activeTab === "my-posts"
+                    ? "all"
                     : "post";
             fetchPosts(1, category, true);
         }
@@ -96,6 +107,8 @@ const Welcome = () => {
                             ? "job"
                             : activeTab === "education"
                             ? "education"
+                            : activeTab === "my-posts"
+                            ? "all"
                             : "post";
                     fetchPosts(currentPageRef.current + 1, category);
                 }
@@ -119,8 +132,30 @@ const Welcome = () => {
                     ? "education"
                     : "post";
             await fetchPosts(1, currentCategory, true);
+            
+            // Custom toast with navigation link using inline styles
+            toast.success(
+                <div>
+                    Post created successfully!{' '}
+                    <span 
+                        style={{ 
+                            textDecoration: 'underline', 
+                            cursor: 'pointer',
+                            color: '#2563eb',
+                            backgroundColor: 'transparent'
+                        }}
+                        onClick={() => {
+                            setActiveTab("my-posts");
+                            navigate("/welcome");
+                        }}
+                    >
+                        View in My Posts
+                    </span>
+                </div>
+            );
         } catch (err) {
             setError("Failed to submit post. Please try again.");
+            toast.error("Failed to create post. Please try again.");
         } finally {
             setIsLoading(false);
         }
@@ -130,8 +165,10 @@ const Welcome = () => {
         try {
             await api.delete(`/posts/${postId}`);
             setPosts((prevPosts) => prevPosts.filter((post) => post._id !== postId));
+            toast.success("Post deleted successfully!");
         } catch (err) {
             setError("Failed to delete post. Please try again.");
+            toast.error("Failed to delete post. Please try again.");
         }
     };
 
@@ -143,8 +180,10 @@ const Welcome = () => {
                     post._id === postId ? { ...post, content: newContent } : post
                 )
             );
+            toast.success("Post updated successfully!");
         } catch (err) {
             setError("Failed to edit post. Please try again.");
+            toast.error("Failed to edit post. Please try again.");
         }
     };
 
@@ -158,6 +197,7 @@ const Welcome = () => {
             );
         } catch (err) {
             setError("Failed to toggle like. Please try again.");
+            toast.error("Failed to toggle like. Please try again.");
         }
     };
 
@@ -168,7 +208,8 @@ const Welcome = () => {
             currentPageRef.current = 1;
             setHasMore(true);
             const category = activeTab === "jobs" ? "job" : 
-                            activeTab === "education" ? "education" : "post";
+                            activeTab === "education" ? "education" : 
+                            activeTab === "my-posts" ? "all" : "post";
             fetchPosts(1, category, true);
             
             // Clean up the state
@@ -183,8 +224,10 @@ const Welcome = () => {
             ) : (
                 <div className="flex flex-col">
                     {activeTab !== "friends" && (
+                        <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
+                    )}
+                    {activeTab !== "friends" && (
                         <>
-                            <PostForm onSubmitPost={handleSubmitPost} isLoading={isLoading} error={error} />
                             {isLoading && posts.length === 0 ? (
                                 <div className="flex justify-center py-4">
                                     <Spinner />
@@ -214,6 +257,17 @@ const Welcome = () => {
                     {activeTab === "friends" && <VerifiedUsersList />}
                 </div>
             )}
+            <ToastContainer
+                position="bottom-center"
+                autoClose={3500}
+                hideProgressBar={false}
+                newestOnTop
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </>
     );
 
@@ -226,6 +280,7 @@ const Welcome = () => {
                     {activeTab === "home" && <RecommendedUsersList />}
                     {activeTab === "jobs" && <RecommendedUsersList />}
                     {activeTab === "education" && <VerifiedUsersList />}
+                    {activeTab === "my-posts" && <RecommendedUsersList />}
                 </>
             }
         />

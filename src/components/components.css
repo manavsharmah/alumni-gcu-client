@@ -2144,3 +2144,186 @@ justify-content: center;
   box-shadow: inset 0px -2px 4px rgba(0, 0, 0, 0.6);
   font-family: "Courier New", Courier, monospace;
 }
+
+
+
+/* Alumni Achievers Card */
+
+.alumni-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  border: 1px solid #ccc;
+  padding: 20px;
+  gap: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.alumni-image {
+  flex: 1;
+  max-width: 250px;
+  text-align: center;
+}
+
+.alumni-image img {
+  width: 100%;
+  max-width: 250px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.alumni-name {
+  margin-top: 10px;
+}
+
+.alumni-name h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.alumni-name p {
+  font-size: 14px;
+  margin: 0;
+  color: #555;
+}
+
+.alumni-info {
+  flex: 2;
+  padding: 0 20px;
+}
+
+.alumni-info h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.alumni-info p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+@media screen and (max-width: 768px) {
+  .alumni-card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .alumni-info {
+    padding: 0;
+  }
+
+  .alumni-image {
+    max-width: 100%;
+  }
+}
+
+
+/* Card Caroousel style */
+
+.card-carousel-wrapper {
+  position: relative;
+  width: 80%;
+  padding: 20px 10px;
+  overflow: hidden;
+}
+
+.card-carousel-list .card-carousel-item {
+  list-style: none;
+}
+
+.card-carousel-list .card-carousel-item .card-carousel-link {
+  display: block;
+  background: #fff;
+  padding: 18px;
+  border-radius: 12px;
+  text-decoration: none;
+  border: 2px solid transparent;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+  transition: 0.2s ease;
+}
+
+.card-carousel-link:hover {
+  border-color: #5372f0;
+}
+
+.card-carousel-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.badge {
+  color: blue;
+  margin: 16px 0 18px;
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  background: #dde4ff;
+  width: fit-content;
+  border-radius: 50px;
+}
+
+.card-carousel-title {
+  font-size: 16px;
+  color: #000;
+  font-weight: 100;
+}
+
+.card-carousel-button {
+  height: 35px;
+  width: 35px;
+  color: #5372f0;
+  border-radius: 50%;
+  margin: 30px 0 5px;
+  background: none;
+  cursor: pointer;
+  transform: rotate(-45deg);
+  border: 2px solid #5382f0;
+  transition: 0.4s ease;
+}
+
+.card-carousel-link:hover .card-button {
+  color: #fff;
+  background: #5372f0;
+}
+
+.swiper-pagination-bullet {
+  height: 13px;
+  width: 13px;
+  opacity: 0.5;
+  background: #5372f0;
+}
+
+.swiper-slide-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+  z-index: 10;
+  color: #5372f0;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+.swiper-button-prev {
+  left: 0; 
+}
+
+.swiper-button-next {
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .swiper-slide-button {
+    display: none;
+  }
+}
+
+
+

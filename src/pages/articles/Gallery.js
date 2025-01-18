@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../pages.css';
+import './articles.css';
 import { useNavigate } from 'react-router-dom';
-import Article from '../../components/common/Article-container';
 
 const Gallery = () => {
   const [albums, setAlbums] = useState([]);
@@ -43,8 +43,11 @@ const Gallery = () => {
 
   return (
     <div className='main'>
-      <div className="page-container">
-        <Article title="Gallery">
+      <div className="art-container">
+        <div className="about-header">
+          <h1>Gallery</h1>
+        </div>
+        <div className="goal-content-container">
             <div className="albums-container">
               {albums.map((album) => (
                 <div key={album._id} className="album-card" onClick={() => handleAlbumClick(album._id)}>
@@ -58,7 +61,7 @@ const Gallery = () => {
                 </div>
               ))}
             </div>
-        </Article>
+        </div>
       </div>
     </div>
   );

@@ -41,7 +41,8 @@
 }
 
 .about-sub-heading h2,
-.goal-sub-heading h2 {
+.goal-sub-heading h2,
+council-sub-heading h2 {
     font-size: 32px;
     font-weight: 600;
     margin-bottom: 12px;
@@ -362,6 +363,7 @@
 .vc-message-container {
     font-size: 18px;
     padding: 40px 20px;
+    text-align: justify;
 }
 
 .letter {
@@ -397,7 +399,286 @@
     transform: rotate(1.4deg);
 }
 
-.letter h3 {
+.letter-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    align-items: center;
+}
+
+.letter-header-text h3 {
     font-size: 28px;
     padding-bottom: 20px;
+}
+
+.letter p strong {
+  margin-bottom: 8px;
+}
+
+.letter-header-image img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .vc-message-container {
+    font-size: 16px;
+    padding: 30px 15px;
+  }
+
+  .letter {
+    max-width: 95%;
+    padding: 32px; /* Reduce padding for smaller screens */
+    margin: 20px auto;
+  }
+
+  .letter:before {
+    transform: rotate(-0.2deg);
+  }
+
+  .letter:after {
+      transform: rotate(0.5deg);
+      padding-bottom: 8px;
+  }
+
+  .letter-header {
+    flex-direction: column; /* Stack text and image vertically */
+    align-items: center; /* Center-align content */
+    text-align: center;
+  }
+
+  .letter-header-text h3 {
+    font-size: 24px; /* Reduce font size for headers */
+    padding-bottom: 10px;
+  }
+
+  .letter-header-image img {
+    width: 150px; /* Reduce image size */
+    height: 150px;
+    margin-bottom: 10px; /* Add spacing below the image */
+  }
+}
+
+@media (max-width: 480px) {
+  .vc-message-container {
+    font-size: 14px; /* Further reduce font size */
+    padding: 20px 0px; /* Adjust padding for very small screens */
+  }
+
+  .letter {
+    padding: 24px;
+    margin: 16px auto;
+  }
+
+
+  .letter-header-text h3 {
+    font-size: 20px; /* Further reduce font size */
+  }
+
+  .letter-header-image img {
+    width: 120px; /* Further reduce image size */
+    height: 120px;
+  }
+}
+
+
+/* Council Members Container */
+
+.council-content-container {
+  width: 80%;
+}
+
+.council-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+    justify-content: center;
+}
+
+.council-members-container {
+  padding: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.council-member {
+    display: flex;
+    width: 80%;
+    flex-wrap: wrap;
+    flex-direction: row;
+    margin: 20px;
+    background: linear-gradient(to left, #fdf3dc,#fdf3dc, #27357f);
+    border: 2px solid transparent; 
+    border-image: linear-gradient(to left, #fdf3dc, #27357f) 3;
+    border-image: linear-gradient(to right, #fdf3dc, #27357f);
+    border-image-slice: 1; 
+}
+
+.alt-council-member {
+    display: flex;
+    width: 80%;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    padding: 20px;
+    margin: 20px;
+    background: linear-gradient(to right, #fdf3dc,#fdf3dc, #27357f);
+    border: 2px solid transparent; 
+    border-image: linear-gradient(to right, #fdf3dc, #27357f) 3;
+    border-image: linear-gradient(to left, #fdf3dc, #27357f);
+    border-image-slice: 1;
+}
+
+.member-image {
+    padding: 50px;
+    /* background-color: #27357f; */
+}
+
+.member-image img{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+}
+
+.member-info {
+  flex: 1;
+    padding: 50px;
+    text-align: right;
+}
+
+.alt-council-member .member-info {
+  text-align: left;
+}
+
+.member-info h3 {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.member-info p {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+
+@media (max-width: 768px) {
+
+  .council-content-container {
+    width: 100%; /* Adjust width for smaller screens */
+  }
+
+  .council-member, .alt-council-member {
+    flex-direction: column; /* Stack content vertically */
+    width: 90%; /* Adjust width for smaller screens */
+    background: linear-gradient(to top, #fdf3dc,#fdf3dc, #27357f);
+  }
+
+  .member-image {
+    padding: 20px; /* Reduce padding for smaller screens */
+    text-align: center; /* Center the image horizontally */
+  }
+
+  .member-image img {
+    width: 200px; /* Adjust image size for smaller screens */
+    height: 200px;
+  }
+
+  .member-info {
+    padding: 20px; /* Reduce padding */
+    text-align: center; /* Center text for smaller screens */
+  }
+
+  .alt-council-member .member-info {
+    text-align: center; /* Center text for alternate containers as well */
+  }
+}
+
+@media (max-width: 480px) {
+  .member-image img {
+    width: 150px; /* Further reduce image size for very small screens */
+    height: 150px;
+  }
+
+  .member-info h3 {
+    font-size: 24px; /* Adjust font size */
+  }
+
+  .member-info p {
+    font-size: 18px;
+  }
+}
+
+
+/* Association members style */
+
+.association-members-container {
+  width: 70%;
+  padding: 30px;
+}
+
+.member-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  text-align: left;
+}
+
+.member-table th,
+.member-table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .member-table th {
+      background-color: #27357f;
+      color: white;
+    }
+
+    @media screen and (max-width: 768px) {
+
+      .member-table table,
+      .member-table thead,
+      .member-table tbody,
+      .member-table th,
+      .member-table td,
+      .member-table tr {
+        display: block;
+      }
+
+      .member-table thead tr {
+        display: none;
+      }
+
+      .member-table tr {
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      .member-table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+      }
+
+      .member-table td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        flex-basis: 50%;
+        text-align: left;
+      }
+    }
+
+
+.carousel-content-container {
+  width: 90%;
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -160,8 +160,16 @@ const FeedPostView = ({ onBack }) => {
 
 	return (
 		<div className="feed-post-container">
-			<button onClick={onBack} className="back-button">
-				<FontAwesomeIcon icon={faArrowLeft} /> 
+			<button 
+					onClick={() => {
+							navigate("/welcome", { 
+									replace: true,
+									state: { refresh: true } 
+							});
+					}} 
+					className="back-button"
+			>
+					<FontAwesomeIcon icon={faArrowLeft} /> 
 			</button>
 
 			<PostCard

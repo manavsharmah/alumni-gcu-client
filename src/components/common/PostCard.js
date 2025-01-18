@@ -9,7 +9,8 @@ import {
     faEllipsisH,
     faThumbsUp, 
     faComment,
-    faShare
+    faShare,
+    faFlag
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from 'react-router-dom';
 
@@ -81,6 +82,16 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
         }
     };
 
+    const handleReport = async (e) => {
+        e.stopPropagation(); // Prevent post click navigation
+        try {
+            await api.post(`/posts/report`, { postId: post._id });
+            alert('Post reported successfully!');
+        } catch (err) {
+            console.error('Error reporting post:', err);
+        }
+    };
+
     const getRelativeTime = (dateString) => {
         const postDate = new Date(dateString);
         const now = new Date();
@@ -147,22 +158,6 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                                     {canDelete && (
                                         <button className="gcu-menu-item" onClick={handleDelete}>
                                             Delete
-                                        </button>
-                                    )}
-                                    {canReport && (
-                                        <button
-                                            className="gcu-menu-item"
-                                            onClick={async () => {
-                                                try {
-                                                    await api.post(`/posts/report`, { postId: post._id });
-                                                    alert('Post reported successfully!');
-                                                } catch (err) {
-                                                    console.error('Error reporting post:', err);
-                                                }
-                                                setShowMenu(false);
-                                            }}
-                                        >
-                                            Report
                                         </button>
                                     )}
                                 </div>
@@ -240,12 +235,12 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                         <FontAwesomeIcon icon={faThumbsUp} /> {post.likes.length}
                     </button>
                     <button
-                className="gcu-action-button"
-                onClick={handleCommentButtonClick}
-                title="Comment on post"
-            >
-                <FontAwesomeIcon icon={faComment} /> {comments.length}
-            </button>
+                        className="gcu-action-button"
+                        onClick={handleCommentButtonClick}
+                        title="Comment on post"
+                    >
+                        <FontAwesomeIcon icon={faComment} /> {comments.length}
+                    </button>
                     <button
                         className="gcu-action-button"
                         onClick={handleShare}
@@ -253,6 +248,15 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                     >
                         <FontAwesomeIcon icon={faShare} />
                     </button>
+                    {canReport && (
+                        <button
+                            className="gcu-action-button"
+                            onClick={handleReport}
+                            title="Report post"
+                        >
+                            <FontAwesomeIcon icon={faFlag} />
+                        </button>
+                    )}
                 </div>
 
                 {showShareToast && (

@@ -1,14 +1,42 @@
 import React, { useState, useEffect } from "react";
-import './form.css'; // Link to the external CSS file
+import './form.css';
 import { useUser } from '../../services/UserContext';
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
+import { toast } from 'react-toastify';
 
 const PostForm = ({ onSubmitPost, isLoading, error }) => {
     const [postContent, setPostContent] = useState("");
-    const [category, setCategory] = useState("post"); // Default category
+    const [category, setCategory] = useState("post");
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { user } = useUser(); // Use the custom hook to get the user data
+    const [cooldownTime, setCooldownTime] = useState(0);
+    const { user } = useUser();
     const maxLength = 300;
+    const cooldownDuration = 45;
+    const cooldownKey = `cooldown_${user._id}`;
+
+    useEffect(() => {
+        const savedEndTime = localStorage.getItem(cooldownKey);
+        if (savedEndTime) {
+            const remainingTime = Math.floor((new Date(savedEndTime) - new Date()) / 1000);
+            if (remainingTime > 0) {
+                setCooldownTime(remainingTime);
+            } else {
+                localStorage.removeItem(cooldownKey); // Cleanup expired timer
+            }
+        }
+    }, [cooldownKey]);
+
+    useEffect(() => {
+        if (cooldownTime > 0) {
+            const timer = setTimeout(() => {
+                setCooldownTime(cooldownTime - 1);
+                if (cooldownTime - 1 <= 0) {
+                    localStorage.removeItem(cooldownKey); // Clear timer once cooldown ends
+                }
+            }, 1000);
+            return () => clearTimeout(timer);
+        }
+    }, [cooldownTime, cooldownKey]);
 
     const handlePostChange = (e) => {
         setPostContent(e.target.value);
@@ -19,11 +47,21 @@ const PostForm = ({ onSubmitPost, isLoading, error }) => {
     };
 
     const handlePostSubmit = () => {
+        if (cooldownTime > 0) {
+            toast.error(`Too many requests! Please wait for ${cooldownTime} seconds.`);
+            return;
+        }
+
         if (postContent.trim()) {
-            onSubmitPost(postContent, category); // Send category along with the content
-            setPostContent(""); 
-            setCategory("post");  // Reset category to default after submission
-            closeModal();  // Close modal after submission
+            onSubmitPost(postContent, category);
+            setPostContent("");
+            setCategory("post");
+            closeModal();
+
+            // Set cooldown timer and save end time to localStorage
+            const endTime = new Date(new Date().getTime() + cooldownDuration * 1000);
+            localStorage.setItem(cooldownKey, endTime.toISOString());
+            setCooldownTime(cooldownDuration);
         }
     };
 
@@ -67,7 +105,6 @@ const PostForm = ({ onSubmitPost, isLoading, error }) => {
                             maxLength={maxLength}
                             className="modal-textarea"
                         />
-                        {/* Dropdown for selecting the category */}
                         <div className="category-selector">
                             <label htmlFor="category">Choose a category:</label>
                             <select 
@@ -84,9 +121,14 @@ const PostForm = ({ onSubmitPost, isLoading, error }) => {
                             <span className={`char-count ${postContent.length > maxLength * 0.9 ? 'warning' : ''}`}>
                                 {postContent.length}/{maxLength}
                             </span>
+                            {cooldownTime > 0 && (
+                                <span className="cooldown-timer">
+                                    Please wait {cooldownTime} seconds before posting again.
+                                </span>
+                            )}
                             <button 
                                 onClick={handlePostSubmit} 
-                                disabled={isLoading || postContent.length > maxLength} 
+                                disabled={isLoading || cooldownTime > 0 || postContent.length > maxLength} 
                                 className={`post-btn ${isLoading ? 'loading' : ''}`}
                             >
                                 {isLoading ? "Posting..." : "Post"}

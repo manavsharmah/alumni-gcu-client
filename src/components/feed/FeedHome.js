@@ -125,15 +125,16 @@ const Welcome = () => {
         try {
             setIsLoading(true);
             await api.post("/posts/create", { content, category });
+    
             const currentCategory =
                 activeTab === "jobs"
                     ? "job"
                     : activeTab === "education"
                     ? "education"
                     : "post";
+    
             await fetchPosts(1, currentCategory, true);
-            
-            // Custom toast with navigation link using inline styles
+    
             toast.success(
                 <div>
                     Post created successfully!{' '}
@@ -154,8 +155,17 @@ const Welcome = () => {
                 </div>
             );
         } catch (err) {
-            setError("Failed to submit post. Please try again.");
-            toast.error("Failed to create post. Please try again.");
+            if (err.response?.status === 429) {
+                const remainingTime = err.response.data.remainingTime || 0;
+    
+                toast.error(
+                    `You're posting too quickly! Please wait ${remainingTime} seconds before trying again.`,
+                    { autoClose: false } // Keeps the toast visible for better UX
+                );
+            } else {
+                setError("Failed to submit post. Please try again.");
+                toast.error("Failed to create post. Please try again.");
+            }
         } finally {
             setIsLoading(false);
         }

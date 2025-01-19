@@ -291,3 +291,9 @@
     color: #e74c3c;
     margin-top: 10px;
 }
+
+.cooldown-timer {
+    color: #d9534f;
+    font-size: 0.9rem;
+    margin-left: 10px;
+}

@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import './form.css'; // Link to the external CSS file
+import React, { useState } from "react";
+import './form.css';
 import { useUser } from '../../services/UserContext';
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
 
 const PostForm = ({ onSubmitPost, isLoading, error }) => {
     const [postContent, setPostContent] = useState("");
-    const [category, setCategory] = useState("post"); // Default category
+    const [category, setCategory] = useState("post");
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const { user } = useUser(); // Use the custom hook to get the user data
+    const { user } = useUser();
     const maxLength = 300;
 
     const handlePostChange = (e) => {
@@ -18,12 +18,19 @@ const PostForm = ({ onSubmitPost, isLoading, error }) => {
         setCategory(e.target.value);
     };
 
-    const handlePostSubmit = () => {
-        if (postContent.trim()) {
-            onSubmitPost(postContent, category); // Send category along with the content
-            setPostContent(""); 
-            setCategory("post");  // Reset category to default after submission
-            closeModal();  // Close modal after submission
+    const handlePostSubmit = async () => {
+        if (!postContent.trim()) {
+            // Display error if the post content is empty
+            return;
+        }
+
+        try {
+            await onSubmitPost(postContent, category);
+            setPostContent("");
+            setCategory("post");
+            closeModal();
+        } catch (err) {
+            // Handle errors (e.g., submission failure) if needed
         }
     };
 
@@ -67,7 +74,6 @@ const PostForm = ({ onSubmitPost, isLoading, error }) => {
                             maxLength={maxLength}
                             className="modal-textarea"
                         />
-                        {/* Dropdown for selecting the category */}
                         <div className="category-selector">
                             <label htmlFor="category">Choose a category:</label>
                             <select 

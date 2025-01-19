@@ -98,7 +98,7 @@ const PostForm = ({ onSubmitPost, isLoading, error }) => {
                                 {isLoading ? "Posting..." : "Post"}
                             </button>
                         </div>
-                        {error && <div className="error-msg">{error}</div>}
+                        {/* {error && <div className="error-msg">{error}</div>} */}
                     </div>
                 </div>
             )}

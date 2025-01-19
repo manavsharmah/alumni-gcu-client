@@ -1,42 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import './form.css';
 import { useUser } from '../../services/UserContext';
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
-import { toast } from 'react-toastify';
 
 const PostForm = ({ onSubmitPost, isLoading, error }) => {
     const [postContent, setPostContent] = useState("");
     const [category, setCategory] = useState("post");
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [cooldownTime, setCooldownTime] = useState(0);
     const { user } = useUser();
     const maxLength = 300;
-    const cooldownDuration = 45;
-    const cooldownKey = `cooldown_${user._id}`;
-
-    useEffect(() => {
-        const savedEndTime = localStorage.getItem(cooldownKey);
-        if (savedEndTime) {
-            const remainingTime = Math.floor((new Date(savedEndTime) - new Date()) / 1000);
-            if (remainingTime > 0) {
-                setCooldownTime(remainingTime);
-            } else {
-                localStorage.removeItem(cooldownKey); // Cleanup expired timer
-            }
-        }
-    }, [cooldownKey]);
-
-    useEffect(() => {
-        if (cooldownTime > 0) {
-            const timer = setTimeout(() => {
-                setCooldownTime(cooldownTime - 1);
-                if (cooldownTime - 1 <= 0) {
-                    localStorage.removeItem(cooldownKey); // Clear timer once cooldown ends
-                }
-            }, 1000);
-            return () => clearTimeout(timer);
-        }
-    }, [cooldownTime, cooldownKey]);
 
     const handlePostChange = (e) => {
         setPostContent(e.target.value);
@@ -46,22 +18,19 @@ const PostForm = ({ onSubmitPost, isLoading, error }) => {
         setCategory(e.target.value);
     };
 
-    const handlePostSubmit = () => {
-        if (cooldownTime > 0) {
-            toast.error(`Too many requests! Please wait for ${cooldownTime} seconds.`);
+    const handlePostSubmit = async () => {
+        if (!postContent.trim()) {
+            // Display error if the post content is empty
             return;
         }
 
-        if (postContent.trim()) {
-            onSubmitPost(postContent, category);
+        try {
+            await onSubmitPost(postContent, category);
             setPostContent("");
             setCategory("post");
             closeModal();
-
-            // Set cooldown timer and save end time to localStorage
-            const endTime = new Date(new Date().getTime() + cooldownDuration * 1000);
-            localStorage.setItem(cooldownKey, endTime.toISOString());
-            setCooldownTime(cooldownDuration);
+        } catch (err) {
+            // Handle errors (e.g., submission failure) if needed
         }
     };
 
@@ -121,14 +90,9 @@ const PostForm = ({ onSubmitPost, isLoading, error }) => {
                             <span className={`char-count ${postContent.length > maxLength * 0.9 ? 'warning' : ''}`}>
                                 {postContent.length}/{maxLength}
                             </span>
-                            {cooldownTime > 0 && (
-                                <span className="cooldown-timer">
-                                    Please wait {cooldownTime} seconds before posting again.
-                                </span>
-                            )}
                             <button 
                                 onClick={handlePostSubmit} 
-                                disabled={isLoading || cooldownTime > 0 || postContent.length > maxLength} 
+                                disabled={isLoading || postContent.length > maxLength} 
                                 className={`post-btn ${isLoading ? 'loading' : ''}`}
                             >
                                 {isLoading ? "Posting..." : "Post"}

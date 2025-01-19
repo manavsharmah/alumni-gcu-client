@@ -208,8 +208,16 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                                             Delete
                                         </button>
                                     )}
+                                    {/* Close button */}
+                                    <button
+                                        className="gcu-menu-item gcu-menu-close"
+                                        onClick={() => setShowMenu(false)}
+                                    >
+                                        Close
+                                    </button>
                                 </div>
                             )}
+
                         </div>
                     </div>
                 )}

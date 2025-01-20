@@ -44,7 +44,9 @@ const EventList = () => {
   return (
     <div className='main'>
       <div className="news-container">
-        <h2 className="news-title">Events Category</h2>
+        <div className="about-header">
+          <h1>Events</h1>
+        </div>
         <div className="news-list">
           {currentEvents.map((eventItem) => (
             <div key={eventItem._id} className="news-item" onClick={() => handleEventClick(eventItem)}>

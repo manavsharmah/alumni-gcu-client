@@ -909,15 +909,71 @@ button:hover {
   font-size: 1.1em;
   margin-bottom: 8px;
   font-weight: bold;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  line-height: 1.4;
+  padding: 0 10px;
 }
 
 .user-profile-post-date {
   color: #666;
+  font-size: 0.9em;
+  padding: 0 10px;
 }
 
 .user-profile-no-posts {
   color: #666;
   font-style: italic;
+  padding: 0 10px;
+}
+
+/* Large screens (laptops and desktops) */
+@media screen and (max-width: 1280px) {
+  .user-profile-post-content {
+      font-size: 1em;
+      margin-bottom: 6px;
+      padding: 0 8px;
+  }
+  
+  .user-profile-post-date {
+      font-size: 0.85em;
+      padding: 0 8px;
+  }
+}
+
+/* Medium screens (tablets) */
+@media screen and (max-width: 768px) {
+  .user-profile-post-content {
+      font-size: 0.95em;
+      margin-bottom: 5px;
+      padding: 0 6px;
+      line-height: 1.3;
+  }
+  
+  .user-profile-post-date {
+      font-size: 0.8em;
+      padding: 0 6px;
+  }
+}
+
+/* Small screens (mobile devices) */
+@media screen and (max-width: 480px) {
+  .user-profile-post-content {
+      font-size: 0.9em;
+      margin-bottom: 4px;
+      padding: 0 4px;
+      line-height: 1.2;
+  }
+  
+  .user-profile-post-date {
+      font-size: 0.75em;
+      padding: 0 4px;
+  }
+  
+  .user-profile-post-card {
+      margin-bottom: 12px;
+  }
 }
 
 .user-profile-pagination {

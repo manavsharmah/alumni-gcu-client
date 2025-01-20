@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import api from "../../services/api";
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
+import Pagination from "../../components/common/Pagination";
 
 const Profile = () => {
     const { id } = useParams();
@@ -135,17 +136,11 @@ const Profile = () => {
                         <p className="user-profile-no-posts">No recent posts</p>
                     )}
                     {totalPages > 1 && (
-                        <div className="user-profile-pagination">
-                            {Array.from({ length: totalPages }, (_, index) => (
-                                <button
-                                    key={index + 1}
-                                    className={`user-profile-page-number ${currentPage === index + 1 ? 'user-profile-page-number-active' : ''}`}
-                                    onClick={() => handleClickPage(index + 1)}
-                                >
-                                    {index + 1}
-                                </button>
-                            ))}
-                        </div>
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={handleClickPage}
+                        />
                     )}
                 </div>
             </div>

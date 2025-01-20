@@ -45,7 +45,7 @@ const Scholarship = () => {
     <div className='main'>
       <div className="art-container">
         <div className="about-header">
-          <h1>Scholorships</h1>
+          <h1>Scholarships</h1>
         </div>
         <div className="goal-content-container">
             <div className="goal-content">

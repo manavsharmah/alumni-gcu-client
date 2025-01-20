@@ -947,24 +947,35 @@ button:hover {
 
 /* News Archive */
 
+.about-header {
+  width: 100%;
+  padding: 20px;
+  background: #192e59;
+}
+
+.about-header h1 {
+  color: #ffffff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  padding: 50px 200px;
+  margin: 0px;
+  letter-spacing: 1px;
+}
+
 .news-container {
-  width: 75%; /* Adjust based on your container needs */
+  width: 100%; /* Adjust based on your container needs */
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 30px 0px;
+  /* padding: 30px 0px; */
+  align-items: center;
   font-family: 'IBM Plex Sans', sans-serif;
 }
 
-.news-title {
-  font-size: 2em;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #27357f;
-}
-
 .news-list {
+  margin-top: 20px;
+  width: 75%;
   display: flex;
   flex-direction: column;
   gap: 20px; /* Space between news items */

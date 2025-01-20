@@ -54,11 +54,6 @@ const Topbar = () => {
     return <div>Loading...</div>; 
   }
 
-  // This function will update the profile photo in the context
-  const handleProfilePhotoChange = (newProfilePhoto) => {
-    updateUserProfile({ ...user, profilePhoto: newProfilePhoto });
-  };
-
   return (
     <header className="App-header">
       <div className="header-container">
@@ -116,7 +111,7 @@ const Topbar = () => {
             <div className="dropdown" ref={dropdownRef}>
               {/* Profile Picture Section */}
               <div className="dropdown-toggle" onClick={toggleDropdown}>
-                <ProfilePhoto userId={user._id} className="rounded-full" />
+                <ProfilePhoto userId={user._id} className="rounded-full" key={user.profilePhoto} />
                 <span className="dropdown-username">{user.name}</span>
               </div>
 

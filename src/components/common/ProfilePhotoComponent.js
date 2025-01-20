@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import api from '../../services/api';
-import Spinner  from './LoadingSpinner'
+import Spinner from './LoadingSpinner';
+import { useUser } from '../../services/UserContext';
 
 const ProfilePhoto = ({ userId, className = '' }) => {
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { user } = useUser();
 
   useEffect(() => {
     const fetchProfilePhoto = async () => {
       if (!userId) return;
       try {
-        // console.log('Fetching profile photo for userId:', userId); 
         const response = await api.get(`/user/profile-photo/${userId}`);
         setProfilePhoto(response.data?.profilePhoto || null);
       } catch (error) {
@@ -22,8 +23,9 @@ const ProfilePhoto = ({ userId, className = '' }) => {
         setLoading(false);
       }
     };
+
     fetchProfilePhoto();
-  }, [userId]);
+  }, [userId, user?.profilePhoto]);
 
   if (loading) return <div><Spinner /></div>;
 

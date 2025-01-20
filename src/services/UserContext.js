@@ -49,8 +49,13 @@ export const UserProvider = ({ children }) => {
         }
     };
 
+    // Add the updateUserProfile function
+    const updateUserProfile = (updatedUser) => {
+        setUser(updatedUser); // Update the user state
+    };
+
     return (
-        <UserContext.Provider value={{ user, setUser, login, logout }}>
+        <UserContext.Provider value={{ user, setUser, login, logout, updateUserProfile }}>
             {children}
         </UserContext.Provider>
     );

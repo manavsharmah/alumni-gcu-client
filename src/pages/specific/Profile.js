@@ -4,6 +4,7 @@ import { jwtDecode } from "jwt-decode";
 import api from "../../services/api";
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
 import Pagination from "../../components/common/Pagination";
+import "../pages.css";
 
 const Profile = () => {
     const { id } = useParams();

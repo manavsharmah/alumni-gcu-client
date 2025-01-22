@@ -22,6 +22,7 @@
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    min-height: 100vh;
   }
 
   @media screen and (max-width: 1279px) {  /* Tablet and mobile screens */

@@ -1244,7 +1244,7 @@ button:hover {
 .single-news-events-images-section {
   flex: 0 0 30%;
   position: sticky;
-  top: 20px;
+  top: 140px;
   align-self: flex-start;
 }
 
@@ -1254,6 +1254,15 @@ button:hover {
   transition: box-shadow 0.3s ease;
   border-radius: 8px;
   overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+
+.single-news-events-image-container:hover .image {
+  transform: scale(1.1);
+}
+.single-news-events-image-container:hover .image-overlay {
+  opacity: 1;
 }
 
 .single-news-events-image-container:hover {

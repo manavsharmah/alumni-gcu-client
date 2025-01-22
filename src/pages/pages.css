@@ -2076,75 +2076,153 @@ button:hover {
 
 /* Feedback Form */
 .feedback-form-container {
-  max-width: 40%;
-  margin: 40px auto; /* Center the form on the screen for both mobile and desktop */
-  padding: 20px;
+  max-width: 600px;
+  width: 90%;
+  margin: 40px auto;
+  padding: 2.5rem;
   background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
 }
 
-.feedback-heading{
+.feedback-heading {
   color: #1d0898;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
 }
 
-.feedback-form {
-  display: flex;
-  flex-direction: column;
-}
-
+/* Form Element Styles */
 .feedback-form-input,
 .feedback-form-textarea {
-  margin-bottom: 15px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #f8fafc;
+}
+
+.feedback-form-input:focus,
+.feedback-form-textarea:focus {
+  outline: none;
+  border-color: #1d0898;
+  box-shadow: 0 0 0 3px rgba(29, 8, 152, 0.1);
+  background-color: #fff;
 }
 
 .feedback-form-textarea {
-  height: 100px;
+  height: 150px;
   resize: vertical;
+  min-height: 100px;
+  max-height: 300px;
 }
 
+/* Button Styles */
 .feedback-form-button {
-  background-color: #21099b;
+  width: 100%;
+  background-color: #1d0898;
   color: white;
   border: none;
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 16px;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.125rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .feedback-form-button:hover {
-  background-color: #020090;
+  background-color: #3923b3a4;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-/* Mobile View */
+.feedback-form-button:active {
+  transform: translateY(0);
+}
+
+/* Response Message Styles */
+.response-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  background-color: #f0fff4;
+  color: #1a9b09;
+  font-weight: 500;
+}
+
+/* Responsive Breakpoints */
+
+/* Large screens (laptops/desktops) */
+@media (max-width: 1280px) {
+  .feedback-form-container {
+    width: 70%;
+    padding: 2rem;
+  }
+}
+
+/* Tablets */
 @media (max-width: 768px) {
   .feedback-form-container {
-    margin: 20px auto;
-    padding: 15px;
-    max-width: 70%; /* Make form take full width on small screens */
+    width: 85%;
+    padding: 1.75rem;
+    margin: 30px auto;
   }
 
   .feedback-heading {
-    font-size: 1.5rem; /* Adjust font size */
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
   }
 
   .feedback-form-input,
   .feedback-form-textarea {
-    padding: 10px;
-    font-size: 14px; /* Slightly reduce font size for mobile */
+    padding: 0.875rem;
+    margin-bottom: 1.25rem;
   }
 
   .feedback-form-button {
-    padding: 8px;
-    font-size: 14px;
+    padding: 0.875rem;
+    font-size: 1rem;
+  }
+}
+
+/* Mobile phones */
+@media (max-width: 480px) {
+  .feedback-form-container {
+    width: 95%;
+    padding: 1.5rem;
+    margin: 20px auto;
+  }
+
+  .feedback-heading {
+    font-size: 1.5rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .feedback-form-input,
+  .feedback-form-textarea {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+  }
+
+  .feedback-form-button {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .response-message {
+    padding: 0.75rem;
+    font-size: 0.875rem;
   }
 }
 

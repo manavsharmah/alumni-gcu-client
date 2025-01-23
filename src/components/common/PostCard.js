@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from 'react-router-dom';
 import '../components.css';
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
@@ -23,6 +23,28 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
     const [showMenu, setShowMenu] = useState(false);
     const [showShareToast, setShowShareToast] = useState(false);
     const navigate = useNavigate();
+    const menuRef = useRef(null);
+    const menuButtonRef = useRef(null);
+
+    // Track menu state with ref
+    const menuOpenRef = useRef(showMenu);
+    useEffect(() => {
+        menuOpenRef.current = showMenu;
+    }, [showMenu]);
+
+    // Handle clicks outside menu
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (showMenu && menuRef.current && 
+                !menuRef.current.contains(event.target) &&
+                !menuButtonRef.current.contains(event.target)) {
+                setShowMenu(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, [showMenu]);
 
     const handleCommentButtonClick = (e) => {
         e.stopPropagation();
@@ -34,7 +56,9 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
     };
 
     const handlePostClick = (e) => {
-        if (e.target.closest('button') || 
+        // Prevent navigation if menu is open or clicking interactive elements
+        if (menuOpenRef.current || 
+            e.target.closest('button') || 
             e.target.closest('a') || 
             e.target.closest('.gcu-edit-form') ||
             e.target.closest('.gcu-comment-form')) {
@@ -183,10 +207,14 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                 {/* Three-dot menu */}
                 {(canEdit || canDelete) && (
                     <div className="gcu-top-actions">
-                        <div className="relative">
+                        <div className="relative" ref={menuRef}>
                             <button 
+                                ref={menuButtonRef}
                                 className="gcu-menu-button"
-                                onClick={() => setShowMenu(!showMenu)}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setShowMenu(!showMenu);
+                                }}
                             >
                                 <FontAwesomeIcon icon={faEllipsisH} />
                             </button>
@@ -208,13 +236,6 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                                             Delete
                                         </button>
                                     )}
-                                    {/* Close button */}
-                                    <button
-                                        className="gcu-menu-item gcu-menu-close"
-                                        onClick={() => setShowMenu(false)}
-                                    >
-                                        Close
-                                    </button>
                                 </div>
                             )}
 

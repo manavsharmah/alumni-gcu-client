@@ -96,11 +96,11 @@
 
 }
 
-/* @media only screen and (max-width: 1070px) {
+@media only screen and (max-width: 680px) {
   .main {
-    padding-top: 100px;
+    padding-top: 110px;
   }
-} */
+}
 
 .hero {
   display: flex;

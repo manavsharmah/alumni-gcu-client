@@ -186,7 +186,13 @@
     border-radius: 50px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     cursor: pointer;
+    margin-top: 3px;
 }
+@media only screen and (max-width: 680px) {
+    .post-form-collapsed {
+      margin-top: 8px;
+    }
+  }
 
 .user-avatar {
     width: 40px;

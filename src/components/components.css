@@ -109,6 +109,22 @@
   text-underline-offset: 4px; 
 }
 
+.nav-content li a.active {
+  color: #007bff !important;
+  text-decoration: underline;
+  text-decoration-color: #fbcf0a;
+  text-decoration-thickness: 7px;
+  text-underline-offset: 56px;
+}
+
+.header-nav ul.sub-menus a.active {
+  color: #ffffff !important;
+  text-decoration: underline;
+  text-decoration-color: #fbcf0a;
+  text-decoration-thickness: 4px;
+  text-underline-offset: 4px;
+}
+
 .nav-content .sub-menus {
   position: absolute;
   color: #fffefe;
@@ -316,6 +332,7 @@
 
 
 /* Media query for mobile responsiveness */
+
 @media screen and (max-width: 768px) {
   .App-header {
     width: 100%;
@@ -376,7 +393,7 @@
   .nav-content.open {
     display: block;
     flex-direction: column;
-    width: 100%;
+    width: 280px;
     position: absolute;
     top: 60px; /* Position the nav content below the navbar */
     left: 0;
@@ -470,6 +487,30 @@
     margin-top: 0;
     margin-left: 0;
   }
+
+  .nav-content li a:hover,
+  .header-nav ul.sub-menus a:hover {
+    color: inherit; /* Resets the hover color */
+    text-decoration: none; /* Removes underline and decoration */
+  }
+
+  .nav-content li a.active, .header-nav ul.sub-menus a.active {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: #fbcf0a;
+    text-decoration-thickness: 4px;
+    text-underline-offset: 5px;
+  }
+
+  .header-nav ul {
+    flex-direction: column;
+    gap: 17px;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    margin: 5px 0;
+    padding: 15px 5px;
+  }
 }
 
 @media screen and (max-width: 680px) {
@@ -500,10 +541,21 @@
 
   .nav-content.open {
     top: 55px; /* Adjust for smaller view */
+    width: 280px;
   }
 
   .App-main {
     padding-top: 130px;
+  }
+  
+  .header-nav ul {
+    flex-direction: column;
+    gap: 17px;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    margin: 5px 0;
+    padding: 15px 5px;
   }
 }
 
@@ -567,7 +619,7 @@
   .nav-content.open {
     display: block;
     flex-direction: column;
-    width: 100%;
+    width: 400px;
     position: absolute;
     top: 60px; /* Position the nav content below the navbar */
     left: 0;
@@ -588,11 +640,12 @@
 
   .header-nav ul {
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
     width: 100%;
     text-align: left;
     padding: 0;
     margin: 5px 0;
+    padding: 15px 5px;
   }
 
   .header-nav li {
@@ -606,7 +659,24 @@
     padding: 10px;
     width: 100%;
     z-index: 1;
+    font-size: 22px;
+    font-weight: 500;
   }
+
+  .nav-content li a:hover,
+  .header-nav ul.sub-menus a:hover {
+    color: inherit; /* Resets the hover color */
+    text-decoration: none; /* Removes underline and decoration */
+  }
+
+  .nav-content li a.active, .header-nav ul.sub-menus a.active {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: #fbcf0a;
+    text-decoration-thickness: 4px;
+    text-underline-offset: 5px;
+  }
+  
 
   .header-nav.open ul.sub-menus {
     opacity: 1;
@@ -631,8 +701,10 @@
   }
 
   .header-nav ul.sub-menus a {
-    padding-left: 25px;
+    padding: 15px 0 15px 25px;
     font-weight: inherit;
+    font-size: 20px;
+    font-weight: 500;
   }
 
   .App-main {

@@ -1,15 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import "../components.css";
 import { useUser } from '../../services/UserContext';
-import { Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom'; // Changed to NavLink
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
 import { Camera, LogOut } from 'lucide-react';
 
 const Topbar = () => {
+  const location = useLocation();
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const { user, logout, loading, updateUserProfile } = useUser(); // Assuming you have a method to update the user profile
   const dropdownRef = useRef(null);
+  const menuToggleRef = useRef(null);
+  const navContentRef = useRef(null);
+
+  const isAboutActive = () => {
+    const aboutRoutes = ['/overview', '/vision', '/vcmsg', '/council'];
+    return aboutRoutes.some(route => location.pathname.startsWith(route));
+  };
 
   // Toggle mobile navigation
   const toggleNav = () => {
@@ -40,14 +48,18 @@ const Topbar = () => {
 
   // Close dropdown when clicking outside
   useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
+    const handleClickOutside = (event) => {
+      if (
+        isNavOpen && 
+        !menuToggleRef.current?.contains(event.target) && 
+        !navContentRef.current?.contains(event.target)
+      ) {
+        closeNav();
       }
     };
-    document.addEventListener('click', handleOutsideClick);
-    return () => document.removeEventListener('click', handleOutsideClick);
-  }, []);
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isNavOpen]);
 
   // If loading, show loading screen
   if (loading) {
@@ -66,32 +78,39 @@ const Topbar = () => {
 
         {/* Navigation Section */}
         <nav className="header-nav">
-          <button className="menu-toggle" onClick={toggleNav}>
+          <button ref={menuToggleRef} className="menu-toggle" onClick={toggleNav}>
             &#9776;
           </button>
-          <div className={`nav-content ${isNavOpen ? 'open' : ''}`}>
+          <div ref={navContentRef} className={`nav-content ${isNavOpen ? 'open' : ''}`}>
             <ul>
-              <li><Link to="/">Home</Link></li>
+              <li><NavLink to="/" className={({ isActive }) => isActive ? 'active' : ''}>Home</NavLink></li>
               <li>
-              <Link to="#">About</Link>
+              <NavLink 
+        to="/overview" 
+        className={({ isActive }) => 
+          isActive || isAboutActive() ? 'active' : ''
+        }
+      >
+        About
+      </NavLink>
                 <ul className='sub-menus'>
-                  <li><Link to='/overview'>Overview</Link></li>
-                  <li><Link to='/vision'>Vision and Mission</Link></li>
-                  <li><Link to='/vcmsg'>VC Message</Link></li>
-                  <li><Link to='/council'>Governing Council</Link></li>
+                  <li><NavLink to='/overview' className={({ isActive }) => isActive ? 'active' : ''}>Overview</NavLink></li>
+                  <li><NavLink to='/vision' className={({ isActive }) => isActive ? 'active' : ''}>Vision and Mission</NavLink></li>
+                  <li><NavLink to='/vcmsg' className={({ isActive }) => isActive ? 'active' : ''}>VC Message</NavLink></li>
+                  <li><NavLink to='/council' className={({ isActive }) => isActive ? 'active' : ''}>Governing Council</NavLink></li>
                 </ul>
               </li>
-              <li><Link to="/association-members">Association Members</Link></li>
-              <li><Link to="/alumni-achievers">Alumni-Achievers</Link></li>
-              <li><Link to="/scholarship">Scholarships</Link></li>
-              <li><Link to="/news">News</Link></li>
-              <li><Link to="/events">Events</Link></li>
-              <li><Link to="/gallery">Gallery</Link></li>
+              <li><NavLink to="/association-members" className={({ isActive }) => isActive ? 'active' : ''}>Association Members</NavLink></li>
+              <li><NavLink to="/alumni-achievers" className={({ isActive }) => isActive ? 'active' : ''}>Alumni-Achievers</NavLink></li>
+              <li><NavLink to="/scholarship" className={({ isActive }) => isActive ? 'active' : ''}>Scholarships</NavLink></li>
+              <li><NavLink to="/news" className={({ isActive }) => isActive ? 'active' : ''}>News</NavLink></li>
+              <li><NavLink to="/events" className={({ isActive }) => isActive ? 'active' : ''}>Events</NavLink></li>
+              <li><NavLink to="/gallery" className={({ isActive }) => isActive ? 'active' : ''}>Gallery</NavLink></li>
               {user && (
                 <>
-                  <li><Link to="/welcome">Feed</Link></li>
+                  <li><NavLink to="/welcome" className={({ isActive }) => isActive ? 'active' : ''}>Feed</NavLink></li>
                   {user.role === 'admin' && (
-                    <li><Link to="/admin-stats">Admin Dashboard</Link></li>
+                    <li><NavLink to="/admin-stats" className={({ isActive }) => isActive ? 'active' : ''}>Admin Dashboard</NavLink></li>
                   )}
                 </>
               )}

@@ -101,33 +101,33 @@ function App() {
                 <Route path="/vision" element={<MissionAndVision />} />
                 <Route path="/vcmsg" element={<VCMessage />} />
 
-                {/* Admin + User Routes */}
+                {/* SuperUser + Admin + User Routes(logged-in user routes) */}
                 
                 <Route
                   path="/reset-password"
                   element={
                     <ProtectedRoute
                       element={<ResetPassword />}
-                      requiredRole={["admin", "user"]}
+                      requiredRole={["superuser", "admin", "user"]}
                     />
                   }
                 />
                 <Route
                   path="/profile"
                   element={
-                    <ProtectedRoute element={<Profile />} requiredRole={["admin", "user"]} />
+                    <ProtectedRoute element={<Profile />} requiredRole={["superuser", "admin", "user"]} />
                   }
                 />
                 <Route
                   path="/profile/:id"
                   element={
-                    <ProtectedRoute element={<Profile />} requiredRole={["admin", "user"]} />
+                    <ProtectedRoute element={<Profile />} requiredRole={["superuser", "admin", "user"]} />
                   }
                 />
                 <Route
                   path="/change-profile-picture"
                   element={
-                    <ProtectedRoute element={<ChangeProfilePicture />} requiredRole={["admin", "user"]} />
+                    <ProtectedRoute element={<ChangeProfilePicture />} requiredRole={["superuser", "admin", "user"]} />
                   }
                 />
                 <Route
@@ -135,7 +135,7 @@ function App() {
                   element={
                     <ProtectedRoute
                       element={<UpdateProfile />}
-                      requiredRole={["admin", "user"]}
+                      requiredRole={["superuser", "admin", "user"]}
                     />
                   }
                 />
@@ -152,7 +152,7 @@ function App() {
                   element={
                     <ProtectedRoute
                       element={<FeedHome />}
-                      requiredRole={["admin", "user"]}
+                      requiredRole={["superuser", "admin", "user"]}
                     />
                   }
                 />
@@ -162,18 +162,18 @@ function App() {
                   element={
                     <ProtectedRoute
                       element={<FeedHome />}
-                      requiredRole={["admin", "user"]}
+                      requiredRole={["superuser", "admin", "user"]}
                     />
                   }
                 />
               </Route>
 
-              {/* Admin Routes */}
+              {/* Admin & SuperUser Routes */}
               <Route
                 element={
                   <ProtectedRoute
                     element={<AdminLayout />}
-                    requiredRole="admin"
+                    requiredRole={["superuser", "admin"]}
                   />
                 }
               >
@@ -185,10 +185,21 @@ function App() {
                 <Route path="/photo-upload-form" element={<PhotoUpload />} />
                 <Route path="/email-form" element={<AdminEmailForm />} />
                 <Route path="/add-bulk-alumni" element={<BulkAddAlumni />} />
-                <Route path="/view-feedback" element={<AdminFeedbackPanel />} />   
-                <Route path="/create-admin" element={<CreateAdmin />} />
+                <Route path="/view-feedback" element={<AdminFeedbackPanel />} /> 
                 <Route path="/flagged-posts" element={<FlaggedPosts />} />             
                 <Route path="*" element={<NotFound />} />                
+              </Route>
+
+              {/*SuperUser Routes */}
+              <Route
+                element={
+                  <ProtectedRoute
+                    element={<AdminLayout />}
+                    requiredRole="superuser"
+                  />
+                }
+              >
+                <Route path="/create-admin" element={<CreateAdmin />} />
               </Route>
             </Routes>
           </section>

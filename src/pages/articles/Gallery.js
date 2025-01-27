@@ -35,7 +35,7 @@ const Gallery = () => {
 
   const handleAlbumClick = (id) => {
     if (id) {
-      navigate(`/album/${id}`);
+      navigate(`/gallery/album/${id}`);
     } else {
       console.error('Album ID is undefined');
     }

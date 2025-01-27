@@ -150,6 +150,7 @@ const AdminNewsForm = () => {
               name='content'
               required
             />
+            <label htmlFor="images">Images (Select up to 10)</label>
             <input
               type="file"
               className="admin-form-input"

@@ -29,10 +29,6 @@ const FeedPostView = ({ onBack }) => {
     };
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-    }, []);
-
-    useEffect(() => {
         const fetchPost = async () => {
             try {
                 setIsLoading(true);

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../pages.css';
 import { UserContext } from '../../services/UserContext';
+import Pagination from '../../components/common/Pagination';
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
@@ -73,17 +74,12 @@ const EventList = () => {
             </div>
           ))}
         </div>
-        <div className="pagination">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-            <button
-              key={number}
-              onClick={() => paginate(number)}
-              className={`page-number ${currentPage === number ? "active" : ""}`}
-            >
-              {number}
-            </button>
-          ))}
-        </div>
+          <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={paginate}
+          stylePrefix="events"
+      />
       </div>
     </div>
   );

@@ -51,11 +51,11 @@
   margin: 0 0 5px;
 }
 
-.pagination {
+/* .pagination {
   display: flex;
   justify-content: center;
   padding: 10px 0;
-}
+} */
 
 .page-item {
   margin: 0 5px;
@@ -808,6 +808,47 @@ button:hover {
   padding: 20px;
 }
 
+.user-profile-name-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 5px;
+}
+
+.user-profile-role-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: white;
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+/* Admin badge gradient */
+.user-profile-role-badge.admin {
+  background: linear-gradient(135deg, #dc3545 0%, #ff6b6b 100%);
+}
+
+.user-profile-role-badge.admin:hover {
+  background: linear-gradient(135deg, #c82333 0%, #ff5252 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+}
+
+/* Superuser badge gradient */
+.user-profile-role-badge.superuser {
+  background: linear-gradient(135deg, #6f42c1 0%, #9066d4 100%);
+}
+
+.user-profile-role-badge.superuser:hover {
+  background: linear-gradient(135deg, #603aa0 0%, #7c52c7 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(111, 66, 193, 0.3);
+}
+
 .user-profile-main-title {
   text-align: center;
   margin-bottom: 20px;
@@ -1152,35 +1193,6 @@ button:hover {
       padding: 10px;
       font-size: 1em;
   }
-}
-
-/* Pagination */
-.pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.page-number {
-  padding: 10px;
-  margin: 0 5px;
-  background-color: #f9c503;
-  color: #1a2b58;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.page-number.active,
-.page-number:hover {
-  background-color: #1a2b58;
-  color: #f9c503;
 }
 
 /* Single News and Events Page */
@@ -2033,32 +2045,242 @@ button:hover {
   line-height: 1.5;
 }
 
-.posts-pagination {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+/* Shared Pagination Styles */
+.default-pagination,
+.user-profile-pagination,
+.events-pagination,
+.news-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    gap: 10px;
 }
 
-.posts-page-number {
-  padding: 10px;
-  margin: 0 5px;
-  background-color: #f9c503;
-  color: #1a2b58;
-  border: none;
-  border-radius: 50%;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.default-page-button,
+.user-profile-page-button,
+.events-page-button,
+.news-page-button {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: #192e59;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    box-shadow: 0 3px 6px rgba(25, 46, 89, 0.3);
 }
 
-.posts-page-number-active,
-.posts-page-number:hover {
-  background-color: #1a2b58;
-  color: #f9c503;
+/* Adjust "First" and "Last" buttons */
+.default-page-button:first-child,
+.default-page-button:last-child,
+.user-profile-page-button:first-child,
+.user-profile-page-button:last-child,
+.events-page-button:first-child,
+.events-page-button:last-child,
+.news-page-button:first-child,
+.news-page-button:last-child {
+    width: auto;
+    padding: 0 18px;
+    border-radius: 20px;
+}
+
+.default-page-number,
+.user-profile-page-number,
+.events-page-number,
+.news-page-number {
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background-color: #192e59;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    box-shadow: 0 3px 6px rgba(25, 46, 89, 0.3);
+}
+
+.default-page-button:hover,
+.user-profile-page-button:hover,
+.events-page-button:hover,
+.news-page-button:hover,
+.default-page-number:hover,
+.user-profile-page-number:hover,
+.events-page-number:hover,
+.news-page-number:hover {
+    background-color: #1b3873;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(25, 46, 89, 0.4);
+}
+
+.default-page-button:active,
+.user-profile-page-button:active,
+.events-page-button:active,
+.news-page-button:active,
+.default-page-number:active,
+.user-profile-page-number:active,
+.events-page-number:active,
+.news-page-number:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(25, 46, 89, 0.3);
+}
+
+.default-page-number-active,
+.user-profile-page-number-active,
+.events-page-number-active,
+.news-page-number-active {
+    background: linear-gradient(135deg, #1b3873, #ffc107);
+    color: white;
+    box-shadow: 0 6px 12px rgba(20, 30, 67, 0.4);
+    font-weight: bold;
+    animation: pulse 2s infinite;
+}
+
+.default-page-button:disabled,
+.user-profile-page-button:disabled,
+.events-page-button:disabled,
+.news-page-button:disabled {
+    background-color: #a0b3d1;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+/* Desktop (min-width: 1280px) */
+@media screen and (min-width: 1280px) {
+  .default-pagination,
+  .user-profile-pagination,
+  .events-pagination,
+  .news-pagination {
+      gap: 12px;
+  }
+
+  .default-page-button,
+  .user-profile-page-button,
+  .events-page-button,
+  .news-page-button,
+  .default-page-number,
+  .user-profile-page-number,
+  .events-page-number,
+  .news-page-number {
+      width: 44px;
+      height: 44px;
+      font-size: 15px;
+  }
+
+  .default-page-button:first-child,
+  .default-page-button:last-child,
+  .user-profile-page-button:first-child,
+  .user-profile-page-button:last-child,
+  .events-page-button:first-child,
+  .events-page-button:last-child,
+  .news-page-button:first-child,
+  .news-page-button:last-child {
+      padding: 0 20px;
+  }
+}
+
+/* Tablet (768px to 1279px) */
+@media screen and (max-width: 1279px) {
+  .default-pagination,
+  .user-profile-pagination,
+  .events-pagination,
+  .news-pagination {
+      gap: 8px;
+  }
+
+  .default-page-button,
+  .user-profile-page-button,
+  .events-page-button,
+  .news-page-button,
+  .default-page-number,
+  .user-profile-page-number,
+  .events-page-number,
+  .news-page-number {
+      width: 40px;
+      height: 40px;
+      font-size: 14px;
+  }
+
+  .default-page-button:first-child,
+  .default-page-button:last-child,
+  .user-profile-page-button:first-child,
+  .user-profile-page-button:last-child,
+  .events-page-button:first-child,
+  .events-page-button:last-child,
+  .news-page-button:first-child,
+  .news-page-button:last-child {
+      padding: 0 16px;
+  }
+}
+
+/* Mobile Large (480px to 767px) */
+@media screen and (max-width: 767px) {
+  .default-pagination,
+  .user-profile-pagination,
+  .events-pagination,
+  .news-pagination {
+      gap: 6px;
+  }
+
+  .default-page-button,
+  .user-profile-page-button,
+  .events-page-button,
+  .news-page-button,
+  .default-page-number,
+  .user-profile-page-number,
+  .events-page-number,
+  .news-page-number {
+      width: 36px;
+      height: 36px;
+      font-size: 13px;
+  }
+
+  .default-page-button:first-child,
+  .default-page-button:last-child,
+  .user-profile-page-button:first-child,
+  .user-profile-page-button:last-child,
+  .events-page-button:first-child,
+  .events-page-button:last-child,
+  .news-page-button:first-child,
+  .news-page-button:last-child {
+      display: none; /* Hide "First" and "Last" buttons on mobile */
+  }
+}
+
+/* Mobile Small (under 480px) */
+@media screen and (max-width: 479px) {
+  .default-pagination,
+  .user-profile-pagination,
+  .events-pagination,
+  .news-pagination {
+      gap: 4px;
+  }
+
+  .default-page-button,
+  .user-profile-page-button,
+  .events-page-button,
+  .news-page-button,
+  .default-page-number,
+  .user-profile-page-number,
+  .events-page-number,
+  .news-page-number {
+      width: 32px;
+      height: 32px;
+      font-size: 12px;
+  }
 }
 
 /*Donation Styling*/

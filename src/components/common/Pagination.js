@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-const Pagination = ({ totalPages, currentPage, onPageChange }) => {
+const Pagination = ({ totalPages, currentPage, onPageChange, stylePrefix = "default" }) => {
     const [startPage, setStartPage] = useState(1);
     const pageWindowSize = 5;
 
-    // Reset startPage when totalPages or currentPage changes significantly
     useEffect(() => {
-        // If current page is outside the window, adjust the window
         if (currentPage < startPage || currentPage > startPage + pageWindowSize - 1) {
-            // Calculate the new start page based on the current page
             const newStart = Math.max(1, Math.min(currentPage - Math.floor(pageWindowSize / 2), totalPages - pageWindowSize + 1));
             setStartPage(newStart);
         }
@@ -16,7 +13,6 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
 
     if (totalPages <= 1) return null;
 
-    // Calculate the end page for the current window
     const endPage = Math.min(startPage + pageWindowSize - 1, totalPages);
 
     const handlePrevGroup = () => {
@@ -29,10 +25,28 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
         setStartPage(newStart);
     };
 
+    const handleFirstPage = () => {
+        setStartPage(1);
+        onPageChange(1);
+    };
+
+    const handleLastPage = () => {
+        const newStart = Math.max(1, totalPages - pageWindowSize + 1);
+        setStartPage(newStart);
+        onPageChange(totalPages);
+    };
+
     return (
-        <div className="posts-pagination">
+        <div className={`${stylePrefix}-pagination`}>
             <button 
-                className="pagination-arrow"
+                className={`${stylePrefix}-page-button`}
+                onClick={handleFirstPage}
+                disabled={currentPage === 1}
+            >
+                First
+            </button>
+            <button 
+                className={`${stylePrefix}-page-button`}
                 onClick={handlePrevGroup}
                 disabled={startPage === 1}
             >
@@ -46,8 +60,8 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
                     return (
                         <button
                             key={pageNum}
-                            className={`posts-page-number ${
-                                currentPage === pageNum ? 'posts-page-number-active' : ''
+                            className={`${stylePrefix}-page-number ${
+                                currentPage === pageNum ? `${stylePrefix}-page-number-active` : ''
                             }`}
                             onClick={() => onPageChange(pageNum)}
                         >
@@ -58,11 +72,18 @@ const Pagination = ({ totalPages, currentPage, onPageChange }) => {
             )}
 
             <button 
-                className="pagination-arrow"
+                className={`${stylePrefix}-page-button`}
                 onClick={handleNextGroup}
                 disabled={endPage === totalPages}
             >
                 →
+            </button>
+            <button 
+                className={`${stylePrefix}-page-button`}
+                onClick={handleLastPage}
+                disabled={currentPage === totalPages}
+            >
+                Last
             </button>
         </div>
     );

@@ -75,7 +75,6 @@ const Profile = () => {
     }, [id, currentPage]);
 
     const handlePostClick = (post) => {
-        // Navigate to FeedPostView for the selected post
         navigate(`/welcome/post/${post._id}`);
     };
 
@@ -85,6 +84,11 @@ const Profile = () => {
 
     const handleChangePicture = () => {
         navigate('/change-profile-picture');
+    };
+
+    // Helper function to get role badge color
+    const getRoleBadgeColor = (role) => {
+        return role === 'admin' ? '#dc3545' : '#6f42c1'; // Red for admin, Purple for superuser
     };
 
     return (
@@ -98,7 +102,16 @@ const Profile = () => {
                             className="user-profile-picture"
                         />
                         <div className="user-profile-info">
-                            <h2 className="user-profile-name">{user?.name}</h2>
+                            <div className="user-profile-name-container">
+                                <h2 className="user-profile-name">{user?.name}</h2>
+                                {user?.role && user.role !== 'user' && (
+                                    <span 
+                                        className={`user-profile-role-badge ${user.role.toLowerCase()}`}
+                                    >
+                                        {user.role}
+                                    </span>
+                                )}
+                            </div>
                             <p className="user-profile-email">{user?.email}</p>
                             {isLoggedInUser && (
                                 <button className="user-profile-change-picture-btn" onClick={handleChangePicture}>
@@ -141,6 +154,7 @@ const Profile = () => {
                             currentPage={currentPage}
                             totalPages={totalPages}
                             onPageChange={handleClickPage}
+                            stylePrefix="user-profile"
                         />
                     )}
                 </div>

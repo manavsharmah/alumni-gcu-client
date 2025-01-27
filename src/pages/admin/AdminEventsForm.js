@@ -216,7 +216,7 @@ const AdminEventsForm = () => {
               />
             </div>
             <div className="admin-form-group">
-              <label htmlFor="images">Images (Select up to 5)</label>
+              <label htmlFor="images">Images (Select up to 10)</label>
               <input
                 type="file"
                 className="admin-form-input"

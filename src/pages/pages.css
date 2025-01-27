@@ -2055,6 +2055,7 @@ button:hover {
     align-items: center;
     margin-top: 20px;
     gap: 10px;
+    padding-bottom: 15px;
 }
 
 .default-page-button,
@@ -2212,6 +2213,7 @@ button:hover {
       width: 40px;
       height: 40px;
       font-size: 14px;
+      margin-left: 10px;
   }
 
   .default-page-button:first-child,
@@ -2280,6 +2282,7 @@ button:hover {
       width: 32px;
       height: 32px;
       font-size: 12px;
+      margin-left: 10px;
   }
 }
 

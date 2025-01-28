@@ -3,37 +3,23 @@ import '../components.css';
 import api from '../../services/api';
 
 const NewsEditModal = ({ isOpen, onClose, newsItem, onNewsUpdated }) => {
-  const [formData, setFormData] = useState({
+  const [newsData, setNewsData] = useState({
     title: newsItem.title,
-    content: newsItem.content,
-    images: [] // For new images only
+    content: newsItem.content
   });
 
-  const { title, content } = formData;
+  const { title, content } = newsData;
 
   const onChange = (e) => {
-    if (e.target.name === 'images') {
-      setFormData({ ...formData, images: Array.from(e.target.files) });
-    } else {
-      setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
+    setNewsData({ ...newsData, [e.target.name]: e.target.value });
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const data = new FormData();
-    data.append('title', title);
-    data.append('content', content);
-
-    formData.images.forEach((image) => {
-      data.append('images', image);
-    });
-
     try {
-      await api.put(`/news/edit/${newsItem._id}`, data, {
+      await api.put(`/news/edit/${newsItem._id}`, newsData, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`,
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'application/json'
         }
       });
       onNewsUpdated(); // Callback to refresh the news list
@@ -49,7 +35,7 @@ const NewsEditModal = ({ isOpen, onClose, newsItem, onNewsUpdated }) => {
     <div className="edit-modal-overlay">
       <div className="edit-modal-content" style={{ maxWidth: "600px", margin: "0 auto", padding: "20px" }}>
         <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Edit News</h2>
-        <form onSubmit={onSubmit} encType="multipart/form-data" style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+        <form onSubmit={onSubmit} style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
           <input
             type="text"
             name="title"
@@ -66,14 +52,6 @@ const NewsEditModal = ({ isOpen, onClose, newsItem, onNewsUpdated }) => {
             rows="4"
             style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ccc", fontSize: "16px" }}
           ></textarea>
-          {/* <input
-            type="file"
-            name="images"
-            accept="image/*"
-            multiple
-            onChange={onChange}
-            style={{ padding: "10px", borderRadius: "5px", border: "1px solid #ccc", fontSize: "16px" }}
-          /> */}
           <button
             type="submit"
             style={{ padding: "10px", borderRadius: "5px", backgroundColor: "#4CAF50", color: "white", fontSize: "16px", cursor: "pointer" }}

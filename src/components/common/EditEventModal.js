@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { UserContext } from '../../services/UserContext';
 import '../components.css';
+import api from '../../services/api';
 
 const EditEventModal = ({ eventId, isOpen, onClose, onEventUpdated }) => {
   const { user } = useContext(UserContext);
@@ -13,7 +14,6 @@ const EditEventModal = ({ eventId, isOpen, onClose, onEventUpdated }) => {
     event_time: '',
     posted_date: '',
   });
-  const [newImages, setNewImages] = useState([]);
 
   useEffect(() => {
     if (user?.role !== 'admin' || !isOpen) return;
@@ -36,13 +36,12 @@ const EditEventModal = ({ eventId, isOpen, onClose, onEventUpdated }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!window.confirm("Are you sure you want to update this event?")) return;
-    const formData = new FormData();
-    Object.entries(eventData).forEach(([key, value]) => formData.append(key, value));
-    newImages.forEach((image) => formData.append('images', image));
 
     try {
-      await axios.put(`http://localhost:5000/api/events/edit/${eventId}`, formData, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('accessToken')}` },
+      await api.put(`/events/edit/${eventId}`, eventData, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
       });
       onEventUpdated();
       onClose();

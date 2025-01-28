@@ -865,24 +865,26 @@ button:hover {
 
 /* Admin badge gradient */
 .user-profile-role-badge.admin {
-  background: linear-gradient(135deg, #dc3545 0%, #ff6b6b 100%);
+  background: linear-gradient(135deg, #dc3545 0%, #ff8f8f 100%);
+  border: 1px solid rgba(220, 53, 69, 0.2);
 }
 
 .user-profile-role-badge.admin:hover {
-  background: linear-gradient(135deg, #c82333 0%, #ff5252 100%);
+  background: linear-gradient(135deg, #c82333 0%, #ff7070 100%);
   transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(220, 53, 69, 0.3);
+  box-shadow: 0 3px 6px rgba(220, 53, 69, 0.4);
 }
 
 /* Superuser badge gradient */
 .user-profile-role-badge.superuser {
-  background: linear-gradient(135deg, #6f42c1 0%, #9066d4 100%);
+  background: linear-gradient(135deg, #6f42c1 0%, #a782e0 100%);
+  border: 1px solid rgba(111, 66, 193, 0.2);
 }
 
 .user-profile-role-badge.superuser:hover {
-  background: linear-gradient(135deg, #603aa0 0%, #7c52c7 100%);
+  background: linear-gradient(135deg, #5a37a0 0%, #8f63d4 100%);
   transform: translateY(-1px);
-  box-shadow: 0 2px 4px rgba(111, 66, 193, 0.3);
+  box-shadow: 0 3px 6px rgba(111, 66, 193, 0.4);
 }
 
 .user-profile-main-title {

@@ -5,6 +5,7 @@ import api from "../../services/api";
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
 import Pagination from "../../components/common/Pagination";
 import "../pages.css";
+import Spinner from "../../components/common/LoadingSpinner";
 
 const Profile = () => {
     const { id } = useParams();
@@ -134,7 +135,7 @@ const Profile = () => {
                 <div className="user-profile-posts-section">
                     <h2 className="user-profile-posts-title">Recent Posts</h2>
                     {isLoading ? (
-                        <p className="user-profile-loading">Loading posts...</p>
+                        <Spinner />
                     ) : userPosts.length > 0 ? (
                         <div className="user-profile-posts-list">
                             {userPosts.map((post) => (

@@ -803,6 +803,7 @@ button:hover {
   align-items: center;
   gap: 10px;
   margin-bottom: 5px;
+  flex-wrap: wrap;
 }
 
 .user-profile-role-badge {
@@ -850,7 +851,7 @@ button:hover {
   }
   
   .user-profile-name {
-    font-size: 1.5em;
+    font-size: 1.6em;
   }
   
   .user-profile-role-badge {
@@ -923,6 +924,8 @@ button:hover {
 .user-profile-name {
   font-size: 1.8em;
   margin-bottom: 5px;
+  word-break: break-word;
+  max-width: 100%;
 }
 
 .user-profile-email {

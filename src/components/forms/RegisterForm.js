@@ -36,7 +36,13 @@ const Register = () => {
     const validateForm = () => {
         const newErrors = {};
         
-        if (!name || name.length < 2) newErrors.name = "Name must be at least 2 characters long";
+        if (!name) {
+            newErrors.name = "Name is required";
+        } else if (name.length < 2 || name.length > 30) {
+            newErrors.name = "Name must be between 2 and 30 characters long";
+        } else if (!/^[a-zA-Z0-9_\s]*$/.test(name)) {
+            newErrors.name = "Name can only contain letters, numbers, underscores, and spaces";
+        }
         if (!email || !/^\S+@\S+\.\S+$/.test(email)) newErrors.email = "Please include a valid email";
         if (!phone || !/^\d{10}$/.test(phone)) newErrors.phone = "Please enter a valid 10-digit phone number";
         if (!password || password.length < 8) newErrors.password = "Password must be at least 8 characters long";

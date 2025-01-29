@@ -4,7 +4,7 @@ import api from '../../services/api';
 import "../components.css";
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
 
-const RecommendedUsersList = () => {
+const RecommendedUsersList = ({ onSwitchToFriends }) => {
   const [users, setUsers] = useState([]);
   const [error, setError] = useState('');
 
@@ -70,15 +70,10 @@ const RecommendedUsersList = () => {
     color: '#fff',
     padding: '10px',
     borderRadius: '8px',
-    textDecoration: 'none'
+    textDecoration: 'none',
+    cursor: 'pointer',
+    border: 'none'
   };
-
-  // const imgStyle = {
-  //   borderRadius: '50%',
-  //   width: '50px',
-  //   height: '50px',
-  //   objectFit: 'cover'
-  // };
 
   const handleMouseEnter = (e) => {
     e.currentTarget.style.transform = 'scale(1.05)';
@@ -112,7 +107,12 @@ const RecommendedUsersList = () => {
           </Link>
         ))}
       </div>
-      <Link to="/alumnidirectory" style={buttonStyle}>Find Other Mates</Link>
+      <button 
+        onClick={onSwitchToFriends}
+        style={buttonStyle}
+      >
+        Find Other Mates
+      </button>
     </div>
   );
 };

@@ -287,10 +287,16 @@ const Welcome = () => {
             mainContent={mainContent}
             rightSidebar={
                 <>
-                    {activeTab === "home" && <RecommendedUsersList />}
-                    {activeTab === "jobs" && <RecommendedUsersList />}
+                    {activeTab === "home" && (
+                        <RecommendedUsersList onSwitchToFriends={() => setActiveTab("friends")} />
+                    )}
+                    {activeTab === "jobs" && (
+                        <RecommendedUsersList onSwitchToFriends={() => setActiveTab("friends")} />
+                    )}
                     {activeTab === "education" && <VerifiedUsersList />}
-                    {activeTab === "my-posts" && <RecommendedUsersList />}
+                    {activeTab === "my-posts" && (
+                        <RecommendedUsersList onSwitchToFriends={() => setActiveTab("friends")} />
+                    )}
                 </>
             }
         />

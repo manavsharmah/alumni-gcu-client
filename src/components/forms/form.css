@@ -303,3 +303,43 @@
     font-size: 0.9rem;
     margin-left: 10px;
 }
+
+.password-input-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.password-icon {
+    position: absolute;
+    left: 10px;
+    color: #666;
+}
+
+.password-input-wrapper input {
+    width: 100%;
+    padding-left: 35px;  /* Make room for the lock icon */
+    padding-right: 40px; /* Make room for the toggle button */
+}
+
+.password-toggle-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    color: #666;
+}
+
+.password-toggle-button:hover {
+    color: #333;
+}
+
+.password-toggle-button:focus {
+    outline: none;
+    color: #333;
+}

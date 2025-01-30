@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { FaUser, FaEnvelope, FaPhone, FaUniversity, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import api from '../../services/api';

@@ -45,8 +45,21 @@ const Topbar = () => {
         setIsDropdownOpen(false);
       }
     };
-    document.addEventListener('click', handleOutsideClick);
-    return () => document.removeEventListener('click', handleOutsideClick);
+  
+    const handleNavClick = (event) => {
+      // Close nav if a link inside .nav-content is clicked
+      if (event.target.closest(".nav-content a")) {
+        closeNav();
+      }
+    };
+  
+    document.addEventListener("click", handleOutsideClick);
+    document.addEventListener("click", handleNavClick);
+  
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+      document.removeEventListener("click", handleNavClick);
+    };
   }, []);
 
   // If loading, show loading screen

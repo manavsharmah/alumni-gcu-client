@@ -59,7 +59,7 @@ const Topbar = () => {
     };
   
     const handleNavClick = (event) => {
-      // Close nav if a link inside .nav-content is clicked
+      // Close the nav tab if a link inside .nav-content is clicked
       if (event.target.closest(".nav-content a")) {
         closeNav();
       }

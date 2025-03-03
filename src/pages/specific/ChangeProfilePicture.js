@@ -214,7 +214,7 @@ function ChangeProfilePicture() {
                         {uploadStatus && <p className="status-message">{uploadStatus}</p>}
                     </div>
                 </div>
-                </div>
+              </div>
             </div>
         </>
     );

@@ -7,7 +7,14 @@ const VCMessage = () => {
             <div className="art-container">
                 <div className="vc-message-container">
                     <div class="letter">
-                        <h3>From the Vice-Chancellor’s desk:</h3>
+                        <div className="letter-header">
+                            <div className="letter-header-text">
+                                <h3>From the Vice-Chancellor’s desk:</h3>
+                            </div>
+                            <div className="letter-header-image">
+                                <img src="./assets/vc-gcu.jpg" alt="Vice Chancellor, GCU" />
+                            </div>
+                        </div>
                         <p>Girijananda Chowdhury University (GCU) stands as a testament to the vision and dedication of the Shrimanta Shankar Academy Society. Established in October 2022, GCU marks a significant milestone in Assam's academic landscape, emerging as a private university under the Assam Private University Act following approval by the Assam Legislative Assembly. This milestone reflects our unwavering commitment to education and our endeavor to create a transformative impact on society.</p>
                         <p>Prior to becoming a university, the Shrimanta Shankar Academy Society had already earned a reputation for excellence through two of its flagship institutions: the Girijananda Chowdhury Institute of Management and Technology (GIMT) and the Girijananda Chowdhury Institute of Pharmaceutical Science (GIPS). With campuses in Guwahati and Tezpur, Assam, these institutions have consistently delivered high-quality education in engineering, management, and pharmaceutical sciences. GIMT offered AICTE-approved undergraduate and postgraduate programs in engineering and management, while GIPS, recognized by the Pharmacy Council of India (PCI), provided exceptional training in pharmaceutical sciences. Several programs from these institutions were accredited by the National Board of Accreditation (NBA), affirming their academic rigor and industry relevance.</p>
                         <p>The elevation of GIMT and GIPS into Girijananda Chowdhury University has created a unified platform to expand our academic horizons. These esteemed institutions now form the School of Engineering and Technology, the School of Management, and the School of Pharmaceutical Sciences under the GCU umbrella. Building on this foundation, GCU has ventured into new domains with the establishment of the School of Humanities and Social Sciences, the School of Natural Sciences, the School of Allied Health Sciences, and the Centre for Legal Studies. This expansion embodies our commitment to comprehensive education, providing opportunities for interdisciplinary and multidisciplinary learning.</p>

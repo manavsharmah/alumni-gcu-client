@@ -5,8 +5,10 @@ import { getCroppedImg } from './cropImage';
 import api from '../../services/api';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import '../pages.css';
+import { useUser } from '../../services/UserContext';
 
 function ChangeProfilePicture() {
+    const { user, updateUserProfile } = useUser();
     const [imageSrc, setImageSrc] = useState(null);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
@@ -47,31 +49,32 @@ function ChangeProfilePicture() {
             setError('No file selected. Please choose a file to upload.');
             return;
         }
-
+    
         if (!croppedAreaPixels) {
             setError('Please crop the image before uploading.');
             return;
         }
-
+    
         setError('');
         setUploadStatus('Processing image...');
         setIsUploading(true);
-
+    
         try {
             const croppedImageBlob = await getCroppedImg(imageSrc, croppedAreaPixels);
             const croppedImageFile = new File([croppedImageBlob], file.name, { type: file.type });
-
+    
             const formData = new FormData();
             formData.append('profilePhoto', croppedImageFile);
-
+    
             setUploadStatus('Uploading image...');
-
+    
             const response = await api.post('/user/upload-profile-photo', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
-
+    
             if (response.data && response.data.photoPath) {
-                setProfilePhoto(response.data.photoPath);  // Update profile photo state
+                setProfilePhoto(response.data.photoPath);  // Update local state
+                updateUserProfile({ ...user, profilePhoto: response.data.photoPath }); // Update global user context
                 setUploadStatus(response.data.message);
                 resetProfilePictureState();
                 setTimeout(() => {

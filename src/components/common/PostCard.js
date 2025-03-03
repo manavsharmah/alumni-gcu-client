@@ -1,17 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from 'react-router-dom';
 import '../components.css';
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
 import CommentModal from "./CommentModal";
-import api from "../../services/api"; // Add this import
+import api from "../../services/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { 
     faEllipsisH,
     faThumbsUp, 
     faComment,
-    faShare
+    faShare,
+    faFlag
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = false, onCommentClick }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -21,18 +23,42 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
     const [showMenu, setShowMenu] = useState(false);
     const [showShareToast, setShowShareToast] = useState(false);
     const navigate = useNavigate();
+    const menuRef = useRef(null);
+    const menuButtonRef = useRef(null);
+
+    // Track menu state with ref
+    const menuOpenRef = useRef(showMenu);
+    useEffect(() => {
+        menuOpenRef.current = showMenu;
+    }, [showMenu]);
+
+    // Handle clicks outside menu
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (showMenu && menuRef.current && 
+                !menuRef.current.contains(event.target) &&
+                !menuButtonRef.current.contains(event.target)) {
+                setShowMenu(false);
+            }
+        };
+
+        document.addEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
+    }, [showMenu]);
 
     const handleCommentButtonClick = (e) => {
-        e.stopPropagation(); // Prevent post click navigation
+        e.stopPropagation();
         if (isInFeedView && onCommentClick) {
-            onCommentClick(); // Call the provided handler in FeedView
+            onCommentClick();
         } else {
-            setIsCommentModalOpen(true); // Open modal in regular view
+            setIsCommentModalOpen(true);
         }
     };
+
     const handlePostClick = (e) => {
-        // Don't navigate if clicking on buttons or links
-        if (e.target.closest('button') || 
+        // Prevent navigation if menu is open or clicking interactive elements
+        if (menuOpenRef.current || 
+            e.target.closest('button') || 
             e.target.closest('a') || 
             e.target.closest('.gcu-edit-form') ||
             e.target.closest('.gcu-comment-form')) {
@@ -67,8 +93,24 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                 text: commentText
             });
             setComments([...comments, response.data]);
+            toast.success('Comment added successfully!', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         } catch (error) {
             console.error("Error posting comment:", error);
+            toast.error('Failed to add comment. Please try again.', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         }
     };
 
@@ -76,8 +118,49 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
         try {
             await api.delete(`/posts/${post._id}/comments/${commentId}`);
             setComments(comments.filter(comment => comment._id !== commentId));
+            toast.success('Comment deleted successfully!', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         } catch (error) {
             console.error("Error deleting comment:", error);
+            toast.error('Failed to delete comment. Please try again.', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        }
+    };
+
+    const handleReport = async (e) => {
+        e.stopPropagation();
+        try {
+            await api.post(`/posts/report`, { postId: post._id });
+            toast.success('Post reported successfully!', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
+        } catch (err) {
+            console.error('Error reporting post:', err);
+            toast.error('Failed to report post. Please try again.', {
+                position: "bottom-center",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true
+            });
         }
     };
 
@@ -103,9 +186,10 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
     const canEdit = currentUser && (currentUser.id === post.author._id);
     const canDelete = currentUser && (currentUser.role === 'admin' || currentUser.id === post.author._id);
     const hasLiked = Array.isArray(post.likes) && post.likes.includes(currentUser.id);
+    const canReport = currentUser && (currentUser.id !== post.author._id);
 
     const handleShare = async (e) => {
-        e.stopPropagation(); // Prevent post click navigation
+        e.stopPropagation();
         const postUrl = `${window.location.origin}/welcome/post/${post._id}`;
         
         try {
@@ -123,17 +207,21 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                 {/* Three-dot menu */}
                 {(canEdit || canDelete) && (
                     <div className="gcu-top-actions">
-                        <div className="relative">
+                        <div className="relative" ref={menuRef}>
                             <button 
+                                ref={menuButtonRef}
                                 className="gcu-menu-button"
-                                onClick={() => setShowMenu(!showMenu)}
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setShowMenu(!showMenu);
+                                }}
                             >
                                 <FontAwesomeIcon icon={faEllipsisH} />
                             </button>
                             {showMenu && (
                                 <div className="gcu-dropdown-menu">
                                     {canEdit && !isEditing && (
-                                        <button 
+                                        <button
                                             className="gcu-menu-item"
                                             onClick={() => {
                                                 setIsEditing(true);
@@ -144,15 +232,13 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                                         </button>
                                     )}
                                     {canDelete && (
-                                        <button 
-                                            className="gcu-menu-item"
-                                            onClick={handleDelete}
-                                        >
+                                        <button className="gcu-menu-item" onClick={handleDelete}>
                                             Delete
                                         </button>
                                     )}
                                 </div>
                             )}
+
                         </div>
                     </div>
                 )}
@@ -226,12 +312,12 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                         <FontAwesomeIcon icon={faThumbsUp} /> {post.likes.length}
                     </button>
                     <button
-                className="gcu-action-button"
-                onClick={handleCommentButtonClick}
-                title="Comment on post"
-            >
-                <FontAwesomeIcon icon={faComment} /> {comments.length}
-            </button>
+                        className="gcu-action-button"
+                        onClick={handleCommentButtonClick}
+                        title="Comment on post"
+                    >
+                        <FontAwesomeIcon icon={faComment} /> {comments.length}
+                    </button>
                     <button
                         className="gcu-action-button"
                         onClick={handleShare}
@@ -239,6 +325,15 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                     >
                         <FontAwesomeIcon icon={faShare} />
                     </button>
+                    {canReport && (
+                        <button
+                            className="gcu-action-button"
+                            onClick={handleReport}
+                            title="Report post"
+                        >
+                            <FontAwesomeIcon icon={faFlag} />
+                        </button>
+                    )}
                 </div>
 
                 {showShareToast && (
@@ -248,15 +343,15 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
                 )}
 
                 {!isInFeedView && (
-                <CommentModal
-                    isOpen={isCommentModalOpen}
-                    onClose={() => setIsCommentModalOpen(false)}
-                    onSubmitComment={handleCommentSubmit}
-                    onDeleteComment={handleDeleteComment}
-                    comments={comments}
-                    currentUser={currentUser}
-                />
-            )}
+                    <CommentModal
+                        isOpen={isCommentModalOpen}
+                        onClose={() => setIsCommentModalOpen(false)}
+                        onSubmitComment={handleCommentSubmit}
+                        onDeleteComment={handleDeleteComment}
+                        comments={comments}
+                        currentUser={currentUser}
+                    />
+                )}
             </div>
         </div>
     );

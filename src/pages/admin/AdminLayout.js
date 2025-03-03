@@ -4,10 +4,12 @@ import { FaTachometerAlt, FaNewspaper, FaCalendarAlt, FaArrowLeft, FaImages, FaA
 import { IoPersonAdd } from "react-icons/io5";
 import { MdAttachEmail, MdFeed, MdFeedback } from "react-icons/md";
 import "./admin.css";
+import { useUser } from '../../services/UserContext';
 
 const getActiveClass = ({ isActive }) => (isActive ? "active-link" : "");
 
 const AdminLayout = () => {
+  const { user } = useUser();
   return (
     <div className="admin-layout">
       <div className="admin-nav-bar">
@@ -70,11 +72,19 @@ const AdminLayout = () => {
             <span>Feedbacks</span>
           </NavLink>
         </li>
+          {user?.role === 'superuser' && (
+            <li>
+              <NavLink to="/create-admin" className={getActiveClass}>
+                <IoPersonAdd />
+                <span>Create Admin</span>            
+              </NavLink>
+            </li>
+          )}
         <li>
-          <NavLink to="/create-admin" className={getActiveClass}>
-            <IoPersonAdd />
-            <span>Create Admin</span>
-          </NavLink>
+        <NavLink to="/flagged-posts" className={getActiveClass}>
+            <MdFeed />
+            <span>Flagged Posts</span>
+        </NavLink>
         </li>
         <li>
           <NavLink to="/" className={getActiveClass}>

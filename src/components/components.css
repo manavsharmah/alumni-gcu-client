@@ -109,6 +109,22 @@
   text-underline-offset: 4px; 
 }
 
+.nav-content li a.active {
+  color: #007bff !important;
+  text-decoration: underline;
+  text-decoration-color: #fbcf0a;
+  text-decoration-thickness: 7px;
+  text-underline-offset: 56px;
+}
+
+.header-nav ul.sub-menus a.active {
+  color: #ffffff !important;
+  text-decoration: underline;
+  text-decoration-color: #fbcf0a;
+  text-decoration-thickness: 4px;
+  text-underline-offset: 4px;
+}
+
 .nav-content .sub-menus {
   position: absolute;
   color: #fffefe;
@@ -316,6 +332,7 @@
 
 
 /* Media query for mobile responsiveness */
+
 @media screen and (max-width: 768px) {
   .App-header {
     width: 100%;
@@ -376,7 +393,7 @@
   .nav-content.open {
     display: block;
     flex-direction: column;
-    width: 100%;
+    width: 280px;
     position: absolute;
     top: 60px; /* Position the nav content below the navbar */
     left: 0;
@@ -478,6 +495,30 @@
     margin-top: 0;
     margin-left: 0;
   }
+
+  .nav-content li a:hover,
+  .header-nav ul.sub-menus a:hover {
+    color: inherit; /* Resets the hover color */
+    text-decoration: none; /* Removes underline and decoration */
+  }
+
+  .nav-content li a.active, .header-nav ul.sub-menus a.active {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: #fbcf0a;
+    text-decoration-thickness: 4px;
+    text-underline-offset: 5px;
+  }
+
+  .header-nav ul {
+    flex-direction: column;
+    gap: 17px;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    margin: 5px 0;
+    padding: 15px 5px;
+  }
 }
 
 @media screen and (max-width: 680px) {
@@ -508,10 +549,21 @@
 
   .nav-content.open {
     top: 55px; /* Adjust for smaller view */
+    width: 280px;
   }
 
   .App-main {
     padding-top: 130px;
+  }
+  
+  .header-nav ul {
+    flex-direction: column;
+    gap: 17px;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    margin: 5px 0;
+    padding: 15px 5px;
   }
 }
 
@@ -575,7 +627,7 @@
   .nav-content.open {
     display: block;
     flex-direction: column;
-    width: 100%;
+    width: 400px;
     position: absolute;
     top: 60px; /* Position the nav content below the navbar */
     left: 0;
@@ -604,11 +656,12 @@
 
   .header-nav ul {
     flex-direction: column;
-    gap: 10px;
+    gap: 30px;
     width: 100%;
     text-align: left;
     padding: 0;
     margin: 5px 0;
+    padding: 15px 5px;
   }
 
   .header-nav li {
@@ -622,7 +675,24 @@
     padding: 10px;
     width: 100%;
     z-index: 1;
+    font-size: 22px;
+    font-weight: 500;
   }
+
+  .nav-content li a:hover,
+  .header-nav ul.sub-menus a:hover {
+    color: inherit; /* Resets the hover color */
+    text-decoration: none; /* Removes underline and decoration */
+  }
+
+  .nav-content li a.active, .header-nav ul.sub-menus a.active {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: #fbcf0a;
+    text-decoration-thickness: 4px;
+    text-underline-offset: 5px;
+  }
+  
 
   .header-nav.open ul.sub-menus {
     opacity: 1;
@@ -647,8 +717,10 @@
   }
 
   .header-nav ul.sub-menus a {
-    padding-left: 25px;
+    padding: 15px 0 15px 25px;
     font-weight: inherit;
+    font-size: 20px;
+    font-weight: 500;
   }
 
   .App-main {
@@ -1007,7 +1079,7 @@ justify-content: center;
 
 .verified-users-container {
   padding: 20px;
-  width: 300px;
+  width: 500px;
   margin: 20px;
   background-color: #fff;
   border-radius: 8px;
@@ -1646,18 +1718,24 @@ justify-content: center;
   border-radius: 100px;
 }
 
+/* Default Dropdown Menu Styling */
 .gcu-dropdown-menu {
   position: absolute;
   right: 0;
-  top: 25px; /* Adjust this value to position below the three dots */
+  top: 25px;
   background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  min-width: 120px; /* Add this to ensure menu has enough width */
+  min-width: 120px;
+  max-width: 300px; /* Prevent excessive width */
+  padding: 8px 0;
+  overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  max-height: 80vh; /* Limit height for small screens */
 }
 
+/* Dropdown Menu Item Styling */
 .gcu-menu-item {
   display: block;
   width: 100%;
@@ -1671,6 +1749,63 @@ justify-content: center;
 
 .gcu-menu-item:hover {
   background-color: #f5f5f5;
+}
+
+/* Close Button for Dropdown */
+.gcu-menu-close {
+  background-color: #f0f0f0;
+  color: #333;
+  font-weight: bold;
+  padding: 8px 16px;
+  text-align: center;
+  border: none;
+  cursor: pointer;
+  border-top: 1px solid #ddd;
+}
+
+.gcu-menu-close:hover {
+  background-color: #e0e0e0;
+  color: #000;
+}
+
+/* Media Query for Mobile View (max-width: 768px) */
+@media screen and (max-width: 768px) {
+  .gcu-dropdown-menu {
+      width: 90%; 
+      left: 50%; 
+      right: auto; 
+      top: 35px; 
+      transform: translateX(-50%); 
+      border-radius: 6px;
+  }
+  .gcu-menu-item {
+      text-align: center; 
+      padding: 12px; 
+  }
+  .gcu-menu-close {
+      font-size: 0.9rem; 
+      padding: 14px;
+  }
+}
+
+/* Media Query for Smaller Mobile View (max-width: 480px) */
+@media screen and (max-width: 480px) {
+  .gcu-dropdown-menu {
+      width: 100%; 
+      max-width: 100%; 
+      left: 0; 
+      right: 0; 
+      border-radius: 0; 
+      top: 40px; 
+  }
+  .gcu-menu-item {
+      font-size: 1rem; 
+      padding: 14px; 
+  }
+  .gcu-menu-close {
+      font-size: 0.9rem;
+      padding: 14px;
+  }
 }
 
 .gcu-top-actions {
@@ -2160,3 +2295,186 @@ justify-content: center;
   box-shadow: inset 0px -2px 4px rgba(0, 0, 0, 0.6);
   font-family: "Courier New", Courier, monospace;
 }
+
+
+
+/* Alumni Achievers Card */
+
+.alumni-card {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  border: 1px solid #ccc;
+  padding: 20px;
+  gap: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.alumni-image {
+  flex: 1;
+  max-width: 250px;
+  text-align: center;
+}
+
+.alumni-image img {
+  width: 100%;
+  max-width: 250px;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.alumni-name {
+  margin-top: 10px;
+}
+
+.alumni-name h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.alumni-name p {
+  font-size: 14px;
+  margin: 0;
+  color: #555;
+}
+
+.alumni-info {
+  flex: 2;
+  padding: 0 20px;
+}
+
+.alumni-info h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.alumni-info p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+@media screen and (max-width: 768px) {
+  .alumni-card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .alumni-info {
+    padding: 0;
+  }
+
+  .alumni-image {
+    max-width: 100%;
+  }
+}
+
+
+/* Card Caroousel style */
+
+.card-carousel-wrapper {
+  position: relative;
+  width: 80%;
+  padding: 20px 10px;
+  overflow: hidden;
+}
+
+.card-carousel-list .card-carousel-item {
+  list-style: none;
+}
+
+.card-carousel-list .card-carousel-item .card-carousel-link {
+  display: block;
+  background: #fff;
+  padding: 18px;
+  border-radius: 12px;
+  text-decoration: none;
+  border: 2px solid transparent;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.05);
+  transition: 0.2s ease;
+}
+
+.card-carousel-link:hover {
+  border-color: #5372f0;
+}
+
+.card-carousel-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.badge {
+  color: blue;
+  margin: 16px 0 18px;
+  padding: 8px 16px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  background: #dde4ff;
+  width: fit-content;
+  border-radius: 50px;
+}
+
+.card-carousel-title {
+  font-size: 16px;
+  color: #000;
+  font-weight: 100;
+}
+
+.card-carousel-button {
+  height: 35px;
+  width: 35px;
+  color: #5372f0;
+  border-radius: 50%;
+  margin: 30px 0 5px;
+  background: none;
+  cursor: pointer;
+  transform: rotate(-45deg);
+  border: 2px solid #5382f0;
+  transition: 0.4s ease;
+}
+
+.card-carousel-link:hover .card-button {
+  color: #fff;
+  background: #5372f0;
+}
+
+.swiper-pagination-bullet {
+  height: 13px;
+  width: 13px;
+  opacity: 0.5;
+  background: #5372f0;
+}
+
+.swiper-slide-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* Center vertically */
+  z-index: 10;
+  color: #5372f0;
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1;
+}
+
+.swiper-button-prev {
+  left: 0; 
+}
+
+.swiper-button-next {
+  right: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .swiper-slide-button {
+    display: none;
+  }
+}
+
+
+

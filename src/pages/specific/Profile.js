@@ -3,6 +3,9 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import api from "../../services/api";
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
+import Pagination from "../../components/common/Pagination";
+import "../pages.css";
+import Spinner from "../../components/common/LoadingSpinner";
 
 const Profile = () => {
     const { id } = useParams();
@@ -73,7 +76,6 @@ const Profile = () => {
     }, [id, currentPage]);
 
     const handlePostClick = (post) => {
-        // Navigate to FeedPostView for the selected post
         navigate(`/welcome/post/${post._id}`);
     };
 
@@ -83,6 +85,11 @@ const Profile = () => {
 
     const handleChangePicture = () => {
         navigate('/change-profile-picture');
+    };
+
+    // Helper function to get role badge color
+    const getRoleBadgeColor = (role) => {
+        return role === 'admin' ? '#dc3545' : '#6f42c1'; // Red for admin, Purple for superuser
     };
 
     return (
@@ -96,7 +103,16 @@ const Profile = () => {
                             className="user-profile-picture"
                         />
                         <div className="user-profile-info">
-                            <h2 className="user-profile-name">{user?.name}</h2>
+                            <div className="user-profile-name-container">
+                                <h2 className="user-profile-name">{user?.name}</h2>
+                                {user?.role && user.role !== 'user' && (
+                                    <span 
+                                        className={`user-profile-role-badge ${user.role.toLowerCase()}`}
+                                    >
+                                        {user.role}
+                                    </span>
+                                )}
+                            </div>
                             <p className="user-profile-email">{user?.email}</p>
                             {isLoggedInUser && (
                                 <button className="user-profile-change-picture-btn" onClick={handleChangePicture}>
@@ -119,7 +135,7 @@ const Profile = () => {
                 <div className="user-profile-posts-section">
                     <h2 className="user-profile-posts-title">Recent Posts</h2>
                     {isLoading ? (
-                        <p className="user-profile-loading">Loading posts...</p>
+                        <Spinner />
                     ) : userPosts.length > 0 ? (
                         <div className="user-profile-posts-list">
                             {userPosts.map((post) => (
@@ -135,17 +151,12 @@ const Profile = () => {
                         <p className="user-profile-no-posts">No recent posts</p>
                     )}
                     {totalPages > 1 && (
-                        <div className="user-profile-pagination">
-                            {Array.from({ length: totalPages }, (_, index) => (
-                                <button
-                                    key={index + 1}
-                                    className={`user-profile-page-number ${currentPage === index + 1 ? 'user-profile-page-number-active' : ''}`}
-                                    onClick={() => handleClickPage(index + 1)}
-                                >
-                                    {index + 1}
-                                </button>
-                            ))}
-                        </div>
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onPageChange={handleClickPage}
+                            stylePrefix="user-profile"
+                        />
                     )}
                 </div>
             </div>

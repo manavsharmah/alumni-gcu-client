@@ -45,7 +45,7 @@ const Home = () => {
         <div className='main'>
             <section className="hero">
                 <div className="left-box">
-                    <img src="./assets/gcu-building.jpg" alt="GCU Campus" />
+                    <img src="./assets/gcu landscape image.jpg" alt="GCU Campus" />
                     <h2>Welcome to the GCU Alumni Association</h2>
                     <p>A registered body of the Alumni members of the Girijananda Chowdhury University where you can connect with fellow members and alumnus</p>
                     <br/>
@@ -56,10 +56,9 @@ const Home = () => {
                     )}
                 </div>
                 <div className="right-box">
-                    <img src="./assets/gcu-building.jpg" alt="GCU Campus" />
+                    <img src="./assets/gcu landscape image.jpg" alt="GCU Campus" />
                 </div>
             </section>
-
             <section className='hero8'>
                 <div className='ch-image'>
                     <img src="./assets/Pres-img-ssa.jpg" alt="SSA President" className='vc-img'/>

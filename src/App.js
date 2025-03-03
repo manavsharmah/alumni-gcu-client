@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { UserProvider } from "./services/UserContext";
 import { VisitorCounterProvider } from "./services/VisitorCounterContext";
 
@@ -34,25 +34,28 @@ import AdminEmailForm from "./pages/admin/AdminEmailForm";
 import BulkAddAlumni from "./pages/admin/AlumniRecordUpload";
 import CreateAdmin from "./pages/admin/CreateAdmin";
 
+import AdminFeedbackPanel from "./pages/admin/AdminFeedbackPanel";
+import DashboardCharts from "./pages/admin/AdminStats";
+import FlaggedPosts from "./pages/admin/FlaggedPosts";
+
+
 
 // Detail Pages
-import { TopAlumni } from "./pages/detail/Alumni";
-import { Copyright, Disclaimer, TermsOfUse, ContactUs, PrivacyPolicy, AlumniDirectory } from "./pages/detail/Others";
+import AlumniAchievers from "./pages/articles/AlumniAchievers";
+import { Copyright, Disclaimer, TermsOfUse, ContactUs, PrivacyPolicy } from "./pages/detail/Others";
 import FeedbackForm from "./pages/detail/Feedbackform";
-import Scholarship from "./pages/detail/Scholarship";
-import { Alumnus } from "./pages/detail/GetInvolved";
-import Gallery from "./pages/detail/Gallery";
-import SingleAlbum from "./pages/detail/SingleAlbum";
+import Scholarship from "./pages/articles/Scholarship";
+import AssociationMembers from "./pages/articles/AssociationMembers";
+import Gallery from "./pages/articles/Gallery";
+import SingleAlbum from "./pages/articles/SingleAlbum";
 import Events from "./pages/detail/Events";
 import NewsList from "./pages/detail/NewsArchive";
 import SingleNews from "./pages/detail/SingleNews";
 import SingleEvent from "./pages/detail/SingleEvent";
 import Donations from "./pages/detail/Donations";
-import {
-	GoverningCouncil
-} from "./pages/detail/About";
-import AdminFeedbackPanel from "./pages/admin/AdminFeedbackPanel";
-import DashboardCharts from "./pages/admin/AdminStats";
+import GoverningCouncil from "./pages/articles/GoverningCouncil";
+
+
 
 
 import AboutAssociation from "./pages/articles/About-Association";
@@ -77,12 +80,12 @@ function App() {
                 {/* Open Routes */}
                 <Route path="/" element={<Home />} />
                 <Route path="/council" element={<GoverningCouncil />} />
-                <Route path="/alumnus" element={<Alumnus />} />
-                <Route path="/top-alumni" element={<TopAlumni />} />
+                <Route path="/association-members" element={<AssociationMembers />} />
+                <Route path="/alumni-achievers" element={<AlumniAchievers />} />
                 <Route path="/news" element={<NewsList />} />
                 <Route path="/news/:id" element={<SingleNews />} />
                 <Route path="/gallery" element={<Gallery />} />
-                <Route path="/album/:id" element={<SingleAlbum />} />
+                <Route path="/gallery/album/:id" element={<SingleAlbum />} />
                 <Route path="/contactus" element={<ContactUs />} />
                 <Route path="/feedback" element={<FeedbackForm />} />
                 <Route path="/scholarship" element={<Scholarship />} />
@@ -98,33 +101,33 @@ function App() {
                 <Route path="/vision" element={<MissionAndVision />} />
                 <Route path="/vcmsg" element={<VCMessage />} />
 
-                {/* Admin + User Routes */}
+                {/* SuperUser + Admin + User Routes(logged-in user routes) */}
                 
                 <Route
                   path="/reset-password"
                   element={
                     <ProtectedRoute
                       element={<ResetPassword />}
-                      requiredRole={["admin", "user"]}
+                      requiredRole={["superuser", "admin", "user"]}
                     />
                   }
                 />
                 <Route
                   path="/profile"
                   element={
-                    <ProtectedRoute element={<Profile />} requiredRole={["admin", "user"]} />
+                    <ProtectedRoute element={<Profile />} requiredRole={["superuser", "admin", "user"]} />
                   }
                 />
                 <Route
                   path="/profile/:id"
                   element={
-                    <ProtectedRoute element={<Profile />} requiredRole={["admin", "user"]} />
+                    <ProtectedRoute element={<Profile />} requiredRole={["superuser", "admin", "user"]} />
                   }
                 />
                 <Route
                   path="/change-profile-picture"
                   element={
-                    <ProtectedRoute element={<ChangeProfilePicture />} requiredRole={["admin", "user"]} />
+                    <ProtectedRoute element={<ChangeProfilePicture />} requiredRole={["superuser", "admin", "user"]} />
                   }
                 />
                 <Route
@@ -132,7 +135,7 @@ function App() {
                   element={
                     <ProtectedRoute
                       element={<UpdateProfile />}
-                      requiredRole={["admin", "user"]}
+                      requiredRole={["superuser", "admin", "user"]}
                     />
                   }
                 />
@@ -149,7 +152,7 @@ function App() {
                   element={
                     <ProtectedRoute
                       element={<FeedHome />}
-                      requiredRole={["admin", "user"]}
+                      requiredRole={["superuser", "admin", "user"]}
                     />
                   }
                 />
@@ -159,18 +162,18 @@ function App() {
                   element={
                     <ProtectedRoute
                       element={<FeedHome />}
-                      requiredRole={["admin", "user"]}
+                      requiredRole={["superuser", "admin", "user"]}
                     />
                   }
                 />
               </Route>
 
-              {/* Admin Routes */}
+              {/* Admin & SuperUser Routes */}
               <Route
                 element={
                   <ProtectedRoute
                     element={<AdminLayout />}
-                    requiredRole="admin"
+                    requiredRole={["superuser", "admin"]}
                   />
                 }
               >
@@ -182,9 +185,21 @@ function App() {
                 <Route path="/photo-upload-form" element={<PhotoUpload />} />
                 <Route path="/email-form" element={<AdminEmailForm />} />
                 <Route path="/add-bulk-alumni" element={<BulkAddAlumni />} />
-                <Route path="/view-feedback" element={<AdminFeedbackPanel />} />   
-                <Route path="/create-admin" element={<CreateAdmin />} />             
+                <Route path="/view-feedback" element={<AdminFeedbackPanel />} /> 
+                <Route path="/flagged-posts" element={<FlaggedPosts />} />             
                 <Route path="*" element={<NotFound />} />                
+              </Route>
+
+              {/*SuperUser Routes */}
+              <Route
+                element={
+                  <ProtectedRoute
+                    element={<AdminLayout />}
+                    requiredRole="superuser"
+                  />
+                }
+              >
+                <Route path="/create-admin" element={<CreateAdmin />} />
               </Route>
             </Routes>
           </section>

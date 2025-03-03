@@ -1,8 +1,16 @@
 import React from "react";
 import "./feed.css";
-import { FaUsers, FaBriefcase, FaGraduationCap, FaHome } from "react-icons/fa";
+import { FaUsers, FaBriefcase, FaGraduationCap, FaHome, FaUser } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const FeedNavbar = ({ activeTab, setActiveTab }) => {
+  const navigate = useNavigate();
+  
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
+    navigate('/welcome');
+  };
+
   return (
     <div className="feed-sidebar">
       <div className="sidebar-header">
@@ -12,19 +20,23 @@ const FeedNavbar = ({ activeTab, setActiveTab }) => {
         </button>
       </div>
       <ul className="feed-navbar-list">
-        <li className={`feed-nav-item ${activeTab === "home" ? "active" : ""}`} onClick={() => setActiveTab("home")}>
+        <li className={`feed-nav-item ${activeTab === "home" ? "active" : ""}`} onClick={() => handleTabClick("home")}>
           <FaHome className="nav-icon" />
           <span>Home</span>
         </li>
-        <li className={`feed-nav-item ${activeTab === "friends" ? "active" : ""}`} onClick={() => setActiveTab("friends")}>
+        <li className={`feed-nav-item ${activeTab === "my-posts" ? "active" : ""}`} onClick={() => handleTabClick("my-posts")}>
+          <FaUser className="nav-icon" />
+          <span>My Posts</span>
+        </li>
+        <li className={`feed-nav-item ${activeTab === "friends" ? "active" : ""}`} onClick={() => handleTabClick("friends")}>
           <FaUsers className="nav-icon" />
           <span>Friends</span>
         </li>
-        <li className={`feed-nav-item ${activeTab === "jobs" ? "active" : ""}`} onClick={() => setActiveTab("jobs")}>
+        <li className={`feed-nav-item ${activeTab === "jobs" ? "active" : ""}`} onClick={() => handleTabClick("jobs")}>
           <FaBriefcase className="nav-icon" />
           <span>Jobs</span>
         </li>
-        <li className={`feed-nav-item ${activeTab === "education" ? "active" : ""}`} onClick={() => setActiveTab("education")}>
+        <li className={`feed-nav-item ${activeTab === "education" ? "active" : ""}`} onClick={() => handleTabClick("education")}>
           <FaGraduationCap className="nav-icon" />
           <span>Education</span>
         </li>

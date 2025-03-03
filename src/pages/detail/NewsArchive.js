@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../pages.css';
+import Pagination from '../../components/common/Pagination';
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
@@ -41,9 +42,10 @@ const NewsList = () => {
   
   return (
     <div className='main'>
-      <div className='page-container'>
       <div className="news-container">
-        <h2 className="news-title">News Category</h2>
+        <div className="about-header">
+          <h1>News</h1>
+        </div>
         <div className="news-list">
           {currentNews.map((newsItem) => (
             <div key={newsItem._id} className="news-item" onClick={() => handleNewsClick(newsItem)}>
@@ -66,21 +68,14 @@ const NewsList = () => {
             </div>
           ))}
         </div>
-        {/* Pagination */}
-        <div className="pagination">
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
-            <button
-              key={number}
-              onClick={() => paginate(number)}
-              className={`page-number ${currentPage === number ? 'active' : ''}`}
-            >
-              {number}
-            </button>
-          ))}
+            <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={paginate}
+            stylePrefix="news"
+          />
         </div>
       </div>
-      </div>
-    </div>
   );
 };
 

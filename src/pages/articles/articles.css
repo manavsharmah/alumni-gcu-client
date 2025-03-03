@@ -52,6 +52,7 @@ council-sub-heading h2 {
     font-family: "IBM Plex Sans", sans-serif;
     font-size: 20px;
     margin-bottom: 12px;
+    text-align: justify;
 }
 
 .article-text li::marker {

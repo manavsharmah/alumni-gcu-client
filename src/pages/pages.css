@@ -508,6 +508,10 @@
     margin-bottom: 20px;
   }
 
+  .left-box a {
+    z-index: 100; /* Makes sure the button is clickable */
+  }
+
   .vc-img {
     height: 235px;
     width: 230px;

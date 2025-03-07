@@ -48,7 +48,7 @@ const Topbar = () => {
 
   // Close dropdown when clicking outside
   useEffect(() => {
-    const handleClickOutside = (event) => {
+    const handleOutsideClick = (event) => {
       if (
         isNavOpen && 
         !menuToggleRef.current?.contains(event.target) && 

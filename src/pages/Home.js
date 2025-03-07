@@ -139,7 +139,7 @@ const Home = () => {
                 </div>
             </section> */}
             
-            <section className='hero4'> {/* New section for gallery preview */}
+            <section className='hero4'> {/* New section for the gallery preview */}
                 <GalleryPreview />
             </section>
         </div>

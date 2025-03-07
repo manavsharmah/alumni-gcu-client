@@ -12,6 +12,9 @@ import "../pages.css";
 import "./articles.css";
 import Spinner from "../../components/common/LoadingSpinner";
 
+
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
+
 const SingleAlbum = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -30,7 +33,7 @@ const SingleAlbum = () => {
 
       try {
         const response = await axios.get(
-          `http://localhost:5000/api/images/album/${id}`
+          `${BASE_URL}/api/images/album/${id}`
         );
         
         if (!response.data || Object.keys(response.data).length === 0) {
@@ -67,7 +70,7 @@ const SingleAlbum = () => {
   if (!album) return null;
 
   const slides = album.images.map((image) => ({
-    src: `http://localhost:5000${image}`,
+    src: `${BASE_URL}${image}`,
   }));
 
   return (
@@ -88,7 +91,7 @@ const SingleAlbum = () => {
                 }}
               >
                 <img
-                  src={`http://localhost:5000${image}`}
+                  src={`${BASE_URL}${image}`}
                   alt={`${album.albumName}_image_${index}`}
                   className="image"
                   loading="lazy" 

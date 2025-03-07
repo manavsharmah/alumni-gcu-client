@@ -4,6 +4,9 @@ import { UserContext } from '../../services/UserContext';
 import api from '../../services/api'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
+
 const ModalGalleryManager = ({ show, onHide }) => {
   const [view, setView] = useState('gallery'); // 'gallery' or 'album'
   const [albums, setAlbums] = useState([]);
@@ -21,7 +24,7 @@ const ModalGalleryManager = ({ show, onHide }) => {
 
   const fetchAlbums = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/images/albums');
+      const response = await fetch(`${BASE_URL}/api/images/albums`);
       if (!response.ok) throw new Error('Failed to fetch albums');
       const data = await response.json();
       if (Array.isArray(data)) {
@@ -152,7 +155,7 @@ const ModalGalleryManager = ({ show, onHide }) => {
               >
                 <div className="position-relative" style={{ height: '200px' }}>
                   <img
-                    src={`http://localhost:5000${album.lastImage}`}
+                    src={`${BASE_URL}${album.lastImage}`}
                     alt={album.albumName}
                     className="w-100 h-100"
                     style={{ 
@@ -263,7 +266,7 @@ const ModalGalleryManager = ({ show, onHide }) => {
             >
               <div className="position-relative" style={{ height: '200px' }}>
                 <img
-                  src={`http://localhost:5000${image}`}
+                  src={`${BASE_URL}${image}`}
                   alt={`${currentAlbum.albumName}_image_${index}`}
                   className="w-100 h-100"
                   style={{ 

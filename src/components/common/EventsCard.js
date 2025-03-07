@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from '../../services/UserContext';
+import api from '../../services/api';
+
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 
 const EventCard = () => {
   const [events, setEvents] = useState([]);
@@ -14,7 +17,7 @@ const EventCard = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/events/get-events");
+        const response = await api.get("/events/get-events");
         const sortedEvents = response.data.sort((a, b) => new Date(b.event_date) - new Date(a.event_date));
         setEvents(sortedEvents);
       } catch (error) {
@@ -49,7 +52,7 @@ const EventCard = () => {
       <div className="event-card" onClick={() => handleEventClick(currentEvent)}>
         {currentEvent.images && currentEvent.images.length > 0 ? (
           <img
-            src={`http://localhost:5000${currentEvent.images[0]}`}
+            src={`${BASE_URL}${currentEvent.images[0]}`}
             alt="Events Thumbnail"
             className="event-card-thumbnail"
           />

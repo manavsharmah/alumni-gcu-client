@@ -4,6 +4,10 @@ import axios from "axios";
 import '../pages.css';
 import { UserContext } from '../../services/UserContext';
 import Pagination from '../../components/common/Pagination';
+import api from '../../services/api';
+
+
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
@@ -15,7 +19,7 @@ const EventList = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/events/get-events");
+        const response = await api.get("/events/get-events");
         const sortedEvents = response.data.sort(
           (a, b) => new Date(b.posted_date) - new Date(a.posted_date)
         );
@@ -54,7 +58,7 @@ const EventList = () => {
               <div className="news-thumbnail">
                 {eventItem.images && eventItem.images.length > 0 ? (
                   <img
-                    src={`http://localhost:5000${eventItem.images[0]}`}
+                    src={`${BASE_URL}${eventItem.images[0]}`}
                     alt="Events Thumbnail"
                   />
                 ) : (

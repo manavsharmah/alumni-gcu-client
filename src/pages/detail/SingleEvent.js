@@ -10,6 +10,10 @@ import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import "../pages.css";
 import Spinner from "../../components/common/LoadingSpinner";
+import api from "../../services/api";
+
+
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 
 const SingleEvent = () => {
 	const { id } = useParams();
@@ -23,8 +27,8 @@ const SingleEvent = () => {
 	useEffect(() => {
 		const fetchEvent = async () => {
 			try {
-				const response = await axios.get(
-					`http://localhost:5000/api/events/get-event/${id}`
+				const response = await api.get(
+					`/events/get-event/${id}`
 				);
 
 				if (!response.data || Object.keys(response.data).length === 0) {
@@ -68,7 +72,7 @@ const SingleEvent = () => {
 	const hasImages = eventItem.images && eventItem.images.length > 0;
 	const slides = hasImages
 		? eventItem.images.map((image) => ({
-				src: `http://localhost:5000${image}`,
+				src: `${BASE_URL}${image}`,
 		  }))
 		: [];
 
@@ -115,7 +119,7 @@ const SingleEvent = () => {
 									style={{ cursor: 'pointer' }}
 								>
 									<img
-										src={`http://localhost:5000${image}`}
+										src={`${BASE_URL}${image}`}
 										alt={`Events Image ${index + 1}`}
 										className="single-news-events-image"
 									/>

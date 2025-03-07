@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';  // Import axios
 import "../pages.css";
+import api from '../../services/api';
 
 const FeedbackForm = () => {
   const [formData, setFormData] = useState({
@@ -24,7 +25,7 @@ const FeedbackForm = () => {
     e.preventDefault();
     try {
       // Make POST request using axios
-      const response = await axios.post('http://localhost:5000/api/feedback/submit', formData, {
+      const response = await api.post('/feedback/submit', formData, {
         headers: {
           'Content-Type': 'application/json',
         },

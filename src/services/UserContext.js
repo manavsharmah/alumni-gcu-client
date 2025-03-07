@@ -26,7 +26,7 @@ export const UserProvider = ({ children }) => {
 
     const login = async (credentials) => {
         try {
-            const res = await axios.post('http://localhost:5000/api/auth/login', credentials, { withCredentials: true }); 
+            const res = await api.post('/auth/login', credentials, { withCredentials: true }); 
             if (res && res.data) {
                 setUser({ ...res.data.user, token: res.data.accessToken }); // Add token to user state
                 localStorage.setItem('accessToken', res.data.accessToken); // Store in local storage

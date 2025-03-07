@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../components.css';
 
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
+
 const GalleryPreview = () => {
     const [photos, setPhotos] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -11,7 +13,7 @@ const GalleryPreview = () => {
     useEffect(() => {
         const fetchPhotos = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/images/all-images');
+                const response = await fetch(`${BASE_URL}/api/images/all-images`);
                 if (!response.ok) throw new Error('Failed to fetch photos');
                 const data = await response.json();
                 if (Array.isArray(data)) setPhotos(data);
@@ -58,7 +60,7 @@ const GalleryPreview = () => {
                         .map((photo, index) => (
                             <img
                                 key={index}
-                                src={`http://localhost:5000${photo.image}`}
+                                src={`${BASE_URL}${photo.image}`}
                                 alt={`photo_${index}`}
                                 className="item"
                                 onClick={handleImageClick}

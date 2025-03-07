@@ -7,6 +7,9 @@ import SharedImagesDeleteModal from './SharedImagesDeleteModal';
 import SharedImagesAddModal from './SharedImagesAddModal';
 import ActionMenu from './ActionMenu';
 
+
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
+
 const AdminEventsForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
@@ -96,7 +99,7 @@ const AdminEventsForm = () => {
         <p><strong>Content:</strong> {eventItem.content}</p>
         <p><strong>Organizer:</strong> {eventItem.organizer}</p>
         {eventItem.images && eventItem.images.length > 0 && (
-          <img src={`http://localhost:5000${eventItem.images[0]}`} alt="Event Thumbnail" style={{ width: '100%' }} />
+          <img src={`${BASE_URL}${eventItem.images[0]}`} alt="Event Thumbnail" style={{ width: '100%' }} />
         )}
       </>
     );
@@ -118,7 +121,7 @@ const AdminEventsForm = () => {
   const handleDelete = async (eventId) => {
     if (window.confirm("Are you sure you want to delete this event?")) {
       try {
-        await api.delete(`http://localhost:5000/api/events/delete/${eventId}`, {
+        await api.delete(`/events/delete/${eventId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         });
         setEventList(eventList.filter(event => event._id !== eventId));
@@ -248,7 +251,7 @@ const AdminEventsForm = () => {
               <td>
                 {eventItem.images && eventItem.images.length > 0 ? (
                   <img
-                    src={`http://localhost:5000${eventItem.images[0]}`}
+                    src={`${BASE_URL}${eventItem.images[0]}`}
                     alt="Thumbnail"
                     style={{ height: '100px', objectFit: 'cover' }}
                   />

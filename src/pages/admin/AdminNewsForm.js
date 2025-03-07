@@ -7,6 +7,9 @@ import SharedImagesDeleteModal from './SharedImagesDeleteModal';
 import SharedImagesAddModal from './SharedImagesAddModal';
 import ActionMenu from './ActionMenu';
 
+
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
+
 const AdminNewsForm = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isNewsModalOpen, setIsNewsModalOpen] = useState(false);
@@ -80,7 +83,7 @@ const AdminNewsForm = () => {
         <p><strong>Content:</strong> {newsItem.content}</p>
         <p><strong>Category:</strong> News</p>
         {newsItem.firstImage && (
-          <img src={`http://localhost:5000${newsItem.firstImage}`} alt="News Thumbnail" style={{ width: '100%' }} />
+          <img src={`${BASE_URL}${newsItem.firstImage}`} alt="News Thumbnail" style={{ width: '100%' }} />
         )}
       </>
     );
@@ -181,7 +184,7 @@ const AdminNewsForm = () => {
             <tr key={newsItem._id} onClick={() => openNewsModal(newsItem)}>
               <td>
                 {newsItem.firstImage ? (
-                  <img src={`http://localhost:5000${newsItem.firstImage}`} alt="Thumbnail" style={{ height: '100px', objectFit: 'cover' }} />
+                  <img src={`${BASE_URL}${newsItem.firstImage}`} alt="Thumbnail" style={{ height: '100px', objectFit: 'cover' }} />
                 ) : (
                   <img src="./assets/gcu-building.jpg" alt="Default Thumbnail" style={{ height: '100px', objectFit: 'cover' }} />
                 )}

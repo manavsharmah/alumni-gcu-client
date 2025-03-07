@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../components.css";
+import api from "../../services/api";
+
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 
 const NewsCard = () => {
     const [news, setNews] = useState([]);
@@ -12,7 +15,7 @@ const NewsCard = () => {
     useEffect(() => {
         const fetchNews = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/news/get-news');
+                const response = await api.get('/news/get-news');
                 const sortedNews = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
                 setNews(sortedNews);
             } catch (error) {
@@ -46,7 +49,7 @@ const NewsCard = () => {
             <div className="news-card" onClick={() => handleNewsClick(currentNews)}>
                 {currentNews.images && currentNews.images.length > 0 ? (
 					<img
-					    src={`http://localhost:5000${currentNews.images[0]}`}
+					    src={`${BASE_URL}${currentNews.images[0]}`}
 					    alt="News Thumbnail"
                         className="news-card-thumbnail"
 					/>

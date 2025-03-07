@@ -10,6 +10,10 @@ import "yet-another-react-lightbox/styles.css";
 import "yet-another-react-lightbox/plugins/thumbnails.css";
 import "../pages.css";
 import Spinner from "../../components/common/LoadingSpinner";
+import api from "../../services/api";
+
+
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 
 const SingleNews = () => {
 	const { id } = useParams();
@@ -23,8 +27,8 @@ const SingleNews = () => {
 	useEffect(() => {
 		const fetchNews = async () => {
 			try {
-				const response = await axios.get(
-					`http://localhost:5000/api/news/get-news/${id}`
+				const response = await api.get(
+					`/news/get-news/${id}`
 				);
 
 				// Check if response data is null or empty
@@ -71,7 +75,7 @@ const SingleNews = () => {
 	const hasImages = newsItem.images && newsItem.images.length > 0;
 	const slides = hasImages
 		? newsItem.images.map((image) => ({
-				src: `http://localhost:5000${image}`,
+				src: `${BASE_URL}${image}`,
 		  }))
 		: [];
 
@@ -117,7 +121,7 @@ const SingleNews = () => {
 									style={{ cursor: 'pointer' }}
 								>
 									<img
-										src={`http://localhost:5000${image}`}
+										src={`${BASE_URL}${image}`}
 										alt={`News Image ${index + 1}`}
 										className="single-news-events-image"
 									/>

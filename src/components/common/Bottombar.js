@@ -3,7 +3,6 @@ import "../components.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faInstagram, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
-import GCUImage from '../../assets/GCU-Logo-White-footer.png';
 import VisitorCounterBanner from './VisitorCounter';
 
 const Bottombar = () => {
@@ -11,7 +10,7 @@ const Bottombar = () => {
     <>
     <div className="bottombar">
       <div className="university-info">
-        <img src={GCUImage} alt="GCU Logo" />
+        <img src="/assets/GCU-Logo-White-footer.png" alt="GCU Logo" />
         <p>
           <strong>Main Campus:</strong><br />
           Hathkhowapara, Azara, Guwahati, Assam 781017

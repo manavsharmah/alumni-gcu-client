@@ -61,6 +61,8 @@ import GoverningCouncil from "./pages/articles/GoverningCouncil";
 import AboutAssociation from "./pages/articles/About-Association";
 import MissionAndVision from "./pages/articles/MissionAndVision";
 import VCMessage from "./pages/articles/VCMessage";
+import RegistrarMessage from "./pages/articles/RegistrarMessage";
+import PresidentMessage from "./pages/articles/PresidentMessage";
 
 function App() {
   return (
@@ -100,6 +102,8 @@ function App() {
                 <Route path="/overview" element={<AboutAssociation />} />
                 <Route path="/vision" element={<MissionAndVision />} />
                 <Route path="/vcmsg" element={<VCMessage />} />
+                <Route path="/registrarmsg" element={<RegistrarMessage />} />
+                <Route path="/presmsg" element={<PresidentMessage />} />
 
                 {/* SuperUser + Admin + User Routes(logged-in user routes) */}
                 

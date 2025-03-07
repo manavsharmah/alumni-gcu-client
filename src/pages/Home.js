@@ -8,37 +8,6 @@ import { useUser } from '../services/UserContext';
 
 const Home = () => {
     const { user } = useUser();
-    // const [currentSlide, setCurrentSlide] = useState(0);
-
-    // const officeBearers = [
-    //     {
-    //         name: "Office Bearer 1",
-    //         position: "President",
-    //         image: "./assets/gcuregistrar.jpg"
-    //     },
-    //     {
-    //         name: "Office Bearer 2",
-    //         position: "Secretary",
-    //         image: "./assets/gcuregistrar.jpg"
-    //     },
-    //     {
-    //         name: "Office Bearer 3",
-    //         position: "Treasurer",
-    //         image: "./assets/gcuregistrar.jpg"
-    //     }
-    // ];
-
-    // const nextSlide = () => {
-    //     setCurrentSlide((prevSlide) =>
-    //         prevSlide === officeBearers.length - 1 ? 0 : prevSlide + 1
-    //     );
-    // };
-
-    // const prevSlide = () => {
-    //     setCurrentSlide((prevSlide) =>
-    //         prevSlide === 0 ? officeBearers.length - 1 : prevSlide - 1
-    //     );
-    // };
 
 
     return (

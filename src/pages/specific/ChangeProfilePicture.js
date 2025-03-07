@@ -18,7 +18,7 @@ function ChangeProfilePicture() {
     const [error, setError] = useState('');
     const [isUploading, setIsUploading] = useState(false);
     const [profilePhoto, setProfilePhoto] = useState(''); // New state for profile photo update
-    const navigate = useNavigate(); // Initialize useNavigate for routing
+    const navigate = useNavigate(); // Initialize useNavigate for routing of profile picture
 
     const onFileChange = (e) => {
         const selectedFile = e.target.files[0];

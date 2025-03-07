@@ -129,7 +129,7 @@
   height: 100%;
   object-fit: cover; /* Ensure the image covers the entire container */
   z-index: 0; /* Image stays behind the text */
-  opacity: 0.2; /* Slight transparency for better readability */
+  opacity: 0.2; /* Slight transparency for better readability of the texts*/
 }
 
 .left-box h2 {
@@ -522,6 +522,10 @@
     font-size: 18px;
     line-height: 1.5;
     margin-bottom: 20px;
+  }
+
+  .left-box a {
+    z-index: 100; /* Makes sure the button is clickable */
   }
 
   .vc-img {

@@ -214,6 +214,11 @@
   font-family: "Georgia", sans-serif;
 }
 
+.vc-msg {
+  text-decoration: none;
+  color: white;
+}
+
 .vc-image {
   display: flex;
   justify-content: center;
@@ -317,6 +322,11 @@
   font-family: "Georgia", sans-serif;
 }
 
+.reg-msg {
+  text-decoration: none;
+  color: #111;
+}
+
 .ch-heading {
   font-size: 30px;
   font-family: "Georgia", sans-serif;
@@ -375,6 +385,12 @@
   justify-content: center;
   align-items: center;
   padding: 15px;
+  font-family: "Georgia", sans-serif;
+}
+
+.pres-msg {
+  text-decoration: none;
+  color: white;
 }
 
 

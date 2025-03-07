@@ -35,7 +35,9 @@ const Home = () => {
                 <div className='pres-text'>
                     <h2 className='ch-heading'>Message from the President</h2>
                     <br />
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sint animi placeat dolorum dolores iure molestiae? Asperiores, ea.</p>
+                    <p>Welcome to the Girijananda Chowdhury University Alumni Association (GCUAA)!   
+                        <br/>
+                        Girijananda Chowdhury University (GCU) is a proud embodiment of the vision and commitment <a className='pres-msg' href="/presmsg">. . . . . . .</a></p>
                     <p className='pres-name'>Shri. Jasoda Ranjan Das
                         <br />
                         President of SSA Society
@@ -68,7 +70,9 @@ const Home = () => {
                 <div className='vc-text'>
                     <h2 className='vc-heading'>Message from the Vice Chancellor</h2>
                     <br />
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sint animi placeat dolorum dolores iure molestiae? Asperiores, ea.</p>
+                    <p>Girijananda Chowdhury University (GCU) stands as a testament to the vision and dedication of the Shrimanta Shankar 
+                        <br />
+                        Academy Society. Established in October 2022, GCU marks <a className='vc-msg' href="/vcmsg">. . . . . .</a></p>
                     <p className='vc-name'>Prof. Kandarpa Das
                         <br />
                         Vice Chancellor of Girijananda Chowdhury University
@@ -81,7 +85,9 @@ const Home = () => {
                 <div className='reg-text'>
                     <h2 className='vc-heading'>Message from the Registrar</h2>
                     <br />
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam sint animi placeat dolorum dolores iure molestiae? Asperiores, ea.</p>
+                    <p>As we celebrate another year of growth, connection, and achievement, I am honored to address you as the President of our esteemed Alumni Association.
+                        <br />
+                        Our university has always been a beacon of excellence, fostering a community <a className='reg-msg' href="/registrarmsg">. . . . . .</a></p>
                     <p className='vc-name'>Dr. Dipankar Saha
                         <br />
                         Registrar of Girijananda Chowdhury University

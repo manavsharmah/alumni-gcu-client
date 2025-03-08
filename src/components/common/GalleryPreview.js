@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../components.css';
 
@@ -6,7 +6,11 @@ const GalleryPreview = () => {
     const [photos, setPhotos] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const navigate = useNavigate();
-    const [visiblePhotosCount, setVisiblePhotosCount] = useState(5); // Default to 5 for larger screens
+    const [visiblePhotosCount, setVisiblePhotosCount] = useState(5);
+    const carouselRef = useRef(null);
+    const intervalRef = useRef(null);
+    let startX = useRef(0);
+    let isDragging = useRef(false);
 
     useEffect(() => {
         const fetchPhotos = async () => {
@@ -23,35 +27,70 @@ const GalleryPreview = () => {
     }, []);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentIndex((prevIndex) => (prevIndex + 1) % photos.length);
-        }, 5000); // Change images every 5 seconds
-        return () => clearInterval(interval);
-    }, [photos.length]);
-
-    // Adjust images for mobile view
-    useEffect(() => {
         const updatePhotoCount = () => {
-            if (window.innerWidth < 768) {
-                setVisiblePhotosCount(2); // Show 2 images on mobile
-            } else {
-                setVisiblePhotosCount(5); // Show 5 images on larger screens
-            }
+            setVisiblePhotosCount(window.innerWidth < 768 ? 2 : 5);
         };
         updatePhotoCount();
         window.addEventListener('resize', updatePhotoCount);
         return () => window.removeEventListener('resize', updatePhotoCount);
     }, []);
 
-    const handleImageClick = () => {
-        navigate('/gallery'); 
+    const nextSlide = () => {
+        setCurrentIndex((prev) => (prev + 1) % photos.length);
+    };
+
+    useEffect(() => {
+        if (photos.length > 0) {
+            intervalRef.current = setInterval(nextSlide, 5000); // Auto slide every 5 seconds
+        }
+        return () => clearInterval(intervalRef.current);
+    }, [photos]);
+
+    const resetAutoSlide = () => {
+        clearInterval(intervalRef.current);
+        intervalRef.current = setInterval(nextSlide, 5000);
+    };
+
+    const handleTouchStart = (e) => {
+        startX.current = e.touches ? e.touches[0].clientX : e.clientX;
+        isDragging.current = true;
+    };
+
+    const handleTouchMove = (e) => {
+        if (!isDragging.current) return;
+        const moveX = e.touches ? e.touches[0].clientX : e.clientX;
+        const diff = startX.current - moveX;
+
+        if (diff > 50) {
+            nextSlide();
+            isDragging.current = false;
+            resetAutoSlide();
+        } else if (diff < -50) {
+            setCurrentIndex((prev) => (prev - 1 + photos.length) % photos.length);
+            isDragging.current = false;
+            resetAutoSlide();
+        }
+    };
+
+    const handleTouchEnd = () => {
+        isDragging.current = false;
     };
 
     return (
         <div className="gallery-preview-container">
             <h2 className="gallery-heading">Gallery Preview</h2>
             {photos.length > 0 ? (
-                <div className="carousel">
+                <div
+                    className="carousel"
+                    ref={carouselRef}
+                    onTouchStart={handleTouchStart}
+                    onTouchMove={handleTouchMove}
+                    onTouchEnd={handleTouchEnd}
+                    onMouseDown={handleTouchStart}
+                    onMouseMove={handleTouchMove}
+                    onMouseUp={handleTouchEnd}
+                    onMouseLeave={handleTouchEnd}
+                >
                     {photos
                         .slice(currentIndex, currentIndex + visiblePhotosCount)
                         .concat(photos.slice(0, Math.max(0, visiblePhotosCount - (photos.length - currentIndex))))
@@ -61,7 +100,7 @@ const GalleryPreview = () => {
                                 src={`http://localhost:5000${photo.image}`}
                                 alt={`photo_${index}`}
                                 className="item"
-                                onClick={handleImageClick}
+                                onClick={() => navigate('/gallery')}
                             />
                         ))}
                 </div>

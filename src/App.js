@@ -63,6 +63,7 @@ import MissionAndVision from "./pages/articles/MissionAndVision";
 import VCMessage from "./pages/articles/VCMessage";
 import RegistrarMessage from "./pages/articles/RegistrarMessage";
 import PresidentMessage from "./pages/articles/PresidentMessage";
+import ChancellorMessage from "./pages/articles/ChancellorMessage";
 
 function App() {
   return (
@@ -104,6 +105,7 @@ function App() {
                 <Route path="/vcmsg" element={<VCMessage />} />
                 <Route path="/registrarmsg" element={<RegistrarMessage />} />
                 <Route path="/presmsg" element={<PresidentMessage />} />
+                <Route path="/cmsg" element={<ChancellorMessage />} />
 
                 {/* SuperUser + Admin + User Routes(logged-in user routes) */}
                 

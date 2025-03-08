@@ -111,10 +111,10 @@ const Topbar = () => {
                 <ul className='sub-menus'>
                   <li><NavLink to='/overview' className={({ isActive }) => isActive ? 'active' : ''}>Overview</NavLink></li>
                   <li><NavLink to='/vision' className={({ isActive }) => isActive ? 'active' : ''}>Vision and Mission</NavLink></li>
-                  <li><NavLink to='/presmsg' className={({ isActive }) => isActive ? 'active' : ''}>President Message</NavLink></li>
-                  <li><NavLink to='/cmsg' className={({ isActive }) => isActive ? 'active' : ''}>Chancellor Message</NavLink></li>
-                  <li><NavLink to='/vcmsg' className={({ isActive }) => isActive ? 'active' : ''}>Vice Chancellor Message</NavLink></li>
-                  <li><NavLink to='/registrarmsg' className={({ isActive }) => isActive ? 'active' : ''}>Registrar Message</NavLink></li>
+                  <li><NavLink to='/presmsg' className={({ isActive }) => isActive ? 'active' : ''}>President's Message</NavLink></li>
+                  <li><NavLink to='/cmsg' className={({ isActive }) => isActive ? 'active' : ''}>Chancellor's Message</NavLink></li>
+                  <li><NavLink to='/vcmsg' className={({ isActive }) => isActive ? 'active' : ''}>Vice Chancellor's Message</NavLink></li>
+                  <li><NavLink to='/registrarmsg' className={({ isActive }) => isActive ? 'active' : ''}>Registrar's Message</NavLink></li>
                   <li><NavLink to='/council' className={({ isActive }) => isActive ? 'active' : ''}>Governing Council</NavLink></li>
                 </ul>
               </li>

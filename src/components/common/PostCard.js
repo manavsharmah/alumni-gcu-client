@@ -184,7 +184,7 @@ const PostCard = ({ post, onDelete, onEdit, onLike, currentUser, isInFeedView = 
     };
 
     const canEdit = currentUser && (currentUser.id === post.author._id);
-    const canDelete = currentUser && (currentUser.role === 'admin' || currentUser.id === post.author._id);
+    const canDelete = currentUser && (currentUser.role === 'admin' || currentUser.role === 'superuser' || currentUser.id === post.author._id);
     const hasLiked = Array.isArray(post.likes) && post.likes.includes(currentUser.id);
     const canReport = currentUser && (currentUser.id !== post.author._id);
 

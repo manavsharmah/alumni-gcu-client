@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import axiosInstance from '../../services/api';
 import { FaFacebook, FaLinkedin } from 'react-icons/fa';
 import { useUser } from "../../services/UserContext";
 import '../pages.css';
+import api from '../../services/api';
 
 const UpdateProfile = () => {
   const { user } = useUser();
@@ -48,7 +48,7 @@ const UpdateProfile = () => {
     e.preventDefault();
     try {
       setLoading(true);
-      await axiosInstance.put('http://localhost:5000/api/user/update-profile', {
+      await api.put('/user/update-profile', {
         biography,
         currentWorkingPlace,
         address,

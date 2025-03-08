@@ -3,6 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import '../pages.css';
 import Pagination from '../../components/common/Pagination';
+import api from '../../services/api';
+
+
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
@@ -13,7 +17,7 @@ const NewsList = () => {
   useEffect(() => {
     const fetchNews = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/news/get-news');
+        const response = await api.get('/news/get-news');
         const sortedNews = response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
         setNews(sortedNews);
         // console.log('Fetched news:', response.data);
@@ -52,7 +56,7 @@ const NewsList = () => {
               <div className="news-thumbnail">
                 {newsItem.firstImage && newsItem.firstImage.length > 0 ? (
                   <img
-                    src={`http://localhost:5000${newsItem.firstImage}`}
+                    src={`${BASE_URL}${newsItem.firstImage}`}
                     alt="News Thumbnail"
                   />
                 ) : (

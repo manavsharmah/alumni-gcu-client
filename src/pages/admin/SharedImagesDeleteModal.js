@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import './admin.css';
 //this modal is shared between newsform and eventsform
+
+
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
+
 const SharedImagesDeleteModal = ({ isOpen, onClose, itemId, api, onImagesDeleted, category }) => {
   const [images, setImages] = useState([]);
   const [selectedImages, setSelectedImages] = useState([]);
@@ -84,7 +88,7 @@ const SharedImagesDeleteModal = ({ isOpen, onClose, itemId, api, onImagesDeleted
               onClick={() => toggleImageSelection(image.filename)}
             >
               <img 
-                src={`http://localhost:5000${image.fullPath}`}
+                src={`${BASE_URL}${image.fullPath}`}
                 alt={image.filename}
               />
               <div className="image-filename">

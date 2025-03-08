@@ -19,7 +19,7 @@ const EditEventModal = ({ eventId, isOpen, onClose, onEventUpdated }) => {
     if (user?.role !== 'admin' || !isOpen) return;
     const fetchEventData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/events/get-event/${eventId}`);
+        const response = await api.get(`/events/get-event/${eventId}`);
         setEventData(response.data);
       } catch (error) {
         console.error("Error fetching event data:", error);

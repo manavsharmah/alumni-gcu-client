@@ -3,6 +3,9 @@ import '../pages.css';
 import './articles.css';
 import { useNavigate } from 'react-router-dom';
 
+
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
+
 const Gallery = () => {
   const [albums, setAlbums] = useState([]);
   const navigate = useNavigate();
@@ -10,7 +13,7 @@ const Gallery = () => {
   useEffect(() => {
     const fetchAlbums = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/images/albums');
+        const response = await fetch(`${BASE_URL}/api/images/albums`);
         if (!response.ok) {
           throw new Error('Failed to fetch albums');
         }
@@ -52,7 +55,7 @@ const Gallery = () => {
               {albums.map((album) => (
                 <div key={album._id} className="album-card" onClick={() => handleAlbumClick(album._id)}>
                   <img
-                    src={`http://localhost:5000${album.lastImage}`}
+                    src={`${BASE_URL}${album.lastImage}`}
                     alt={`${album.albumName}_thumbnail`}
                     className="album-thumbnail"
                     loading="lazy"

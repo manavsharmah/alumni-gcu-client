@@ -9,7 +9,7 @@ const Topbar = () => {
   const location = useLocation();
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const { user, logout, loading, updateUserProfile } = useUser(); // Assuming you have a method to update the user profile
+  const { user, logout, loading, updateUserProfile } = useUser(); // Assuming that you have a method to update the user profile
   const dropdownRef = useRef(null);
   const menuToggleRef = useRef(null);
   const navContentRef = useRef(null);

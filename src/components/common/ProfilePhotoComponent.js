@@ -3,6 +3,8 @@ import api from '../../services/api';
 import Spinner from './LoadingSpinner';
 import { useUser } from '../../services/UserContext';
 
+const BASE_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:5000';
+
 const ProfilePhoto = ({ userId, className = '' }) => {
   const [profilePhoto, setProfilePhoto] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -31,7 +33,7 @@ const ProfilePhoto = ({ userId, className = '' }) => {
 
   return (
     <img
-      src={profilePhoto ? `http://localhost:5000/${profilePhoto.replace(/\\/g, "/")}` : `/assets/profile-placeholder.svg`}
+      src={profilePhoto ? `${BASE_URL}/${profilePhoto.replace(/\\/g, "/")}` : `/assets/profile-placeholder.svg`}
       alt="Profile"
       className={`profile-photo ${className}`}
     />

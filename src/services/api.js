@@ -1,16 +1,17 @@
 import axios from 'axios';
 import { jwtDecode } from "jwt-decode";
 
+const API_URL =  process.env.REACT_APP_API_URL ||'http://localhost:5000/api';
 // Create an Axios instance
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api', // Replace with your API base URL
+  baseURL: API_URL,
   withCredentials: true, // This ensures cookies are sent with requests
 });
 
 // Function to refresh the access token
 const refreshAccessToken = async () => {
   try {
-    const response = await axios.post('http://localhost:5000/api/auth/refresh-token', {}, {
+    const response = await axios.post('${API_URL}/auth/refresh-token', {}, {
       withCredentials: true,
     });
     localStorage.setItem('accessToken', response.data.accessToken);

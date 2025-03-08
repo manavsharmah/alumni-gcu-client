@@ -23,7 +23,6 @@ const Bottombar = () => {
       <div className="important-links">
         <h4>Important Information</h4>
         <ul>
-          <li><a href="/contactus">Contact Us</a></li>
           <li><a href="/feedback">Feedback Form</a></li>
           <li><a href="/copyright">© Copyright 2025</a></li>
           <li><a href="/disclaimer">Disclaimer</a></li>

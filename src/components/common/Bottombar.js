@@ -25,7 +25,7 @@ const Bottombar = () => {
         <ul>
           <li><a href="/contactus">Contact Us</a></li>
           <li><a href="/feedback">Feedback Form</a></li>
-          <li><a href="/copyright">© Copyright 2024</a></li>
+          <li><a href="/copyright">© Copyright 2025</a></li>
           <li><a href="/disclaimer">Disclaimer</a></li>
           <li><a href="/termsofuse">Terms of Use</a></li>
           <li><a href="/privacypolicy">Privacy Policy</a></li>
@@ -33,9 +33,8 @@ const Bottombar = () => {
       </div>
       <div className="contact-info">
         <h4>Contact Us</h4>
-        <p>Email: <a href="mailto:info@gcuniversity.ac.in">info@gcuniversity.ac.in</a></p>
-        <p>Phone: 7099034050</p>
-        <p>Women Helpline: 7099004706</p>
+        <p>Email: <a href="mailto:info@gcuniversity.ac.in">alumnni_gcu@gcuiversity.ac.in</a></p>
+        <p>Phone: 7002699418</p>
         <VisitorCounterBanner />
       </div>
       <div className="social-links">

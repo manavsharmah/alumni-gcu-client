@@ -264,6 +264,11 @@
   font-family: "Georgia", sans-serif;
 }
 
+.ch-msg {
+  text-decoration: none;
+  color: #000000;
+}
+
 .ch-heading {
   font-size: 30px;
   font-family: "Georgia", sans-serif;
@@ -304,6 +309,10 @@
   display: flex;
   justify-content: space-around;
   height: 430px;
+}
+
+.hero6 p {
+  font-size: 20px;
 }
 
 .reg-text{
@@ -1815,10 +1824,17 @@ button:hover {
 .page-container {
   display: flex;
   justify-content: center;
+  align-content: center;
   width: 100%;
   min-height: calc(100vh - (186px + 9px));
   padding: 30px 10px;
   background-color: #f5f6fa; 
+  font-size: 20px;
+}
+
+.page-title {
+  display: flex;
+  justify-content: center;
 }
 
 .content-wrapper {

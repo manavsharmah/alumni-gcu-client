@@ -153,8 +153,8 @@ const Register = () => {
 
         if (!formData.roll_no) {
             newErrors.roll_no = "Roll number is required";
-        } else if (!/^\d{1,8}$/.test(formData.roll_no)) {
-            newErrors.roll_no = "Please enter a valid roll number";
+        } else if (!/^\d+$/.test(formData.roll_no)) {
+            newErrors.roll_no = "Please enter a valid roll number (numbers only)";
         }
 
         if (!formData.branch) {
@@ -321,7 +321,7 @@ const Register = () => {
                         <span className="sr-only">Roll Number</span>
                     </label>
                     <input
-                        type='number'
+                        type='text'
                         id="roll_no"
                         name='roll_no'
                         placeholder='Roll Number'

@@ -47,15 +47,15 @@ const NewsCard = () => {
         <div className="news-card-container">
             <h2 className='news-event-title'>NEWS</h2>
             <div className="news-card" onClick={() => handleNewsClick(currentNews)}>
-                {currentNews.images && currentNews.images.length > 0 ? (
-					<img
-					    src={`${BASE_URL}${currentNews.images[0]}`}
-					    alt="News Thumbnail"
-                        className="news-card-thumbnail"
-					/>
-					) : (
-						<img src="./assets/gcu-building.jpg" alt="Default Thumbnail" className="news-card-thumbnail"/>
-				)}
+            {currentNews.firstImage ? (
+                <img
+                    src={`${BASE_URL}${currentNews.firstImage}`}
+                    alt="News Thumbnail"
+                    className="news-card-thumbnail"
+                />
+                ) : (
+                <img src="./assets/gcu-building.jpg" alt="Default Thumbnail" className="news-card-thumbnail"/>
+            )}
                 <div className="news-card-content">
                     <span className="news-card-label">News</span>
                     <h3 className="news-card-title">{currentNews.title}</h3>

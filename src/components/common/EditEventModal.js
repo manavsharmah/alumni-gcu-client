@@ -16,17 +16,27 @@ const EditEventModal = ({ eventId, isOpen, onClose, onEventUpdated }) => {
   });
 
   useEffect(() => {
-    if (user?.role !== 'admin' || !isOpen) return;
+    if (!isOpen || !eventId) return;
+    
     const fetchEventData = async () => {
       try {
         const response = await api.get(`/events/get-event/${eventId}`);
-        setEventData(response.data);
+        // Make sure all fields from the response are properly set in state
+        setEventData({
+          title: response.data.title || '',
+          content: response.data.content || '',
+          organizer: response.data.organizer || '',
+          event_date: response.data.event_date || '',
+          event_time: response.data.event_time || '',
+          posted_date: response.data.posted_date || '',
+        });
       } catch (error) {
         console.error("Error fetching event data:", error);
       }
     };
+    
     fetchEventData();
-  }, [eventId, user, isOpen]);
+  }, [eventId, isOpen]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

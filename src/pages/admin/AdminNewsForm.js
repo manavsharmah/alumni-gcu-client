@@ -126,6 +126,11 @@ const AdminNewsForm = () => {
     setIsAddImagesModalOpen(true);
   };
 
+  const closeEditModal = () => {
+    setIsEditModalOpen(false);
+    setSelectedNews(null); // Clear selected news after closing
+  };
+
   return (
     <div className="admin-news-container">
       <h2>News Management</h2>
@@ -217,7 +222,11 @@ const AdminNewsForm = () => {
           isOpen={isEditModalOpen}
           onClose={() => setIsEditModalOpen(false)}
           newsItem={selectedNews}
-          onNewsUpdated={fetchNews} // Refresh news list after edit
+          onNewsUpdated={() => {
+            setMessage('News updated successfully');
+            setIsEditModalOpen(false);
+            fetchNews();
+          }} 
         />
       )}
 

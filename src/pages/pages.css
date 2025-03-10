@@ -187,6 +187,7 @@
   display: flex;
   justify-content: space-around;
   height: 430px;
+  font-size: 20px;
 }
 
 .vc-text{
@@ -252,6 +253,7 @@
 }
 
 .ch-text{
+  font-size: 20px;
   color: #000000;
   display: flex;
   flex-direction: column;
@@ -385,6 +387,7 @@
   display: flex;
   justify-content: space-around;
   height: 430px;
+  font-size: 20px;
 }
 
 .pres-text {

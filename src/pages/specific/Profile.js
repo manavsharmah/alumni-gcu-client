@@ -6,6 +6,8 @@ import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
 import Pagination from "../../components/common/Pagination";
 import "../pages.css";
 import Spinner from "../../components/common/LoadingSpinner";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
 
 const Profile = () => {
     const { id } = useParams();
@@ -127,8 +129,40 @@ const Profile = () => {
                         <p><strong>Current Working Place:</strong> {user?.currentWorkingPlace || "Not provided"}</p>
                         <p><strong>Batch:</strong> {user?.batch}</p>
                         <p><strong>Branch:</strong> {user?.branch}</p>
+                        <h3>Social Media</h3>
+                        {user?.socialLinks?.linkedin || user?.socialLinks?.facebook ? (
+                            <div className="user-profile-social-icons">
+                            {user?.socialLinks?.linkedin && (
+                                <a 
+                                href={user.socialLinks.linkedin} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="user-profile-social-link"
+                                >
+                                <FontAwesomeIcon icon={faLinkedin} /> LinkedIn
+                                </a>
+                            )}
+                            {user?.socialLinks?.facebook && (
+                                <a 
+                                href={user.socialLinks.facebook} 
+                                target="_blank" 
+                                rel="noopener noreferrer" 
+                                className="user-profile-social-link"
+                                >
+                                <FontAwesomeIcon icon={faFacebook} /> Facebook
+                                </a>
+                            )}
+                            </div>
+                        ) : (
+                            <p>No social links provided</p>
+                        )}
                         {isLoggedInUser && (
                             <Link to="/update-profile" className="user-profile-update-btn">Update Profile</Link>
+                        )}
+                        {isLoggedInUser && (
+                        <Link to="/reset-password" className="user-profile-reset-pwd-btn">
+                            Reset Password
+                        </Link>
                         )}
                     </div>
                 </div>

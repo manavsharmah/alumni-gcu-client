@@ -32,7 +32,7 @@ const Bottombar = () => {
       </div>
       <div className="contact-info">
         <h4>Contact Us</h4>
-        <p>Email: <a href="mailto:info@gcuniversity.ac.in">alumnni_gcu@gcuiversity.ac.in</a></p>
+        <p>Email: <a href="mailto:alumni@gcuniversity.ac.in">alumni@gcuniversity.ac.in</a></p>
         <p>Phone: 7002699418</p>
         <VisitorCounterBanner />
       </div>

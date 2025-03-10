@@ -15,6 +15,7 @@ const AdminNewsForm = () => {
   const [isNewsModalOpen, setIsNewsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [message, setMessage] = useState('');
+  const [modalError, setModalError] = useState(''); // New state for modal-specific errors
   const [modalContent, setModalContent] = useState(null);
   const [modalTitle, setModalTitle] = useState("");
   const [newsList, setNewsList] = useState([]);
@@ -41,6 +42,8 @@ const AdminNewsForm = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setModalError(''); // Clear previous error messages
+    
     const data = new FormData();
     data.append('title', title);
     data.append('content', content);
@@ -56,8 +59,22 @@ const AdminNewsForm = () => {
       setMessage('News Uploaded!');
       setIsModalOpen(false);
       fetchNews(); // Refresh news list after creation
+      
+      // Reset form data after successful submission
+      setFormData({
+        title: '',
+        content: '',
+        images: []
+      });
     } catch (error) {
-      setMessage('Error Creating News');
+      console.error('Error Creating News:', error);
+      
+      // Display error message inside the modal
+      if (error.response && error.response.data && error.response.data.message) {
+        setModalError(error.response.data.message);
+      } else {
+        setModalError('Error creating news. Please try again.');
+      }
     }
   };
 
@@ -131,6 +148,17 @@ const AdminNewsForm = () => {
     setSelectedNews(null); // Clear selected news after closing
   };
 
+  const closeCreateModal = () => {
+    setIsModalOpen(false);
+    setModalError(''); // Clear error message when closing modal
+    // Optional: reset form data when closing modal
+    setFormData({
+      title: '',
+      content: '',
+      images: []
+    });
+  };
+
   return (
     <div className="admin-news-container">
       <h2>News Management</h2>
@@ -141,6 +169,18 @@ const AdminNewsForm = () => {
         title="Create News"
         content={(
           <form onSubmit={onSubmit} encType="multipart/form-data">
+            {modalError && (
+              <div className="error-message" style={{ 
+                color: 'red', 
+                backgroundColor: '#ffeded', 
+                padding: '10px', 
+                borderRadius: '5px', 
+                marginBottom: '10px',
+                border: '1px solid #ff9999'
+              }}>
+                {modalError}
+              </div>
+            )}
             <input
               type='text'
               className="admin-form-input"
@@ -171,7 +211,7 @@ const AdminNewsForm = () => {
           </form>
         )}
         isOpen={isModalOpen}
-        closeModal={() => setIsModalOpen(false)}
+        closeModal={closeCreateModal}
       />
       {message && <p className="admin-form-message">{message}</p>}
 

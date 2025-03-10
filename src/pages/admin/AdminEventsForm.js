@@ -15,6 +15,7 @@ const AdminEventsForm = () => {
   const [isEventModalOpen, setIsEventModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false); // State for edit modal
   const [message, setMessage] = useState('');
+  const [modalError, setModalError] = useState(''); // New state for modal-specific errors
   const [modalContent, setModalContent] = useState(null);
   const [modalTitle, setModalTitle] = useState("");
   const [eventList, setEventList] = useState([]);
@@ -45,6 +46,8 @@ const AdminEventsForm = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    setModalError(''); // Clear previous error messages
+    
     const data = new FormData();
     data.append('title', title);
     data.append('content', content);
@@ -67,14 +70,31 @@ const AdminEventsForm = () => {
       setMessage('Event Uploaded!');
       setFormData({ title: '', content: '', organizer: '', event_date: '', event_time: '', images: [] });
       setIsModalOpen(false);
-      setEventList([...eventList, response.data]); // Add new event to the list
-    } catch (err) {
-      setMessage('Error Creating Event');
+      fetchEvents(); // Refresh event list after creation
+    } catch (error) {
+      console.error('Error Creating Event:', error);
+      
+      // Display error message inside the modal
+      if (error.response && error.response.data && error.response.data.message) {
+        setModalError(error.response.data.message);
+      } else {
+        setModalError('Error creating event. Please try again.');
+      }
     }
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setModalError(''); // Clear error message when closing modal
+    // Reset form data when closing modal
+    setFormData({
+      title: '',
+      content: '',
+      organizer: '',
+      event_date: '',
+      event_time: '',
+      images: []
+    });
   };
 
   const fetchEvents = async () => {
@@ -158,6 +178,18 @@ const AdminEventsForm = () => {
         title="Create Event"
         content={(
           <form onSubmit={onSubmit}>
+            {modalError && (
+              <div className="error-message" style={{ 
+                color: 'red', 
+                backgroundColor: '#ffeded', 
+                padding: '10px', 
+                borderRadius: '5px', 
+                marginBottom: '10px',
+                border: '1px solid #ff9999'
+              }}>
+                {modalError}
+              </div>
+            )}
             <div className="admin-input-group">
               <label htmlFor="title">Title</label>
               <input
@@ -264,13 +296,13 @@ const AdminEventsForm = () => {
                 )}
               </td>
               <td>{eventItem.title}</td>
-              <td>
-              <ActionMenu
+              <td onClick={(e) => e.stopPropagation()}>
+                <ActionMenu
                   onEdit={() => handleEdit(eventItem)}
                   onDelete={() => handleDelete(eventItem._id)}
                   onDeleteImages={() => handleDeleteImages(eventItem)}
                   onAddImages={() => handleAddImages(eventItem)}
-              />
+                />
               </td>
             </tr>
           ))}
@@ -294,34 +326,35 @@ const AdminEventsForm = () => {
           onEventUpdated={() => {
             setMessage('Event updated successfully');
             closeEditModal();
+            fetchEvents();
           }}
         />
       )}
 
       {/* Delete Images Modal */}
       {isDeleteImagesModalOpen && selectedEventsForImages && (
-  <SharedImagesDeleteModal
-    isOpen={isDeleteImagesModalOpen}
-    onClose={() => setIsDeleteImagesModalOpen(false)}
-    itemId={selectedEventsForImages._id}
-    api={api}
-    onImagesDeleted={fetchEvents}
-    category="events"
-  />
-)}
+        <SharedImagesDeleteModal
+          isOpen={isDeleteImagesModalOpen}
+          onClose={() => setIsDeleteImagesModalOpen(false)}
+          itemId={selectedEventsForImages._id}
+          api={api}
+          onImagesDeleted={fetchEvents}
+          category="events"
+        />
+      )}
 
       {/* Add Images Modal */}
       {isAddImagesModalOpen && selectedEventsForAddImages && (
-  <SharedImagesAddModal
-    isOpen={isAddImagesModalOpen}
-    onClose={() => setIsAddImagesModalOpen(false)}
-    itemId={selectedEventsForAddImages._id}
-    itemTitle={selectedEventsForAddImages.title}
-    api={api}
-    onImagesAdded={fetchEvents}
-    category="events"
-  />
-)}
+        <SharedImagesAddModal
+          isOpen={isAddImagesModalOpen}
+          onClose={() => setIsAddImagesModalOpen(false)}
+          itemId={selectedEventsForAddImages._id}
+          itemTitle={selectedEventsForAddImages.title}
+          api={api}
+          onImagesAdded={fetchEvents}
+          category="events"
+        />
+      )}
     </div>
   );
 };

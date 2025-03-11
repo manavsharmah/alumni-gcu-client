@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../pages.css';
 import api from '../../services/api';
+import Spinner from "../../components/common/LoadingSpinner";
 
 const UpdateProfile = () => {
   const { user, refreshUser } = useUser(); // Added refreshUser to update context
@@ -130,15 +131,13 @@ const UpdateProfile = () => {
         await refreshUser();
       }
       
-      // Use toast with position at the bottom
       toast.success('Profile Updated Successfully!', {
-        position: toast.POSITION.BOTTOM_CENTER
+        position: "bottom-center"
       });
-      
-      // Set a timeout to allow the toast to be visible briefly before redirecting
+         
       setTimeout(() => {
         navigate('/profile');
-      }, 2000);
+      }, 3000);
       
     } catch (err) {
       console.error(err.response?.data || err);
@@ -172,11 +171,7 @@ const UpdateProfile = () => {
         <div className="modern-profile-card">
           <div className="card-body">
             {loading ? (
-              <div className="spinner">
-                <div className="spinner-border" role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </div>
-              </div>
+              <Spinner />
             ) : (
               <>
                 {/* User Info Section */}
@@ -222,6 +217,7 @@ const UpdateProfile = () => {
                       name="address"
                       value={address}
                       onChange={onChange}
+                      maxLength={150}
                     />
                   </div>
 

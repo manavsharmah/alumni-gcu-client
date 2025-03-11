@@ -8,9 +8,11 @@ import "../pages.css";
 import Spinner from "../../components/common/LoadingSpinner";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { useUser } from "../../services/UserContext";
 
 const Profile = () => {
     const { id } = useParams();
+    const { refreshUser } = useUser();
     const [user, setUser] = useState(null);
     const [userPosts, setUserPosts] = useState([]);
     const [isLoggedInUser, setIsLoggedInUser] = useState(false);
@@ -72,6 +74,9 @@ const Profile = () => {
         fetchUserProfile(id).then((data) => {
             if (data) {
                 setUser(data);
+                if (refreshUser && typeof refreshUser === "function") {
+                    refreshUser(); // Update context with latest data
+                }
                 fetchUserPosts(data._id, currentPage);
             }
         });

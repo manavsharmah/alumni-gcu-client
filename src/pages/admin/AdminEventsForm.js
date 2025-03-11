@@ -28,6 +28,7 @@ const AdminEventsForm = () => {
     event_time: '',
     images: [],
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const [isDeleteImagesModalOpen, setIsDeleteImagesModalOpen] = useState(false);
   const [selectedEventsForImages, setSelectedEventsForImages] = useState(null);
@@ -47,6 +48,7 @@ const AdminEventsForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setModalError(''); // Clear previous error messages
+    setIsLoading(true); // Set loading to true when submission starts
     
     const data = new FormData();
     data.append('title', title);
@@ -55,11 +57,11 @@ const AdminEventsForm = () => {
     data.append('event_date', event_date);
     data.append('event_time', event_time);
     data.append('category', "events");
-
+  
     images.forEach((image) => {
       data.append('images', image);
     });
-
+  
     try {
       const response = await api.post('/events/upload', data, {
         headers: {
@@ -80,6 +82,8 @@ const AdminEventsForm = () => {
       } else {
         setModalError('Error creating event. Please try again.');
       }
+    } finally {
+      setIsLoading(false); // Set loading to false when submission ends (success or error)
     }
   };
 
@@ -172,7 +176,18 @@ const AdminEventsForm = () => {
     <div className="admin-events-container">
       <h2>Event Management</h2>
 
-      <button className="create-news-events" onClick={() => setIsModalOpen(true)}>Create Event</button>
+      <button 
+        className="create-news-events"
+        style={isLoading ? {
+          backgroundColor: '#7a7a7a',
+          cursor: 'not-allowed',
+          opacity: 0.8
+        } : {}}
+        onClick={() => setIsModalOpen(true)}
+        disabled={isLoading}
+      >
+        Create Event
+      </button>
 
       <Modal
         title="Create Event"
@@ -261,7 +276,18 @@ const AdminEventsForm = () => {
                 multiple
               />
             </div>
-            <button type="submit" className="admin-form-button">Create Event</button>
+            <button 
+              type="submit" 
+              className="admin-form-button"
+              style={isLoading ? {
+                backgroundColor: '#7a7a7a',
+                cursor: 'not-allowed',
+                opacity: 0.8
+              } : {}}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Creating...' : 'Create Event'}
+            </button>
           </form>
         )}
         isOpen={isModalOpen}

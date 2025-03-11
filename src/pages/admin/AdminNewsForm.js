@@ -31,6 +31,7 @@ const AdminNewsForm = () => {
   const [selectedNewsForAddImages, setSelectedNewsForAddImages] = useState(null);
 
   const { title, content, images } = formData;
+  const [isLoading, setIsLoading] = useState(false);
 
   const onChange = (e) => {
     if (e.target.name === 'images') {
@@ -43,6 +44,7 @@ const AdminNewsForm = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     setModalError(''); // Clear previous error messages
+    setIsLoading(true); // Set loading state to true
     
     const data = new FormData();
     data.append('title', title);
@@ -75,6 +77,8 @@ const AdminNewsForm = () => {
       } else {
         setModalError('Error creating news. Please try again.');
       }
+    } finally {
+      setIsLoading(false); // Reset loading state regardless of outcome
     }
   };
 
@@ -162,7 +166,18 @@ const AdminNewsForm = () => {
   return (
     <div className="admin-news-container">
       <h2>News Management</h2>
-      <button className="create-news-events" onClick={() => setIsModalOpen(true)}>Create News</button>
+      <button 
+        className="create-news-events" 
+        onClick={() => setIsModalOpen(true)}
+        style={isLoading ? {
+          backgroundColor: '#7a7a7a',
+          cursor: 'not-allowed',
+          opacity: 0.8
+        } : {}}
+        disabled={isLoading}
+      >
+        Create News
+      </button>
 
       {/* Create News Modal */}
       <Modal
@@ -207,7 +222,18 @@ const AdminNewsForm = () => {
               onChange={onChange}
               multiple
             />
-            <button type="submit" className='admin-form-button'>Create News</button>
+            <button 
+              type="submit" 
+              className='admin-form-button'
+              style={isLoading ? {
+                backgroundColor: '#7a7a7a',
+                cursor: 'not-allowed',
+                opacity: 0.8
+              } : {}}
+              disabled={isLoading}
+            >
+              {isLoading ? 'Creating...' : 'Create News'}
+            </button>
           </form>
         )}
         isOpen={isModalOpen}

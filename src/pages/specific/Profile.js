@@ -132,8 +132,19 @@ const Profile = () => {
                         <h3>About</h3>
                         <p><strong>Biography:</strong> {user?.biography || "No biography available"}</p>
                         <p><strong>Current Working Place:</strong> {user?.currentWorkingPlace || "Not provided"}</p>
+                        <p><strong>Designation:</strong> {user?.designation || "Not provided"}</p>
                         <p><strong>Batch:</strong> {user?.batch}</p>
                         <p><strong>Branch:</strong> {user?.branch}</p>
+                        <h3>Achievements</h3>
+                        {user?.achievements && user.achievements.length > 0 ? (
+                            <ul className="user-profile-achievements">
+                                {user.achievements.map((achievement, index) => (
+                                    <li key={index}>{achievement}</li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>No achievements listed</p>
+                        )}
                         <h3>Social Media</h3>
                         {user?.socialLinks?.linkedin || user?.socialLinks?.facebook ? (
                             <div className="user-profile-social-icons">

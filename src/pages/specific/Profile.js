@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, useNavigate, useLocation } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import api from "../../services/api";
 import ProfilePhoto from "../../components/common/ProfilePhotoComponent";
@@ -9,6 +9,8 @@ import Spinner from "../../components/common/LoadingSpinner";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
 import { useUser } from "../../services/UserContext";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Profile = () => {
     const { id } = useParams();
@@ -21,7 +23,27 @@ const Profile = () => {
     const [totalPages, setTotalPages] = useState(1);
     const [isLoading, setIsLoading] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
+    const location = useLocation();
     const postsPerPage = 5;
+
+    useEffect(() => {
+        if (location.state?.message) {
+            if (location.state.type === 'success') {
+                toast.success(location.state.message, {
+                    position: "bottom-center",
+                    autoClose: 2000
+                });
+            } else if (location.state.type === 'error') {
+                toast.error(location.state.message, {
+                    position: "bottom-center",
+                    autoClose: 2000
+                });
+            }
+            
+            // Clear the navigation state to prevent showing the toast again on refresh
+            window.history.replaceState({}, document.title);
+        }
+    }, [location]);
 
     useEffect(() => {
         // Get current user from token
@@ -101,6 +123,17 @@ const Profile = () => {
 
     return (
         <div className="main">
+            <ToastContainer 
+                position="bottom-center" 
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
             <div className="user-profile-container">
                 <h1 className="user-profile-main-title">Profile</h1>
                 <div className="user-profile-card">

@@ -9,9 +9,10 @@ import api from '../../services/api';
 import Spinner from "../../components/common/LoadingSpinner";
 
 const UpdateProfile = () => {
-  const { user, refreshUser } = useUser(); // Added refreshUser to update context
+  const { user, refreshUser } = useUser();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true); // Start with loading true
+  const [loading, setLoading] = useState(true); // For initial data loading
+  const [isSubmitting, setIsSubmitting] = useState(false); // For form submission state
   const [formData, setFormData] = useState({
     biography: '',
     currentWorkingPlace: '',
@@ -105,7 +106,7 @@ const UpdateProfile = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
+      setIsSubmitting(true); // Set submitting state to true
       
       // Process achievements back to array if needed
       let achievementsData = achievements;
@@ -131,20 +132,20 @@ const UpdateProfile = () => {
         await refreshUser();
       }
       
-      toast.success('Profile Updated Successfully!', {
-        position: "bottom-center"
+      // Navigate with a success message in state
+      navigate('/profile', { 
+        state: { 
+          message: 'Profile Updated Successfully!',
+          type: 'success'
+        }
       });
-         
-      setTimeout(() => {
-        navigate('/profile');
-      }, 3000);
       
     } catch (err) {
       console.error(err.response?.data || err);
       toast.error('Error Updating Profile', {
         position: toast.POSITION.BOTTOM_CENTER
       });
-      setLoading(false);
+      setIsSubmitting(false); // Reset submitting state on error
     }
   };
 
@@ -163,9 +164,9 @@ const UpdateProfile = () => {
       />
       <div className="modern-profile-container">
         <div className="profile-header">
-          <button onClick={handleBack} className="back-button">
+          {/* <button onClick={handleBack} className="back-button">
             &larr; Back to Profile
-          </button>
+          </button> */}
           <h2 className="card-header">Update Profile</h2>
         </div>
         <div className="modern-profile-card">
@@ -276,11 +277,25 @@ const UpdateProfile = () => {
                   </div>
 
                   <div className="button-group">
-                    <button type="button" className="cancel-button" onClick={handleBack}>
+                    <button 
+                      type="button" 
+                      className="cancel-button" 
+                      onClick={handleBack}
+                      disabled={isSubmitting}
+                    >
                       Cancel
                     </button>
-                    <button type="submit" className="update-button">
-                      Update Profile
+                    <button 
+                      type="submit" 
+                      className="update-button"
+                      style={isSubmitting ? {
+                        backgroundColor: '#7a7a7a',
+                        cursor: 'not-allowed',
+                        opacity: 0.8
+                      } : {}}
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? 'Updating...' : 'Update Profile'}
                     </button>
                   </div>
                 </form>

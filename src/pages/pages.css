@@ -2121,10 +2121,10 @@ button:hover {
 /* Form button group styling */
 .button-group {
   display: flex;
-  justify-content: space-between;
-  margin-top: 30px;
+  justify-content: center;
+  margin-bottom: 40px;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 100px;
 }
 
 .update-button {

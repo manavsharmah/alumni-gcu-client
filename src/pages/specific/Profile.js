@@ -8,9 +8,11 @@ import "../pages.css";
 import Spinner from "../../components/common/LoadingSpinner";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLinkedin, faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { useUser } from "../../services/UserContext";
 
 const Profile = () => {
     const { id } = useParams();
+    const { refreshUser } = useUser();
     const [user, setUser] = useState(null);
     const [userPosts, setUserPosts] = useState([]);
     const [isLoggedInUser, setIsLoggedInUser] = useState(false);
@@ -72,6 +74,9 @@ const Profile = () => {
         fetchUserProfile(id).then((data) => {
             if (data) {
                 setUser(data);
+                if (refreshUser && typeof refreshUser === "function") {
+                    refreshUser(); // Update context with latest data
+                }
                 fetchUserPosts(data._id, currentPage);
             }
         });
@@ -127,8 +132,19 @@ const Profile = () => {
                         <h3>About</h3>
                         <p><strong>Biography:</strong> {user?.biography || "No biography available"}</p>
                         <p><strong>Current Working Place:</strong> {user?.currentWorkingPlace || "Not provided"}</p>
+                        <p><strong>Designation:</strong> {user?.designation || "Not provided"}</p>
                         <p><strong>Batch:</strong> {user?.batch}</p>
                         <p><strong>Branch:</strong> {user?.branch}</p>
+                        <h3>Achievements</h3>
+                        {user?.achievements && user.achievements.length > 0 ? (
+                            <ul className="user-profile-achievements">
+                                {user.achievements.map((achievement, index) => (
+                                    <li key={index}>{achievement}</li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>No achievements listed</p>
+                        )}
                         <h3>Social Media</h3>
                         {user?.socialLinks?.linkedin || user?.socialLinks?.facebook ? (
                             <div className="user-profile-social-icons">

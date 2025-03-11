@@ -49,18 +49,30 @@ export const UserProvider = ({ children }) => {
         }
     };
 
+    const refreshUser = async () => {
+        const accessToken = localStorage.getItem('accessToken');
+        if (accessToken) {
+          try {
+            const res = await api.get('/user/user');
+            if (res && res.data) {
+              setUser({ ...res.data, token: accessToken });
+            }
+          } catch (err) {
+            console.error('Error refreshing user data:', err);
+          }
+        }
+      };
+
     // Add the updateUserProfile function
     const updateUserProfile = (updatedUser) => {
         setUser(updatedUser); // Update the user state
     };
 
     return (
-        <UserContext.Provider value={{ user, setUser, login, logout, updateUserProfile }}>
+        <UserContext.Provider value={{ user, setUser, login, logout, updateUserProfile, refreshUser }}>
             {children}
         </UserContext.Provider>
     );
 };
 
 export const useUser = () => useContext(UserContext);
-
-    
